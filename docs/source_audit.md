@@ -44,6 +44,10 @@ Tipos de evento vistos: `INICIO/FINAL-PARTIDO`, `INICIO/FINAL-PERIODO`, `CANASTA
 - El orden del play-by-play viene en el número `accion-N` (creciente), así que no hace falta invertir la lista para desempatar eventos del mismo segundo.
 - No hay JSON para el box score ni para el play-by-play: se parsea HTML. Es el mayor riesgo de mantenimiento (cambio de maquetación). Mitigación: tests con páginas guardadas y validación del box score contra el play-by-play (5.8).
 - Hay un handler `?handler=Recargar` (refresco en vivo); el pipeline no lo usa.
+- Los tiros convertidos del mapa de tiro llegan como `CANASTA-2P/3P` y los errados como `TIRO2/3-FALLADO`.
+- Al empezar cada cuarto, los cinco de cada equipo figuran como `CAMBIO-JUGADOR-ENTRA` con el reloj en 10:00; al terminar no hay salidas, el cuarto se cierra con `FINAL-PERIODO`.
+
+**Validación del play-by-play contra el box score (6 partidos de Boca, 3-nov-2026):** marcador, puntos, tiros, rebotes, asistencias, robos, pérdidas, tapones, minutos (al segundo) y +/− coinciden en los 6. Lo único que no cierra son las **faltas personales**: en cada partido a 1 a 3 jugadores les faltan 1 o 2 faltas en las jugadas. La numeración `accion-N` tiene huecos (73 de 624 en Boca-Regatas) que no aparecen en ningún lugar de la página: la fuente omite algunas jugadas, y entre ellas hay faltas (probablemente técnicas o antideportivas). Decisión: esa diferencia no invalida el play-by-play (posesiones, quintetos, minutos y +/− no dependen de las faltas); solo deja `n/d` las tácticas de faltas y bonus de ese partido. Se vuelve a la regla estricta de 5.8 vaciando `FOUL_STATS` en `pipeline/pbp.py`.
 
 **Riesgo legal (sin cambios respecto del prompt):** según la prensa del sector, Genius Sports captura y comercializa estos datos (FIBA LiveStats) con un acuerdo exclusivo con la ADC. Por eso el sitio muestra solo estadísticas derivadas con atribución a la LNB, **no republica el play-by-play crudo** y el dueño puede pedir autorización escrita a la ADC (Av. Belgrano 1354, CABA, dueña del sitio según su política de privacidad).
 

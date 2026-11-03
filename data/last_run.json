@@ -1,0 +1,58 @@
+{
+  "run_id": "0463154f-35b1-47f3-8fa9-88866ff66b8e",
+  "started_at": "2026-11-03T05:33:40+00:00",
+  "source": "lnb",
+  "window": [
+    "2026-09-01",
+    "2026-11-03"
+  ],
+  "scope": "boca",
+  "finished_at": "2026-11-03T05:33:56+00:00",
+  "duration_s": 16,
+  "games_loaded": 6,
+  "pbp_validated": [
+    {
+      "game": "2026-10-07 boca-vs-obera",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-10 quimsa-vs-boca",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-12 olimpico-lb-vs-boca",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-21 argentino-j-vs-boca",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-23 racing-ch-vs-boca",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-28 boca-vs-regatas-c",
+      "fouls_validated": false
+    }
+  ],
+  "pbp_quarantined": [],
+  "failed": [],
+  "rows": {
+    "game": 6,
+    "game_period_score": 24,
+    "team_game_stats": 12,
+    "player_game_stats": 144,
+    "shot": 796,
+    "play_by_play_event": 3297
+  },
+  "input_hashes": [
+    "57c7e3822c9f71f73f3733184bab4c3756be56e37dc01d28d159a88f36ef163a",
+    "46ad71f32bcdfdd7809a123680810b17e2ce49b5740f0334b2c38457565ff4c0",
+    "4667326057b8a7f7a44562a2a577071eabd22ec94893c23b83ddd496e346db5d",
+    "d05b56ab4d2c4e90e109e1f0a77da58b0d5b15a7bb177fb4fbbf57a6899bc97d",
+    "6444470f7db7688067f798e5ba00e05e6fb6c91a63cfffdf7a6b83e4819b9609",
+    "18d7c0972d8f1035d06cecc79a25e172da8fbc14c0cecfd83a4e7315440fd2ac"
+  ],
+  "status": "ok"
+}

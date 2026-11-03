@@ -18,6 +18,7 @@ htmlcov/
 
 # Datos crudos de terceros: se guardan en caché local, no se republican (regla 4)
 data/raw/cache/
+data/processed/
 data/quarantine/*
 !data/quarantine/.gitkeep
 

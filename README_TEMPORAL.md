@@ -7,8 +7,20 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 
 | Etapa | Estado |
 |---|---|
-| 1. Preparación | En curso: Fase 0, Supabase y repo hechos; falta el deploy en Vercel |
-| 2 a 11 | Pendientes |
+| 1. Preparación | En curso: Fase 0, Supabase y repo hechos; falta el deploy en Vercel (el dueño lo hace más adelante) |
+| 3. Pipeline | En curso en local (se adelantó por pedido del dueño): adaptador LNB, validación del play-by-play y salida a CSV; falta la carga en Supabase, los workflows y la Interfaz 6 |
+| 2 y 4 a 11 | Pendientes |
+
+## Etapa 3: qué está hecho (3-nov-2026)
+
+- `sources/http_client.py` (reusado del fútbol): pausa de 3 s, caché, robots.txt y manifiesto con SHA-256.
+- `sources/lnb.py`: fixture (JSON), box score, parciales, mapa de tiro con coordenadas y play-by-play, validados con pydantic.
+- `pipeline/pbp.py`: reconstruye marcador, contadores, minutos y +/− desde las jugadas y los compara con el box score.
+- `pipeline/run.py`: `uv run python -m pipeline.run [--desde] [--hasta] [--force] [--liga]`. Escribe `data/processed/*.csv` (no se versiona) y `data/last_run.json`.
+- Primera corrida real: 6 partidos de Boca, 144 líneas de box score, 796 tiros y 3297 jugadas. Los 6 pasan la validación crítica; en los 6 faltan 1 o 2 faltas en las jugadas (ver `docs/source_audit.md`).
+- Tests: 29 pasan (página sintética armada a mano + los 6 partidos reales de la caché local, que en CI se saltean).
+
+Falta en la etapa 3: carga idempotente en Supabase (`pipeline/load.py`), workflows mensual y keepalive, `ingest_log` y la Interfaz 6. Se hace cuando el dueño retome Supabase.
 
 ## Etapa 1: qué está hecho
 
