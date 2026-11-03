@@ -2,6 +2,7 @@
 // da nombre, descripción, fórmula y nivel, y el conjunto (stat_set_item) qué columnas y en qué orden.
 
 import type { PlayerSummary } from '@/lib/data/players';
+import { formatNumber, NOT_AVAILABLE } from '@/lib/format';
 
 /** Nivel A: viene directo de una fuente. B: se calcula. C: no disponible en fuentes gratuitas. */
 export type StatLevel = 'A' | 'B' | 'C';
@@ -20,10 +21,28 @@ export interface SummaryColumn {
   higherIsBetter: boolean;
 }
 
-// Unidades de conteo: son las únicas que se llevan a 36 minutos.
-const COUNT_UNITS = new Set(['puntos', 'rebotes', 'asistencias', 'robos', 'tapas', 'pérdidas', 'faltas']);
-// Estadísticas que ya vienen normalizadas aunque su unidad sea de conteo.
-const ALREADY_RATE = /(_per36|_avg|_stdev|_pct|_share)$/;
+// Totales de temporada: los únicos que se llevan a 36 minutos. Por unidad no alcanza: «puntos por
+// tiro» o el Game Score medio están en puntos y ya son tasas.
+const SEASON_TOTALS = new Set([
+  'pts',
+  'trb',
+  'orb',
+  'drb',
+  'ast',
+  'stl',
+  'blk',
+  'tov',
+  'pf',
+  'pf_drawn',
+  'fgm',
+  'fga',
+  'fg2m',
+  'fg2a',
+  'fg3m',
+  'fg3a',
+  'ftm',
+  'fta',
+]);
 
 export interface CatalogRow {
   stat_id: string;
@@ -45,7 +64,7 @@ export function toColumn(row: CatalogRow): SummaryColumn {
     description: row.description_es,
     formula: row.formula ?? undefined,
     level: row.level === 'A' || row.level === 'B' ? row.level : 'C',
-    per36: COUNT_UNITS.has(row.unit) && !ALREADY_RATE.test(row.stat_id) && row.stat_id !== 'efficiency',
+    per36: SEASON_TOTALS.has(row.stat_id),
     available: row.available,
     higherIsBetter: row.higher_is_better,
   };
@@ -67,10 +86,21 @@ export function columnValue(player: PlayerSummary, column: SummaryColumn, per36:
   return player.minutes > 0 ? (raw * 36) / player.minutes : null;
 }
 
+/** Porcentajes guardados como proporción (0 a 1) se muestran como %; el resto con 1 decimal o entero. */
+export function formatValue(value: number | null | undefined, column: Pick<SummaryColumn, 'unit'>): string {
+  if (value === null || value === undefined) return NOT_AVAILABLE;
+  if (column.unit === '%' && Math.abs(value) <= 1) return `${formatNumber(value * 100, 1)} %`;
+  // Las proporciones (FT/FGA, AST/TOV...) viven cerca de 0: con un decimal casi todas se ven iguales.
+  if (column.unit === 'proporción') return value.toFixed(2).replace('.', ',');
+  return formatNumber(value, Number.isInteger(value) ? 0 : 1);
+}
+
 /** Puesto en el plantel (1 = el más alto) y percentil (0 a 100) de un valor. */
 export function rankAndPercentile(values: readonly number[], value: number): { rank: number; percentile: number } {
   const higher = values.filter((v) => v > value).length;
   const lower = values.filter((v) => v < value).length;
-  const percentile = values.length > 1 ? Math.round((lower / (values.length - 1)) * 100) : 100;
+  // Los empatados (sin contarse a sí mismo) cuentan por mitades: todos iguales = percentil 50, no 0.
+  const tied = Math.max(0, values.length - higher - lower - 1);
+  const percentile = values.length > 1 ? Math.round(((lower + tied / 2) / (values.length - 1)) * 100) : 100;
   return { rank: higher + 1, percentile };
 }

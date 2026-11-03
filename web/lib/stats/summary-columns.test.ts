@@ -33,6 +33,7 @@ describe('columnValue', () => {
     expect(columnValue(base, toColumn(row('pts', 'puntos')), true)).toBe(18);
     expect(columnValue(base, toColumn(row('ts', '%')), true)).toBe(0.6);
     expect(columnValue(base, toColumn(row('pts_per36', 'puntos')), true)).toBe(18); // ya está por 36
+    expect(toColumn(row('points_per_shot', 'puntos')).per36).toBe(false); // en puntos, pero es una tasa
   });
 
   it('n/d queda null, nunca 0', () => {
@@ -58,5 +59,10 @@ describe('rankAndPercentile', () => {
   it('ubica el valor en el plantel', () => {
     expect(rankAndPercentile([1, 5, 3, 9], 5)).toEqual({ rank: 2, percentile: 67 });
     expect(rankAndPercentile([1, 5, 3, 9], 9)).toEqual({ rank: 1, percentile: 100 });
+  });
+
+  it('reparte los empates', () => {
+    expect(rankAndPercentile([6, 6, 6, 6, 6], 6)).toEqual({ rank: 1, percentile: 50 });
+    expect(rankAndPercentile([0, 0, 0, 2, 4], 0)).toEqual({ rank: 3, percentile: 25 });
   });
 });

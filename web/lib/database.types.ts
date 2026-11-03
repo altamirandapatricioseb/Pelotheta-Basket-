@@ -101,6 +101,60 @@ export type Database = {
         };
         Relationships: [];
       };
+      game_line: {
+        Row: {
+          game_id: number | null;
+          game_date: string | null;
+          team_id: number | null;
+          team: string | null;
+          is_boca: boolean | null;
+          player_id: number | null;
+          player: string | null;
+          shirt_number: number | null;
+          started: boolean | null;
+          minutes: number | null;
+          pts: number | null;
+          fg2m: number | null;
+          fg2a: number | null;
+          fg3m: number | null;
+          fg3a: number | null;
+          ftm: number | null;
+          fta: number | null;
+          orb: number | null;
+          drb: number | null;
+          reb: number | null;
+          ast: number | null;
+          stl: number | null;
+          tov: number | null;
+          blk: number | null;
+          pf: number | null;
+          pf_drawn: number | null;
+          efficiency: number | null;
+          plus_minus: number | null;
+        };
+        Relationships: [];
+      };
+      game_period: {
+        Row: {
+          game_id: number | null;
+          period: number | null;
+          points_for: number | null;
+          points_against: number | null;
+        };
+        Relationships: [];
+      };
+      player_bio: {
+        Row: {
+          player_id: number | null;
+          full_name: string | null;
+          known_as: string | null;
+          position_raw: string | null;
+          nationality: string | null;
+          height_cm: number | null;
+          weight_kg: number | null;
+        };
+        Relationships: [];
+      };
       player_summary: {
         Row: {
           ast: number | null;

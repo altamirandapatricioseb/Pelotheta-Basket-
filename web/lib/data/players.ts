@@ -32,6 +32,21 @@ function fail(cause: unknown): { ok: false; code: 'PEL-DB-001'; detail: string }
   return { ok: false, code: 'PEL-DB-001', detail: cause instanceof Error ? cause.message : String(cause) };
 }
 
+// Supabase corta cada pedido en 1000 filas (max-rows de PostgREST): las tablas largas se piden por tramos.
+const PAGE = 1000;
+
+async function fetchAll<T>(
+  page: (from: number, to: number) => PromiseLike<{ data: T[] | null; error: { message: string } | null }>,
+): Promise<T[]> {
+  const rows: T[] = [];
+  for (let from = 0; ; from += PAGE) {
+    const { data, error } = await page(from, from + PAGE - 1);
+    if (error) throw new Error(error.message);
+    rows.push(...(data ?? []));
+    if (!data || data.length < PAGE) return rows;
+  }
+}
+
 const CATALOG_COLUMNS = 'stat_id, name_es, description_es, unit, formula, level, available, higher_is_better';
 
 /** Catálogo y conjuntos de una entidad: qué tablas hay y qué columnas lleva cada una. */
@@ -88,17 +103,23 @@ export async function getSets(
 export async function getPlayers(): Promise<DataResult<PlayerSummary[]>> {
   try {
     const client = createApiClient();
-    const [summary, stats] = await Promise.all([
+    const [summary, statRows] = await Promise.all([
       client
         .from('player_summary')
         .select('player_id, full_name, known_as, position_raw, height_cm, shirt_number, matches, minutes')
         .limit(200),
-      client.from('player_stat').select('player_id, stat_id, value').limit(5000),
+      fetchAll((from, to) =>
+        client
+          .from('player_stat')
+          .select('player_id, stat_id, value')
+          .order('player_id')
+          .order('stat_id')
+          .range(from, to),
+      ),
     ]);
     if (summary.error) return fail(summary.error.message);
-    if (stats.error) return fail(stats.error.message);
     const values = new Map<number, Record<string, number | null>>();
-    for (const s of stats.data) {
+    for (const s of statRows) {
       if (s.player_id === null || s.stat_id === null) continue;
       const row = values.get(s.player_id) ?? {};
       row[s.stat_id] = s.value;
@@ -186,8 +207,14 @@ export async function getTeamRows(scope: SetScope): Promise<DataResult<TeamRow[]
         }),
       };
     }
-    const { data, error } = await client.from('team_stat').select('team_id, team, is_boca, stat_id, value').limit(5000);
-    if (error) return fail(error.message);
+    const data = await fetchAll((from, to) =>
+      client
+        .from('team_stat')
+        .select('team_id, team, is_boca, stat_id, value')
+        .order('team_id')
+        .order('stat_id')
+        .range(from, to),
+    );
     const rows = new Map<number, TeamRow>();
     for (const s of data) {
       if (s.team_id === null || s.stat_id === null) continue;

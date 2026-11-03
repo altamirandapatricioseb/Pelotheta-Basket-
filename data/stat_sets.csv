@@ -7,8 +7,8 @@ creacion,jugador,temporada,Creación,5,ast tov ast_to ast_pct tov_pct usg_pct
 defensa,jugador,temporada,Defensa,6,stl blk stl_per36 blk_per36 stl_pct blk_pct
 valoracion,jugador,temporada,Valoración global,7,per game_score_avg game_score_stdev pie efficiency win_shares bpm
 impacto,jugador,temporada,Impacto,8,plus_minus on_off net_rating_on net_rating_off game_score_avg pie
-disciplina,jugador,temporada,Disciplina,9,pf
-marcas,jugador,temporada,Marcas,10,starts double_doubles triple_doubles streak_10_pts
+disciplina,jugador,temporada,Disciplina,9,pf fpg pf_per36 pf_drawn
+marcas,jugador,temporada,Marcas,10,starts double_doubles triple_doubles streak_10_pts streak_double_double streak_three_40
 partidos,equipo,partido,Partido a partido,1,points_for points_against rest_days possessions pace ortg drtg net_rating elo_win_prob brier
 cuatro_factores,equipo,partido,Cuatro factores,2,efg efg_against tov_pct tov_pct_against orb_pct_team orb_pct_against ft_per_fga ft_per_fga_against
 tiro_equipo,equipo,partido,Tiro,3,ts efg three_rate ft_per_fga
@@ -20,3 +20,10 @@ tacticas_equipo,equipo,partido,Tácticas,5,max_run max_run_rival big_runs big_ru
 origen_puntos,equipo,partido,Origen de los puntos,6,pts_assisted_share pts_3_share pts_ft_share pts_second_chance pts_second_chance_rival quarter_start_diff quarter_end_diff
 quintetos,equipo,quinteto,Quintetos,7,minutes possessions points_for points_against ortg drtg net_rating
 promedios,jugador,temporada,Promedios por partido,14,games mpg ppg rpg apg spg bpg tpg
+tiro_totales,jugador,temporada,Tiros (totales),15,fgm fga fg2m fg2a fg3m fg3a ftm fta
+por_100,jugador,temporada,Por 100 posesiones,16,possessions_on pts_per100 trb_per100 ast_per100
+liga,jugador,temporada,Lugar en la liga,17,rank_ppg rank_rpg rank_apg rank_spg rank_bpg rank_per
+carga,jugador,temporada,Carga de minutos,18,mpg minutes_last_7d minutes_last_14d minutes_last_28d bench_games
+volumen_equipo,equipo,partido,Volumen por partido,8,team_fga team_fg3a team_fta team_orb team_drb team_ast team_stl team_blk team_tov team_pf
+contexto_partido,equipo,partido,Contexto del partido,9,elo_win_prob surprise net_rating_vs_last5 extra_possessions team_ftr team_drb_pct
+localia,equipo,temporada,Localía de la liga,10,home_win_pct away_win_pct home_advantage

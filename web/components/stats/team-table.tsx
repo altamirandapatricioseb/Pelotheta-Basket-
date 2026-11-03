@@ -1,27 +1,24 @@
 'use client';
 
 import { CaretDownIcon } from '@phosphor-icons/react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
-import { formatNumber, NOT_AVAILABLE } from '@/lib/format';
-import type { SummaryColumn } from '@/lib/stats/summary-columns';
+import { formatValue as show, type SummaryColumn } from '@/lib/stats/summary-columns';
 
 interface TeamTableProps {
   caption: string;
   rowHeader: string;
   rows: readonly { id: string; label: string; highlight: boolean; values: Record<string, number | null> }[];
   columns: readonly SummaryColumn[];
-}
-
-/** Porcentajes guardados como proporción (0 a 1) se muestran como %; el resto con 1 decimal o entero. */
-function show(value: number | null | undefined, column: SummaryColumn): string {
-  if (value === null || value === undefined) return NOT_AVAILABLE;
-  if (column.unit === '%' && Math.abs(value) <= 1) return `${formatNumber(value * 100, 1)} %`;
-  return formatNumber(value, Number.isInteger(value) ? 0 : 1);
+  /** Si cada fila tiene página de detalle (partidos): `${rowHrefBase}${id}`. Doble clic en la fila la abre. */
+  rowHrefBase?: string;
 }
 
 /** Tabla del equipo (Interfaz 2, 9.5): una a la vez, orden con un clic en el encabezado. */
-export function TeamTable({ caption, rowHeader, rows, columns }: TeamTableProps) {
+export function TeamTable({ caption, rowHeader, rows, columns, rowHrefBase }: TeamTableProps) {
+  const router = useRouter();
   const [sort, setSort] = useState<{ key: string | null; dir: 'asc' | 'desc' }>({ key: null, dir: 'asc' });
   const sorted = useMemo(() => {
     if (sort.key === null) return rows;
@@ -79,9 +76,27 @@ export function TeamTable({ caption, rowHeader, rows, columns }: TeamTableProps)
           </thead>
           <tbody>
             {sorted.map((r) => (
-              <tr key={r.id} data-highlight={r.highlight || undefined}>
+              <tr
+                key={r.id}
+                data-highlight={r.highlight || undefined}
+                className={rowHrefBase ? 'row-link' : undefined}
+                title={rowHrefBase ? 'Doble clic para ver el detalle' : undefined}
+                onDoubleClick={
+                  rowHrefBase
+                    ? () => {
+                        router.push(`${rowHrefBase}${r.id}`);
+                      }
+                    : undefined
+                }
+              >
                 <th scope="row" className="whitespace-nowrap text-left font-semibold">
-                  {r.label}
+                  {rowHrefBase ? (
+                    <Link href={`${rowHrefBase}${r.id}`} className="focus-ring hover:underline">
+                      {r.label}
+                    </Link>
+                  ) : (
+                    r.label
+                  )}
                 </th>
                 {columns.map((c) => {
                   const v = r.values[c.key];

@@ -443,3 +443,39 @@ def fetch_match(client: PoliteClient, game: FixtureGame) -> tuple[MatchData, str
     if result.status != 200:
         raise ParseError(f"partido {game.home_route}-vs-{game.away_route}: HTTP {result.status}")
     return parse_match(result.text()), result.sha256
+
+
+# --- Ficha de jugador ------------------------------------------------------------------------------
+
+_BIRTH = re.compile(r"Fecha de nacimiento:\s*</strong>\s*(\d{2})/(\d{2})/(\d{4})")
+_FULL_NAME = re.compile(r'class="bloque-detalle-jugador">\s*<h4><strong>([^<]+)</strong>')
+
+
+class PlayerBio(BaseModel):
+    source_player_id: str = Field(pattern=r"^\d+$")
+    full_name: str | None
+    birth_date: date | None
+
+
+def player_url(player_id: str) -> str:
+    # El último tramo (nombre) no se valida en el sitio: alcanza con el id del jugador.
+    return f"{BASE_URL}/laliga/jugador/19/{BOCA_TEAM_ID}/{player_id}/jugador"
+
+
+def parse_player(html: str, player_id: str) -> PlayerBio:
+    """Fecha de nacimiento y nombre completo de la ficha. Dato personal: solo se usa para la edad."""
+    birth = _BIRTH.search(html)
+    name = _FULL_NAME.search(html)
+    born = date(int(birth.group(3)), int(birth.group(2)), int(birth.group(1))) if birth else None
+    if born is not None and not date(1950, 1, 1) < born < date.today():
+        raise ParseError(f"fecha de nacimiento imposible: {born}")
+    return PlayerBio(
+        source_player_id=player_id, full_name=name.group(1).strip() if name else None, birth_date=born
+    )
+
+
+def fetch_player(client: PoliteClient, player_id: str) -> PlayerBio:
+    result = client.get(player_url(player_id))
+    if result.status != 200:
+        raise ParseError(f"ficha de jugador {player_id}: HTTP {result.status}")
+    return parse_player(result.text(), player_id)

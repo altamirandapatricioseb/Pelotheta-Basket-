@@ -137,3 +137,61 @@ home_win_pct,% de victorias de local,Partidos ganados de local sobre jugados de 
 away_win_pct,% de victorias de visitante,Partidos ganados de visitante sobre jugados de visitante.,resultados,equipo,%,lnb,B,W visitante / PJ visitante,true,true
 net_rating_stdev,Consistencia del NR,Cuánto varía el Net Rating de un partido a otro: más bajo es más regular.,resultados,equipo,puntos,lnb,B,Desvío estándar muestral del NR por partido,false,true
 position,Posición en la tabla,Puesto en la tabla de la liga ordenada por % de victorias.,resultados,equipo,puesto,lnb,B,Orden por % de victorias y MOV,false,true
+fgm,Tiros de campo convertidos,Dobles más triples convertidos en la temporada.,anotacion,jugador,tiros,lnb,B,2P + 3P,true,true
+fga,Tiros de campo intentados,Dobles más triples intentados en la temporada.,anotacion,jugador,tiros,lnb,B,2PA + 3PA,true,true
+fg2m,Dobles convertidos,Tiros de 2 convertidos en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
+fg2a,Dobles intentados,Tiros de 2 intentados en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
+fg3m,Triples convertidos,Tiros de 3 convertidos en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
+fg3a,Triples intentados,Tiros de 3 intentados en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
+ftm,Libres convertidos,Tiros libres convertidos en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
+fta,Libres intentados,Tiros libres intentados en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
+pf_drawn,Faltas recibidas,Faltas que le cometieron en la temporada.,disciplina,jugador,faltas,lnb,A,,true,true
+bench_games,Partidos desde el banco,Partidos en los que entró desde el banco.,resumen,jugador,partidos,lnb,B,PJ − titularidades,true,true
+fpg,Faltas por partido,Faltas personales promedio por partido jugado.,disciplina,jugador,faltas,lnb,B,PF / PJ,false,true
+pts_per100,Puntos cada 100 posesiones,Puntos por cada 100 posesiones con él en cancha (estimado).,anotacion,jugador,puntos,lnb,B,100 × PTS / posesiones en cancha,true,true
+trb_per100,Rebotes cada 100 posesiones,Rebotes por cada 100 posesiones con él en cancha (estimado).,rebote,jugador,rebotes,lnb,B,100 × TRB / posesiones en cancha,true,true
+ast_per100,Asistencias cada 100 posesiones,Asistencias por cada 100 posesiones con él en cancha (estimado).,creacion,jugador,asistencias,lnb,B,100 × AST / posesiones en cancha,true,true
+minutes_last_7d,Minutos en los últimos 7 días,Carga de minutos de la última semana hasta el último partido.,carga,jugador,minutos,lnb,B,Σ MP de los últimos 7 días,false,true
+minutes_last_14d,Minutos en los últimos 14 días,Carga de minutos de las últimas dos semanas.,carga,jugador,minutos,lnb,B,Σ MP de los últimos 14 días,false,true
+minutes_last_28d,Minutos en los últimos 28 días,Carga de minutos de las últimas cuatro semanas.,carga,jugador,minutos,lnb,B,Σ MP de los últimos 28 días,false,true
+streak_double_double,Racha de dobles-dobles,Mayor cantidad de partidos seguidos con doble-doble.,marcas,jugador,partidos,lnb,B,Racha máxima,true,true
+streak_three_40,Racha de 40 % en triples,Partidos seguidos con 40 % o más en triples (3 intentos o más).,marcas,jugador,partidos,lnb,B,Racha máxima,true,true
+rank_ppg,Puesto en puntos por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de PTS/PJ en la liga,false,true
+rank_rpg,Puesto en rebotes por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de TRB/PJ en la liga,false,true
+rank_apg,Puesto en asistencias por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de AST/PJ en la liga,false,true
+rank_spg,Puesto en robos por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de STL/PJ en la liga,false,true
+rank_bpg,Puesto en tapas por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de BLK/PJ en la liga,false,true
+rank_per,Puesto en PER,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de PER en la liga,false,true
+is_foreign,Extranjero,1 si su nacionalidad deportiva no es argentina (Wikipedia).,resumen,jugador,sí/no,wikipedia,A,,false,true
+team_fga,Tiros de campo del equipo,Tiros de campo intentados por Boca en el partido.,volumen,equipo,tiros,lnb,B,2PA + 3PA,true,true
+team_fg3a,Triples del equipo,Triples intentados por Boca en el partido.,volumen,equipo,tiros,lnb,A,,true,true
+team_fta,Libres del equipo,Tiros libres intentados por Boca en el partido.,volumen,equipo,tiros,lnb,A,,true,true
+team_orb,Rebotes ofensivos del equipo,Rebotes ofensivos de Boca en el partido.,volumen,equipo,rebotes,lnb,A,,true,true
+team_drb,Rebotes defensivos del equipo,Rebotes defensivos de Boca en el partido.,volumen,equipo,rebotes,lnb,A,,true,true
+team_ast,Asistencias del equipo,Asistencias de Boca en el partido.,volumen,equipo,asistencias,lnb,A,,true,true
+team_stl,Robos del equipo,Robos de Boca en el partido.,volumen,equipo,robos,lnb,A,,true,true
+team_blk,Tapas del equipo,Tapas de Boca en el partido.,volumen,equipo,tapas,lnb,A,,true,true
+team_tov,Pérdidas del equipo,Pérdidas de Boca en el partido.,volumen,equipo,pérdidas,lnb,A,,false,true
+team_pf,Faltas del equipo,Faltas de Boca en el partido.,volumen,equipo,faltas,lnb,A,,false,true
+team_ftr,FTr del equipo,Libres intentados por cada tiro de campo de Boca.,eficiencia_colectiva,equipo,proporción,lnb,B,FTA / FGA,true,true
+team_drb_pct,DRB% del equipo,Rebotes defensivos tomados de los disponibles.,eficiencia_colectiva,equipo,%,lnb,B,DRB / (DRB + ORB_rival),true,true
+extra_possessions,Posesiones extra,"Rebotes ofensivos, robos y pérdidas propios menos los del rival.",tacticas,equipo,posesiones,lnb,B,(ORB + STL − TOV) − lo mismo del rival,true,true
+surprise,Sorpresa,"Resultado menos la probabilidad del Elo: positivo, ganó más de lo esperado (estimado).",resultados,equipo,puntos,lnb,B,Resultado (1/0) − prob. Elo,true,true
+net_rating_vs_last5,NR frente a los 5 anteriores,Cuánto mejor o peor fue el NR del partido que el promedio de los 5 previos.,resultados,equipo,puntos,lnb,B,NR − promedio de los 5 anteriores,true,true
+q1_diff,Diferencia en el 1.er cuarto,Diferencia de puntos promedio en el primer cuarto.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true
+q2_diff,Diferencia en el 2.º cuarto,Diferencia de puntos promedio en el segundo cuarto.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true
+q3_diff,Diferencia en el 3.er cuarto,Diferencia de puntos promedio en el tercer cuarto.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true
+q4_diff,Diferencia en el 4.º cuarto,Diferencia de puntos promedio en el último cuarto.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true
+last5_wins,Victorias en los últimos 5,Partidos ganados en los últimos 5.,resultados,equipo,partidos,lnb,B,Conteo,true,true
+last5_net_rating,NR de los últimos 5,Net Rating promedio de los últimos 5 partidos.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true
+net_rating_vs_top,NR contra el tercio alto,NR promedio contra los equipos del tercio alto de la tabla.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true
+net_rating_vs_mid,NR contra el tercio medio,NR promedio contra los equipos del tercio medio de la tabla.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true
+net_rating_vs_bottom,NR contra el tercio bajo,NR promedio contra los equipos del tercio bajo de la tabla.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true
+coverage_box_score,Cobertura de box score,Partidos de Boca con box score sobre los jugados.,cobertura,equipo,%,lnb,B,Partidos con box score / jugados,true,true
+coverage_pbp,Cobertura de play-by-play,Partidos de Boca con play-by-play validado.,cobertura,equipo,%,lnb,B,Partidos validados / con box score,true,true
+starters_jaccard,Estabilidad del quinteto titular,Titulares repetidos entre partidos seguidos (1 = siempre los mismos).,tacticas,equipo,índice,lnb,B,Promedio de Jaccard entre partidos consecutivos,true,true
+min_share_age_21,% de minutos de hasta 21 años,Parte de los minutos jugada por jugadores de 21 años o menos.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true
+min_share_age_22_26,% de minutos de 22 a 26 años,Parte de los minutos jugada por jugadores de 22 a 26 años.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true
+min_share_age_27_31,% de minutos de 27 a 31 años,Parte de los minutos jugada por jugadores de 27 a 31 años.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true
+min_share_age_32,% de minutos de 32 años o más,Parte de los minutos jugada por jugadores de 32 años o más.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true
+home_advantage,Ventaja de localía,% de victorias de local menos % de victorias de visitante.,resultados,equipo,%,lnb,B,W% local − W% visitante,true,true

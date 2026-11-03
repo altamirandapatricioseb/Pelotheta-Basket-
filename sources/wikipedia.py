@@ -52,6 +52,7 @@ class RosterPlayer(BaseModel):
     shirt_number: int = Field(ge=0, le=99)
     name: str = Field(min_length=3)
     position: Position
+    nationality: str | None = Field(default=None, pattern=r"^[A-Z]{3}$")
     age: int | None = Field(default=None, ge=14, le=50)
     height_cm: int | None = Field(default=None, ge=150, le=235)
     weight_kg: int | None = Field(default=None, ge=50, le=170)
@@ -92,6 +93,9 @@ def parse_roster(html: str) -> list[RosterPlayer]:
                 shirt_number=int(cells[0].get_text(strip=True)),
                 name=cells[3].get_text(" ", strip=True),
                 position=POSITION_BY_TITLE[title],
+                nationality=(
+                    nat.group(0) if (nat := re.search(r"\b[A-Z]{3}\b", cells[1].get_text(" "))) else None
+                ),
                 age=int(age) if age else None,
                 height_cm=round(height * 100) if height else None,
                 weight_kg=int(weight) if weight else None,

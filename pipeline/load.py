@@ -93,6 +93,8 @@ def build_batch(folder: Path = PROCESSED, *, run_id: str, trigger: str, started_
     bios = {
         p["source_player_id"]: {
             "position": POSITION_ES.get(p["position"] or ""),
+            "birth_date": p.get("birth_date") or None,
+            "nationality": p.get("nationality") or None,
             "height_cm": p["height_cm"] or None,
             "weight_kg": p["weight_kg"] or None,
         }

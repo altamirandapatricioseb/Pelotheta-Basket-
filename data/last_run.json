@@ -1,14 +1,14 @@
 {
-  "run_id": "e5d8330c-0677-44c8-a907-a2851807cc22",
-  "started_at": "2026-11-03T16:58:21+00:00",
+  "run_id": "3351ebfd-e715-4134-a4fa-75e17414a505",
+  "started_at": "2026-11-03T18:28:39+00:00",
   "source": "lnb",
   "window": [
     "2026-09-01",
     "2026-11-03"
   ],
   "scope": "liga",
-  "finished_at": "2026-11-03T17:01:15+00:00",
-  "duration_s": 174,
+  "finished_at": "2026-11-03T18:32:25+00:00",
+  "duration_s": 226,
   "games_loaded": 49,
   "pbp_validated": [
     {
@@ -219,6 +219,7 @@
     "shot": 6270,
     "play_by_play_event": 21938,
     "league_result": 49,
+    "player_bio": 13,
     "roster": 14
   },
   "input_hashes": [

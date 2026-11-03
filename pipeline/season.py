@@ -16,9 +16,11 @@ import csv
 import json
 import statistics
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 from typing import Any
 
+from pipeline import extras
 from pipeline import metrics as m
 from pipeline import own_metrics as own
 from sources.lnb import BOCA_TEAM_ID
@@ -452,8 +454,9 @@ def player_season(
     return sorted(rows, key=lambda r: -r["minutes"])
 
 
-def league_per(league_rows: list[dict[str, Any]], team_rows: list[dict[str, str]],
-               game_rows: list[dict[str, str]]) -> dict[str, float]:  # fmt: skip
+def league_per(
+    league_rows: list[dict[str, Any]], team_rows: list[dict[str, str]], game_rows: list[dict[str, str]]
+) -> dict[str, float]:
     """PER de todos los jugadores de la liga (5.6): uPER con los totales de la LNB, ajuste por el
     ritmo de su equipo (aPER = ritmo liga / ritmo equipo × uPER) y escala para que la liga promedie 15."""
     pairs = _pairs(team_rows)
@@ -469,13 +472,18 @@ def league_per(league_rows: list[dict[str, Any]], team_rows: list[dict[str, str]
     if not team_tot:
         return {}
     lg = m.PerLeague(
-        pts=sum(t["pts"] for t in team_tot.values()), fg=sum(t["fg"] for t in team_tot.values()),
-        fga=sum(t["fga"] for t in team_tot.values()), ft=sum(t["ftm"] for t in team_tot.values()),
-        fta=sum(t["fta"] for t in team_tot.values()), orb=sum(t["orb"] for t in team_tot.values()),
-        trb=sum(t["orb"] + t["drb"] for t in team_tot.values()), ast=sum(t["ast"] for t in team_tot.values()),
-        tov=sum(t["tov"] for t in team_tot.values()), pf=sum(t["pf"] for t in team_tot.values()),
+        pts=sum(t["pts"] for t in team_tot.values()),
+        fg=sum(t["fg"] for t in team_tot.values()),
+        fga=sum(t["fga"] for t in team_tot.values()),
+        ft=sum(t["ftm"] for t in team_tot.values()),
+        fta=sum(t["fta"] for t in team_tot.values()),
+        orb=sum(t["orb"] for t in team_tot.values()),
+        trb=sum(t["orb"] + t["drb"] for t in team_tot.values()),
+        ast=sum(t["ast"] for t in team_tot.values()),
+        tov=sum(t["tov"] for t in team_tot.values()),
+        pf=sum(t["pf"] for t in team_tot.values()),
         pace=statistics.fmean(v for vals in paces.values() for v in vals),
-    )  # fmt: skip
+    )
     adjusted, minutes = {}, {}
     for r in league_rows:
         tid = r["team_id"]
@@ -490,23 +498,42 @@ def league_per(league_rows: list[dict[str, Any]], team_rows: list[dict[str, str]
 
 
 def add_roster(
-    players: list[dict[str, Any]], roster: list[dict[str, str]], player_rows: list[dict[str, str]]
+    players: list[dict[str, Any]],
+    roster: list[dict[str, str]],
+    player_rows: list[dict[str, str]],
+    bios: list[dict[str, str]],
+    game_rows: list[dict[str, str]],
 ) -> None:
-    """Posición, edad, altura y peso de Wikipedia, cruzados por el dorsal que usó en Boca."""
+    """Posición, altura, peso y nacionalidad de Wikipedia (por dorsal); edad desde la ficha de la LNB."""
     shirts = {
         row["source_player_id"]: row["shirt_number"]
         for row in player_rows
         if row["team_id"] == str(BOCA_TEAM_ID) and row["shirt_number"]
     }
     by_shirt = {r["shirt_number"]: r for r in roster}
+    births = {b["source_player_id"]: b["birth_date"] for b in bios if b.get("birth_date")}
+    boca_dates = [
+        date.fromisoformat(g["played_at"][:10])
+        for g in game_rows
+        if str(BOCA_TEAM_ID) in (g["home_team_id"], g["away_team_id"])
+    ]
+    last_game = max(boca_dates, default=None)
     for p in players:
         bio = by_shirt.get(shirts.get(p["source_player_id"], ""))
         p["position"] = bio["position"] if bio else None
         p["zone"] = ZONE.get(bio["position"]) if bio else None
         p["height_cm"] = int(bio["height_cm"]) if bio and bio["height_cm"] else None
         p["weight_kg"] = int(bio["weight_kg"]) if bio and bio["weight_kg"] else None
-        # Edad en años enteros: Wikipedia no da la fecha de nacimiento (y así no se guarda).
-        p["age"] = int(bio["age"]) if bio and bio["age"] else None
+        p["nationality"] = bio["nationality"] if bio and bio.get("nationality") else None
+        p["is_foreign"] = None if p["nationality"] is None else int(p["nationality"] != "ARG")
+        # Edad con decimales a la fecha del último partido (6.1) si la LNB da la fecha de nacimiento;
+        # si no, la edad en años de Wikipedia.
+        born = births.get(p["source_player_id"])
+        if born and last_game:
+            p["age"] = round((last_game - date.fromisoformat(born)).days / 365.25, 2)
+        else:
+            p["age"] = int(bio["age"]) if bio and bio["age"] else None
+        p["birth_date"] = born  # solo para la carga: core.player.birth_date no es pública
 
 
 def main() -> None:
@@ -519,7 +546,7 @@ def main() -> None:
     per = league_per(league_rows, team_rows, game_rows)
     for row in [*players, *league_rows]:
         row["per"] = r4(per.get(row["source_player_id"]))
-    add_roster(players, read("roster"), player_rows)
+    add_roster(players, read("roster"), player_rows, read("player_bio"), game_rows)
     season = boca_season(games, table, x)
     season["scorer_herfindahl"] = r4(m.herfindahl([p["pts"] for p in players]))
     # Aporte de la banca y profundidad de la rotación (5.7).
@@ -541,6 +568,19 @@ def main() -> None:
             g.update(own.tactic_values(per_game[g["source_game_id"]]))
     season.update({k: r4(v) if isinstance(v, float) else v for k, v in own.season_tactics(per_game).items()})
     write("boca_lineup", own.lineups(per_game, {p["source_player_id"]: p["name"] for p in players}))
+
+    # Estadísticas del inventario que faltaban (pipeline/extras.py).
+    extras.player_extras(players, player_rows, game_rows)
+    extras.league_ranks(players, league_rows)
+    extras.game_extras(games, team_rows)
+    extras.season_extras(
+        season, games, read("game_period_score"), game_rows, table, players, player_rows, league_games
+    )
+    extras.home_advantage(table, league_games)
+    for row in [*players, *games, season, *table]:
+        for key, value in list(row.items()):
+            if isinstance(value, float):
+                row[key] = r4(value)
 
     write("league_table", table)
     write("boca_game", games)

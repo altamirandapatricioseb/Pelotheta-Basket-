@@ -1,7 +1,9 @@
 'use client';
 
-import { CaretDownIcon, InfoIcon, MagnifyingGlassIcon } from '@phosphor-icons/react';
+import { ArrowRightIcon, CaretDownIcon, InfoIcon, MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { motion } from 'motion/react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { AnimatedNumber } from '@/components/animated-number';
@@ -46,6 +48,7 @@ export function PlayerSummaryView({
   initialPlayerId,
   initialStat,
 }: PlayerSummaryViewProps) {
+  const router = useRouter();
   const [per36, setPer36] = useState(false);
   const [query, setQuery] = useState('');
   const [statKey, setStatKey] = useState<string>(getColumn(columns, initialStat)?.key ?? '');
@@ -123,6 +126,10 @@ export function PlayerSummaryView({
       ArrowLeft: () => {
         setStatKey((columns[colIndex - 1] ?? column).key);
       },
+      // Enter abre el detalle del jugador seleccionado (lo mismo que el doble clic).
+      Enter: () => {
+        if (selectedId !== null) router.push(`/jugador/${String(selectedId)}`);
+      },
     };
     const action = keyActions[event.key];
     if (action) {
@@ -155,6 +162,12 @@ export function PlayerSummaryView({
                     {previewId !== null && previewId !== selectedId ? ' · vista previa' : ''}
                   </p>
                   <h2 className="truncate text-2xl font-extrabold tracking-tight">{current.name}</h2>
+                  <Link
+                    href={`/jugador/${String(current.playerId)}`}
+                    className="focus-ring mt-1 inline-flex items-center gap-1 text-sm font-bold text-link hover:underline"
+                  >
+                    Ver detalle del jugador <ArrowRightIcon size={14} aria-hidden="true" />
+                  </Link>
                   <p className="text-sm text-muted">
                     {current.age !== null ? `${String(current.age)} años` : 'Edad n/d'} ·{' '}
                     {current.heightCm !== null ? `${formatNumber(current.heightCm / 100, 1)} m` : 'Altura n/d'} ·{' '}
@@ -246,7 +259,7 @@ export function PlayerSummaryView({
         <table className="data-table tabular" role="grid" aria-readonly="true" onKeyDown={onKeyDown}>
           <caption className="sr-only">
             Resumen del plantel, {competitionName}. Flechas arriba y abajo cambian el jugador; izquierda y derecha, la
-            estadística.
+            estadística; Enter abre el detalle del jugador.
           </caption>
           <thead>
             <tr>
@@ -305,6 +318,10 @@ export function PlayerSummaryView({
                   onClick={() => {
                     setSelectedId(p.playerId);
                   }}
+                  onDoubleClick={() => {
+                    router.push(`/jugador/${String(p.playerId)}`);
+                  }}
+                  title="Doble clic o Enter para ver el detalle"
                   onMouseEnter={() => {
                     setPreviewId(p.playerId);
                   }}

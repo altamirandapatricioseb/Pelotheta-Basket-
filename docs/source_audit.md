@@ -74,6 +74,6 @@ Un partido ≈ 620 eventos de play-by-play, ≈ 140 tiros y ≈ 24 filas de box 
 
 ## Pendientes
 
-- Confirmar que los partidos de la Supercopa y de la BCL Americas tengan página en el mismo sitio (otra `delegacionKey`) o queden solo con resultados.
+- ~~Confirmar Supercopa y BCL Americas~~ (revisado el 3-nov-2026): la Liga Sudamericana, la BCL Americas y la Intercontinental solo publican estadísticas en FIBA.basketball, cuyo pie prohíbe duplicar o redistribuir, así que no se automatizan. La Supercopa LNB todavía no se jugó en esta temporada (el fixture no trae partidos de Boca entre julio y septiembre de 2026); cuando se juegue, si aparece en el mismo fixture de la LNB entra sola. Temporadas pasadas: no se cargan, por decisión del dueño.
 - Fecha de inicio exacta de la temporada 2026-27 para el backfill del fixture.
 - Sondear 365Scores y Latinbasket solo si hace falta contrastar algo puntual.

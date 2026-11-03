@@ -37,7 +37,10 @@ export default async function EquipoPage({ searchParams }: PageProps) {
           <h1 className="page-title">
             <span className="title-trace">Equipo</span>
           </h1>
-          <p className="mt-2 text-muted">Boca · Liga Nacional 2026-27 · una tabla por categoría</p>
+          <p className="mt-2 text-muted">
+            Boca · Liga Nacional 2026-27 · una tabla por categoría
+            {set?.scope === 'partido' ? ' · doble clic en un partido para ver su detalle' : ''}
+          </p>
         </div>
         {sets.ok && set ? <SetPicker basePath="/equipo" sets={sets.data.sets} current={set.id} /> : null}
       </div>
@@ -53,6 +56,7 @@ export default async function EquipoPage({ searchParams }: PageProps) {
           rowHeader={set.scope === 'partido' ? 'Partido' : set.scope === 'quinteto' ? 'Quinteto' : 'Equipo'}
           rows={rows.data}
           columns={columns}
+          rowHrefBase={set.scope === 'partido' ? '/partido/' : undefined}
         />
       ) : (
         <p className="under-construction text-muted">
