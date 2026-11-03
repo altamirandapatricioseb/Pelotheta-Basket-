@@ -19,7 +19,8 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 - `pelotheta-basket` (sin `-dva`) es la otra importación del mismo repo: se puede borrar desde Vercel.
 - Supabase: migraciones 1 a 8 aplicadas. Security Advisor: 0 ERROR (4 INFO intencionales). `test_rls.py` 9 de 9 contra la base real.
 - **Primera carga hecha** el 3-nov desde la máquina del dueño: 49 partidos de la liga, 6 de Boca con box score, 144 líneas de jugador, 3233 jugadas, 796 tiros y 690 valores de estadística. Base: 12,85 MB de 500.
-- Dos intentos fallaron antes y la base los frenó sin cargar nada: (1) la LNB publica los partidos programados con 0-0 y se tomaban como jugados (corregido en `sources/lnb.py`); (2) la Data API rechaza `DELETE` sin `WHERE` (corregido en la migración 7).
+- Dos intentos fallaron antes y la base los frenó sin cargar nada: (1) la LNB publica los partidos programados con 0-0 y se tomaban como jugados (corregido en `sources/lnb.py`); (2) la Data API rechaza `DELETE` sin `WHERE` (corregido en la migración 7). Después se corrigió la fecha de los partidos nocturnos, que quedaba en el día UTC siguiente (migración 9).
+- Verificado en local con los datos cargados: Jugadores (10 categorías) y Equipo (4 categorías) con valores, descripciones y `n/d`; consola sin errores.
 
 ## Pasos pendientes del dueño
 

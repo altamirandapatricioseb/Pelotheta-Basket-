@@ -340,7 +340,7 @@ export function PlayerSummaryView({
             <tr>
               <td>Promedio del plantel</td>
               {columns.map((c) => (
-                <td key={c.key}>{formatNumber(average(c), 1)}</td>
+                <td key={c.key}>{display(average(c), per36, c)}</td>
               ))}
             </tr>
           </tfoot>
@@ -348,7 +348,7 @@ export function PlayerSummaryView({
       </div>
       <p className="flex items-center gap-2 text-xs text-muted">
         <InfoIcon size={14} aria-hidden="true" />
-        Minutos sin contar el descuento. Partidos oficiales de 2026 (sin amistosos). Fuente: Promiedos; cálculo propio.
+        Liga Nacional 2026-27. Jugadores sin minutos figuran n/d. Fuente: Liga Nacional de Básquet; cálculo propio.
       </p>
     </div>
   );
