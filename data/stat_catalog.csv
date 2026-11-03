@@ -62,3 +62,16 @@ play_types,Tipos de jugada,"Pick and roll, aislamiento, poste, cortes: ninguna f
 defensive_scheme,Esquema defensivo,"Zona, hombre o presión: la fuente no lo informa y no se infiere.",tacticas,equipo,,n/d,C,,true,false
 contested_shots,Tiros contestados,Requiere tracking de jugadores; no hay fuente gratuita.,tacticas,equipo,,n/d,C,,true,false
 media_rating,Calificación de medios,Nota por partido; ninguna fuente gratuita automatizable la publica para la LNB.,valoracion,jugador,puntos,n/d,C,,true,false
+played,Partidos jugados (equipo),Partidos de liga jugados en la temporada.,resultados,equipo,partidos,lnb,B,Conteo de resultados,true,true
+wins,Victorias,Partidos ganados.,resultados,equipo,partidos,lnb,B,Conteo de resultados,true,true
+losses,Derrotas,Partidos perdidos.,resultados,equipo,partidos,lnb,B,Conteo de resultados,false,true
+win_pct,% de victorias,Partidos ganados sobre jugados.,resultados,equipo,%,lnb,B,W / PJ,true,true
+points_for_pg,Puntos a favor por partido,Promedio de puntos anotados.,resultados,equipo,puntos,lnb,B,PF / PJ,true,true
+points_against_pg,Puntos en contra por partido,Promedio de puntos recibidos.,resultados,equipo,puntos,lnb,B,PA / PJ,false,true
+points_for,Puntos a favor,Puntos de Boca en el partido.,resultados,equipo,puntos,lnb,A,,true,true
+points_against,Puntos en contra,Puntos del rival en el partido.,resultados,equipo,puntos,lnb,A,,false,true
+rest_days,Días de descanso,Días desde el partido anterior de Boca.,resultados,equipo,días,lnb,B,Fecha del partido − fecha del anterior,true,true
+tov_pct_against,TOV% del rival,Pérdidas del rival cada 100 jugadas: más alto es mejor para Boca.,cuatro_factores,equipo,%,lnb,B,"100 × TOV / (FGA + 0,44 × FTA + TOV) del rival",true,true
+orb_pct_against,ORB% del rival,Rebotes ofensivos que le permite tomar al rival.,cuatro_factores,equipo,%,lnb,B,ORB_rival / (ORB_rival + DRB),false,true
+ft_per_fga_against,Libres por tiro del rival,Libres que convierte el rival por cada tiro de campo.,cuatro_factores,equipo,proporción,lnb,B,FT / FGA del rival,false,true
+brier,Brier del partido,Error de la probabilidad del Elo en ese partido: más bajo es mejor.,resultados,equipo,puntos,lnb,B,(p − resultado)²,false,true

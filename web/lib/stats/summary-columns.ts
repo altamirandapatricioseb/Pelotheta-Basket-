@@ -1,6 +1,5 @@
-// Columnas del conjunto «Resumen» de la Interfaz 3 (9.1) con su descripción.
-// Etapa 2: viven acá. En la etapa 4 pasan a las tablas stat_catalog, stat_set y stat_set_item
-// de la base, como pide la sección 9.1, y este archivo se borra.
+// Columnas de las tablas de la Interfaz 3 (9.1). Salen de la base: el catálogo (stat_catalog)
+// da nombre, descripción, fórmula y nivel, y el conjunto (stat_set_item) qué columnas y en qué orden.
 
 import type { PlayerSummary } from '@/lib/data/players';
 
@@ -8,100 +7,62 @@ import type { PlayerSummary } from '@/lib/data/players';
 export type StatLevel = 'A' | 'B' | 'C';
 
 export interface SummaryColumn {
-  key: keyof PlayerSummary;
+  key: string;
   short: string;
   name: string;
   unit: string;
   description: string;
   formula?: string;
   level: StatLevel;
-  /** Si tiene sentido expresarla cada 36 minutos. */
+  /** Si tiene sentido expresarla cada 36 minutos (conteos, no tasas ni porcentajes). */
   per36: boolean;
+  available: boolean;
+  higherIsBetter: boolean;
 }
 
-const MATCHES: SummaryColumn = {
-  key: 'matches',
-  short: 'PJ',
-  name: 'Partidos jugados',
-  unit: 'partidos',
-  description: 'Partidos en los que el jugador estuvo en cancha al menos un segundo, como titular o desde el banco.',
-  formula: 'Partidos con minutos > 0 en el box score',
-  level: 'B',
-  per36: false,
-};
+// Unidades de conteo: son las únicas que se llevan a 36 minutos.
+const COUNT_UNITS = new Set(['puntos', 'rebotes', 'asistencias', 'robos', 'tapas', 'pérdidas', 'faltas']);
+// Estadísticas que ya vienen normalizadas aunque su unidad sea de conteo.
+const ALREADY_RATE = /(_per36|_avg|_stdev|_pct|_share)$/;
 
-export const SUMMARY_COLUMNS: readonly SummaryColumn[] = [
-  MATCHES,
-  {
-    key: 'starts',
-    short: 'Tit.',
-    name: 'Titularidades',
-    unit: 'partidos',
-    description: 'Partidos que empezó en el quinteto inicial.',
-    level: 'A',
-    per36: false,
-  },
-  {
-    key: 'minutes',
-    short: 'Min.',
-    name: 'Minutos jugados',
-    unit: 'minutos',
-    description: 'Minutos en cancha sumados en la temporada, desde el tiempo de juego de cada box score.',
-    formula: 'Σ minutos por partido',
-    level: 'B',
-    per36: false,
-  },
-  {
-    key: 'pts',
-    short: 'PTS',
-    name: 'Puntos',
-    unit: 'puntos',
-    description: 'Puntos convertidos: dobles, triples y tiros libres.',
-    formula: '2 × dobles + 3 × triples + libres',
-    level: 'B',
-    per36: true,
-  },
-  {
-    key: 'reb',
-    short: 'REB',
-    name: 'Rebotes',
-    unit: 'rebotes',
-    description: 'Rebotes ofensivos más defensivos tomados.',
-    formula: 'Rebotes ofensivos + defensivos',
-    level: 'B',
-    per36: true,
-  },
-  {
-    key: 'ast',
-    short: 'AST',
-    name: 'Asistencias',
-    unit: 'asistencias',
-    description: 'Último pase antes de una canasta de un compañero, según la planilla oficial.',
-    level: 'B',
-    per36: true,
-  },
-  {
-    key: 'efficiency',
-    short: 'VAL',
-    name: 'Valoración',
-    unit: 'puntos de valoración',
-    description:
-      'Índice de la planilla FIBA: suma lo positivo (puntos, rebotes, asistencias, robos) y resta lo negativo.',
-    formula: 'PTS + REB + AST + ROB + TAP − tiros errados − PER − faltas',
-    level: 'A',
-    per36: true,
-  },
-];
+export interface CatalogRow {
+  stat_id: string;
+  name_es: string;
+  description_es: string;
+  unit: string;
+  formula: string | null;
+  level: string;
+  available: boolean;
+  higher_is_better: boolean;
+}
 
-/** Columna por clave; si la clave no existe, la primera (Partidos jugados). */
-export function getColumn(key: string | null | undefined): SummaryColumn {
-  return SUMMARY_COLUMNS.find((c) => c.key === key) ?? MATCHES;
+export function toColumn(row: CatalogRow): SummaryColumn {
+  return {
+    key: row.stat_id,
+    short: row.name_es,
+    name: row.name_es,
+    unit: row.unit,
+    description: row.description_es,
+    formula: row.formula ?? undefined,
+    level: row.level === 'A' || row.level === 'B' ? row.level : 'C',
+    per36: COUNT_UNITS.has(row.unit) && !ALREADY_RATE.test(row.stat_id) && row.stat_id !== 'efficiency',
+    available: row.available,
+    higherIsBetter: row.higher_is_better,
+  };
+}
+
+/** Columna por clave; si la clave no está en el conjunto, la primera. */
+export function getColumn(
+  columns: readonly SummaryColumn[],
+  key: string | null | undefined,
+): SummaryColumn | undefined {
+  return columns.find((c) => c.key === key) ?? columns[0];
 }
 
 /** Valor de una columna para un jugador, en totales o cada 36 minutos. null = no disponible. */
 export function columnValue(player: PlayerSummary, column: SummaryColumn, per36: boolean): number | null {
-  const raw = player[column.key];
-  if (typeof raw !== 'number') return null;
+  const raw = player.values[column.key];
+  if (raw === undefined || raw === null) return null;
   if (!per36 || !column.per36) return raw;
   return player.minutes > 0 ? (raw * 36) / player.minutes : null;
 }

@@ -1,0 +1,59 @@
+# Actualización de datos (sección 8): LNB -> validación -> tablas de temporada -> carga en Supabase.
+# Corre el día 1 de cada mes y a mano (Actions -> Actualizar datos -> Run workflow). Las claves viven
+# solo en GitHub Secrets. Con `force` vuelve a pedir las páginas aunque estén en la caché (9.11).
+name: Actualizar datos
+
+on:
+  schedule:
+    - cron: "0 6 1 * *" # día 1 de cada mes, 03:00 en Argentina
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Volver a pedir las páginas aunque estén en caché"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+# Nunca dos corridas a la vez: la segunda espera (no se cancela la que está cargando).
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write # solo para commitear data/last_run.json (8.6)
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+      - run: uv sync --locked
+      # Caché de páginas ya bajadas: los partidos terminados no se vuelven a pedir.
+      - uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: data/raw/cache
+          key: raw-cache-${{ github.run_id }}
+          restore-keys: raw-cache-
+      - name: Scraping, validación y tablas de temporada
+        run: uv run python -m pipeline.run ${{ inputs.force && '--force' || '' }}
+      - name: Carga en Supabase
+        run: uv run python -m pipeline.load
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      - uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        if: always()
+        with:
+          path: data/raw/cache
+          key: raw-cache-${{ github.run_id }}
+      # GitHub desactiva los cron de repos sin actividad en 60 días: este commit lo evita (8.6).
+      - name: Commit de data/last_run.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/last_run.json data/raw/manifest.jsonl
+          git diff --cached --quiet || git commit -m "chore(datos): corrida del $(date -u +%F)"
+          git push

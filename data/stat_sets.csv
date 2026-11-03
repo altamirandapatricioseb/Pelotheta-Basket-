@@ -1,0 +1,15 @@
+set_id,entity,scope,name_es,sort_order,stats
+resumen,jugador,temporada,Resumen,1,games starts minutes pts trb ast efficiency
+anotacion,jugador,temporada,Anotación,2,pts pts_per36 team_points_share points_per_shot fg_pct fg3_pct ft_pct streak_10_pts
+eficiencia_tiro,jugador,temporada,Eficiencia de tiro,3,efg ts three_rate ft_rate fg_pct fg3_pct ft_pct
+rebote,jugador,temporada,Rebote,4,trb orb drb orb_pct drb_pct trb_pct
+creacion,jugador,temporada,Creación,5,ast tov ast_to ast_pct tov_pct usg_pct
+defensa,jugador,temporada,Defensa,6,stl blk stl_pct blk_pct
+valoracion,jugador,temporada,Valoración global,7,game_score_avg game_score_stdev pie efficiency per win_shares bpm
+impacto,jugador,temporada,Impacto,8,plus_minus game_score_avg pie
+disciplina,jugador,temporada,Disciplina,9,pf
+marcas,jugador,temporada,Marcas,10,starts double_doubles triple_doubles streak_10_pts
+partidos,equipo,partido,Partido a partido,1,points_for points_against rest_days possessions pace ortg drtg net_rating elo_win_prob brier
+cuatro_factores,equipo,partido,Cuatro factores,2,efg efg_against tov_pct tov_pct_against orb_pct_team orb_pct_against ft_per_fga ft_per_fga_against
+tiro_equipo,equipo,partido,Tiro,3,ts efg three_rate ft_per_fga
+tabla_liga,equipo,temporada,Tabla de la liga,4,played wins losses win_pct points_for_pg points_against_pg mov pyth_wins srs sos gb elo

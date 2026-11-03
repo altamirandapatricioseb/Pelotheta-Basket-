@@ -170,7 +170,7 @@ def boca_games(
                 "efg_against": r4(m.efg(rival["fg"], rival["fg3m"], rival["fga"])),
                 "tov_pct": r4(m.tov_pct(boca["tov"], boca["fga"], boca["fta"])),
                 "tov_pct_against": r4(m.tov_pct(rival["tov"], rival["fga"], rival["fta"])),
-                "orb_pct": r4(m.ratio(boca["orb"], boca["orb"] + rival["drb"])),
+                "orb_pct_team": r4(m.ratio(boca["orb"], boca["orb"] + rival["drb"])),
                 "orb_pct_against": r4(m.ratio(rival["orb"], rival["orb"] + boca["drb"])),
                 "ft_per_fga": r4(m.ft_per_fga(boca["ftm"], boca["fga"])),
                 "ft_per_fga_against": r4(m.ft_per_fga(rival["ftm"], rival["fga"])),
@@ -226,7 +226,24 @@ def boca_season(games: list[dict[str, Any]], table: list[dict[str, Any]], x: flo
 
 # --- Jugadores de Boca -------------------------------------------------------------------------
 
-COUNTS = ("pts", "fg2m", "fg2a", "fg3m", "fg3a", "ftm", "fta", "orb", "drb", "ast", "stl", "tov", "blk", "pf")
+COUNTS = (
+    "pts",
+    "fg2m",
+    "fg2a",
+    "fg3m",
+    "fg3a",
+    "ftm",
+    "fta",
+    "orb",
+    "drb",
+    "ast",
+    "stl",
+    "tov",
+    "blk",
+    "pf",
+    "efficiency",
+    "plus_minus",
+)
 
 
 def player_season(

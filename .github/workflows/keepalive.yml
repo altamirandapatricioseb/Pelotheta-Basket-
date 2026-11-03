@@ -1,0 +1,28 @@
+# Keepalive (sección 8.4): Supabase gratis pausa el proyecto tras 7 días sin actividad. Dos lecturas
+# por semana con la clave publicable (solo lectura, RLS). Es un paliativo: si igual se pausa, se
+# restaura desde el panel (ver README).
+name: Keepalive
+
+on:
+  schedule:
+    - cron: "0 12 * * 1,4" # lunes y jueves, 09:00 en Argentina
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Lectura de prueba
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://jztmmfdkbajdrmzilxlt.supabase.co' }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_RPdj0Jqv7bVqMaNLJbztvw_dOwf9He4' }}
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "apikey: ${SUPABASE_PUBLISHABLE_KEY}" \
+            "${SUPABASE_URL}/rest/v1/system_status?select=key&limit=1")
+          echo "Supabase respondió ${code}"
+          test "${code}" = "200"

@@ -123,6 +123,8 @@ def test_jugador_usa_solo_sus_partidos() -> None:
         "tov": "2",
         "blk": "0",
         "pf": "3",
+        "efficiency": "25",
+        "plus_minus": "6",
     }
     bench = {**line, "source_game_id": "g2", "seconds": "0", "started": "False"}  # no entró en el segundo
     [row] = season.player_season([line, bench], TEAMS, GAMES)

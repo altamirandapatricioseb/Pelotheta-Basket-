@@ -17,6 +17,68 @@ export type Database = {
       [_ in never]: never;
     };
     Views: {
+      boca_game: {
+        Row: {
+          game_date: string | null;
+          game_id: number | null;
+          is_home: boolean | null;
+          opponent: string | null;
+          points_against: number | null;
+          points_for: number | null;
+          stats: Json | null;
+          tip_off_at: string | null;
+        };
+        Relationships: [];
+      };
+      player_stat: {
+        Row: {
+          full_name: string | null;
+          is_estimated: boolean | null;
+          player_id: number | null;
+          stat_id: string | null;
+          value: number | null;
+        };
+        Relationships: [];
+      };
+      stat_catalog: {
+        Row: {
+          available: boolean | null;
+          description_es: string | null;
+          entity: string | null;
+          formula: string | null;
+          higher_is_better: boolean | null;
+          level: string | null;
+          name_es: string | null;
+          source: string | null;
+          stat_group: string | null;
+          stat_id: string | null;
+          unit: string | null;
+        };
+        Relationships: [];
+      };
+      stat_set_column: {
+        Row: {
+          entity: string | null;
+          scope: string | null;
+          set_id: string | null;
+          set_name: string | null;
+          set_order: number | null;
+          sort_order: number | null;
+          stat_id: string | null;
+        };
+        Relationships: [];
+      };
+      team_stat: {
+        Row: {
+          is_boca: boolean | null;
+          is_estimated: boolean | null;
+          stat_id: string | null;
+          team: string | null;
+          team_id: number | null;
+          value: number | null;
+        };
+        Relationships: [];
+      };
       player_summary: {
         Row: {
           ast: number | null;

@@ -7,19 +7,15 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatedNumber } from '@/components/animated-number';
 import type { PlayerSummary } from '@/lib/data/players';
 import { formatNumber, NOT_AVAILABLE } from '@/lib/format';
-import {
-  columnValue,
-  getColumn,
-  rankAndPercentile,
-  SUMMARY_COLUMNS,
-  type SummaryColumn,
-} from '@/lib/stats/summary-columns';
+import { columnValue, getColumn, rankAndPercentile, type SummaryColumn } from '@/lib/stats/summary-columns';
 
 type SortDir = 'asc' | 'desc';
 const ROW_LAYOUT = { type: 'spring', stiffness: 520, damping: 44 } as const;
 
 interface PlayerSummaryViewProps {
   players: PlayerSummary[];
+  /** Columnas del conjunto elegido en el desplegable (vienen de la base). Nunca vacío. */
+  columns: readonly SummaryColumn[];
   competitionName: string;
   initialPlayerId: number | null;
   initialStat: string | null;
@@ -31,7 +27,10 @@ function initials(name: string): string {
 }
 
 function display(value: number | null, per36: boolean, column: SummaryColumn): string {
-  return formatNumber(value, per36 && column.per36 ? 1 : 0);
+  // Los porcentajes se guardan como proporción (0 a 1) o ya en escala 0-100 (USG%, TOV%...).
+  if (value !== null && column.unit === '%' && Math.abs(value) <= 1) return `${formatNumber(value * 100, 1)} %`;
+  const decimals = (per36 && column.per36) || (value !== null && !Number.isInteger(value)) ? 1 : 0;
+  return formatNumber(value, decimals);
 }
 
 /**
@@ -40,10 +39,16 @@ function display(value: number | null, per36: boolean, column: SummaryColumn): s
  * Jugador actual = fila seleccionada (clic o flechas arriba/abajo); estadística actual =
  * columna seleccionada (clic en el encabezado o flechas izquierda/derecha).
  */
-export function PlayerSummaryView({ players, competitionName, initialPlayerId, initialStat }: PlayerSummaryViewProps) {
+export function PlayerSummaryView({
+  players,
+  columns,
+  competitionName,
+  initialPlayerId,
+  initialStat,
+}: PlayerSummaryViewProps) {
   const [per36, setPer36] = useState(false);
   const [query, setQuery] = useState('');
-  const [statKey, setStatKey] = useState<SummaryColumn['key']>(getColumn(initialStat).key);
+  const [statKey, setStatKey] = useState<string>(getColumn(columns, initialStat)?.key ?? '');
   const [sort, setSort] = useState<{ key: SummaryColumn['key']; dir: SortDir }>({ key: 'minutes', dir: 'desc' });
   // Al arrancar, el jugador actual es el de más minutos (9.1).
   const [selectedId, setSelectedId] = useState<number | null>(
@@ -52,11 +57,12 @@ export function PlayerSummaryView({ players, competitionName, initialPlayerId, i
   const [previewId, setPreviewId] = useState<number | null>(null);
   const tableRef = useRef<HTMLTableSectionElement>(null);
 
-  const column = getColumn(statKey);
+  // `columns` nunca llega vacío (la página lo garantiza), así que siempre hay una columna actual.
+  const column = (getColumn(columns, statKey) ?? columns[0]) as SummaryColumn;
 
   const visible = useMemo(() => {
     const q = query.trim().toLocaleLowerCase('es-AR');
-    const sortColumn = getColumn(sort.key);
+    const sortColumn = getColumn(columns, sort.key) ?? column;
     return players
       .filter((p) => !q || p.name.toLocaleLowerCase('es-AR').includes(q))
       .toSorted((a, b) => {
@@ -66,7 +72,7 @@ export function PlayerSummaryView({ players, competitionName, initialPlayerId, i
         if (va === null || vb === null) return va === vb ? 0 : va === null ? 1 : -1;
         return sort.dir === 'asc' ? va - vb : vb - va;
       });
-  }, [players, query, sort, per36]);
+  }, [players, query, sort, per36, columns, column]);
 
   const current = players.find((p) => p.playerId === (previewId ?? selectedId)) ?? visible[0] ?? null;
 
@@ -103,7 +109,7 @@ export function PlayerSummaryView({ players, competitionName, initialPlayerId, i
   );
 
   const onKeyDown = (event: React.KeyboardEvent) => {
-    const colIndex = SUMMARY_COLUMNS.findIndex((c) => c.key === statKey);
+    const colIndex = columns.findIndex((c) => c.key === statKey);
     const keyActions: Record<string, () => void> = {
       ArrowDown: () => {
         moveSelection(1);
@@ -112,10 +118,10 @@ export function PlayerSummaryView({ players, competitionName, initialPlayerId, i
         moveSelection(-1);
       },
       ArrowRight: () => {
-        setStatKey((SUMMARY_COLUMNS[colIndex + 1] ?? column).key);
+        setStatKey((columns[colIndex + 1] ?? column).key);
       },
       ArrowLeft: () => {
-        setStatKey((SUMMARY_COLUMNS[colIndex - 1] ?? column).key);
+        setStatKey((columns[colIndex - 1] ?? column).key);
       },
     };
     const action = keyActions[event.key];
@@ -159,10 +165,10 @@ export function PlayerSummaryView({ players, competitionName, initialPlayerId, i
               <dl className="fact-grid">
                 <Fact label="Partidos" value={current.matches} />
                 <Fact label="Minutos" value={current.minutes} />
-                <Fact label="Puntos" value={current.pts} />
-                <Fact label="Rebotes" value={current.reb} />
-                <Fact label="Asistencias" value={current.ast} />
-                <Fact label="Valoración" value={current.efficiency} />
+                <Fact label="Puntos" value={current.values.pts ?? 0} />
+                <Fact label="Rebotes" value={current.values.trb ?? 0} />
+                <Fact label="Asistencias" value={current.values.ast ?? 0} />
+                <Fact label="Valoración" value={current.values.efficiency ?? 0} />
               </dl>
             </div>
           ) : (
@@ -245,7 +251,7 @@ export function PlayerSummaryView({ players, competitionName, initialPlayerId, i
           <thead>
             <tr>
               <th scope="col">Jugador</th>
-              {SUMMARY_COLUMNS.map((c) => {
+              {columns.map((c) => {
                 const sorted = sort.key === c.key;
                 return (
                   <th
@@ -312,7 +318,7 @@ export function PlayerSummaryView({ players, competitionName, initialPlayerId, i
                       {p.name}
                     </span>
                   </th>
-                  {SUMMARY_COLUMNS.map((c) => {
+                  {columns.map((c) => {
                     const v = columnValue(p, c, per36);
                     return (
                       <td key={c.key} data-current-stat={c.key === statKey || undefined}>
@@ -333,7 +339,7 @@ export function PlayerSummaryView({ players, competitionName, initialPlayerId, i
           <tfoot>
             <tr>
               <td>Promedio del plantel</td>
-              {SUMMARY_COLUMNS.map((c) => (
+              {columns.map((c) => (
                 <td key={c.key}>{formatNumber(average(c), 1)}</td>
               ))}
             </tr>
