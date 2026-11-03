@@ -10,7 +10,16 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 | 1. Preparación | En curso: Fase 0, Supabase y repo hechos; falta el deploy en Vercel (el dueño lo hace más adelante) |
 | 3. Pipeline | En curso en local (se adelantó por pedido del dueño): adaptador LNB, validación del play-by-play y salida a CSV; falta la carga en Supabase, los workflows y la Interfaz 6 |
 | 2. Esqueleto | Hecho en local, sin desplegar: header de 6 interfaces, tokens, tema claro y oscuro, Jugadores con la tabla «Resumen» y el resto «en construcción». Falta aplicar la migración `player_summary` y cargar datos para verla con números |
-| 4 a 11 | Pendientes |
+| 4. Estadísticas | En curso en local: fórmulas de 5.6 y 6, tabla de la liga, temporada de Boca y de cada jugador, y catálogo inicial. Faltan vistas SQL, Interfaces 2 y 3 completas, NR/EWA/ELA por jugador, Mejoría y Potencial |
+| 5 a 11 | Pendientes |
+
+## Etapa 4: qué está hecho (3-nov-2026)
+
+- `pipeline/metrics.py`: fórmulas puras de 5.6 y 6 (tiro, posesiones, ratings, cuatro factores, USG%, AST%, ORB/DRB/TRB%, STL%, BLK%, Game Score, PIE, dobles, por 36, Elo, pitagórico calibrado, SRS, GB, rachas, Herfindahl, Jaccard, EWA, ELA). Toda división por cero da `n/d`.
+- `pipeline/season.py` (corre al final de `pipeline.run`): `league_table`, `boca_game`, `boca_season` y `player_season` en `data/processed/`.
+- `data/stat_catalog.csv`: 63 estadísticas con nivel A/B/C, fórmula y si están disponibles (PER, Win Shares y BPM quedan `n/d` hasta cargar los box scores de toda la liga con `--liga`).
+- Control: Boca 95-83 Regatas da 77,82 posesiones, ORtg 122,08 y DRtg 106,66, igual que el cálculo a mano. Temporada: 3-3, 7.º, NR +4,3, SRS +3,8.
+- Tests: 49 pasan (ejemplos a mano y propiedades con hypothesis).
 
 ## Etapa 2: qué está hecho (3-nov-2026)
 

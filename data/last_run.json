@@ -1,14 +1,14 @@
 {
-  "run_id": "0463154f-35b1-47f3-8fa9-88866ff66b8e",
-  "started_at": "2026-11-03T05:33:40+00:00",
+  "run_id": "597ea70c-c55a-4d81-9b52-063e7819ae20",
+  "started_at": "2026-11-03T06:34:44+00:00",
   "source": "lnb",
   "window": [
     "2026-09-01",
     "2026-11-03"
   ],
   "scope": "boca",
-  "finished_at": "2026-11-03T05:33:56+00:00",
-  "duration_s": 16,
+  "finished_at": "2026-11-03T06:34:56+00:00",
+  "duration_s": 12,
   "games_loaded": 6,
   "pbp_validated": [
     {
@@ -44,7 +44,8 @@
     "team_game_stats": 12,
     "player_game_stats": 144,
     "shot": 796,
-    "play_by_play_event": 3297
+    "play_by_play_event": 3297,
+    "league_result": 52
   },
   "input_hashes": [
     "57c7e3822c9f71f73f3733184bab4c3756be56e37dc01d28d159a88f36ef163a",

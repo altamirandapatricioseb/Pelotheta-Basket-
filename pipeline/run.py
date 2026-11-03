@@ -1,7 +1,8 @@
 """Corrida del pipeline: `uv run python -m pipeline.run [--desde AAAA-MM-DD] [--force] [--liga]`.
 
 Pasos (sección 8): fixture de la LNB → página de cada partido jugado → validación (modelos y
-play-by-play contra box score) → archivos procesados en `data/processed/` → `data/last_run.json`.
+play-by-play contra box score) → archivos procesados en `data/processed/` → `data/last_run.json`
+→ tablas de temporada (`pipeline.season`).
 
 La carga en Supabase se suma cuando el dueño configure las claves (pendiente por decisión suya
 del 3-nov-2026). Mientras tanto la salida queda en CSV locales, que no se versionan: son datos
@@ -23,6 +24,7 @@ import uuid
 from datetime import UTC, date, datetime
 from pathlib import Path
 
+from pipeline import season
 from pipeline.pbp import validate
 from sources import lnb
 from sources.http_client import PoliteClient
@@ -111,9 +113,22 @@ def run(*, start: date, end: date, force: bool, whole_league: bool) -> dict[str,
     }  # fmt: skip
     published, quarantined, failed, hashes = [], [], [], []
     with PoliteClient(source=lnb.SOURCE) as client:
-        games = [
-            g for g in lnb.fetch_fixture(client, start, end) if g.is_played and (whole_league or g.is_boca)
+        played = [g for g in lnb.fetch_fixture(client, start, end) if g.is_played]
+        # Resultados de toda la liga: alimentan tabla, pitagórico, Elo y SRS sin pedir más páginas.
+        tables["league_result"] = [
+            {
+                "source_game_id": g.source_game_id,
+                "played_at": g.played_at.isoformat(),
+                "home_team_id": g.home_team_id,
+                "away_team_id": g.away_team_id,
+                "home_name": g.home_name,
+                "away_name": g.away_name,
+                "home_points": g.home_points,
+                "away_points": g.away_points,
+            }
+            for g in played
         ]
+        games = [g for g in played if whole_league or g.is_boca]
         for game in games:
             label = f"{game.played_at.date()} {game.home_route}-vs-{game.away_route}"
             try:
@@ -171,6 +186,7 @@ def main() -> None:
     )
     args = parser.parse_args()
     summary = run(start=args.desde, end=args.hasta, force=args.force, whole_league=args.liga)
+    season.main()  # tablas de temporada (etapa 4) sobre lo que se acaba de procesar
     print(json.dumps({k: summary[k] for k in ("status", "games_loaded", "pbp_quarantined", "failed", "rows")},
                      ensure_ascii=False, indent=2))  # fmt: skip
 

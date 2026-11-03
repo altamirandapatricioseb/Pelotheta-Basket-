@@ -1,0 +1,64 @@
+id,nombre_es,descripcion_es,grupo,categoria,unidad,fuente,nivel,formula,higher_is_better,available
+games,Partidos jugados,Partidos en los que estuvo en cancha al menos un segundo.,resumen,jugador,partidos,lnb,B,Partidos con minutos > 0,true,true
+starts,Titularidades,Partidos que empezó en el quinteto inicial.,resumen,jugador,partidos,lnb,A,,true,true
+minutes,Minutos,"Minutos jugados en la temporada, desde el tiempo de cada box score.",resumen,jugador,minutos,lnb,B,Σ minutos por partido,true,true
+pts,Puntos,"Puntos convertidos con dobles, triples y libres.",anotacion,jugador,puntos,lnb,B,2 × 2P + 3 × 3P + TL,true,true
+trb,Rebotes,Rebotes ofensivos más defensivos.,rebote,jugador,rebotes,lnb,B,ORB + DRB,true,true
+orb,Rebotes ofensivos,"Rebotes tomados en el aro rival, que dan una posesión extra.",rebote,jugador,rebotes,lnb,A,,true,true
+drb,Rebotes defensivos,"Rebotes tomados en el aro propio, que cierran la posesión rival.",rebote,jugador,rebotes,lnb,A,,true,true
+ast,Asistencias,"Último pase antes de una canasta de un compañero, según la planilla.",creacion,jugador,asistencias,lnb,A,,true,true
+stl,Robos,Pelotas recuperadas al rival.,defensa,jugador,robos,lnb,A,,true,true
+blk,Tapas,Tiros del rival bloqueados.,defensa,jugador,tapas,lnb,A,,true,true
+tov,Pérdidas,Posesiones perdidas sin tirar.,creacion,jugador,pérdidas,lnb,A,,false,true
+pf,Faltas cometidas,Faltas personales del jugador.,disciplina,jugador,faltas,lnb,A,,false,true
+fg_pct,% de campo,Tiros de campo convertidos sobre intentados.,eficiencia_tiro,jugador,%,lnb,B,FG / FGA,true,true
+fg3_pct,% de triples,Triples convertidos sobre intentados.,eficiencia_tiro,jugador,%,lnb,B,3P / 3PA,true,true
+ft_pct,% de libres,Libres convertidos sobre intentados.,eficiencia_tiro,jugador,%,lnb,B,TL / TLI,true,true
+efg,eFG%,"Efectividad de campo que cuenta el triple como 1,5 dobles.",eficiencia_tiro,jugador,%,lnb,B,"(FG + 0,5 × 3P) / FGA",true,true
+ts,TS%,"Efectividad total: cuántos puntos saca por cada intento, incluidos los libres.",eficiencia_tiro,jugador,%,lnb,B,"PTS / (2 × (FGA + 0,44 × FTA))",true,true
+points_per_shot,Puntos por tiro de campo,"Puntos que produce cada tiro de campo, sin contar libres.",eficiencia_tiro,jugador,puntos,lnb,B,(2 × (FG − 3P) + 3 × 3P) / FGA,true,true
+three_rate,3PAr,Qué parte de sus tiros de campo son triples.,eficiencia_tiro,jugador,proporción,lnb,B,3PA / FGA,true,true
+ft_rate,FTr,Cuántos libres genera por cada tiro de campo.,eficiencia_tiro,jugador,proporción,lnb,B,FTA / FGA,true,true
+ast_to,Asistencias por pérdida,Asistencias que da por cada pelota que pierde.,creacion,jugador,proporción,lnb,B,AST / TOV,true,true
+tov_pct,TOV%,Pérdidas cada 100 jugadas que termina.,creacion,jugador,%,lnb,B,"100 × TOV / (FGA + 0,44 × FTA + TOV)",false,true
+usg_pct,USG%,Parte de las jugadas del equipo que termina él mientras está en cancha.,creacion,jugador,%,lnb,B,"100 × ((FGA + 0,44 FTA + TOV) × MinEq/5) / (MP × (FGA_eq + 0,44 FTA_eq + TOV_eq))",true,true
+ast_pct,AST%,Parte de las canastas de sus compañeros en cancha que asistió.,creacion,jugador,%,lnb,B,100 × AST / ((MP / (MinEq/5)) × FG_eq − FG),true,true
+orb_pct,ORB%,Rebotes ofensivos que toma de los disponibles mientras juega.,rebote,jugador,%,lnb,B,100 × (ORB × MinEq/5) / (MP × (ORB_eq + DRB_rival)),true,true
+drb_pct,DRB%,Rebotes defensivos que toma de los disponibles mientras juega.,rebote,jugador,%,lnb,B,100 × (DRB × MinEq/5) / (MP × (DRB_eq + ORB_rival)),true,true
+trb_pct,TRB%,Rebotes totales que toma de los disponibles mientras juega.,rebote,jugador,%,lnb,B,100 × (TRB × MinEq/5) / (MP × (TRB_eq + TRB_rival)),true,true
+stl_pct,STL%,Posesiones rivales que termina con un robo mientras juega.,defensa,jugador,%,lnb,B,100 × (STL × MinEq/5) / (MP × Pos_rival),true,true
+blk_pct,BLK%,Dobles del rival que tapa mientras juega.,defensa,jugador,%,lnb,B,100 × (BLK × MinEq/5) / (MP × 2PA_rival),true,true
+game_score_avg,Game Score medio,"Resumen de un partido en un número, en la escala de los puntos (Hollinger).",valoracion,jugador,puntos,lnb,B,"PTS + 0,4 FG − 0,7 FGA − 0,4 (FTA − FT) + 0,7 ORB + 0,3 DRB + STL + 0,7 AST + 0,7 BLK − 0,4 PF − TOV",true,true
+game_score_stdev,Consistencia (desvío del Game Score),Cuánto varía su Game Score entre partidos: más bajo es más regular.,valoracion,jugador,puntos,lnb,B,Desvío estándar muestral,false,true
+pie,PIE,Parte de lo que pasó en sus partidos que se explica por él.,valoracion,jugador,proporción,lnb,B,Suma del jugador / misma suma de ambos equipos,true,true
+double_doubles,Dobles-dobles,"Partidos con 10 o más en dos de puntos, rebotes, asistencias, robos y tapas.",marcas,jugador,partidos,lnb,B,Conteo,true,true
+triple_doubles,Triples-dobles,Partidos con 10 o más en tres de esas cinco categorías.,marcas,jugador,partidos,lnb,B,Conteo,true,true
+pts_per36,Puntos cada 36 minutos,Puntos llevados a 36 minutos para comparar jugadores con distinto tiempo.,anotacion,jugador,puntos,lnb,B,PTS × 36 / MP,true,true
+team_points_share,% de los puntos del equipo,Qué parte de los puntos de Boca anotó.,anotacion,jugador,%,lnb,B,PTS / PTS_eq,true,true
+streak_10_pts,Racha de 10 o más puntos,Mayor cantidad de partidos seguidos con 10 o más puntos.,marcas,jugador,partidos,lnb,B,Racha máxima,true,true
+efficiency,Valoración,Índice de la planilla FIBA que publica la liga.,valoracion,jugador,puntos,lnb,A,,true,true
+plus_minus,+/−,Diferencia del marcador con el jugador en cancha.,impacto,jugador,puntos,lnb,A,,true,true
+possessions,Posesiones,Posesiones estimadas de cada equipo en el partido.,ritmo,equipo,posesiones,lnb,B,"0,5 × (FGA + 0,44 FTA − ORB + TOV de ambos equipos)",true,true
+pace,Ritmo,Posesiones cada 40 minutos de juego.,ritmo,equipo,posesiones,lnb,B,40 × Pos / (MinEq/5),true,true
+ortg,ORtg,Puntos a favor cada 100 posesiones.,ritmo,equipo,puntos,lnb,B,100 × PTS / Pos,true,true
+drtg,DRtg,Puntos en contra cada 100 posesiones.,ritmo,equipo,puntos,lnb,B,100 × PTS_rival / Pos,false,true
+net_rating,Net Rating,Diferencia de puntos cada 100 posesiones.,metricas_propias,equipo,puntos,lnb,B,ORtg − DRtg,true,true
+mov,MOV,Diferencia media de puntos por partido.,resultados,equipo,puntos,lnb,B,(PF − PA) / PJ,true,true
+pyth_wins,Victorias pitagóricas,Victorias que corresponden a los puntos a favor y en contra.,resultados,equipo,victorias,lnb,B,"PJ × PF^x / (PF^x + PA^x), x calibrado con la tabla",true,true
+srs,SRS,Diferencia de puntos ajustada por la dificultad de los rivales.,resultados,equipo,puntos,lnb,B,"MOV + SOS, iterado hasta converger",true,true
+sos,SOS,Dificultad del calendario: promedio del SRS de los rivales.,resultados,equipo,puntos,lnb,B,Promedio del SRS de los rivales,true,true
+gb,Partidos detrás del líder,Distancia en la tabla con el primero.,resultados,equipo,partidos,lnb,B,((W_líder − W) + (L − L_líder)) / 2,false,true
+elo,Elo,Fuerza estimada del equipo según sus resultados (estimado).,resultados,equipo,puntos,lnb,B,"R + K × (S − E), K = 20, V = 100",true,true
+elo_win_prob,Probabilidad de ganar antes del partido,Lo que daba el Elo antes de cada partido (estimado).,resultados,equipo,%,lnb,B,1 / (1 + 10^((R_rival − R − V) / 400)),true,true
+brier_mean,Brier del Elo,Error medio de las probabilidades del Elo en la temporada: más bajo es mejor.,resultados,equipo,puntos,lnb,B,Promedio de (p − resultado)²,false,true
+efg_against,eFG% del rival,Efectividad de campo que permite Boca.,cuatro_factores,equipo,%,lnb,B,"(FG + 0,5 × 3P) / FGA del rival",false,true
+orb_pct_team,ORB% del equipo,Rebotes ofensivos tomados de los disponibles.,cuatro_factores,equipo,%,lnb,B,ORB / (ORB + DRB_rival),true,true
+ft_per_fga,Libres por tiro de campo,Libres convertidos por cada tiro de campo (cuarto factor).,cuatro_factores,equipo,proporción,lnb,B,FT / FGA,true,true
+scorer_herfindahl,Concentración del ataque,Cuánto dependen los puntos de pocos jugadores: 1 sería un solo anotador.,anotacion,equipo,índice,lnb,B,Σ (PTS_jugador / PTS_eq)²,false,true
+per,PER,Eficiencia por minuto de Hollinger; necesita box scores de toda la liga.,valoracion,jugador,puntos,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false
+win_shares,Win Shares,Victorias atribuibles al jugador; necesita box scores de toda la liga.,valoracion,jugador,victorias,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false
+bpm,BPM,Aporte cada 100 posesiones frente a un jugador promedio; coeficientes de la NBA.,valoracion,jugador,puntos,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false
+play_types,Tipos de jugada,"Pick and roll, aislamiento, poste, cortes: ninguna fuente gratuita los publica.",tacticas,equipo,,n/d,C,,true,false
+defensive_scheme,Esquema defensivo,"Zona, hombre o presión: la fuente no lo informa y no se infiere.",tacticas,equipo,,n/d,C,,true,false
+contested_shots,Tiros contestados,Requiere tracking de jugadores; no hay fuente gratuita.,tacticas,equipo,,n/d,C,,true,false
+media_rating,Calificación de medios,Nota por partido; ninguna fuente gratuita automatizable la publica para la LNB.,valoracion,jugador,puntos,n/d,C,,true,false
