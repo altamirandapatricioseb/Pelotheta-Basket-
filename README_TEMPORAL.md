@@ -34,8 +34,18 @@ SUPABASE_URL=https://jztmmfdkbajdrmzilxlt.supabase.co SUPABASE_PUBLISHABLE_KEY=<
 
 ## Pasos que necesitan al dueño
 
-1. **GitHub Secrets** (Settings → Secrets and variables → Actions) para la etapa 3: `SUPABASE_URL` (termina en `.supabase.co`) y `SUPABASE_SECRET_KEY` (panel de Supabase → Project Settings → API Keys → Secret keys). No la pegues en el chat.
-2. Confirmar que la URL de Vercel abre y muestra «etapa: 1 - Preparación».
+1. **Push** (un hook local bloquea `git push` al agente): `git push origin main` desde esta carpeta.
+2. **Proyecto en Vercel** (el MCP no pudo crearlo; probablemente la app de Vercel en GitHub no ve el repo nuevo):
+   vercel.com → Add New → Project → importar `Pelotheta-Basket-` (si no aparece: «Adjust GitHub App Permissions» y darle acceso al repo).
+   Nombre `pelotheta-basket`, **Root Directory = `web`**, y en Environment Variables (Production y Preview):
+   `NEXT_PUBLIC_SUPABASE_URL = https://jztmmfdkbajdrmzilxlt.supabase.co` y
+   `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY = <clave publicable sb_publishable_... del panel de Supabase>`. Deploy.
+3. **GitHub Secrets** (Settings → Secrets and variables → Actions) para la etapa 3: `SUPABASE_URL` (termina en `.supabase.co`) y `SUPABASE_SECRET_KEY` (panel de Supabase → Project Settings → API Keys → Secret keys). No la pegues en el chat.
+4. Avisar la URL de Vercel: el agente verifica que muestre «etapa: 1 - Preparación», las cabeceras de seguridad y la consola sin errores, y cierra la etapa 1.
+
+## Notas
+
+- Los nombres de las migraciones en el historial remoto de Supabase llevan el timestamp del MCP, no el de los archivos locales. Antes de usar `supabase db push` hay que alinear las versiones (`supabase migration repair`).
 
 ## Próxima etapa (2: esqueleto desplegado)
 
