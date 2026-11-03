@@ -38,7 +38,8 @@ jobs:
           key: raw-cache-${{ github.run_id }}
           restore-keys: raw-cache-
       - name: Scraping, validación y tablas de temporada
-        run: uv run python -m pipeline.run ${{ inputs.force && '--force' || '' }}
+        # --liga: el PER y los percentiles del índice necesitan los box scores de toda la liga.
+        run: uv run python -m pipeline.run --liga ${{ inputs.force && '--force' || '' }}
       - name: Carga en Supabase
         run: uv run python -m pipeline.load
         env:
