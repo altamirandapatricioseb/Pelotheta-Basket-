@@ -13,6 +13,7 @@ from pathlib import Path
 
 import pytest
 
+from pipeline import tactics
 from pipeline.pbp import FOUL_STATS, elapsed_at, reconstruct, validate
 from sources import lnb
 
@@ -288,3 +289,40 @@ def _cached_match_pages() -> list[Path]:
 def test_partidos_reales_reconstruidos(page: Path) -> None:
     check = validate(lnb.parse_match(page.read_text(encoding="utf-8")))
     assert check.critical == []
+
+
+# --- Tácticas desde el play-by-play (pipeline/tactics.py) -------------------------------------
+
+
+def _tactics_events() -> list[tactics.Event]:
+    match = lnb.parse_match(synthetic_page())
+    return [
+        tactics.Event(e.seq, e.period, e.clock_s, e.side, e.event_type, e.source_player_id)
+        for e in match.events
+    ]
+
+
+def test_tacticas_del_partido_sintetico() -> None:
+    result = tactics.analyze(_tactics_events(), "local")
+    # 5-2 final: corrida máxima 3 (el triple) y 2 del rival; un cambio de líder no hay (siempre adelante).
+    assert result.team.pts_for == 5 and result.team.pts_against == 2
+    assert result.counters["max_run"] == 3 and result.counters["max_run_rival"] == 2
+    assert result.counters["lead_changes"] == 0 and result.counters["max_lead"] == 3
+    assert result.counters["pts_assisted"] == 3  # el triple fue asistido
+    assert result.counters["pts_second_chance_rival"] == 2  # doble del rival tras su rebote ofensivo
+    # Todos los locales jugaron los 40 minutos con el mismo quinteto.
+    assert all(s.seconds == 2400 for s in result.on.values())
+    [(five, split)] = result.lineups.items()
+    assert len(five) == 5 and split.pts_for == 5
+    # Posesiones estimadas: locales 2 FGA; visitantes 1 FGA + 0,44 FTA − 1 ORB.
+    assert result.team.possessions == pytest.approx(0.5 * (2 + (1 + 0.44 - 1)))
+
+
+def test_on_off_y_corridas() -> None:
+    team = tactics.Split(pts_for=100, pts_against=90, plays_for=80, plays_against=80)
+    on = tactics.Split(seconds=1200, pts_for=60, pts_against=40, plays_for=40, plays_against=40)
+    values = tactics.on_off(on, team)
+    assert values["net_rating_on"] == pytest.approx(50)  # (60 − 40) cada 40 posesiones
+    assert values["net_rating_off"] == pytest.approx(-25)  # (40 − 50) cada 40
+    assert values["on_off"] == pytest.approx(75)
+    assert tactics.count_big_runs([("a", 3), ("a", 3), ("a", 2), ("b", 2), ("a", 2)], "a") == (1, 0)

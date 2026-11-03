@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 from pipeline import metrics as m
+from pipeline import own_metrics as own
 from sources.lnb import BOCA_TEAM_ID
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -412,10 +413,25 @@ def player_season(
 
 def main() -> None:
     table, x, league_games = league(read("league_result"))
-    games = boca_games(read("game"), read("team_game_stats"), league_games)
-    players = player_season(read("player_game_stats"), read("team_game_stats"), read("game"))
+    game_rows = read("game")
+    games = boca_games(game_rows, read("team_game_stats"), league_games)
+    players = player_season(read("player_game_stats"), read("team_game_stats"), game_rows)
     season = boca_season(games, table, x)
     season["scorer_herfindahl"] = r4(m.herfindahl([p["pts"] for p in players]))
+
+    # Métricas propias y tácticas desde el play-by-play validado (5.8, 6 y 6.1).
+    per_game = own.game_tactics(game_rows, read("play_by_play_event"))
+    own.player_metrics(players, per_game, x)
+    for p in players:
+        for key, value in list(p.items()):
+            if isinstance(value, float):
+                p[key] = r4(value)
+    for g in games:
+        if g["source_game_id"] in per_game:
+            g.update(own.tactic_values(per_game[g["source_game_id"]]))
+    season.update({k: r4(v) if isinstance(v, float) else v for k, v in own.season_tactics(per_game).items()})
+    write("boca_lineup", own.lineups(per_game, {p["source_player_id"]: p["name"] for p in players}))
+
     write("league_table", table)
     write("boca_game", games)
     write("boca_season", [season])

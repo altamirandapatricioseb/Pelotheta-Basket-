@@ -75,3 +75,41 @@ tov_pct_against,TOV% del rival,Pérdidas del rival cada 100 jugadas: más alto e
 orb_pct_against,ORB% del rival,Rebotes ofensivos que le permite tomar al rival.,cuatro_factores,equipo,%,lnb,B,ORB_rival / (ORB_rival + DRB),false,true
 ft_per_fga_against,Libres por tiro del rival,Libres que convierte el rival por cada tiro de campo.,cuatro_factores,equipo,proporción,lnb,B,FT / FGA del rival,false,true
 brier,Brier del partido,Error de la probabilidad del Elo en ese partido: más bajo es mejor.,resultados,equipo,puntos,lnb,B,(p − resultado)²,false,true
+possessions_on,Posesiones en cancha,Posesiones estimadas de Boca y del rival mientras el jugador estaba en cancha.,tacticas,jugador,posesiones,lnb,B,"0,5 × (FGA + 0,44 FTA − ORB + TOV) de los tramos con él en cancha",true,true
+ortg_on,ORtg en cancha,Puntos de Boca cada 100 posesiones con el jugador en cancha (estimado).,metricas_propias,jugador,puntos,lnb,B,100 × PTS_eq en cancha / Pos en cancha,true,true
+drtg_on,DRtg en cancha,Puntos del rival cada 100 posesiones con el jugador en cancha (estimado).,metricas_propias,jugador,puntos,lnb,B,100 × PTS_rival en cancha / Pos en cancha,false,true
+net_rating_on,NR en cancha,"Diferencia de puntos cada 100 posesiones con él en cancha. Es del equipo, no producción individual.",metricas_propias,jugador,puntos,lnb,B,ORtg en cancha − DRtg en cancha,true,true
+net_rating_off,NR fuera de cancha,Diferencia de puntos cada 100 posesiones con el jugador en el banco.,metricas_propias,jugador,puntos,lnb,B,ORtg fuera − DRtg fuera,false,true
+on_off,On/Off,"Cuánto mejor (o peor) le va a Boca con el jugador en cancha que sin él, cada 100 posesiones.",impacto,jugador,puntos,lnb,B,NR en cancha − NR fuera,true,true
+ewa,EWA,Victorias esperadas que agrega su ataque frente a un suplente promedio (propuesta de este sistema).,metricas_propias,jugador,victorias,lnb,B,"(Min / 40) × [P(ORtg_on) − P(ORtg_rep)], P(a) = a^x / (a^x + L^x)",true,true
+ela,ELA,Derrotas esperadas que agrega su defensa frente a un suplente; negativo es bueno (propuesta).,metricas_propias,jugador,derrotas,lnb,B,"(Min / 40) × [Q(DRtg_on) − Q(DRtg_rep)], Q(g) = g^x / (g^x + L^x)",false,true
+rendimiento_indice,Índice de rendimiento,"Rendimiento global de 0 a 100 frente al plantel, por componentes (estimado).",evolucion,jugador,índice,lnb,B,Σ peso × promedio de percentiles por componente (pesos sin posición),true,true
+rendimiento_cobertura,Cobertura del índice,"Qué parte de los pesos del índice tiene datos; menos de 0,6 deja el índice n/d.",evolucion,jugador,proporción,lnb,B,Σ pesos de los componentes con datos,true,true
+mejoria_alpha,Mejoría α,Cuánto cambió su rendimiento reciente frente al resto de su temporada. Necesita posición y 20 partidos.,evolucion,jugador,índice,n/d,B,"50 + 16,7 × w × Z",true,false
+mejoria_beta,Mejoría β,Puntos que subió o bajó su índice de rendimiento entre dos bloques de partidos. Necesita 12 partidos.,evolucion,jugador,puntos,n/d,B,R_reciente − R_anterior,true,false
+potencial_alpha,Potencial α,"Percentil esperado en su pico según la edad. Necesita posición y edad, que la LNB no publica.",evolucion,jugador,percentil,n/d,B,"min(100, N + G × años × (1 + λ × M))",true,false
+potencial_beta,Potencial β,"Índice de nivel, tendencia y edad para ordenar el plantel. Necesita la edad.",evolucion,jugador,índice,n/d,B,"0,60 R* + 0,25 T + 0,15 × 100 × F_edad",true,false
+ast_per36,Asistencias cada 36 minutos,Asistencias llevadas a 36 minutos.,creacion,jugador,asistencias,lnb,B,AST × 36 / MP,true,true
+pf_per36,Faltas cada 36 minutos,Faltas llevadas a 36 minutos.,disciplina,jugador,faltas,lnb,B,PF × 36 / MP,false,true
+game_score_per36,Game Score cada 36 minutos,Game Score total llevado a 36 minutos.,valoracion,jugador,puntos,lnb,B,Σ Game Score × 36 / MP,true,true
+team_minutes_share,% de los minutos del equipo,Parte de los minutos de juego de Boca que estuvo en cancha.,tacticas,jugador,%,lnb,B,MP / minutos de juego del equipo,true,true
+max_run,Mayor corrida a favor,Mayor cantidad de puntos seguidos de Boca sin que anote el rival.,tacticas,equipo,puntos,lnb,B,Máximo de puntos consecutivos,true,true
+max_run_rival,Mayor corrida en contra,Mayor cantidad de puntos seguidos del rival.,tacticas,equipo,puntos,lnb,B,Máximo de puntos consecutivos del rival,false,true
+big_runs,Corridas de 8-0 o más,Veces que Boca anotó 8 puntos o más seguidos.,tacticas,equipo,corridas,lnb,B,Conteo de corridas ≥ 8,true,true
+big_runs_rival,Corridas de 8-0 o más en contra,Veces que el rival anotó 8 puntos o más seguidos.,tacticas,equipo,corridas,lnb,B,Conteo de corridas ≥ 8 del rival,false,true
+lead_changes,Cambios de líder,Veces que la ventaja pasó de un equipo al otro.,tacticas,equipo,cambios,lnb,B,Conteo,true,true
+max_lead,Mayor ventaja,Mayor diferencia a favor de Boca durante el partido.,tacticas,equipo,puntos,lnb,B,Máximo de (PTS − PTS_rival),true,true
+max_deficit,Mayor desventaja,Mayor diferencia en contra de Boca durante el partido.,tacticas,equipo,puntos,lnb,B,Máximo de (PTS_rival − PTS),false,true
+minutes_leading,Minutos arriba,Minutos de juego con Boca en ventaja.,tacticas,equipo,minutos,lnb,B,Σ tiempo con ventaja,true,true
+minutes_trailing,Minutos abajo,Minutos de juego con Boca en desventaja.,tacticas,equipo,minutos,lnb,B,Σ tiempo con desventaja,false,true
+minutes_tied,Minutos empatado,Minutos de juego con el marcador igualado.,tacticas,equipo,minutos,lnb,B,Σ tiempo empatado,true,true
+pts_assisted_share,% de puntos asistidos,Parte de los puntos de Boca que llegaron con una asistencia.,origen_puntos,equipo,%,lnb,B,Puntos de canastas asistidas / PTS,true,true
+pts_3_share,% de puntos de triple,Parte de los puntos de Boca que fueron de triple.,origen_puntos,equipo,%,lnb,B,3 × 3P / PTS,true,true
+pts_ft_share,% de puntos de libre,Parte de los puntos de Boca que fueron de tiro libre.,origen_puntos,equipo,%,lnb,B,TL / PTS,true,true
+pts_second_chance,Puntos de segunda oportunidad,"Puntos de Boca después de un rebote ofensivo propio, hasta perder la pelota.",origen_puntos,equipo,puntos,lnb,B,Puntos tras ORB hasta el cambio de posesión,true,true
+pts_second_chance_rival,Puntos de segunda oportunidad del rival,Puntos del rival después de su rebote ofensivo.,origen_puntos,equipo,puntos,lnb,B,Puntos del rival tras su ORB,false,true
+quarter_start_diff,Diferencia en los arranques de cuarto,Diferencia de puntos en los primeros 3 minutos de cada cuarto.,tacticas,equipo,puntos,lnb,B,Σ (PTS − PTS_rival) en los minutos 0 a 3,true,true
+quarter_end_diff,Diferencia en los cierres de cuarto,Diferencia de puntos en los últimos 3 minutos de cada cuarto.,tacticas,equipo,puntos,lnb,B,Σ (PTS − PTS_rival) en los últimos 3 minutos,true,true
+clutch_net,Diferencia en el clutch,Diferencia de puntos en los últimos 5 minutos con el partido a 5 puntos o menos.,tacticas,equipo,puntos,lnb,B,PTS − PTS_rival en el clutch,true,true
+timeouts,Tiempos muertos pedidos,Tiempos muertos que pidió Boca.,tacticas,equipo,tiempos muertos,lnb,A,,true,true
+possessions_pbp,Posesiones (desde las jugadas),Posesiones estimadas sumando las jugadas del partido; se compara con la del box score.,ritmo,equipo,posesiones,lnb,B,"0,5 × (FGA + 0,44 FTA − ORB + TOV) desde el play-by-play",true,true

@@ -6,10 +6,16 @@ rebote,jugador,temporada,Rebote,4,trb orb drb orb_pct drb_pct trb_pct
 creacion,jugador,temporada,Creación,5,ast tov ast_to ast_pct tov_pct usg_pct
 defensa,jugador,temporada,Defensa,6,stl blk stl_pct blk_pct
 valoracion,jugador,temporada,Valoración global,7,game_score_avg game_score_stdev pie efficiency per win_shares bpm
-impacto,jugador,temporada,Impacto,8,plus_minus game_score_avg pie
+impacto,jugador,temporada,Impacto,8,plus_minus on_off net_rating_on net_rating_off game_score_avg pie
 disciplina,jugador,temporada,Disciplina,9,pf
 marcas,jugador,temporada,Marcas,10,starts double_doubles triple_doubles streak_10_pts
 partidos,equipo,partido,Partido a partido,1,points_for points_against rest_days possessions pace ortg drtg net_rating elo_win_prob brier
 cuatro_factores,equipo,partido,Cuatro factores,2,efg efg_against tov_pct tov_pct_against orb_pct_team orb_pct_against ft_per_fga ft_per_fga_against
 tiro_equipo,equipo,partido,Tiro,3,ts efg three_rate ft_per_fga
 tabla_liga,equipo,temporada,Tabla de la liga,4,played wins losses win_pct points_for_pg points_against_pg mov pyth_wins srs sos gb elo
+metricas_propias,jugador,temporada,Métricas propias,11,net_rating_on net_rating_off on_off ewa ela
+evolucion,jugador,temporada,Evolución y proyección,12,minutes rendimiento_indice rendimiento_cobertura mejoria_alpha mejoria_beta potencial_alpha potencial_beta
+tacticas,jugador,temporada,Tácticas,13,team_minutes_share possessions_on ortg_on drtg_on on_off
+tacticas_equipo,equipo,partido,Tácticas,5,max_run max_run_rival big_runs big_runs_rival lead_changes max_lead max_deficit minutes_leading minutes_trailing clutch_net timeouts
+origen_puntos,equipo,partido,Origen de los puntos,6,pts_assisted_share pts_3_share pts_ft_share pts_second_chance pts_second_chance_rival quarter_start_diff quarter_end_diff
+quintetos,equipo,quinteto,Quintetos,7,minutes possessions points_for points_against ortg drtg net_rating

@@ -17,6 +17,15 @@ export type Database = {
       [_ in never]: never;
     };
     Views: {
+      boca_lineup: {
+        Row: {
+          lineup_key: string | null;
+          players: string | null;
+          small_sample: boolean | null;
+          stats: Json | null;
+        };
+        Relationships: [];
+      };
       boca_game: {
         Row: {
           game_date: string | null;

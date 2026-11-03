@@ -1,13 +1,13 @@
 {
-  "run_id": "277a5710-2481-4138-b381-c63ffbf033a1",
-  "started_at": "2026-11-03T14:49:01+00:00",
+  "run_id": "4c962505-15ce-4476-9aa7-701612a9f12d",
+  "started_at": "2026-11-03T16:08:32+00:00",
   "source": "lnb",
   "window": [
     "2026-09-01",
     "2026-11-03"
   ],
   "scope": "boca",
-  "finished_at": "2026-11-03T14:49:41+00:00",
+  "finished_at": "2026-11-03T16:09:11+00:00",
   "duration_s": 40,
   "games_loaded": 6,
   "pbp_validated": [

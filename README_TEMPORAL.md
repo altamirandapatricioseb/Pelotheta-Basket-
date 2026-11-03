@@ -7,10 +7,10 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 
 | Etapa | Estado |
 |---|---|
-| 1. Preparación | En curso: Fase 0, Supabase y repo hechos; falta el deploy en Vercel (el dueño lo hace más adelante) |
-| 3. Pipeline | En curso en local (se adelantó por pedido del dueño): adaptador LNB, validación del play-by-play y salida a CSV; falta la carga en Supabase, los workflows y la Interfaz 6 |
-| 2. Esqueleto | Hecho en local, sin desplegar: header de 6 interfaces, tokens, tema claro y oscuro, Jugadores con la tabla «Resumen» y el resto «en construcción». Falta aplicar la migración `player_summary` y cargar datos para verla con números |
-| 4. Estadísticas | En curso: fórmulas, tablas de temporada, catálogo, carga en Supabase (`ingest.load_batch`) e Interfaces 2 y 3 por categoría hechas. Primera carga hecha el 3-nov. Faltan las métricas desde el play-by-play: tácticas, NR/EWA/ELA por jugador, Mejoría y Potencial |
+| 1. Preparación | Hecha: Fase 0, Supabase con RLS, Vercel (`pelotheta-basket-dva.vercel.app`) y GitHub |
+| 2. Esqueleto | Hecha: header de 6 interfaces, tokens, tema claro y oscuro |
+| 3. Pipeline | Casi hecha: adaptador LNB, validación del play-by-play, carga en Supabase, workflows mensual y keepalive, revalidación de la web. Falta la **Interfaz 6** (botón y fecha de actualización) y correr el workflow mensual una vez desde GitHub |
+| 4. Estadísticas | **Hecha** (3-nov): 96 estadísticas en el catálogo, Jugadores con 13 categorías y Equipo con 7 (incluye tácticas, origen de los puntos y quintetos), métricas propias (NR, On/Off, EWA, ELA, índice de rendimiento). Mejoría y Potencial implementadas y probadas, `n/d` hasta tener posición, edad y más partidos |
 | 5 a 11 | Pendientes |
 
 ## Deploy y primera carga (3-nov-2026)
@@ -33,7 +33,13 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 1. **Local:** `uv run python -m pipeline.run` y después `uv run --env-file .env python -m pipeline.load` (necesita `SUPABASE_SECRET_KEY` en `.env`).
 2. **GitHub:** Actions → «Actualizar datos» → Run workflow (Secrets `SUPABASE_URL`, `SUPABASE_SECRET_KEY` y `REVALIDATE_SECRET`).
 
-## Etapa 4: qué está hecho (3-nov-2026)
+## Etapa 4: cierre (3-nov-2026)
+
+- Desde el play-by-play validado (`pipeline/tactics.py`): On/Off y NR con y sin cada jugador, EWA y ELA, 44 quintetos con minutos y NR, corridas, cambios de líder, minutos arriba y abajo, origen de los puntos (asistidos, triples, libres, segunda oportunidad), arranques y cierres de cuarto, clutch y tiempos muertos. Control: los minutos en cancha suman exactamente 5 × 40 × partidos.
+- Sección 6.1 (`pipeline/projection.py`): las cinco fórmulas con los ejemplos del prompt reproducidos en tests. Índice de rendimiento calculado contra el plantel; Mejoría α y β y Potencial α y β `n/d` con su motivo (`docs/metricas_propias.md`).
+- Pendiente para cuando haya datos: posición y edad de los jugadores (Wikipedia, Latinbasket) y box scores de toda la liga (`--liga`) para PER, Win Shares, BPM y percentiles contra la liga.
+
+## Etapa 4: base (3-nov-2026)
 
 - `pipeline/metrics.py`: fórmulas puras de 5.6 y 6 (tiro, posesiones, ratings, cuatro factores, USG%, AST%, ORB/DRB/TRB%, STL%, BLK%, Game Score, PIE, dobles, por 36, Elo, pitagórico calibrado, SRS, GB, rachas, Herfindahl, Jaccard, EWA, ELA). Toda división por cero da `n/d`.
 - `pipeline/season.py` (corre al final de `pipeline.run`): `league_table`, `boca_game`, `boca_season` y `player_season` en `data/processed/`.

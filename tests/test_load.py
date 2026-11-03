@@ -149,7 +149,7 @@ def test_lote_completo_y_limpio(processed: Path) -> None:
     assert values[("equipo", BOCA, "elo")]["is_estimated"]
     assert ("equipo", BOCA, "position") not in values  # lo que no está en el catálogo no se carga
     assert batch["game_derived"][0]["stats"] == {"ortg": 110.5}
-    assert {s["scope"] for s in batch["sets"]} == {"temporada", "partido"}
+    assert {s["scope"] for s in batch["sets"]} == {"temporada", "partido", "quinteto"}
 
 
 def test_rpc_manda_la_clave_solo_en_el_header() -> None:

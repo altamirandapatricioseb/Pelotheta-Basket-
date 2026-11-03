@@ -50,7 +50,7 @@ export default async function EquipoPage({ searchParams }: PageProps) {
         <TeamTable
           key={set.id}
           caption={`${set.name} de Boca Juniors`}
-          rowHeader={set.scope === 'partido' ? 'Partido' : 'Equipo'}
+          rowHeader={set.scope === 'partido' ? 'Partido' : set.scope === 'quinteto' ? 'Quinteto' : 'Equipo'}
           rows={rows.data}
           columns={columns}
         />

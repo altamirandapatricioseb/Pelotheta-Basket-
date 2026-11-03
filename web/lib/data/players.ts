@@ -17,10 +17,12 @@ export interface PlayerSummary {
   values: Record<string, number | null>;
 }
 
+export type SetScope = 'temporada' | 'partido' | 'quinteto';
+
 export interface StatSet {
   id: string;
   name: string;
-  scope: 'temporada' | 'partido';
+  scope: SetScope;
   statIds: string[];
 }
 
@@ -70,7 +72,7 @@ export async function getSets(
       const set = sets.get(r.set_id) ?? {
         id: r.set_id,
         name: r.set_name ?? r.set_id,
-        scope: r.scope === 'partido' ? 'partido' : 'temporada',
+        scope: r.scope === 'partido' || r.scope === 'quinteto' ? r.scope : 'temporada',
         statIds: [],
       };
       set.statIds.push(r.stat_id);
@@ -140,9 +142,26 @@ function shortDate(isoDate: string | null): string {
 }
 
 /** Filas de una tabla del equipo: tabla de la liga (temporada) o partido a partido de Boca. */
-export async function getTeamRows(scope: 'temporada' | 'partido'): Promise<DataResult<TeamRow[]>> {
+export async function getTeamRows(scope: SetScope): Promise<DataResult<TeamRow[]>> {
   try {
     const client = createApiClient();
+    if (scope === 'quinteto') {
+      const { data, error } = await client.from('boca_lineup').select('lineup_key, players, stats, small_sample');
+      if (error) return fail(error.message);
+      const rows = data.flatMap((q) =>
+        q.lineup_key === null
+          ? []
+          : [
+              {
+                id: q.lineup_key,
+                label: `${q.players ?? ''}${q.small_sample ? ' (muestra pequeña)' : ''}`,
+                highlight: false,
+                values: (q.stats ?? {}) as Record<string, number | null>,
+              },
+            ],
+      );
+      return { ok: true, data: rows.sort((a, b) => (b.values.minutes ?? 0) - (a.values.minutes ?? 0)).slice(0, 25) };
+    }
     if (scope === 'partido') {
       const { data, error } = await client
         .from('boca_game')

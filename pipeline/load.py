@@ -32,7 +32,10 @@ SUPABASE_URL_RE = re.compile(r"^https://[a-z0-9]{1,40}\.supabase\.co/?$")
 TIMEOUT_SECONDS = 120.0
 COMPETITION = {"code": "lnb", "name_es": "Liga Nacional de Básquet", "season": "2026-27"}
 # Estadísticas que dependen de un modelo o de un supuesto: la web las marca como estimadas.
-ESTIMATED = frozenset({"elo", "elo_win_prob", "brier", "brier_mean", "pyth_wins"})
+ESTIMATED = frozenset({
+    "elo", "elo_win_prob", "brier", "brier_mean", "pyth_wins", "possessions_on", "ortg_on", "drtg_on",
+    "net_rating_on", "net_rating_off", "on_off", "ewa", "ela", "rendimiento_indice", "possessions_pbp",
+})  # fmt: skip
 
 
 class LoadError(RuntimeError):
@@ -157,6 +160,15 @@ def build_batch(folder: Path = PROCESSED, *, run_id: str, trigger: str, started_
         "game_derived": [
             {"source_game_id": g["source_game_id"], "stats": _values(g, stat_ids)}
             for g in read("boca_game", folder)
+        ],
+        "lineups": [
+            {
+                "lineup_key": q["lineup_key"],
+                "players": q["players"],
+                "small_sample": q["small_sample"] == "True",
+                "stats": _values(q, stat_ids),
+            }
+            for q in read("boca_lineup", folder)
         ],
         "log": {"status": "ok", "message": None},
     }
