@@ -1,0 +1,51 @@
+@import 'tailwindcss';
+
+/* Tokens mínimos de la etapa 1. El sistema de diseño completo (9.10) llega en la etapa 2. */
+:root {
+  --green: #32b531;
+  --bg: #ffffff;
+  --fg: #0b0b0b;
+  --muted: #5b5b5b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --fg: #f2f2f2;
+    --muted: #a3a3a3;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-montserrat), var(--font-greek), sans-serif;
+}
+
+.page {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  border-bottom: 3px solid var(--green);
+  padding-bottom: 0.5rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.status div {
+  display: flex;
+  gap: 1rem;
+}
+
+.status dt {
+  font-weight: 700;
+  min-width: 12rem;
+}
