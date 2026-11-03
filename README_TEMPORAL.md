@@ -11,7 +11,8 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 | 2. Esqueleto | Hecha: header de 6 interfaces, tokens, tema claro y oscuro. **3-nov:** paleta, tokens y CSS copiados de Pelotheta fútbol (sistema madre, decisión del dueño): verde #64cc4f, violeta como secundario permitido, sin #b2e05b |
 | 3. Pipeline | Hecha: adaptador LNB (toda la liga: 49 box scores, 38 play-by-play validados), plantel de Wikipedia, fichas de la LNB, carga en Supabase, workflows, revalidación e **Interfaz 6** (`/actualizar`) |
 | 4. Estadísticas | **Hecha** (3-nov): 273 estadísticas en el catálogo con las columnas de fútbol (abreviatura, cómo leerla, regla de agregación, por 36). Equipo igual que fútbol: 15 categorías y vistas por partido, rival, mes, competición y acumulada (tarjetas con línea partido a partido); Jugadores igual que fútbol: 21 categorías, filtros de posición y minutos, cada 36, barras de percentil y personalizado. Detalle de partido y de jugador |
-| 5 a 11 | Pendientes. Siguiente: Comparar como fútbol (tarjetas y conclusiones siempre visibles) y etapa 5, Gráficos |
+| 5. Gráficos (Interfaz 1) | **Hecha** (3-nov), igual que fútbol: landing en `/` con **76 gráficos en 13 categorías (A a M, numerados como 9.2.1), 73 con datos reales**. Barra de categorías que sigue el scroll, filtros de competición y localía, 3 o 4 números destacados por sección, tabla equivalente, PNG, datos en CSV y «Ver origen de los datos» (9.9). Sin datos, con motivo: 25 mapa de tiros (no se republican las coordenadas crudas; el reparto por zona está en el 26), 59 árbitros (la carga todavía no los lee) y 76 temporada anterior (no se carga, decisión del dueño). `data/chart_catalog.csv`, `data/chart_source_map.csv`, migración 1600 y `tests/test_chart_catalog.py` (sin enlaces rotos) |
+| 6 a 11 | Pendientes. Siguiente: etapa 6, Situaciones y estadística desglosada (como fútbol) |
 
 ## Deploy y primera carga (3-nov-2026)
 

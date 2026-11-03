@@ -143,6 +143,32 @@ def _plays(t: dict[str, float]) -> tuple[float, float, float, float]:
     return t["fga"], t["fta"], t["orb"], t["tov"]
 
 
+def league_ratings(table: list[dict[str, Any]], team_rows: list[dict[str, str]]) -> None:
+    """ORtg, DRtg, Net Rating y cuatro factores de cada equipo de la liga (suma sobre suma de sus
+    box scores): sirven para el promedio de la liga y los percentiles de Boca en los gráficos."""
+    keys = ("pf", "pa", "poss", "fg", "fg3m", "fga", "fta", "ftm", "tov", "orb", "rival_drb")
+    acc: dict[str, dict[str, float]] = defaultdict(lambda: dict.fromkeys(keys, 0.0))
+    for (_, tid), (team, rival) in _pairs(team_rows).items():
+        a = acc[tid]
+        a["poss"] += m.possessions(_plays(team), _plays(rival))
+        a["pf"] += team["pts"]
+        a["pa"] += rival["pts"]
+        a["rival_drb"] += rival["drb"]
+        for k in ("fg", "fg3m", "fga", "fta", "ftm", "tov", "orb"):
+            a[k] += team[k]
+    for row in table:
+        if not acc.get(row["team_id"], {}).get("poss"):
+            continue
+        a = acc[row["team_id"]]
+        row["ortg"] = r4(m.rating(a["pf"], a["poss"]))
+        row["drtg"] = r4(m.rating(a["pa"], a["poss"]))
+        row["net_rating"] = r4(100 * (a["pf"] - a["pa"]) / a["poss"])
+        row["efg"] = r4(m.efg(a["fg"], a["fg3m"], a["fga"]))
+        row["tov_pct"] = r4(m.tov_pct(a["tov"], a["fga"], a["fta"]))
+        row["orb_pct_team"] = r4(m.ratio(a["orb"], a["orb"] + a["rival_drb"]))
+        row["ft_per_fga"] = r4(m.ft_per_fga(a["ftm"], a["fga"]))
+
+
 def boca_games(
     game_rows: list[dict[str, str]], team_rows: list[dict[str, str]], league_games: list[m.Game]
 ) -> list[dict[str, Any]]:
@@ -196,6 +222,9 @@ def boca_games(
                 "ts": r4(m.ts(boca["pts"], boca["fga"], boca["fta"])),
                 "elo_win_prob": r4(win_prob),
                 "brier": r4(m.brier(win_prob, won)) if win_prob is not None else None,
+                # Elo de los dos antes del partido (gráfico de evolución del Elo, 9.2.1 n.º 55).
+                "elo_pre": r4(elo[0] if home else elo[1]) if elo is not None else None,
+                "elo_rival_pre": r4(elo[1] if home else elo[0]) if elo is not None else None,
             }
         )
     return rows
@@ -581,6 +610,7 @@ def main() -> None:
         season, games, read("game_period_score"), game_rows, table, players, player_rows, league_games
     )
     extras.home_advantage(table, league_games)
+    league_ratings(table, team_rows)
     for row in [*players, *games, season, *table]:
         for key, value in list(row.items()):
             if isinstance(value, float):

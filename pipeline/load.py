@@ -23,6 +23,7 @@ from typing import Any
 
 import httpx
 
+from pipeline import charts
 from pipeline.season import PROCESSED, read
 from sources.lnb import BOCA_TEAM_ID, SOURCE
 from sources.wikipedia import POSITION_ES
@@ -250,6 +251,15 @@ def load(*, run_id: str, trigger: str, started_at: str, client: httpx.Client | N
         raise
 
 
+def send_charts(client: httpx.Client | None = None) -> Any:
+    """Catálogo de gráficos y mapa de origen (`data/chart_catalog.csv` y `chart_source_map.csv`)."""
+    url = os.environ.get("SUPABASE_URL", "").strip()
+    key = os.environ.get("SUPABASE_SECRET_KEY", "").strip()
+    payload = charts.to_payload(charts.load_charts(), charts.load_sources())
+    body = {"p_charts": payload["charts"], "p_sources": payload["sources"]}
+    return rpc("load_charts", body, url, key, client)
+
+
 def revalidate_site(client: httpx.Client | None = None) -> str:
     """Pide a la web que descarte su caché de datos (8.9). Sin SITE_URL o sin secreto, no hace nada.
 
@@ -277,6 +287,7 @@ def main() -> None:
     trigger = "schedule" if os.environ.get("GITHUB_EVENT_NAME") == "schedule" else "manual"
     started = last_run.get("started_at") or datetime.now(UTC).isoformat(timespec="seconds")
     result = load(run_id=last_run["run_id"], trigger=trigger, started_at=started)
+    result["graficos"] = send_charts()
     print(json.dumps({**result, "revalidacion_web": revalidate_site()}, ensure_ascii=False))
 
 

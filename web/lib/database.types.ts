@@ -109,6 +109,43 @@ export type Database = {
         };
         Relationships: [];
       };
+      chart_catalog: {
+        Row: {
+          chart_id: string | null;
+          category: string | null;
+          title_es: string | null;
+          chart_type: string | null;
+          required_data: string | null;
+          origin_ref: string | null;
+          powerbi: string | null;
+          excel: string | null;
+          available: boolean | null;
+          reason_es: string | null;
+          sort_order: number | null;
+        };
+        Relationships: [];
+      };
+      chart_source_map: {
+        Row: {
+          chart_id: string | null;
+          target_type: string | null;
+          target_ref: string | null;
+          params: string | null;
+          label_es: string | null;
+        };
+        Relationships: [];
+      };
+      league_game: {
+        Row: {
+          game_id: number | null;
+          game_date: string | null;
+          home: string | null;
+          away: string | null;
+          home_points: number | null;
+          away_points: number | null;
+        };
+        Relationships: [];
+      };
       game_line: {
         Row: {
           game_id: number | null;
