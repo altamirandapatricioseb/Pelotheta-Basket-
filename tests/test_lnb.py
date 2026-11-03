@@ -147,6 +147,9 @@ def test_parse_fixture_y_partidos_de_boca() -> None:
     games = lnb.parse_fixture(payload)
     assert [g.is_boca for g in games] == [True, False]
     assert [g.is_played for g in games] == [True, False]
+    # La LNB publica los programados con 0-0: no cuentan como jugados.
+    scheduled = games[1].model_copy(update={"home_points": 0, "away_points": 0})
+    assert not scheduled.is_played
     assert games[0].played_at.utcoffset() is not None and games[0].played_at.hour == 20
     assert games[0].url.endswith("/laliga/partido/v2abcdefghijk/boca-vs-regatas-c")
 

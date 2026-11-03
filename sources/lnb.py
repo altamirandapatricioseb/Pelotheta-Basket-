@@ -57,7 +57,10 @@ class FixtureGame(BaseModel):
 
     @property
     def is_played(self) -> bool:
-        return self.home_points is not None and self.away_points is not None
+        # La LNB publica los partidos programados con 0-0, no vacíos; en básquet no hay 0-0 ni empates.
+        if self.home_points is None or self.away_points is None:
+            return False
+        return self.home_points != self.away_points
 
     @property
     def url(self) -> str:

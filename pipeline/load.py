@@ -225,13 +225,34 @@ def load(*, run_id: str, trigger: str, started_at: str, client: httpx.Client | N
         raise
 
 
+def revalidate_site(client: httpx.Client | None = None) -> str:
+    """Pide a la web que descarte su caché de datos (8.9). Sin SITE_URL o sin secreto, no hace nada.
+
+    Un fallo acá no invalida la carga (los datos ya están en la base): la web los muestra igual
+    cuando vence su caché de 6 horas.
+    """
+    site = os.environ.get("SITE_URL", "").strip().rstrip("/")
+    secret = os.environ.get("REVALIDATE_SECRET", "").strip()
+    if not site.startswith("https://") or not secret:
+        return "omitida (faltan SITE_URL o REVALIDATE_SECRET)"
+    own_client = client is None
+    http = client or httpx.Client(timeout=30.0)
+    try:
+        response = http.post(f"{site}/api/revalidar", headers={"x-revalidate-secret": secret})
+    except httpx.HTTPError as exc:
+        return f"falló ({type(exc).__name__})"
+    finally:
+        if own_client:
+            http.close()
+    return "ok" if response.status_code == 200 else f"falló (HTTP {response.status_code})"
+
+
 def main() -> None:
     last_run = json.loads((DATA / "last_run.json").read_text(encoding="utf-8"))
     trigger = "schedule" if os.environ.get("GITHUB_EVENT_NAME") == "schedule" else "manual"
     started = last_run.get("started_at") or datetime.now(UTC).isoformat(timespec="seconds")
-    print(
-        json.dumps(load(run_id=last_run["run_id"], trigger=trigger, started_at=started), ensure_ascii=False)
-    )
+    result = load(run_id=last_run["run_id"], trigger=trigger, started_at=started)
+    print(json.dumps({**result, "revalidacion_web": revalidate_site()}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

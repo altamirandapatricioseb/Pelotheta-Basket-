@@ -185,3 +185,22 @@ def test_error_de_supabase_sin_la_clave() -> None:
     with httpx.Client(transport=httpx.MockTransport(handler)) as client, pytest.raises(load.LoadError) as err:
         load.rpc("load_batch", {}, URL, KEY, client)
     assert KEY not in str(err.value) and "400" in str(err.value)
+
+
+def test_revalidacion_manda_el_secreto_y_no_rompe_si_falla(monkeypatch: pytest.MonkeyPatch) -> None:
+    seen: dict[str, object] = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        seen["url"], seen["secret"] = str(request.url), request.headers.get("x-revalidate-secret")
+        return httpx.Response(200, json={"ok": True})
+
+    monkeypatch.setenv("SITE_URL", "https://pelotheta-basket-dva.vercel.app/")
+    monkeypatch.setenv("REVALIDATE_SECRET", "s" * 40)
+    with httpx.Client(transport=httpx.MockTransport(handler)) as client:
+        assert load.revalidate_site(client) == "ok"
+    assert seen == {"url": "https://pelotheta-basket-dva.vercel.app/api/revalidar", "secret": "s" * 40}
+
+    with httpx.Client(transport=httpx.MockTransport(lambda r: httpx.Response(401))) as client:
+        assert load.revalidate_site(client) == "falló (HTTP 401)"
+    monkeypatch.delenv("REVALIDATE_SECRET")
+    assert load.revalidate_site().startswith("omitida")

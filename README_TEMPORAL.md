@@ -10,22 +10,27 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 | 1. Preparación | En curso: Fase 0, Supabase y repo hechos; falta el deploy en Vercel (el dueño lo hace más adelante) |
 | 3. Pipeline | En curso en local (se adelantó por pedido del dueño): adaptador LNB, validación del play-by-play y salida a CSV; falta la carga en Supabase, los workflows y la Interfaz 6 |
 | 2. Esqueleto | Hecho en local, sin desplegar: header de 6 interfaces, tokens, tema claro y oscuro, Jugadores con la tabla «Resumen» y el resto «en construcción». Falta aplicar la migración `player_summary` y cargar datos para verla con números |
-| 4. Estadísticas | En curso: fórmulas, tablas de temporada, catálogo, carga en Supabase (`ingest.load_batch`) e Interfaces 2 y 3 por categoría hechas. Falta la **primera carga de datos** (clave secreta) y las métricas desde el play-by-play: tácticas, NR/EWA/ELA por jugador, Mejoría y Potencial |
+| 4. Estadísticas | En curso: fórmulas, tablas de temporada, catálogo, carga en Supabase (`ingest.load_batch`) e Interfaces 2 y 3 por categoría hechas. Primera carga hecha el 3-nov. Faltan las métricas desde el play-by-play: tácticas, NR/EWA/ELA por jugador, Mejoría y Potencial |
 | 5 a 11 | Pendientes |
 
-## Deploy (3-nov-2026)
+## Deploy y primera carga (3-nov-2026)
 
-- URL: https://pelotheta-basket.vercel.app (proyecto `pelotheta-basket`, Root Directory `web`). Variables públicas cargadas el 3-nov; se aplican en el próximo deploy.
-- `pelotheta-basket-dva` es una importación duplicada del mismo repo: borrarlo desde el panel de Vercel (Settings → Delete Project).
-- Supabase: migraciones 1 a 6 aplicadas. Security Advisor sin ERROR.
+- **URL: https://pelotheta-basket-dva.vercel.app** (proyecto `pelotheta-basket-dva`, Root Directory `web`).
+- `pelotheta-basket` (sin `-dva`) es la otra importación del mismo repo: se puede borrar desde Vercel.
+- Supabase: migraciones 1 a 8 aplicadas. Security Advisor: 0 ERROR (4 INFO intencionales). `test_rls.py` 9 de 9 contra la base real.
+- **Primera carga hecha** el 3-nov desde la máquina del dueño: 49 partidos de la liga, 6 de Boca con box score, 144 líneas de jugador, 3233 jugadas, 796 tiros y 690 valores de estadística. Base: 12,85 MB de 500.
+- Dos intentos fallaron antes y la base los frenó sin cargar nada: (1) la LNB publica los partidos programados con 0-0 y se tomaban como jugados (corregido en `sources/lnb.py`); (2) la Data API rechaza `DELETE` sin `WHERE` (corregido en la migración 7).
+
+## Pasos pendientes del dueño
+
+1. **Vercel** (proyecto `pelotheta-basket-dva`) → Settings → Environment Variables: `REVALIDATE_SECRET` = el valor de `REVALIDATE_SECRET` de tu `.env` local, tipo Sensitive, Production y Preview. Después, Redeploy.
+2. **GitHub** → Settings → Secrets → Actions: `REVALIDATE_SECRET` con el mismo valor.
+3. Hasta entonces la web puede tardar hasta 6 horas en mostrar los datos nuevos (caché). Para verlos ya: Vercel → proyecto → Settings → Caches → Purge Data Cache.
 
 ## Cómo cargar los datos
 
-Una de las dos:
-
-1. **Local:** poner `SUPABASE_SECRET_KEY=sb_secret_...` en `.env` (está en .gitignore) y correr
-   `uv run python -m pipeline.run` y después `uv run --env-file .env python -m pipeline.load`.
-2. **GitHub:** push y Actions → «Actualizar datos» → Run workflow (usa los Secrets `SUPABASE_URL` y `SUPABASE_SECRET_KEY`).
+1. **Local:** `uv run python -m pipeline.run` y después `uv run --env-file .env python -m pipeline.load` (necesita `SUPABASE_SECRET_KEY` en `.env`).
+2. **GitHub:** Actions → «Actualizar datos» → Run workflow (Secrets `SUPABASE_URL`, `SUPABASE_SECRET_KEY` y `REVALIDATE_SECRET`).
 
 ## Etapa 4: qué está hecho (3-nov-2026)
 
