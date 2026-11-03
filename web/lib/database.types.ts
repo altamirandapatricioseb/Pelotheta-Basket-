@@ -75,6 +75,14 @@ export type Database = {
           stat_group: string | null;
           stat_id: string | null;
           unit: string | null;
+          short_name: string | null;
+          reading_es: string | null;
+          estimated: boolean | null;
+          per_unit: boolean | null;
+          rule: string | null;
+          arg1: string | null;
+          arg2: string | null;
+          factor: number | null;
         };
         Relationships: [];
       };

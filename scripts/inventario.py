@@ -101,6 +101,8 @@ def main() -> None:
     requested: Counter[str] = Counter()
     extras: Counter[str] = Counter()
     for row in catalog:
+        if row["grupo"] == "auxiliar":  # numeradores y denominadores para agrupar partidos, no se muestran
+            continue
         (extras if row["id"] in EXTRAS else requested)[classify(row)] += 1
     for _, _, state, _ in PENDING:
         requested[state] += 1

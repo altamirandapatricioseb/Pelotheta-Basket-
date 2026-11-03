@@ -35,7 +35,7 @@ function fail(cause: unknown): { ok: false; code: 'PEL-DB-001'; detail: string }
 // Supabase corta cada pedido en 1000 filas (max-rows de PostgREST): las tablas largas se piden por tramos.
 const PAGE = 1000;
 
-async function fetchAll<T>(
+export async function fetchAll<T>(
   page: (from: number, to: number) => PromiseLike<{ data: T[] | null; error: { message: string } | null }>,
 ): Promise<T[]> {
   const rows: T[] = [];

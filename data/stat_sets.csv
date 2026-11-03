@@ -27,3 +27,12 @@ carga,jugador,temporada,Carga de minutos,18,mpg minutes_last_7d minutes_last_14d
 volumen_equipo,equipo,partido,Volumen por partido,8,team_fga team_fg3a team_fta team_orb team_drb team_ast team_stl team_blk team_tov team_pf
 contexto_partido,equipo,partido,Contexto del partido,9,elo_win_prob surprise net_rating_vs_last5 extra_possessions team_ftr team_drb_pct
 localia,equipo,temporada,Localía de la liga,10,home_win_pct away_win_pct home_advantage
+splits,jugador,temporada,"Local, visitante y resultado",19,ppg_home ppg_away ppg_wins ppg_losses pm_per_game pm_wins pm_losses
+forma,jugador,temporada,Forma y mejores partidos,20,ppg_last5 rpg_last5 apg_last5 mpg_last5 max_pts max_trb max_ast max_efficiency
+zonas,jugador,temporada,Zonas de tiro,21,aro_fga_share aro_fg_pct pintura_fga_share pintura_fg_pct media_fga_share media_fg_pct esquina3_fga_share esquina3_fg_pct frontal3_fga_share frontal3_fg_pct
+tiro_detalle,equipo,partido,Tiro de Boca,11,team_fgm team_fga team_fg_pct team_fg3m team_fg3a team_fg3_pct team_ftm team_fta team_ft_pct team_ast_fgm
+zonas_equipo,equipo,partido,Zonas de tiro,12,team_aro_fga_share team_aro_fg_pct team_pintura_fga_share team_pintura_fg_pct team_media_fga_share team_media_fg_pct team_esquina3_fga_share team_esquina3_fg_pct team_frontal3_fga_share team_frontal3_fg_pct
+rival_box,equipo,partido,Box score del rival,13,rival_fgm rival_fga rival_fg3m rival_fg3a rival_ftm rival_fta rival_orb rival_drb rival_trb rival_ast rival_stl rival_blk rival_tov rival_pf
+defensa_equipo,equipo,partido,Defensa,14,points_against drtg efg_against rival_fg3_pct tov_pct_against orb_pct_against ft_per_fga_against rival_stl rival_blk
+cuartos_equipo,equipo,partido,Cuartos y mitades,15,q1_diff q2_diff q3_diff q4_diff h1_diff h2_diff quarter_start_diff quarter_end_diff
+margenes,equipo,partido,Resultados y márgenes,16,won net_points net_rating reb_margin tov_margin ast_margin extra_possessions

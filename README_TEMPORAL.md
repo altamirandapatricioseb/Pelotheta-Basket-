@@ -8,10 +8,10 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 | Etapa | Estado |
 |---|---|
 | 1. Preparación | Hecha: Fase 0, Supabase con RLS, Vercel (`pelotheta-basket-dva.vercel.app`) y GitHub |
-| 2. Esqueleto | Hecha: header de 6 interfaces, tokens, tema claro y oscuro |
-| 3. Pipeline | Hecha salvo una prueba: adaptador LNB (toda la liga: 49 box scores, 38 play-by-play validados), plantel de Wikipedia, carga en Supabase, workflows, revalidación e **Interfaz 6** (`/actualizar`). Falta que el dueño corra una vez el workflow «Actualizar datos» desde GitHub Actions |
-| 4. Estadísticas | **Hecha** (3-nov): 96 estadísticas en el catálogo, Jugadores con 13 categorías y Equipo con 7 (incluye tácticas, origen de los puntos y quintetos), métricas propias (NR, On/Off, EWA, ELA, índice de rendimiento). Mejoría y Potencial implementadas y probadas, `n/d` hasta tener posición, edad y más partidos |
-| 5 a 11 | Pendientes |
+| 2. Esqueleto | Hecha: header de 6 interfaces, tokens, tema claro y oscuro. **3-nov:** paleta, tokens y CSS copiados de Pelotheta fútbol (sistema madre, decisión del dueño): verde #64cc4f, violeta como secundario permitido, sin #b2e05b |
+| 3. Pipeline | Hecha: adaptador LNB (toda la liga: 49 box scores, 38 play-by-play validados), plantel de Wikipedia, fichas de la LNB, carga en Supabase, workflows, revalidación e **Interfaz 6** (`/actualizar`) |
+| 4. Estadísticas | **Hecha** (3-nov): 273 estadísticas en el catálogo con las columnas de fútbol (abreviatura, cómo leerla, regla de agregación, por 36). Equipo igual que fútbol: 15 categorías y vistas por partido, rival, mes, competición y acumulada (tarjetas con línea partido a partido); Jugadores igual que fútbol: 21 categorías, filtros de posición y minutos, cada 36, barras de percentil y personalizado. Detalle de partido y de jugador |
+| 5 a 11 | Pendientes. Siguiente: Comparar como fútbol (tarjetas y conclusiones siempre visibles) y etapa 5, Gráficos |
 
 ## Deploy y primera carga (3-nov-2026)
 

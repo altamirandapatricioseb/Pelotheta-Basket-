@@ -152,7 +152,9 @@ def boca_games(
     before, _ = m.elo_run(ordered)
     elo_before = {(g.date, g.home, g.away): b for g, b in zip(ordered, before, strict=True)}
     rows = []
-    dates = sorted(g["played_at"] for g in game_rows)
+    # Descanso de Boca: solo sus partidos (game_rows trae toda la liga desde que se baja con --liga).
+    boca_id = str(BOCA_TEAM_ID)
+    dates = sorted(g["played_at"] for g in game_rows if boca_id in (g["home_team_id"], g["away_team_id"]))
     rest = dict(zip(dates, m.rest_days([d[:10] for d in dates]), strict=True))
     for g in sorted(game_rows, key=lambda r: r["played_at"]):
         if g["source_game_id"] not in sides:
@@ -572,7 +574,9 @@ def main() -> None:
     # Estadísticas del inventario que faltaban (pipeline/extras.py).
     extras.player_extras(players, player_rows, game_rows)
     extras.league_ranks(players, league_rows)
-    extras.game_extras(games, team_rows)
+    extras.game_extras(games, team_rows, read("game_period_score"))
+    extras.player_splits(players, player_rows, games)
+    extras.shot_zones(players, games, read("shot"))
     extras.season_extras(
         season, games, read("game_period_score"), game_rows, table, players, player_rows, league_games
     )

@@ -1,197 +1,274 @@
-id,nombre_es,descripcion_es,grupo,categoria,unidad,fuente,nivel,formula,higher_is_better,available
-games,Partidos jugados,Partidos en los que estuvo en cancha al menos un segundo.,resumen,jugador,partidos,lnb,B,Partidos con minutos > 0,true,true
-starts,Titularidades,Partidos que empezó en el quinteto inicial.,resumen,jugador,partidos,lnb,A,,true,true
-minutes,Minutos,"Minutos jugados en la temporada, desde el tiempo de cada box score.",resumen,jugador,minutos,lnb,B,Σ minutos por partido,true,true
-pts,Puntos,"Puntos convertidos con dobles, triples y libres.",anotacion,jugador,puntos,lnb,B,2 × 2P + 3 × 3P + TL,true,true
-trb,Rebotes,Rebotes ofensivos más defensivos.,rebote,jugador,rebotes,lnb,B,ORB + DRB,true,true
-orb,Rebotes ofensivos,"Rebotes tomados en el aro rival, que dan una posesión extra.",rebote,jugador,rebotes,lnb,A,,true,true
-drb,Rebotes defensivos,"Rebotes tomados en el aro propio, que cierran la posesión rival.",rebote,jugador,rebotes,lnb,A,,true,true
-ast,Asistencias,"Último pase antes de una canasta de un compañero, según la planilla.",creacion,jugador,asistencias,lnb,A,,true,true
-stl,Robos,Pelotas recuperadas al rival.,defensa,jugador,robos,lnb,A,,true,true
-blk,Tapas,Tiros del rival bloqueados.,defensa,jugador,tapas,lnb,A,,true,true
-tov,Pérdidas,Posesiones perdidas sin tirar.,creacion,jugador,pérdidas,lnb,A,,false,true
-pf,Faltas cometidas,Faltas personales del jugador.,disciplina,jugador,faltas,lnb,A,,false,true
-fg_pct,% de campo,Tiros de campo convertidos sobre intentados.,eficiencia_tiro,jugador,%,lnb,B,FG / FGA,true,true
-fg3_pct,% de triples,Triples convertidos sobre intentados.,eficiencia_tiro,jugador,%,lnb,B,3P / 3PA,true,true
-ft_pct,% de libres,Libres convertidos sobre intentados.,eficiencia_tiro,jugador,%,lnb,B,TL / TLI,true,true
-efg,eFG%,"Efectividad de campo que cuenta el triple como 1,5 dobles.",eficiencia_tiro,jugador,%,lnb,B,"(FG + 0,5 × 3P) / FGA",true,true
-ts,TS%,"Efectividad total: cuántos puntos saca por cada intento, incluidos los libres.",eficiencia_tiro,jugador,%,lnb,B,"PTS / (2 × (FGA + 0,44 × FTA))",true,true
-points_per_shot,Puntos por tiro de campo,"Puntos que produce cada tiro de campo, sin contar libres.",eficiencia_tiro,jugador,puntos,lnb,B,(2 × (FG − 3P) + 3 × 3P) / FGA,true,true
-three_rate,3PAr,Qué parte de sus tiros de campo son triples.,eficiencia_tiro,jugador,proporción,lnb,B,3PA / FGA,true,true
-ft_rate,FTr,Cuántos libres genera por cada tiro de campo.,eficiencia_tiro,jugador,proporción,lnb,B,FTA / FGA,true,true
-ast_to,Asistencias por pérdida,Asistencias que da por cada pelota que pierde.,creacion,jugador,proporción,lnb,B,AST / TOV,true,true
-tov_pct,TOV%,Pérdidas cada 100 jugadas que termina.,creacion,jugador,%,lnb,B,"100 × TOV / (FGA + 0,44 × FTA + TOV)",false,true
-usg_pct,USG%,Parte de las jugadas del equipo que termina él mientras está en cancha.,creacion,jugador,%,lnb,B,"100 × ((FGA + 0,44 FTA + TOV) × MinEq/5) / (MP × (FGA_eq + 0,44 FTA_eq + TOV_eq))",true,true
-ast_pct,AST%,Parte de las canastas de sus compañeros en cancha que asistió.,creacion,jugador,%,lnb,B,100 × AST / ((MP / (MinEq/5)) × FG_eq − FG),true,true
-orb_pct,ORB%,Rebotes ofensivos que toma de los disponibles mientras juega.,rebote,jugador,%,lnb,B,100 × (ORB × MinEq/5) / (MP × (ORB_eq + DRB_rival)),true,true
-drb_pct,DRB%,Rebotes defensivos que toma de los disponibles mientras juega.,rebote,jugador,%,lnb,B,100 × (DRB × MinEq/5) / (MP × (DRB_eq + ORB_rival)),true,true
-trb_pct,TRB%,Rebotes totales que toma de los disponibles mientras juega.,rebote,jugador,%,lnb,B,100 × (TRB × MinEq/5) / (MP × (TRB_eq + TRB_rival)),true,true
-stl_pct,STL%,Posesiones rivales que termina con un robo mientras juega.,defensa,jugador,%,lnb,B,100 × (STL × MinEq/5) / (MP × Pos_rival),true,true
-blk_pct,BLK%,Dobles del rival que tapa mientras juega.,defensa,jugador,%,lnb,B,100 × (BLK × MinEq/5) / (MP × 2PA_rival),true,true
-game_score_avg,Game Score medio,"Resumen de un partido en un número, en la escala de los puntos (Hollinger).",valoracion,jugador,puntos,lnb,B,"PTS + 0,4 FG − 0,7 FGA − 0,4 (FTA − FT) + 0,7 ORB + 0,3 DRB + STL + 0,7 AST + 0,7 BLK − 0,4 PF − TOV",true,true
-game_score_stdev,Consistencia (desvío del Game Score),Cuánto varía su Game Score entre partidos: más bajo es más regular.,valoracion,jugador,puntos,lnb,B,Desvío estándar muestral,false,true
-pie,PIE,Parte de lo que pasó en sus partidos que se explica por él.,valoracion,jugador,proporción,lnb,B,Suma del jugador / misma suma de ambos equipos,true,true
-double_doubles,Dobles-dobles,"Partidos con 10 o más en dos de puntos, rebotes, asistencias, robos y tapas.",marcas,jugador,partidos,lnb,B,Conteo,true,true
-triple_doubles,Triples-dobles,Partidos con 10 o más en tres de esas cinco categorías.,marcas,jugador,partidos,lnb,B,Conteo,true,true
-pts_per36,Puntos cada 36 minutos,Puntos llevados a 36 minutos para comparar jugadores con distinto tiempo.,anotacion,jugador,puntos,lnb,B,PTS × 36 / MP,true,true
-team_points_share,% de los puntos del equipo,Qué parte de los puntos de Boca anotó.,anotacion,jugador,%,lnb,B,PTS / PTS_eq,true,true
-streak_10_pts,Racha de 10 o más puntos,Mayor cantidad de partidos seguidos con 10 o más puntos.,marcas,jugador,partidos,lnb,B,Racha máxima,true,true
-efficiency,Valoración,Índice de la planilla FIBA que publica la liga.,valoracion,jugador,puntos,lnb,A,,true,true
-plus_minus,+/−,Diferencia del marcador con el jugador en cancha.,impacto,jugador,puntos,lnb,A,,true,true
-possessions,Posesiones,Posesiones estimadas de cada equipo en el partido.,ritmo,equipo,posesiones,lnb,B,"0,5 × (FGA + 0,44 FTA − ORB + TOV de ambos equipos)",true,true
-pace,Ritmo,Posesiones cada 40 minutos de juego.,ritmo,equipo,posesiones,lnb,B,40 × Pos / (MinEq/5),true,true
-ortg,ORtg,Puntos a favor cada 100 posesiones.,ritmo,equipo,puntos,lnb,B,100 × PTS / Pos,true,true
-drtg,DRtg,Puntos en contra cada 100 posesiones.,ritmo,equipo,puntos,lnb,B,100 × PTS_rival / Pos,false,true
-net_rating,Net Rating,Diferencia de puntos cada 100 posesiones.,metricas_propias,equipo,puntos,lnb,B,ORtg − DRtg,true,true
-mov,MOV,Diferencia media de puntos por partido.,resultados,equipo,puntos,lnb,B,(PF − PA) / PJ,true,true
-pyth_wins,Victorias pitagóricas,Victorias que corresponden a los puntos a favor y en contra.,resultados,equipo,victorias,lnb,B,"PJ × PF^x / (PF^x + PA^x), x calibrado con la tabla",true,true
-srs,SRS,Diferencia de puntos ajustada por la dificultad de los rivales.,resultados,equipo,puntos,lnb,B,"MOV + SOS, iterado hasta converger",true,true
-sos,SOS,Dificultad del calendario: promedio del SRS de los rivales.,resultados,equipo,puntos,lnb,B,Promedio del SRS de los rivales,true,true
-gb,Partidos detrás del líder,Distancia en la tabla con el primero.,resultados,equipo,partidos,lnb,B,((W_líder − W) + (L − L_líder)) / 2,false,true
-elo,Elo,Fuerza estimada del equipo según sus resultados (estimado).,resultados,equipo,puntos,lnb,B,"R + K × (S − E), K = 20, V = 100",true,true
-elo_win_prob,Probabilidad de ganar antes del partido,Lo que daba el Elo antes de cada partido (estimado).,resultados,equipo,%,lnb,B,1 / (1 + 10^((R_rival − R − V) / 400)),true,true
-brier_mean,Brier del Elo,Error medio de las probabilidades del Elo en la temporada: más bajo es mejor.,resultados,equipo,puntos,lnb,B,Promedio de (p − resultado)²,false,true
-efg_against,eFG% del rival,Efectividad de campo que permite Boca.,cuatro_factores,equipo,%,lnb,B,"(FG + 0,5 × 3P) / FGA del rival",false,true
-orb_pct_team,ORB% del equipo,Rebotes ofensivos tomados de los disponibles.,cuatro_factores,equipo,%,lnb,B,ORB / (ORB + DRB_rival),true,true
-ft_per_fga,Libres por tiro de campo,Libres convertidos por cada tiro de campo (cuarto factor).,cuatro_factores,equipo,proporción,lnb,B,FT / FGA,true,true
-scorer_herfindahl,Concentración del ataque,Cuánto dependen los puntos de pocos jugadores: 1 sería un solo anotador.,anotacion,equipo,índice,lnb,B,Σ (PTS_jugador / PTS_eq)²,false,true
-per,PER,Eficiencia por minuto de Hollinger con las constantes y el ritmo de la LNB; la liga promedia 15.,valoracion,jugador,puntos,lnb,B,uPER × ritmo liga / ritmo equipo × 15 / aPER medio de la liga,true,true
-win_shares,Win Shares,Victorias atribuibles al jugador; necesita el ORtg individual de Oliver (pendiente).,valoracion,jugador,victorias,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false
-bpm,BPM,Aporte cada 100 posesiones frente a un promedio; coeficientes de la NBA (pendiente).,valoracion,jugador,puntos,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false
-play_types,Tipos de jugada,"Pick and roll, aislamiento, poste, cortes: ninguna fuente gratuita los publica.",tacticas,equipo,,n/d,C,,true,false
-defensive_scheme,Esquema defensivo,"Zona, hombre o presión: la fuente no lo informa y no se infiere.",tacticas,equipo,,n/d,C,,true,false
-contested_shots,Tiros contestados,Requiere tracking de jugadores; no hay fuente gratuita.,tacticas,equipo,,n/d,C,,true,false
-media_rating,Calificación de medios,Nota por partido; ninguna fuente gratuita automatizable la publica para la LNB.,valoracion,jugador,puntos,n/d,C,,true,false
-played,Partidos jugados (equipo),Partidos de liga jugados en la temporada.,resultados,equipo,partidos,lnb,B,Conteo de resultados,true,true
-wins,Victorias,Partidos ganados.,resultados,equipo,partidos,lnb,B,Conteo de resultados,true,true
-losses,Derrotas,Partidos perdidos.,resultados,equipo,partidos,lnb,B,Conteo de resultados,false,true
-win_pct,% de victorias,Partidos ganados sobre jugados.,resultados,equipo,%,lnb,B,W / PJ,true,true
-points_for_pg,Puntos a favor por partido,Promedio de puntos anotados.,resultados,equipo,puntos,lnb,B,PF / PJ,true,true
-points_against_pg,Puntos en contra por partido,Promedio de puntos recibidos.,resultados,equipo,puntos,lnb,B,PA / PJ,false,true
-points_for,Puntos a favor,Puntos de Boca en el partido.,resultados,equipo,puntos,lnb,A,,true,true
-points_against,Puntos en contra,Puntos del rival en el partido.,resultados,equipo,puntos,lnb,A,,false,true
-rest_days,Días de descanso,Días desde el partido anterior de Boca.,resultados,equipo,días,lnb,B,Fecha del partido − fecha del anterior,true,true
-tov_pct_against,TOV% del rival,Pérdidas del rival cada 100 jugadas: más alto es mejor para Boca.,cuatro_factores,equipo,%,lnb,B,"100 × TOV / (FGA + 0,44 × FTA + TOV) del rival",true,true
-orb_pct_against,ORB% del rival,Rebotes ofensivos que le permite tomar al rival.,cuatro_factores,equipo,%,lnb,B,ORB_rival / (ORB_rival + DRB),false,true
-ft_per_fga_against,Libres por tiro del rival,Libres que convierte el rival por cada tiro de campo.,cuatro_factores,equipo,proporción,lnb,B,FT / FGA del rival,false,true
-brier,Brier del partido,Error de la probabilidad del Elo en ese partido: más bajo es mejor.,resultados,equipo,puntos,lnb,B,(p − resultado)²,false,true
-possessions_on,Posesiones en cancha,Posesiones estimadas de Boca y del rival mientras el jugador estaba en cancha.,tacticas,jugador,posesiones,lnb,B,"0,5 × (FGA + 0,44 FTA − ORB + TOV) de los tramos con él en cancha",true,true
-ortg_on,ORtg en cancha,Puntos de Boca cada 100 posesiones con el jugador en cancha (estimado).,metricas_propias,jugador,puntos,lnb,B,100 × PTS_eq en cancha / Pos en cancha,true,true
-drtg_on,DRtg en cancha,Puntos del rival cada 100 posesiones con el jugador en cancha (estimado).,metricas_propias,jugador,puntos,lnb,B,100 × PTS_rival en cancha / Pos en cancha,false,true
-net_rating_on,NR en cancha,"Diferencia de puntos cada 100 posesiones con él en cancha. Es del equipo, no producción individual.",metricas_propias,jugador,puntos,lnb,B,ORtg en cancha − DRtg en cancha,true,true
-net_rating_off,NR fuera de cancha,Diferencia de puntos cada 100 posesiones con el jugador en el banco.,metricas_propias,jugador,puntos,lnb,B,ORtg fuera − DRtg fuera,false,true
-on_off,On/Off,"Cuánto mejor (o peor) le va a Boca con el jugador en cancha que sin él, cada 100 posesiones.",impacto,jugador,puntos,lnb,B,NR en cancha − NR fuera,true,true
-ewa,EWA,Victorias esperadas que agrega su ataque frente a un suplente promedio (propuesta de este sistema).,metricas_propias,jugador,victorias,lnb,B,"(Min / 40) × [P(ORtg_on) − P(ORtg_rep)], P(a) = a^x / (a^x + L^x)",true,true
-ela,ELA,Derrotas esperadas que agrega su defensa frente a un suplente; negativo es bueno (propuesta).,metricas_propias,jugador,derrotas,lnb,B,"(Min / 40) × [Q(DRtg_on) − Q(DRtg_rep)], Q(g) = g^x / (g^x + L^x)",false,true
-rendimiento_indice,Índice de rendimiento,"Rendimiento global de 0 a 100 frente al plantel, por componentes (estimado).",evolucion,jugador,índice,lnb,B,Σ peso × promedio de percentiles por componente (pesos sin posición),true,true
-rendimiento_cobertura,Cobertura del índice,"Qué parte de los pesos del índice tiene datos; menos de 0,6 deja el índice n/d.",evolucion,jugador,proporción,lnb,B,Σ pesos de los componentes con datos,true,true
-mejoria_alpha,Mejoría α,Cuánto cambió su rendimiento reciente frente al resto de su temporada. Necesita 20 partidos.,evolucion,jugador,índice,n/d,B,"50 + 16,7 × w × Z",true,false
-mejoria_beta,Mejoría β,Puntos que subió o bajó su índice de rendimiento entre dos bloques de partidos. Necesita 12 partidos.,evolucion,jugador,puntos,n/d,B,R_reciente − R_anterior,true,false
-potencial_alpha,Potencial α,Percentil esperado en su pico según la edad (rango ± 8). Sin Mejoría α todavía: usa M = 0.,evolucion,jugador,percentil,lnb,B,"min(100, N + G × años × (1 + λ × M))",true,true
-potencial_beta,Potencial β,"Índice de nivel, tendencia y edad para ordenar el plantel. Sin Mejoría β todavía: T = R*.",evolucion,jugador,índice,lnb,B,"0,60 R* + 0,25 T + 0,15 × 100 × F_edad",true,true
-ast_per36,Asistencias cada 36 minutos,Asistencias llevadas a 36 minutos.,creacion,jugador,asistencias,lnb,B,AST × 36 / MP,true,true
-pf_per36,Faltas cada 36 minutos,Faltas llevadas a 36 minutos.,disciplina,jugador,faltas,lnb,B,PF × 36 / MP,false,true
-game_score_per36,Game Score cada 36 minutos,Game Score total llevado a 36 minutos.,valoracion,jugador,puntos,lnb,B,Σ Game Score × 36 / MP,true,true
-team_minutes_share,% de los minutos del equipo,Parte de los minutos de juego de Boca que estuvo en cancha.,tacticas,jugador,%,lnb,B,MP / minutos de juego del equipo,true,true
-max_run,Mayor corrida a favor,Mayor cantidad de puntos seguidos de Boca sin que anote el rival.,tacticas,equipo,puntos,lnb,B,Máximo de puntos consecutivos,true,true
-max_run_rival,Mayor corrida en contra,Mayor cantidad de puntos seguidos del rival.,tacticas,equipo,puntos,lnb,B,Máximo de puntos consecutivos del rival,false,true
-big_runs,Corridas de 8-0 o más,Veces que Boca anotó 8 puntos o más seguidos.,tacticas,equipo,corridas,lnb,B,Conteo de corridas ≥ 8,true,true
-big_runs_rival,Corridas de 8-0 o más en contra,Veces que el rival anotó 8 puntos o más seguidos.,tacticas,equipo,corridas,lnb,B,Conteo de corridas ≥ 8 del rival,false,true
-lead_changes,Cambios de líder,Veces que la ventaja pasó de un equipo al otro.,tacticas,equipo,cambios,lnb,B,Conteo,true,true
-max_lead,Mayor ventaja,Mayor diferencia a favor de Boca durante el partido.,tacticas,equipo,puntos,lnb,B,Máximo de (PTS − PTS_rival),true,true
-max_deficit,Mayor desventaja,Mayor diferencia en contra de Boca durante el partido.,tacticas,equipo,puntos,lnb,B,Máximo de (PTS_rival − PTS),false,true
-minutes_leading,Minutos arriba,Minutos de juego con Boca en ventaja.,tacticas,equipo,minutos,lnb,B,Σ tiempo con ventaja,true,true
-minutes_trailing,Minutos abajo,Minutos de juego con Boca en desventaja.,tacticas,equipo,minutos,lnb,B,Σ tiempo con desventaja,false,true
-minutes_tied,Minutos empatado,Minutos de juego con el marcador igualado.,tacticas,equipo,minutos,lnb,B,Σ tiempo empatado,true,true
-pts_assisted_share,% de puntos asistidos,Parte de los puntos de Boca que llegaron con una asistencia.,origen_puntos,equipo,%,lnb,B,Puntos de canastas asistidas / PTS,true,true
-pts_3_share,% de puntos de triple,Parte de los puntos de Boca que fueron de triple.,origen_puntos,equipo,%,lnb,B,3 × 3P / PTS,true,true
-pts_ft_share,% de puntos de libre,Parte de los puntos de Boca que fueron de tiro libre.,origen_puntos,equipo,%,lnb,B,TL / PTS,true,true
-pts_second_chance,Puntos de segunda oportunidad,"Puntos de Boca después de un rebote ofensivo propio, hasta perder la pelota.",origen_puntos,equipo,puntos,lnb,B,Puntos tras ORB hasta el cambio de posesión,true,true
-pts_second_chance_rival,Puntos de segunda oportunidad del rival,Puntos del rival después de su rebote ofensivo.,origen_puntos,equipo,puntos,lnb,B,Puntos del rival tras su ORB,false,true
-quarter_start_diff,Diferencia en los arranques de cuarto,Diferencia de puntos en los primeros 3 minutos de cada cuarto.,tacticas,equipo,puntos,lnb,B,Σ (PTS − PTS_rival) en los minutos 0 a 3,true,true
-quarter_end_diff,Diferencia en los cierres de cuarto,Diferencia de puntos en los últimos 3 minutos de cada cuarto.,tacticas,equipo,puntos,lnb,B,Σ (PTS − PTS_rival) en los últimos 3 minutos,true,true
-clutch_net,Diferencia en el clutch,Diferencia de puntos en los últimos 5 minutos con el partido a 5 puntos o menos.,tacticas,equipo,puntos,lnb,B,PTS − PTS_rival en el clutch,true,true
-timeouts,Tiempos muertos pedidos,Tiempos muertos que pidió Boca.,tacticas,equipo,tiempos muertos,lnb,A,,true,true
-possessions_pbp,Posesiones (desde las jugadas),Posesiones estimadas sumando las jugadas del partido; se compara con la del box score.,ritmo,equipo,posesiones,lnb,B,"0,5 × (FGA + 0,44 FTA − ORB + TOV) desde el play-by-play",true,true
-age,Edad,Edad en años informada en el plantel de Wikipedia.,resumen,jugador,años,wikipedia,A,,false,true
-height_cm,Altura,Altura informada en el plantel de Wikipedia.,resumen,jugador,cm,wikipedia,A,,true,true
-weight_kg,Peso,Peso informado en el plantel de Wikipedia.,resumen,jugador,kg,wikipedia,A,,true,true
-pts_per40,Puntos cada 40 minutos,Puntos llevados a un partido completo de 40 minutos.,anotacion,jugador,puntos,lnb,B,PTS × 40 / MP,true,true
-stl_per36,Robos cada 36 minutos,Robos llevados a 36 minutos.,defensa,jugador,robos,lnb,B,STL × 36 / MP,true,true
-blk_per36,Tapas cada 36 minutos,Tapas llevadas a 36 minutos.,defensa,jugador,tapas,lnb,B,BLK × 36 / MP,true,true
-tov_per36,Pérdidas cada 36 minutos,Pérdidas llevadas a 36 minutos.,creacion,jugador,pérdidas,lnb,B,TOV × 36 / MP,false,true
-fg2_pct,% de dobles,Tiros de 2 convertidos sobre intentados.,eficiencia_tiro,jugador,%,lnb,B,2P / 2PA,true,true
-mpg,Minutos por partido,Minutos promedio en los partidos que jugó.,promedios,jugador,minutos,lnb,B,MP / PJ,true,true
-ppg,Puntos por partido,Puntos promedio por partido jugado.,promedios,jugador,puntos,lnb,B,PTS / PJ,true,true
-rpg,Rebotes por partido,Rebotes promedio por partido jugado.,promedios,jugador,rebotes,lnb,B,TRB / PJ,true,true
-apg,Asistencias por partido,Asistencias promedio por partido jugado.,promedios,jugador,asistencias,lnb,B,AST / PJ,true,true
-spg,Robos por partido,Robos promedio por partido jugado.,promedios,jugador,robos,lnb,B,STL / PJ,true,true
-bpg,Tapas por partido,Tapas promedio por partido jugado.,promedios,jugador,tapas,lnb,B,BLK / PJ,true,true
-tpg,Pérdidas por partido,Pérdidas promedio por partido jugado.,promedios,jugador,pérdidas,lnb,B,TOV / PJ,false,true
-bench_pts_share,% de puntos de la banca,Parte de los puntos de Boca que hicieron los suplentes.,origen_puntos,equipo,%,lnb,B,PTS suplentes / PTS,true,true
-bench_ppg,Puntos de la banca por partido,Puntos de los suplentes por partido.,origen_puntos,equipo,puntos,lnb,B,PTS suplentes / PJ,true,true
-rotation_depth,Profundidad de la rotación,Jugadores con 10 o más minutos por partido.,tacticas,equipo,jugadores,lnb,B,Conteo de jugadores con MP/PJ ≥ 10,true,true
-pyth_losses,Derrotas pitagóricas,Derrotas que corresponden a los puntos a favor y en contra.,resultados,equipo,derrotas,lnb,B,PJ − victorias pitagóricas,false,true
-longest_win_streak,Racha de victorias,Mayor cantidad de partidos ganados seguidos en la temporada.,resultados,equipo,partidos,lnb,B,Racha máxima,true,true
-home_win_pct,% de victorias de local,Partidos ganados de local sobre jugados de local.,resultados,equipo,%,lnb,B,W local / PJ local,true,true
-away_win_pct,% de victorias de visitante,Partidos ganados de visitante sobre jugados de visitante.,resultados,equipo,%,lnb,B,W visitante / PJ visitante,true,true
-net_rating_stdev,Consistencia del NR,Cuánto varía el Net Rating de un partido a otro: más bajo es más regular.,resultados,equipo,puntos,lnb,B,Desvío estándar muestral del NR por partido,false,true
-position,Posición en la tabla,Puesto en la tabla de la liga ordenada por % de victorias.,resultados,equipo,puesto,lnb,B,Orden por % de victorias y MOV,false,true
-fgm,Tiros de campo convertidos,Dobles más triples convertidos en la temporada.,anotacion,jugador,tiros,lnb,B,2P + 3P,true,true
-fga,Tiros de campo intentados,Dobles más triples intentados en la temporada.,anotacion,jugador,tiros,lnb,B,2PA + 3PA,true,true
-fg2m,Dobles convertidos,Tiros de 2 convertidos en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
-fg2a,Dobles intentados,Tiros de 2 intentados en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
-fg3m,Triples convertidos,Tiros de 3 convertidos en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
-fg3a,Triples intentados,Tiros de 3 intentados en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
-ftm,Libres convertidos,Tiros libres convertidos en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
-fta,Libres intentados,Tiros libres intentados en la temporada.,anotacion,jugador,tiros,lnb,A,,true,true
-pf_drawn,Faltas recibidas,Faltas que le cometieron en la temporada.,disciplina,jugador,faltas,lnb,A,,true,true
-bench_games,Partidos desde el banco,Partidos en los que entró desde el banco.,resumen,jugador,partidos,lnb,B,PJ − titularidades,true,true
-fpg,Faltas por partido,Faltas personales promedio por partido jugado.,disciplina,jugador,faltas,lnb,B,PF / PJ,false,true
-pts_per100,Puntos cada 100 posesiones,Puntos por cada 100 posesiones con él en cancha (estimado).,anotacion,jugador,puntos,lnb,B,100 × PTS / posesiones en cancha,true,true
-trb_per100,Rebotes cada 100 posesiones,Rebotes por cada 100 posesiones con él en cancha (estimado).,rebote,jugador,rebotes,lnb,B,100 × TRB / posesiones en cancha,true,true
-ast_per100,Asistencias cada 100 posesiones,Asistencias por cada 100 posesiones con él en cancha (estimado).,creacion,jugador,asistencias,lnb,B,100 × AST / posesiones en cancha,true,true
-minutes_last_7d,Minutos en los últimos 7 días,Carga de minutos de la última semana hasta el último partido.,carga,jugador,minutos,lnb,B,Σ MP de los últimos 7 días,false,true
-minutes_last_14d,Minutos en los últimos 14 días,Carga de minutos de las últimas dos semanas.,carga,jugador,minutos,lnb,B,Σ MP de los últimos 14 días,false,true
-minutes_last_28d,Minutos en los últimos 28 días,Carga de minutos de las últimas cuatro semanas.,carga,jugador,minutos,lnb,B,Σ MP de los últimos 28 días,false,true
-streak_double_double,Racha de dobles-dobles,Mayor cantidad de partidos seguidos con doble-doble.,marcas,jugador,partidos,lnb,B,Racha máxima,true,true
-streak_three_40,Racha de 40 % en triples,Partidos seguidos con 40 % o más en triples (3 intentos o más).,marcas,jugador,partidos,lnb,B,Racha máxima,true,true
-rank_ppg,Puesto en puntos por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de PTS/PJ en la liga,false,true
-rank_rpg,Puesto en rebotes por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de TRB/PJ en la liga,false,true
-rank_apg,Puesto en asistencias por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de AST/PJ en la liga,false,true
-rank_spg,Puesto en robos por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de STL/PJ en la liga,false,true
-rank_bpg,Puesto en tapas por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de BLK/PJ en la liga,false,true
-rank_per,Puesto en PER,Lugar entre los jugadores de la liga con 3 partidos o más.,liga,jugador,puesto,lnb,B,Orden de PER en la liga,false,true
-is_foreign,Extranjero,1 si su nacionalidad deportiva no es argentina (Wikipedia).,resumen,jugador,sí/no,wikipedia,A,,false,true
-team_fga,Tiros de campo del equipo,Tiros de campo intentados por Boca en el partido.,volumen,equipo,tiros,lnb,B,2PA + 3PA,true,true
-team_fg3a,Triples del equipo,Triples intentados por Boca en el partido.,volumen,equipo,tiros,lnb,A,,true,true
-team_fta,Libres del equipo,Tiros libres intentados por Boca en el partido.,volumen,equipo,tiros,lnb,A,,true,true
-team_orb,Rebotes ofensivos del equipo,Rebotes ofensivos de Boca en el partido.,volumen,equipo,rebotes,lnb,A,,true,true
-team_drb,Rebotes defensivos del equipo,Rebotes defensivos de Boca en el partido.,volumen,equipo,rebotes,lnb,A,,true,true
-team_ast,Asistencias del equipo,Asistencias de Boca en el partido.,volumen,equipo,asistencias,lnb,A,,true,true
-team_stl,Robos del equipo,Robos de Boca en el partido.,volumen,equipo,robos,lnb,A,,true,true
-team_blk,Tapas del equipo,Tapas de Boca en el partido.,volumen,equipo,tapas,lnb,A,,true,true
-team_tov,Pérdidas del equipo,Pérdidas de Boca en el partido.,volumen,equipo,pérdidas,lnb,A,,false,true
-team_pf,Faltas del equipo,Faltas de Boca en el partido.,volumen,equipo,faltas,lnb,A,,false,true
-team_ftr,FTr del equipo,Libres intentados por cada tiro de campo de Boca.,eficiencia_colectiva,equipo,proporción,lnb,B,FTA / FGA,true,true
-team_drb_pct,DRB% del equipo,Rebotes defensivos tomados de los disponibles.,eficiencia_colectiva,equipo,%,lnb,B,DRB / (DRB + ORB_rival),true,true
-extra_possessions,Posesiones extra,"Rebotes ofensivos, robos y pérdidas propios menos los del rival.",tacticas,equipo,posesiones,lnb,B,(ORB + STL − TOV) − lo mismo del rival,true,true
-surprise,Sorpresa,"Resultado menos la probabilidad del Elo: positivo, ganó más de lo esperado (estimado).",resultados,equipo,puntos,lnb,B,Resultado (1/0) − prob. Elo,true,true
-net_rating_vs_last5,NR frente a los 5 anteriores,Cuánto mejor o peor fue el NR del partido que el promedio de los 5 previos.,resultados,equipo,puntos,lnb,B,NR − promedio de los 5 anteriores,true,true
-q1_diff,Diferencia en el 1.er cuarto,Diferencia de puntos promedio en el primer cuarto.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true
-q2_diff,Diferencia en el 2.º cuarto,Diferencia de puntos promedio en el segundo cuarto.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true
-q3_diff,Diferencia en el 3.er cuarto,Diferencia de puntos promedio en el tercer cuarto.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true
-q4_diff,Diferencia en el 4.º cuarto,Diferencia de puntos promedio en el último cuarto.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true
-last5_wins,Victorias en los últimos 5,Partidos ganados en los últimos 5.,resultados,equipo,partidos,lnb,B,Conteo,true,true
-last5_net_rating,NR de los últimos 5,Net Rating promedio de los últimos 5 partidos.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true
-net_rating_vs_top,NR contra el tercio alto,NR promedio contra los equipos del tercio alto de la tabla.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true
-net_rating_vs_mid,NR contra el tercio medio,NR promedio contra los equipos del tercio medio de la tabla.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true
-net_rating_vs_bottom,NR contra el tercio bajo,NR promedio contra los equipos del tercio bajo de la tabla.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true
-coverage_box_score,Cobertura de box score,Partidos de Boca con box score sobre los jugados.,cobertura,equipo,%,lnb,B,Partidos con box score / jugados,true,true
-coverage_pbp,Cobertura de play-by-play,Partidos de Boca con play-by-play validado.,cobertura,equipo,%,lnb,B,Partidos validados / con box score,true,true
-starters_jaccard,Estabilidad del quinteto titular,Titulares repetidos entre partidos seguidos (1 = siempre los mismos).,tacticas,equipo,índice,lnb,B,Promedio de Jaccard entre partidos consecutivos,true,true
-min_share_age_21,% de minutos de hasta 21 años,Parte de los minutos jugada por jugadores de 21 años o menos.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true
-min_share_age_22_26,% de minutos de 22 a 26 años,Parte de los minutos jugada por jugadores de 22 a 26 años.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true
-min_share_age_27_31,% de minutos de 27 a 31 años,Parte de los minutos jugada por jugadores de 27 a 31 años.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true
-min_share_age_32,% de minutos de 32 años o más,Parte de los minutos jugada por jugadores de 32 años o más.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true
-home_advantage,Ventaja de localía,% de victorias de local menos % de victorias de visitante.,resultados,equipo,%,lnb,B,W% local − W% visitante,true,true
+id,nombre_es,abrev,descripcion_es,lectura_es,grupo,categoria,unidad,fuente,nivel,formula,higher_is_better,available,estimada,por36,agregacion,arg1,arg2,factor
+games,Partidos jugados,PJ,Partidos en los que estuvo en cancha al menos un segundo.,Más alto es mejor.,resumen,jugador,partidos,lnb,B,Partidos con minutos > 0,true,true,false,false,metrica,,,1
+starts,Titularidades,Tit.,Partidos que empezó en el quinteto inicial.,Más alto es mejor.,resumen,jugador,partidos,lnb,A,,true,true,false,false,metrica,,,1
+minutes,Minutos,Min,"Minutos jugados en la temporada, desde el tiempo de cada box score.",Ni mejor ni peor por sí sola: describe el estilo o el contexto.,resumen,jugador,minutos,lnb,B,Σ minutos por partido,true,true,false,false,metrica,,,1
+pts,Puntos,Pts,"Puntos convertidos con dobles, triples y libres.",Más alto es mejor.,anotacion,jugador,puntos,lnb,B,2 × 2P + 3 × 3P + TL,true,true,false,true,metrica,,,1
+trb,Rebotes,Reb,Rebotes ofensivos más defensivos.,Más alto es mejor.,rebote,jugador,rebotes,lnb,B,ORB + DRB,true,true,false,true,metrica,,,1
+orb,Rebotes ofensivos,RO,"Rebotes tomados en el aro rival, que dan una posesión extra.",Más alto es mejor.,rebote,jugador,rebotes,lnb,A,,true,true,false,true,metrica,,,1
+drb,Rebotes defensivos,RD,"Rebotes tomados en el aro propio, que cierran la posesión rival.",Más alto es mejor.,rebote,jugador,rebotes,lnb,A,,true,true,false,true,metrica,,,1
+ast,Asistencias,Ast,"Último pase antes de una canasta de un compañero, según la planilla.",Más alto es mejor.,creacion,jugador,asistencias,lnb,A,,true,true,false,true,metrica,,,1
+stl,Robos,Rob,Pelotas recuperadas al rival.,Más alto es mejor.,defensa,jugador,robos,lnb,A,,true,true,false,true,metrica,,,1
+blk,Tapas,Tap,Tiros del rival bloqueados.,Más alto es mejor.,defensa,jugador,tapas,lnb,A,,true,true,false,true,metrica,,,1
+tov,Pérdidas,Pér,Posesiones perdidas sin tirar.,Más bajo es mejor.,creacion,jugador,pérdidas,lnb,A,,false,true,false,true,metrica,,,1
+pf,Faltas cometidas,Fal,Faltas personales del jugador.,Más bajo es mejor.,disciplina,jugador,faltas,lnb,A,,false,true,false,true,metrica,,,1
+fg_pct,% de campo,TC%,Tiros de campo convertidos sobre intentados.,Más alto es mejor.,eficiencia_tiro,jugador,%,lnb,B,FG / FGA,true,true,false,false,metrica,,,1
+fg3_pct,% de triples,3P%,Triples convertidos sobre intentados.,Más alto es mejor.,eficiencia_tiro,jugador,%,lnb,B,3P / 3PA,true,true,false,false,metrica,,,1
+ft_pct,% de libres,TL%,Libres convertidos sobre intentados.,Más alto es mejor.,eficiencia_tiro,jugador,%,lnb,B,TL / TLI,true,true,false,false,metrica,,,1
+efg,eFG%,eFG%,"Efectividad de campo que cuenta el triple como 1,5 dobles.",Más alto es mejor.,eficiencia_tiro,jugador,%,lnb,B,"(FG + 0,5 × 3P) / FGA",true,true,false,false,cociente,team_efg_num,team_fga,1
+ts,TS%,TS%,"Efectividad total: cuántos puntos saca por cada intento, incluidos los libres.",Más alto es mejor.,eficiencia_tiro,jugador,%,lnb,B,"PTS / (2 × (FGA + 0,44 × FTA))",true,true,false,false,cociente,points_for,team_ts_den,1
+points_per_shot,Puntos por tiro de campo,Puntos por tiro de campo,"Puntos que produce cada tiro de campo, sin contar libres.",Más alto es mejor.,eficiencia_tiro,jugador,puntos,lnb,B,(2 × (FG − 3P) + 3 × 3P) / FGA,true,true,false,false,metrica,,,1
+three_rate,3PAr,3PAr,Qué parte de sus tiros de campo son triples.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,eficiencia_tiro,jugador,proporción,lnb,B,3PA / FGA,true,true,false,false,cociente,team_fg3a,team_fga,1
+ft_rate,FTr,FTr,Cuántos libres genera por cada tiro de campo.,Más alto es mejor.,eficiencia_tiro,jugador,proporción,lnb,B,FTA / FGA,true,true,false,false,metrica,,,1
+ast_to,Asistencias por pérdida,Asistencias por pérdida,Asistencias que da por cada pelota que pierde.,Más alto es mejor.,creacion,jugador,proporción,lnb,B,AST / TOV,true,true,false,false,metrica,,,1
+tov_pct,TOV%,TOV%,Pérdidas cada 100 jugadas que termina.,Más bajo es mejor.,creacion,jugador,%,lnb,B,"100 × TOV / (FGA + 0,44 × FTA + TOV)",false,true,false,false,cociente,team_tov,team_tov_den,100
+usg_pct,USG%,USG%,Parte de las jugadas del equipo que termina él mientras está en cancha.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,creacion,jugador,%,lnb,B,"100 × ((FGA + 0,44 FTA + TOV) × MinEq/5) / (MP × (FGA_eq + 0,44 FTA_eq + TOV_eq))",true,true,false,false,metrica,,,1
+ast_pct,AST%,AST%,Parte de las canastas de sus compañeros en cancha que asistió.,Más alto es mejor.,creacion,jugador,%,lnb,B,100 × AST / ((MP / (MinEq/5)) × FG_eq − FG),true,true,false,false,metrica,,,1
+orb_pct,ORB%,ORB%,Rebotes ofensivos que toma de los disponibles mientras juega.,Más alto es mejor.,rebote,jugador,%,lnb,B,100 × (ORB × MinEq/5) / (MP × (ORB_eq + DRB_rival)),true,true,false,false,metrica,,,1
+drb_pct,DRB%,DRB%,Rebotes defensivos que toma de los disponibles mientras juega.,Más alto es mejor.,rebote,jugador,%,lnb,B,100 × (DRB × MinEq/5) / (MP × (DRB_eq + ORB_rival)),true,true,false,false,metrica,,,1
+trb_pct,TRB%,TRB%,Rebotes totales que toma de los disponibles mientras juega.,Más alto es mejor.,rebote,jugador,%,lnb,B,100 × (TRB × MinEq/5) / (MP × (TRB_eq + TRB_rival)),true,true,false,false,metrica,,,1
+stl_pct,STL%,STL%,Posesiones rivales que termina con un robo mientras juega.,Más alto es mejor.,defensa,jugador,%,lnb,B,100 × (STL × MinEq/5) / (MP × Pos_rival),true,true,false,false,metrica,,,1
+blk_pct,BLK%,BLK%,Dobles del rival que tapa mientras juega.,Más alto es mejor.,defensa,jugador,%,lnb,B,100 × (BLK × MinEq/5) / (MP × 2PA_rival),true,true,false,false,metrica,,,1
+game_score_avg,Game Score medio,Game Score medio,"Resumen de un partido en un número, en la escala de los puntos (Hollinger).",Más alto es mejor.,valoracion,jugador,puntos,lnb,B,"PTS + 0,4 FG − 0,7 FGA − 0,4 (FTA − FT) + 0,7 ORB + 0,3 DRB + STL + 0,7 AST + 0,7 BLK − 0,4 PF − TOV",true,true,false,false,metrica,,,1
+game_score_stdev,Consistencia (desvío del Game Score),Consistencia (desvío del Game Score),Cuánto varía su Game Score entre partidos: más bajo es más regular.,Más bajo es mejor.,valoracion,jugador,puntos,lnb,B,Desvío estándar muestral,false,true,false,false,metrica,,,1
+pie,PIE,PIE,Parte de lo que pasó en sus partidos que se explica por él.,Más alto es mejor.,valoracion,jugador,proporción,lnb,B,Suma del jugador / misma suma de ambos equipos,true,true,false,false,metrica,,,1
+double_doubles,Dobles-dobles,Dobles-dobles,"Partidos con 10 o más en dos de puntos, rebotes, asistencias, robos y tapas.",Más alto es mejor.,marcas,jugador,partidos,lnb,B,Conteo,true,true,false,false,metrica,,,1
+triple_doubles,Triples-dobles,Triples-dobles,Partidos con 10 o más en tres de esas cinco categorías.,Más alto es mejor.,marcas,jugador,partidos,lnb,B,Conteo,true,true,false,false,metrica,,,1
+pts_per36,Puntos cada 36 minutos,Puntos cada 36 minutos,Puntos llevados a 36 minutos para comparar jugadores con distinto tiempo.,Más alto es mejor.,anotacion,jugador,puntos,lnb,B,PTS × 36 / MP,true,true,false,false,metrica,,,1
+team_points_share,% de los puntos del equipo,% de los puntos del equipo,Qué parte de los puntos de Boca anotó.,Más alto es mejor.,anotacion,jugador,%,lnb,B,PTS / PTS_eq,true,true,false,false,metrica,,,1
+streak_10_pts,Racha de 10 o más puntos,Racha de 10 o más puntos,Mayor cantidad de partidos seguidos con 10 o más puntos.,Más alto es mejor.,marcas,jugador,partidos,lnb,B,Racha máxima,true,true,false,false,metrica,,,1
+efficiency,Valoración,Val,Índice de la planilla FIBA que publica la liga.,Más alto es mejor.,valoracion,jugador,puntos,lnb,A,,true,true,false,false,metrica,,,1
+plus_minus,+/−,+/-,Diferencia del marcador con el jugador en cancha.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,impacto,jugador,puntos,lnb,A,,true,true,false,false,metrica,,,1
+possessions,Posesiones,Pos.,Posesiones estimadas de cada equipo en el partido.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,ritmo,equipo,posesiones,lnb,B,"0,5 × (FGA + 0,44 FTA − ORB + TOV de ambos equipos)",true,true,true,true,suma,possessions,,1
+pace,Ritmo,Ritmo,Posesiones cada 40 minutos de juego.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,ritmo,equipo,posesiones,lnb,B,40 × Pos / (MinEq/5),true,true,true,false,promedio,pace,,1
+ortg,ORtg,ORtg,Puntos a favor cada 100 posesiones.,Más alto es mejor.,ritmo,equipo,puntos,lnb,B,100 × PTS / Pos,true,true,true,false,cociente,points_for,possessions,100
+drtg,DRtg,DRtg,Puntos en contra cada 100 posesiones.,Más bajo es mejor.,ritmo,equipo,puntos,lnb,B,100 × PTS_rival / Pos,false,true,true,false,cociente,points_against,possessions,100
+net_rating,Net Rating,NR,Diferencia de puntos cada 100 posesiones.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,metricas_propias,equipo,puntos,lnb,B,ORtg − DRtg,true,true,true,false,cociente,net_points,possessions,100
+mov,MOV,MOV,Diferencia media de puntos por partido.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,resultados,equipo,puntos,lnb,B,(PF − PA) / PJ,true,true,false,false,promedio,mov,,1
+pyth_wins,Victorias pitagóricas,Victorias pitagóricas,Victorias que corresponden a los puntos a favor y en contra.,Más alto es mejor.,resultados,equipo,victorias,lnb,B,"PJ × PF^x / (PF^x + PA^x), x calibrado con la tabla",true,true,false,false,promedio,pyth_wins,,1
+srs,SRS,SRS,Diferencia de puntos ajustada por la dificultad de los rivales.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,resultados,equipo,puntos,lnb,B,"MOV + SOS, iterado hasta converger",true,true,false,false,promedio,srs,,1
+sos,SOS,SOS,Dificultad del calendario: promedio del SRS de los rivales.,Más alto es mejor.,resultados,equipo,puntos,lnb,B,Promedio del SRS de los rivales,true,true,false,false,promedio,sos,,1
+gb,Partidos detrás del líder,Partidos detrás del líder,Distancia en la tabla con el primero.,Más bajo es mejor.,resultados,equipo,partidos,lnb,B,((W_líder − W) + (L − L_líder)) / 2,false,true,false,false,promedio,gb,,1
+elo,Elo,Elo,Fuerza estimada del equipo según sus resultados (estimado).,Más alto es mejor.,resultados,equipo,puntos,lnb,B,"R + K × (S − E), K = 20, V = 100",true,true,false,false,promedio,elo,,1
+elo_win_prob,Probabilidad de ganar antes del partido,Prob. Elo,Lo que daba el Elo antes de cada partido (estimado).,Más alto es mejor.,resultados,equipo,%,lnb,B,1 / (1 + 10^((R_rival − R − V) / 400)),true,true,false,false,promedio,elo_win_prob,,1
+brier_mean,Brier del Elo,Brier del Elo,Error medio de las probabilidades del Elo en la temporada: más bajo es mejor.,Más bajo es mejor.,resultados,equipo,puntos,lnb,B,Promedio de (p − resultado)²,false,true,false,false,promedio,brier_mean,,1
+efg_against,eFG% del rival,eFG% riv.,Efectividad de campo que permite Boca.,Más bajo es mejor.,cuatro_factores,equipo,%,lnb,B,"(FG + 0,5 × 3P) / FGA del rival",false,true,false,false,cociente,rival_efg_num,rival_fga,1
+orb_pct_team,ORB% del equipo,ORB%,Rebotes ofensivos tomados de los disponibles.,Más alto es mejor.,cuatro_factores,equipo,%,lnb,B,ORB / (ORB + DRB_rival),true,true,false,false,cociente,team_orb,orb_chances,1
+ft_per_fga,Libres por tiro de campo,TL/TCI,Libres convertidos por cada tiro de campo (cuarto factor).,Más alto es mejor.,cuatro_factores,equipo,proporción,lnb,B,FT / FGA,true,true,false,false,cociente,team_ftm,team_fga,1
+scorer_herfindahl,Concentración del ataque,Concentración del ataque,Cuánto dependen los puntos de pocos jugadores: 1 sería un solo anotador.,Más bajo es mejor.,anotacion,equipo,índice,lnb,B,Σ (PTS_jugador / PTS_eq)²,false,true,false,false,promedio,scorer_herfindahl,,1
+per,PER,PER,Eficiencia por minuto de Hollinger con las constantes y el ritmo de la LNB; la liga promedia 15.,Más alto es mejor.,valoracion,jugador,puntos,lnb,B,uPER × ritmo liga / ritmo equipo × 15 / aPER medio de la liga,true,true,false,false,metrica,,,1
+win_shares,Win Shares,Win Shares,Victorias atribuibles al jugador; necesita el ORtg individual de Oliver (pendiente).,Más alto es mejor.,valoracion,jugador,victorias,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false,false,false,metrica,,,1
+bpm,BPM,BPM,Aporte cada 100 posesiones frente a un promedio; coeficientes de la NBA (pendiente).,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,valoracion,jugador,puntos,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false,false,false,metrica,,,1
+play_types,Tipos de jugada,Tipos de jugada,"Pick and roll, aislamiento, poste, cortes: ninguna fuente gratuita los publica.",Más alto es mejor.,tacticas,equipo,,n/d,C,,true,false,false,false,promedio,play_types,,1
+defensive_scheme,Esquema defensivo,Esquema defensivo,"Zona, hombre o presión: la fuente no lo informa y no se infiere.",Más alto es mejor.,tacticas,equipo,,n/d,C,,true,false,false,false,promedio,defensive_scheme,,1
+contested_shots,Tiros contestados,Tiros contestados,Requiere tracking de jugadores; no hay fuente gratuita.,Más alto es mejor.,tacticas,equipo,,n/d,C,,true,false,false,false,promedio,contested_shots,,1
+media_rating,Calificación de medios,Calificación de medios,Nota por partido; ninguna fuente gratuita automatizable la publica para la LNB.,Más alto es mejor.,valoracion,jugador,puntos,n/d,C,,true,false,false,false,metrica,,,1
+played,Partidos jugados (equipo),Partidos jugados (equipo),Partidos de liga jugados en la temporada.,Más alto es mejor.,resultados,equipo,partidos,lnb,B,Conteo de resultados,true,true,false,false,promedio,played,,1
+wins,Victorias,Victorias,Partidos ganados.,Más alto es mejor.,resultados,equipo,partidos,lnb,B,Conteo de resultados,true,true,false,false,promedio,wins,,1
+losses,Derrotas,Derrotas,Partidos perdidos.,Más bajo es mejor.,resultados,equipo,partidos,lnb,B,Conteo de resultados,false,true,false,false,promedio,losses,,1
+win_pct,% de victorias,% de victorias,Partidos ganados sobre jugados.,Más alto es mejor.,resultados,equipo,%,lnb,B,W / PJ,true,true,false,false,promedio,win_pct,,1
+points_for_pg,Puntos a favor por partido,Puntos a favor por partido,Promedio de puntos anotados.,Más alto es mejor.,resultados,equipo,puntos,lnb,B,PF / PJ,true,true,false,false,promedio,points_for_pg,,1
+points_against_pg,Puntos en contra por partido,Puntos en contra por partido,Promedio de puntos recibidos.,Más bajo es mejor.,resultados,equipo,puntos,lnb,B,PA / PJ,false,true,false,false,promedio,points_against_pg,,1
+points_for,Puntos a favor,PF,Puntos de Boca en el partido.,Más alto es mejor.,resultados,equipo,puntos,lnb,A,,true,true,false,true,suma,points_for,,1
+points_against,Puntos en contra,PC,Puntos del rival en el partido.,Más bajo es mejor.,resultados,equipo,puntos,lnb,A,,false,true,false,true,suma,points_against,,1
+rest_days,Días de descanso,Desc.,Días desde el partido anterior de Boca.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,resultados,equipo,días,lnb,B,Fecha del partido − fecha del anterior,true,true,false,false,promedio,rest_days,,1
+tov_pct_against,TOV% del rival,TOV% riv.,Pérdidas del rival cada 100 jugadas: más alto es mejor para Boca.,Más alto es mejor.,cuatro_factores,equipo,%,lnb,B,"100 × TOV / (FGA + 0,44 × FTA + TOV) del rival",true,true,false,false,cociente,rival_tov,rival_tov_den,100
+orb_pct_against,ORB% del rival,ORB% riv.,Rebotes ofensivos que le permite tomar al rival.,Más bajo es mejor.,cuatro_factores,equipo,%,lnb,B,ORB_rival / (ORB_rival + DRB),false,true,false,false,cociente,rival_orb,drb_chances,1
+ft_per_fga_against,Libres por tiro del rival,TL/TCI riv.,Libres que convierte el rival por cada tiro de campo.,Más bajo es mejor.,cuatro_factores,equipo,proporción,lnb,B,FT / FGA del rival,false,true,false,false,cociente,rival_ftm,rival_fga,1
+brier,Brier del partido,Brier del partido,Error de la probabilidad del Elo en ese partido: más bajo es mejor.,Más bajo es mejor.,resultados,equipo,puntos,lnb,B,(p − resultado)²,false,true,false,false,promedio,brier,,1
+possessions_on,Posesiones en cancha,Posesiones en cancha,Posesiones estimadas de Boca y del rival mientras el jugador estaba en cancha.,Más alto es mejor.,tacticas,jugador,posesiones,lnb,B,"0,5 × (FGA + 0,44 FTA − ORB + TOV) de los tramos con él en cancha",true,true,true,false,metrica,,,1
+ortg_on,ORtg en cancha,ORtg en cancha,Puntos de Boca cada 100 posesiones con el jugador en cancha (estimado).,Más alto es mejor.,metricas_propias,jugador,puntos,lnb,B,100 × PTS_eq en cancha / Pos en cancha,true,true,true,false,metrica,,,1
+drtg_on,DRtg en cancha,DRtg en cancha,Puntos del rival cada 100 posesiones con el jugador en cancha (estimado).,Más bajo es mejor.,metricas_propias,jugador,puntos,lnb,B,100 × PTS_rival en cancha / Pos en cancha,false,true,true,false,metrica,,,1
+net_rating_on,NR en cancha,NR en cancha,"Diferencia de puntos cada 100 posesiones con él en cancha. Es del equipo, no producción individual.",Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,metricas_propias,jugador,puntos,lnb,B,ORtg en cancha − DRtg en cancha,true,true,false,false,metrica,,,1
+net_rating_off,NR fuera de cancha,NR fuera de cancha,Diferencia de puntos cada 100 posesiones con el jugador en el banco.,Más bajo es mejor.,metricas_propias,jugador,puntos,lnb,B,ORtg fuera − DRtg fuera,false,true,false,false,metrica,,,1
+on_off,On/Off,On/Off,"Cuánto mejor (o peor) le va a Boca con el jugador en cancha que sin él, cada 100 posesiones.",Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,impacto,jugador,puntos,lnb,B,NR en cancha − NR fuera,true,true,false,false,metrica,,,1
+ewa,EWA,EWA,Victorias esperadas que agrega su ataque frente a un suplente promedio (propuesta de este sistema).,Más alto es mejor.,metricas_propias,jugador,victorias,lnb,B,"(Min / 40) × [P(ORtg_on) − P(ORtg_rep)], P(a) = a^x / (a^x + L^x)",true,true,false,false,metrica,,,1
+ela,ELA,ELA,Derrotas esperadas que agrega su defensa frente a un suplente; negativo es bueno (propuesta).,Más bajo es mejor.,metricas_propias,jugador,derrotas,lnb,B,"(Min / 40) × [Q(DRtg_on) − Q(DRtg_rep)], Q(g) = g^x / (g^x + L^x)",false,true,false,false,metrica,,,1
+rendimiento_indice,Índice de rendimiento,Índice de rendimiento,"Rendimiento global de 0 a 100 frente al plantel, por componentes (estimado).",Más alto es mejor.,evolucion,jugador,índice,lnb,B,Σ peso × promedio de percentiles por componente (pesos sin posición),true,true,false,false,metrica,,,1
+rendimiento_cobertura,Cobertura del índice,Cobertura del índice,"Qué parte de los pesos del índice tiene datos; menos de 0,6 deja el índice n/d.",Más alto es mejor.,evolucion,jugador,proporción,lnb,B,Σ pesos de los componentes con datos,true,true,false,false,metrica,,,1
+mejoria_alpha,Mejoría α,Mejoría α,Cuánto cambió su rendimiento reciente frente al resto de su temporada. Necesita 20 partidos.,Más alto es mejor.,evolucion,jugador,índice,n/d,B,"50 + 16,7 × w × Z",true,false,false,false,metrica,,,1
+mejoria_beta,Mejoría β,Mejoría β,Puntos que subió o bajó su índice de rendimiento entre dos bloques de partidos. Necesita 12 partidos.,Más alto es mejor.,evolucion,jugador,puntos,n/d,B,R_reciente − R_anterior,true,false,false,false,metrica,,,1
+potencial_alpha,Potencial α,Potencial α,Percentil esperado en su pico según la edad (rango ± 8). Sin Mejoría α todavía: usa M = 0.,Más alto es mejor.,evolucion,jugador,percentil,lnb,B,"min(100, N + G × años × (1 + λ × M))",true,true,false,false,metrica,,,1
+potencial_beta,Potencial β,Potencial β,"Índice de nivel, tendencia y edad para ordenar el plantel. Sin Mejoría β todavía: T = R*.",Más alto es mejor.,evolucion,jugador,índice,lnb,B,"0,60 R* + 0,25 T + 0,15 × 100 × F_edad",true,true,false,false,metrica,,,1
+ast_per36,Asistencias cada 36 minutos,Asistencias cada 36 minutos,Asistencias llevadas a 36 minutos.,Más alto es mejor.,creacion,jugador,asistencias,lnb,B,AST × 36 / MP,true,true,false,false,metrica,,,1
+pf_per36,Faltas cada 36 minutos,Faltas cada 36 minutos,Faltas llevadas a 36 minutos.,Más bajo es mejor.,disciplina,jugador,faltas,lnb,B,PF × 36 / MP,false,true,false,false,metrica,,,1
+game_score_per36,Game Score cada 36 minutos,Game Score cada 36 minutos,Game Score total llevado a 36 minutos.,Más alto es mejor.,valoracion,jugador,puntos,lnb,B,Σ Game Score × 36 / MP,true,true,false,false,metrica,,,1
+team_minutes_share,% de los minutos del equipo,% de los minutos del equipo,Parte de los minutos de juego de Boca que estuvo en cancha.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,tacticas,jugador,%,lnb,B,MP / minutos de juego del equipo,true,true,false,false,metrica,,,1
+max_run,Mayor corrida a favor,Racha,Mayor cantidad de puntos seguidos de Boca sin que anote el rival.,Más alto es mejor.,tacticas,equipo,puntos,lnb,B,Máximo de puntos consecutivos,true,true,false,false,maximo,max_run,,1
+max_run_rival,Mayor corrida en contra,Racha riv.,Mayor cantidad de puntos seguidos del rival.,Más bajo es mejor.,tacticas,equipo,puntos,lnb,B,Máximo de puntos consecutivos del rival,false,true,false,false,maximo,max_run_rival,,1
+big_runs,Corridas de 8-0 o más,Rachas 8+,Veces que Boca anotó 8 puntos o más seguidos.,Más alto es mejor.,tacticas,equipo,corridas,lnb,B,Conteo de corridas ≥ 8,true,true,false,true,suma,big_runs,,1
+big_runs_rival,Corridas de 8-0 o más en contra,Rachas 8+ riv.,Veces que el rival anotó 8 puntos o más seguidos.,Más bajo es mejor.,tacticas,equipo,corridas,lnb,B,Conteo de corridas ≥ 8 del rival,false,true,false,true,suma,big_runs_rival,,1
+lead_changes,Cambios de líder,Cambios,Veces que la ventaja pasó de un equipo al otro.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,tacticas,equipo,cambios,lnb,B,Conteo,true,true,false,true,suma,lead_changes,,1
+max_lead,Mayor ventaja,Máx. ventaja,Mayor diferencia a favor de Boca durante el partido.,Más alto es mejor.,tacticas,equipo,puntos,lnb,B,Máximo de (PTS − PTS_rival),true,true,false,false,maximo,max_lead,,1
+max_deficit,Mayor desventaja,Máx. desventaja,Mayor diferencia en contra de Boca durante el partido.,Más bajo es mejor.,tacticas,equipo,puntos,lnb,B,Máximo de (PTS_rival − PTS),false,true,false,false,maximo,max_deficit,,1
+minutes_leading,Minutos arriba,Min arriba,Minutos de juego con Boca en ventaja.,Más alto es mejor.,tacticas,equipo,minutos,lnb,B,Σ tiempo con ventaja,true,true,false,true,suma,minutes_leading,,1
+minutes_trailing,Minutos abajo,Min abajo,Minutos de juego con Boca en desventaja.,Más bajo es mejor.,tacticas,equipo,minutos,lnb,B,Σ tiempo con desventaja,false,true,false,true,suma,minutes_trailing,,1
+minutes_tied,Minutos empatado,Min igual,Minutos de juego con el marcador igualado.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,tacticas,equipo,minutos,lnb,B,Σ tiempo empatado,true,true,false,true,suma,minutes_tied,,1
+pts_assisted_share,% de puntos asistidos,% asistidos,Parte de los puntos de Boca que llegaron con una asistencia.,Más alto es mejor.,origen_puntos,equipo,%,lnb,B,Puntos de canastas asistidas / PTS,true,true,false,false,promedio,pts_assisted_share,,1
+pts_3_share,% de puntos de triple,% de triple,Parte de los puntos de Boca que fueron de triple.,Más alto es mejor.,origen_puntos,equipo,%,lnb,B,3 × 3P / PTS,true,true,false,false,promedio,pts_3_share,,1
+pts_ft_share,% de puntos de libre,% de libre,Parte de los puntos de Boca que fueron de tiro libre.,Más alto es mejor.,origen_puntos,equipo,%,lnb,B,TL / PTS,true,true,false,false,promedio,pts_ft_share,,1
+pts_second_chance,Puntos de segunda oportunidad,2.ª opor.,"Puntos de Boca después de un rebote ofensivo propio, hasta perder la pelota.",Más alto es mejor.,origen_puntos,equipo,puntos,lnb,B,Puntos tras ORB hasta el cambio de posesión,true,true,false,true,suma,pts_second_chance,,1
+pts_second_chance_rival,Puntos de segunda oportunidad del rival,2.ª opor. riv.,Puntos del rival después de su rebote ofensivo.,Más bajo es mejor.,origen_puntos,equipo,puntos,lnb,B,Puntos del rival tras su ORB,false,true,false,true,suma,pts_second_chance_rival,,1
+quarter_start_diff,Diferencia en los arranques de cuarto,Arranques,Diferencia de puntos en los primeros 3 minutos de cada cuarto.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,tacticas,equipo,puntos,lnb,B,Σ (PTS − PTS_rival) en los minutos 0 a 3,true,true,false,false,promedio,quarter_start_diff,,1
+quarter_end_diff,Diferencia en los cierres de cuarto,Cierres,Diferencia de puntos en los últimos 3 minutos de cada cuarto.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,tacticas,equipo,puntos,lnb,B,Σ (PTS − PTS_rival) en los últimos 3 minutos,true,true,false,false,promedio,quarter_end_diff,,1
+clutch_net,Diferencia en el clutch,Clutch,Diferencia de puntos en los últimos 5 minutos con el partido a 5 puntos o menos.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,tacticas,equipo,puntos,lnb,B,PTS − PTS_rival en el clutch,true,true,false,false,promedio,clutch_net,,1
+timeouts,Tiempos muertos pedidos,T. muertos,Tiempos muertos que pidió Boca.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,tacticas,equipo,tiempos muertos,lnb,A,,true,true,false,true,suma,timeouts,,1
+possessions_pbp,Posesiones (desde las jugadas),Posesiones (desde las jugadas),Posesiones estimadas sumando las jugadas del partido; se compara con la del box score.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,ritmo,equipo,posesiones,lnb,B,"0,5 × (FGA + 0,44 FTA − ORB + TOV) desde el play-by-play",true,true,false,true,suma,possessions_pbp,,1
+age,Edad,Edad,Edad en años informada en el plantel de Wikipedia.,Más bajo es mejor.,resumen,jugador,años,wikipedia,A,,false,true,false,false,metrica,,,1
+height_cm,Altura,Altura,Altura informada en el plantel de Wikipedia.,Más alto es mejor.,resumen,jugador,cm,wikipedia,A,,true,true,false,false,metrica,,,1
+weight_kg,Peso,Peso,Peso informado en el plantel de Wikipedia.,Más alto es mejor.,resumen,jugador,kg,wikipedia,A,,true,true,false,false,metrica,,,1
+pts_per40,Puntos cada 40 minutos,Puntos cada 40 minutos,Puntos llevados a un partido completo de 40 minutos.,Más alto es mejor.,anotacion,jugador,puntos,lnb,B,PTS × 40 / MP,true,true,false,false,metrica,,,1
+stl_per36,Robos cada 36 minutos,Robos cada 36 minutos,Robos llevados a 36 minutos.,Más alto es mejor.,defensa,jugador,robos,lnb,B,STL × 36 / MP,true,true,false,false,metrica,,,1
+blk_per36,Tapas cada 36 minutos,Tapas cada 36 minutos,Tapas llevadas a 36 minutos.,Más alto es mejor.,defensa,jugador,tapas,lnb,B,BLK × 36 / MP,true,true,false,false,metrica,,,1
+tov_per36,Pérdidas cada 36 minutos,Pérdidas cada 36 minutos,Pérdidas llevadas a 36 minutos.,Más bajo es mejor.,creacion,jugador,pérdidas,lnb,B,TOV × 36 / MP,false,true,false,false,metrica,,,1
+fg2_pct,% de dobles,2P%,Tiros de 2 convertidos sobre intentados.,Más alto es mejor.,eficiencia_tiro,jugador,%,lnb,B,2P / 2PA,true,true,false,false,metrica,,,1
+mpg,Minutos por partido,MPP,Minutos promedio en los partidos que jugó.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,promedios,jugador,minutos,lnb,B,MP / PJ,true,true,false,false,metrica,,,1
+ppg,Puntos por partido,PPP,Puntos promedio por partido jugado.,Más alto es mejor.,promedios,jugador,puntos,lnb,B,PTS / PJ,true,true,false,false,metrica,,,1
+rpg,Rebotes por partido,RPP,Rebotes promedio por partido jugado.,Más alto es mejor.,promedios,jugador,rebotes,lnb,B,TRB / PJ,true,true,false,false,metrica,,,1
+apg,Asistencias por partido,APP,Asistencias promedio por partido jugado.,Más alto es mejor.,promedios,jugador,asistencias,lnb,B,AST / PJ,true,true,false,false,metrica,,,1
+spg,Robos por partido,RoPP,Robos promedio por partido jugado.,Más alto es mejor.,promedios,jugador,robos,lnb,B,STL / PJ,true,true,false,false,metrica,,,1
+bpg,Tapas por partido,TaPP,Tapas promedio por partido jugado.,Más alto es mejor.,promedios,jugador,tapas,lnb,B,BLK / PJ,true,true,false,false,metrica,,,1
+tpg,Pérdidas por partido,PéPP,Pérdidas promedio por partido jugado.,Más bajo es mejor.,promedios,jugador,pérdidas,lnb,B,TOV / PJ,false,true,false,false,metrica,,,1
+bench_pts_share,% de puntos de la banca,% de puntos de la banca,Parte de los puntos de Boca que hicieron los suplentes.,Más alto es mejor.,origen_puntos,equipo,%,lnb,B,PTS suplentes / PTS,true,true,false,false,promedio,bench_pts_share,,1
+bench_ppg,Puntos de la banca por partido,Puntos de la banca por partido,Puntos de los suplentes por partido.,Más alto es mejor.,origen_puntos,equipo,puntos,lnb,B,PTS suplentes / PJ,true,true,false,false,promedio,bench_ppg,,1
+rotation_depth,Profundidad de la rotación,Profundidad de la rotación,Jugadores con 10 o más minutos por partido.,Más alto es mejor.,tacticas,equipo,jugadores,lnb,B,Conteo de jugadores con MP/PJ ≥ 10,true,true,false,false,promedio,rotation_depth,,1
+pyth_losses,Derrotas pitagóricas,Derrotas pitagóricas,Derrotas que corresponden a los puntos a favor y en contra.,Más bajo es mejor.,resultados,equipo,derrotas,lnb,B,PJ − victorias pitagóricas,false,true,false,false,promedio,pyth_losses,,1
+longest_win_streak,Racha de victorias,Racha de victorias,Mayor cantidad de partidos ganados seguidos en la temporada.,Más alto es mejor.,resultados,equipo,partidos,lnb,B,Racha máxima,true,true,false,false,promedio,longest_win_streak,,1
+home_win_pct,% de victorias de local,% de victorias de local,Partidos ganados de local sobre jugados de local.,Más alto es mejor.,resultados,equipo,%,lnb,B,W local / PJ local,true,true,false,false,promedio,home_win_pct,,1
+away_win_pct,% de victorias de visitante,% de victorias de visitante,Partidos ganados de visitante sobre jugados de visitante.,Más alto es mejor.,resultados,equipo,%,lnb,B,W visitante / PJ visitante,true,true,false,false,promedio,away_win_pct,,1
+net_rating_stdev,Consistencia del NR,Consistencia del NR,Cuánto varía el Net Rating de un partido a otro: más bajo es más regular.,Más bajo es mejor.,resultados,equipo,puntos,lnb,B,Desvío estándar muestral del NR por partido,false,true,false,false,promedio,net_rating_stdev,,1
+position,Posición en la tabla,Posición en la tabla,Puesto en la tabla de la liga ordenada por % de victorias.,Más bajo es mejor.,resultados,equipo,puesto,lnb,B,Orden por % de victorias y MOV,false,true,false,false,promedio,position,,1
+fgm,Tiros de campo convertidos,Tiros de campo convertidos,Dobles más triples convertidos en la temporada.,Más alto es mejor.,anotacion,jugador,tiros,lnb,B,2P + 3P,true,true,false,true,metrica,,,1
+fga,Tiros de campo intentados,Tiros de campo intentados,Dobles más triples intentados en la temporada.,Más alto es mejor.,anotacion,jugador,tiros,lnb,B,2PA + 3PA,true,true,false,true,metrica,,,1
+fg2m,Dobles convertidos,Dobles convertidos,Tiros de 2 convertidos en la temporada.,Más alto es mejor.,anotacion,jugador,tiros,lnb,A,,true,true,false,true,metrica,,,1
+fg2a,Dobles intentados,Dobles intentados,Tiros de 2 intentados en la temporada.,Más alto es mejor.,anotacion,jugador,tiros,lnb,A,,true,true,false,true,metrica,,,1
+fg3m,Triples convertidos,Triples convertidos,Tiros de 3 convertidos en la temporada.,Más alto es mejor.,anotacion,jugador,tiros,lnb,A,,true,true,false,true,metrica,,,1
+fg3a,Triples intentados,Triples intentados,Tiros de 3 intentados en la temporada.,Más alto es mejor.,anotacion,jugador,tiros,lnb,A,,true,true,false,true,metrica,,,1
+ftm,Libres convertidos,Libres convertidos,Tiros libres convertidos en la temporada.,Más alto es mejor.,anotacion,jugador,tiros,lnb,A,,true,true,false,true,metrica,,,1
+fta,Libres intentados,Libres intentados,Tiros libres intentados en la temporada.,Más alto es mejor.,anotacion,jugador,tiros,lnb,A,,true,true,false,true,metrica,,,1
+pf_drawn,Faltas recibidas,Faltas recibidas,Faltas que le cometieron en la temporada.,Más alto es mejor.,disciplina,jugador,faltas,lnb,A,,true,true,false,true,metrica,,,1
+bench_games,Partidos desde el banco,Partidos desde el banco,Partidos en los que entró desde el banco.,Más alto es mejor.,resumen,jugador,partidos,lnb,B,PJ − titularidades,true,true,false,false,metrica,,,1
+fpg,Faltas por partido,Faltas por partido,Faltas personales promedio por partido jugado.,Más bajo es mejor.,disciplina,jugador,faltas,lnb,B,PF / PJ,false,true,false,false,metrica,,,1
+pts_per100,Puntos cada 100 posesiones,Puntos cada 100 posesiones,Puntos por cada 100 posesiones con él en cancha (estimado).,Más alto es mejor.,anotacion,jugador,puntos,lnb,B,100 × PTS / posesiones en cancha,true,true,false,false,metrica,,,1
+trb_per100,Rebotes cada 100 posesiones,Rebotes cada 100 posesiones,Rebotes por cada 100 posesiones con él en cancha (estimado).,Más alto es mejor.,rebote,jugador,rebotes,lnb,B,100 × TRB / posesiones en cancha,true,true,false,false,metrica,,,1
+ast_per100,Asistencias cada 100 posesiones,Asistencias cada 100 posesiones,Asistencias por cada 100 posesiones con él en cancha (estimado).,Más alto es mejor.,creacion,jugador,asistencias,lnb,B,100 × AST / posesiones en cancha,true,true,false,false,metrica,,,1
+minutes_last_7d,Minutos en los últimos 7 días,Minutos en los últimos 7 días,Carga de minutos de la última semana hasta el último partido.,Más bajo es mejor.,carga,jugador,minutos,lnb,B,Σ MP de los últimos 7 días,false,true,false,false,metrica,,,1
+minutes_last_14d,Minutos en los últimos 14 días,Minutos en los últimos 14 días,Carga de minutos de las últimas dos semanas.,Más bajo es mejor.,carga,jugador,minutos,lnb,B,Σ MP de los últimos 14 días,false,true,false,false,metrica,,,1
+minutes_last_28d,Minutos en los últimos 28 días,Minutos en los últimos 28 días,Carga de minutos de las últimas cuatro semanas.,Más bajo es mejor.,carga,jugador,minutos,lnb,B,Σ MP de los últimos 28 días,false,true,false,false,metrica,,,1
+streak_double_double,Racha de dobles-dobles,Racha de dobles-dobles,Mayor cantidad de partidos seguidos con doble-doble.,Más alto es mejor.,marcas,jugador,partidos,lnb,B,Racha máxima,true,true,false,false,metrica,,,1
+streak_three_40,Racha de 40 % en triples,Racha de 40 % en triples,Partidos seguidos con 40 % o más en triples (3 intentos o más).,Más alto es mejor.,marcas,jugador,partidos,lnb,B,Racha máxima,true,true,false,false,metrica,,,1
+rank_ppg,Puesto en puntos por partido,Puesto en puntos por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,Más bajo es mejor: 1 es el primero de la liga.,liga,jugador,puesto,lnb,B,Orden de PTS/PJ en la liga,false,true,false,false,metrica,,,1
+rank_rpg,Puesto en rebotes por partido,Puesto en rebotes por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,Más bajo es mejor: 1 es el primero de la liga.,liga,jugador,puesto,lnb,B,Orden de TRB/PJ en la liga,false,true,false,false,metrica,,,1
+rank_apg,Puesto en asistencias por partido,Puesto en asistencias por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,Más bajo es mejor: 1 es el primero de la liga.,liga,jugador,puesto,lnb,B,Orden de AST/PJ en la liga,false,true,false,false,metrica,,,1
+rank_spg,Puesto en robos por partido,Puesto en robos por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,Más bajo es mejor: 1 es el primero de la liga.,liga,jugador,puesto,lnb,B,Orden de STL/PJ en la liga,false,true,false,false,metrica,,,1
+rank_bpg,Puesto en tapas por partido,Puesto en tapas por partido,Lugar entre los jugadores de la liga con 3 partidos o más.,Más bajo es mejor: 1 es el primero de la liga.,liga,jugador,puesto,lnb,B,Orden de BLK/PJ en la liga,false,true,false,false,metrica,,,1
+rank_per,Puesto en PER,Puesto en PER,Lugar entre los jugadores de la liga con 3 partidos o más.,Más bajo es mejor: 1 es el primero de la liga.,liga,jugador,puesto,lnb,B,Orden de PER en la liga,false,true,false,false,metrica,,,1
+is_foreign,Extranjero,Extranjero,1 si su nacionalidad deportiva no es argentina (Wikipedia).,Más bajo es mejor.,resumen,jugador,sí/no,wikipedia,A,,false,true,false,false,metrica,,,1
+team_fga,Tiros de campo del equipo,TCI,Tiros de campo intentados por Boca en el partido.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,volumen,equipo,tiros,lnb,B,2PA + 3PA,true,true,false,true,suma,team_fga,,1
+team_fg3a,Triples del equipo,3PI,Triples intentados por Boca en el partido.,Ni mejor ni peor por sí sola: describe el estilo o el contexto.,volumen,equipo,tiros,lnb,A,,true,true,false,true,suma,team_fg3a,,1
+team_fta,Libres del equipo,TLI,Tiros libres intentados por Boca en el partido.,Más alto es mejor.,volumen,equipo,tiros,lnb,A,,true,true,false,true,suma,team_fta,,1
+team_orb,Rebotes ofensivos del equipo,RO,Rebotes ofensivos de Boca en el partido.,Más alto es mejor.,volumen,equipo,rebotes,lnb,A,,true,true,false,true,suma,team_orb,,1
+team_drb,Rebotes defensivos del equipo,RD,Rebotes defensivos de Boca en el partido.,Más alto es mejor.,volumen,equipo,rebotes,lnb,A,,true,true,false,true,suma,team_drb,,1
+team_ast,Asistencias del equipo,Ast,Asistencias de Boca en el partido.,Más alto es mejor.,volumen,equipo,asistencias,lnb,A,,true,true,false,true,suma,team_ast,,1
+team_stl,Robos del equipo,Rob,Robos de Boca en el partido.,Más alto es mejor.,volumen,equipo,robos,lnb,A,,true,true,false,true,suma,team_stl,,1
+team_blk,Tapas del equipo,Tap,Tapas de Boca en el partido.,Más alto es mejor.,volumen,equipo,tapas,lnb,A,,true,true,false,true,suma,team_blk,,1
+team_tov,Pérdidas del equipo,Pér,Pérdidas de Boca en el partido.,Más bajo es mejor.,volumen,equipo,pérdidas,lnb,A,,false,true,false,true,suma,team_tov,,1
+team_pf,Faltas del equipo,Fal,Faltas de Boca en el partido.,Más bajo es mejor.,volumen,equipo,faltas,lnb,A,,false,true,false,true,suma,team_pf,,1
+team_ftr,FTr del equipo,FTr,Libres intentados por cada tiro de campo de Boca.,Más alto es mejor.,eficiencia_colectiva,equipo,proporción,lnb,B,FTA / FGA,true,true,false,false,cociente,team_fta,team_fga,1
+team_drb_pct,DRB% del equipo,DRB%,Rebotes defensivos tomados de los disponibles.,Más alto es mejor.,eficiencia_colectiva,equipo,%,lnb,B,DRB / (DRB + ORB_rival),true,true,false,false,cociente,team_drb,drb_chances,1
+extra_possessions,Posesiones extra,Pos. extra,"Rebotes ofensivos, robos y pérdidas propios menos los del rival.",Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,tacticas,equipo,posesiones,lnb,B,(ORB + STL − TOV) − lo mismo del rival,true,true,false,true,suma,extra_possessions,,1
+surprise,Sorpresa,Sorpresa,"Resultado menos la probabilidad del Elo: positivo, ganó más de lo esperado (estimado).",Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,resultados,equipo,puntos,lnb,B,Resultado (1/0) − prob. Elo,true,true,false,false,promedio,surprise,,1
+net_rating_vs_last5,NR frente a los 5 anteriores,NR vs últ. 5,Cuánto mejor o peor fue el NR del partido que el promedio de los 5 previos.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,resultados,equipo,puntos,lnb,B,NR − promedio de los 5 anteriores,true,true,false,false,promedio,net_rating_vs_last5,,1
+q1_diff,Diferencia en el 1.er cuarto,Q1,Diferencia de puntos promedio en el primer cuarto.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true,false,true,suma,q1_diff,,1
+q2_diff,Diferencia en el 2.º cuarto,Q2,Diferencia de puntos promedio en el segundo cuarto.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true,false,true,suma,q2_diff,,1
+q3_diff,Diferencia en el 3.er cuarto,Q3,Diferencia de puntos promedio en el tercer cuarto.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true,false,true,suma,q3_diff,,1
+q4_diff,Diferencia en el 4.º cuarto,Q4,Diferencia de puntos promedio en el último cuarto.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,cuartos,equipo,puntos,lnb,B,Promedio de (PTS − PTS_rival) del cuarto,true,true,false,true,suma,q4_diff,,1
+last5_wins,Victorias en los últimos 5,Victorias en los últimos 5,Partidos ganados en los últimos 5.,Más alto es mejor.,resultados,equipo,partidos,lnb,B,Conteo,true,true,false,false,promedio,last5_wins,,1
+last5_net_rating,NR de los últimos 5,NR de los últimos 5,Net Rating promedio de los últimos 5 partidos.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true,false,false,promedio,last5_net_rating,,1
+net_rating_vs_top,NR contra el tercio alto,NR contra el tercio alto,NR promedio contra los equipos del tercio alto de la tabla.,Más alto es mejor.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true,false,false,promedio,net_rating_vs_top,,1
+net_rating_vs_mid,NR contra el tercio medio,NR contra el tercio medio,NR promedio contra los equipos del tercio medio de la tabla.,Más alto es mejor.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true,false,false,promedio,net_rating_vs_mid,,1
+net_rating_vs_bottom,NR contra el tercio bajo,NR contra el tercio bajo,NR promedio contra los equipos del tercio bajo de la tabla.,Más alto es mejor.,resultados,equipo,puntos,lnb,B,Promedio del NR,true,true,false,false,promedio,net_rating_vs_bottom,,1
+coverage_box_score,Cobertura de box score,Cobertura de box score,Partidos de Boca con box score sobre los jugados.,Más alto es mejor.,cobertura,equipo,%,lnb,B,Partidos con box score / jugados,true,true,false,false,promedio,coverage_box_score,,1
+coverage_pbp,Cobertura de play-by-play,Cobertura de play-by-play,Partidos de Boca con play-by-play validado.,Más alto es mejor.,cobertura,equipo,%,lnb,B,Partidos validados / con box score,true,true,false,false,promedio,coverage_pbp,,1
+starters_jaccard,Estabilidad del quinteto titular,Estabilidad del quinteto titular,Titulares repetidos entre partidos seguidos (1 = siempre los mismos).,Más alto es mejor.,tacticas,equipo,índice,lnb,B,Promedio de Jaccard entre partidos consecutivos,true,true,false,false,promedio,starters_jaccard,,1
+min_share_age_21,% de minutos de hasta 21 años,% de minutos de hasta 21 años,Parte de los minutos jugada por jugadores de 21 años o menos.,Más alto es mejor.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true,false,false,promedio,min_share_age_21,,1
+min_share_age_22_26,% de minutos de 22 a 26 años,% de minutos de 22 a 26 años,Parte de los minutos jugada por jugadores de 22 a 26 años.,Más alto es mejor.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true,false,false,promedio,min_share_age_22_26,,1
+min_share_age_27_31,% de minutos de 27 a 31 años,% de minutos de 27 a 31 años,Parte de los minutos jugada por jugadores de 27 a 31 años.,Más alto es mejor.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true,false,false,promedio,min_share_age_27_31,,1
+min_share_age_32,% de minutos de 32 años o más,% de minutos de 32 años o más,Parte de los minutos jugada por jugadores de 32 años o más.,Más alto es mejor.,edades,equipo,%,lnb,B,Minutos del tramo / minutos totales,true,true,false,false,promedio,min_share_age_32,,1
+home_advantage,Ventaja de localía,Ventaja de localía,% de victorias de local menos % de victorias de visitante.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,resultados,equipo,%,lnb,B,W% local − W% visitante,true,true,false,false,promedio,home_advantage,,1
+team_fgm,Dobles y triples convertidos,TCC,Tiros de campo convertidos por Boca.,Más alto es mejor.,volumen,equipo,tiros,lnb,A,2PM + 3PM,true,true,false,true,suma,team_fgm,,1
+team_fg2m,Dobles convertidos,2PC,Dobles convertidos por Boca.,Más alto es mejor.,volumen,equipo,tiros,lnb,A,,true,true,false,true,suma,team_fg2m,,1
+team_fg2a,Dobles intentados,2PI,Dobles intentados por Boca.,Más alto es mejor.,volumen,equipo,tiros,lnb,A,,true,true,false,true,suma,team_fg2a,,1
+team_fg3m,Triples convertidos,3PC,Triples convertidos por Boca.,Más alto es mejor.,volumen,equipo,tiros,lnb,A,,true,true,false,true,suma,team_fg3m,,1
+team_ftm,Libres convertidos,TLC,Tiros libres convertidos por Boca.,Más alto es mejor.,volumen,equipo,tiros,lnb,A,,true,true,false,true,suma,team_ftm,,1
+team_trb,Rebotes totales,Reb,Rebotes ofensivos más defensivos de Boca.,Más alto es mejor.,volumen,equipo,rebotes,lnb,A,ORB + DRB,true,true,false,true,suma,team_trb,,1
+team_fg_pct,% de campo,TC%,Acierto en tiros de campo de Boca.,Más alto es mejor.,tiro_equipo,equipo,%,lnb,B,FGM / FGA,true,true,false,false,cociente,team_fgm,team_fga,1
+team_fg3_pct,% de triples,3P%,Acierto en triples de Boca.,Más alto es mejor.,tiro_equipo,equipo,%,lnb,B,3PM / 3PA,true,true,false,false,cociente,team_fg3m,team_fg3a,1
+team_ft_pct,% de libres,TL%,Acierto en tiros libres de Boca.,Más alto es mejor.,tiro_equipo,equipo,%,lnb,B,FTM / FTA,true,true,false,false,cociente,team_ftm,team_fta,1
+team_ast_fgm,Canastas asistidas,Asistidas,Parte de las canastas de campo de Boca que llegaron con asistencia.,Más alto es mejor.,tiro_equipo,equipo,%,lnb,B,AST / FGM,true,true,false,false,cociente,team_ast,team_fgm,1
+rival_fgm,Canastas del rival,TCC riv.,Tiros de campo convertidos por el rival.,Más bajo es mejor.,rival,equipo,tiros,lnb,A,,false,true,false,true,suma,rival_fgm,,1
+rival_fga,Tiros del rival,TCI riv.,Tiros de campo intentados por el rival.,Más bajo es mejor.,rival,equipo,tiros,lnb,A,,false,true,false,true,suma,rival_fga,,1
+rival_fg2m,Dobles del rival,2PC riv.,Dobles convertidos por el rival.,Más bajo es mejor.,rival,equipo,tiros,lnb,A,,false,true,false,true,suma,rival_fg2m,,1
+rival_fg2a,Dobles intentados del rival,2PI riv.,Dobles intentados por el rival.,Más bajo es mejor.,rival,equipo,tiros,lnb,A,,false,true,false,true,suma,rival_fg2a,,1
+rival_fg3m,Triples del rival,3PC riv.,Triples convertidos por el rival.,Más bajo es mejor.,rival,equipo,tiros,lnb,A,,false,true,false,true,suma,rival_fg3m,,1
+rival_fg3a,Triples intentados del rival,3PI riv.,Triples intentados por el rival.,Más bajo es mejor.,rival,equipo,tiros,lnb,A,,false,true,false,true,suma,rival_fg3a,,1
+rival_ftm,Libres del rival,TLC riv.,Tiros libres convertidos por el rival.,Más bajo es mejor.,rival,equipo,tiros,lnb,A,,false,true,false,true,suma,rival_ftm,,1
+rival_fta,Libres intentados del rival,TLI riv.,Tiros libres intentados por el rival.,Más bajo es mejor.,rival,equipo,tiros,lnb,A,,false,true,false,true,suma,rival_fta,,1
+rival_orb,Rebotes ofensivos del rival,RO riv.,Rebotes ofensivos que tomó el rival.,Más bajo es mejor.,rival,equipo,rebotes,lnb,A,,false,true,false,true,suma,rival_orb,,1
+rival_drb,Rebotes defensivos del rival,RD riv.,Rebotes defensivos que tomó el rival.,Más bajo es mejor.,rival,equipo,rebotes,lnb,A,,false,true,false,true,suma,rival_drb,,1
+rival_trb,Rebotes del rival,Reb riv.,Rebotes totales del rival.,Más bajo es mejor.,rival,equipo,rebotes,lnb,A,ORB + DRB,false,true,false,true,suma,rival_trb,,1
+rival_ast,Asistencias del rival,Ast riv.,Asistencias del rival.,Más bajo es mejor.,rival,equipo,asistencias,lnb,A,,false,true,false,true,suma,rival_ast,,1
+rival_stl,Robos del rival,Rob riv.,Robos del rival (pelotas que perdió Boca por robo).,Más bajo es mejor.,rival,equipo,robos,lnb,A,,false,true,false,true,suma,rival_stl,,1
+rival_blk,Tapas del rival,Tap riv.,Tapas que recibió Boca.,Más bajo es mejor.,rival,equipo,tapas,lnb,A,,false,true,false,true,suma,rival_blk,,1
+rival_tov,Pérdidas del rival,Pér riv.,Pérdidas del rival: más es mejor para Boca.,Más alto es mejor.,rival,equipo,pérdidas,lnb,A,,true,true,false,true,suma,rival_tov,,1
+rival_pf,Faltas del rival,Fal riv.,Faltas personales del rival.,Más alto es mejor.,rival,equipo,faltas,lnb,A,,true,true,false,true,suma,rival_pf,,1
+rival_fg3_pct,% de triples del rival,3P% riv.,Acierto en triples que le permitió Boca al rival.,Más bajo es mejor.,rival,equipo,%,lnb,B,3PM rival / 3PA rival,false,true,false,false,cociente,rival_fg3m,rival_fg3a,1
+won,Victorias,Vict.,"Partidos ganados; agrupados, el porcentaje de victorias.",Más alto es mejor.,resultados,equipo,%,lnb,A,Ganados / jugados,true,true,false,false,promedio,won,,1
+net_points,Diferencia de puntos,Dif.,Puntos a favor menos puntos en contra.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,resultados,equipo,puntos,lnb,B,PTS − PTS rival,true,true,false,true,suma,net_points,,1
+reb_margin,Diferencia de rebotes,Dif. reb,Rebotes de Boca menos rebotes del rival.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,margenes,equipo,rebotes,lnb,B,TRB − TRB rival,true,true,false,true,suma,reb_margin,,1
+tov_margin,Diferencia de pérdidas,Dif. pér,"Pérdidas del rival menos pérdidas de Boca: positivo, Boca cuidó más la pelota.",Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,margenes,equipo,pérdidas,lnb,B,TOV rival − TOV,true,true,false,true,suma,tov_margin,,1
+ast_margin,Diferencia de asistencias,Dif. ast,Asistencias de Boca menos asistencias del rival.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,margenes,equipo,asistencias,lnb,B,AST − AST rival,true,true,false,true,suma,ast_margin,,1
+h1_diff,Diferencia en el 1.er tiempo,1.er T,Diferencia de puntos de Boca en el primer y segundo cuarto.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,cuartos,equipo,puntos,lnb,B,Suma de Q1 y Q2,true,true,false,true,suma,h1_diff,,1
+h2_diff,Diferencia en el 2.º tiempo,2.º T,Diferencia de puntos de Boca en el tercer y cuarto cuarto.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,cuartos,equipo,puntos,lnb,B,Suma de Q3 y Q4,true,true,false,true,suma,h2_diff,,1
+team_efg_num,Auxiliar: numerador de eFG%,Auxiliar: numerador de eFG%,"FGM + 0,5 × 3PM de Boca. Sirve para calcular el eFG% de varios partidos.",No se lee sola: es la parte de una fórmula que permite sumar partidos.,auxiliar,equipo,tiros,lnb,B,"FGM + 0,5 × 3PM",true,true,false,true,suma,team_efg_num,,1
+rival_efg_num,Auxiliar: numerador de eFG% rival,Auxiliar: numerador de eFG% rival,"FGM + 0,5 × 3PM del rival.",No se lee sola: es la parte de una fórmula que permite sumar partidos.,auxiliar,equipo,tiros,lnb,B,"FGM + 0,5 × 3PM",false,true,false,true,suma,rival_efg_num,,1
+team_ts_den,Auxiliar: denominador de TS%,Aux. TS,"2 × (FGA + 0,44 × FTA) de Boca.",No se lee sola: es la parte de una fórmula que permite sumar partidos.,auxiliar,equipo,tiros,lnb,B,"2 × (FGA + 0,44 × FTA)",true,true,false,true,suma,team_ts_den,,1
+rival_ts_den,Auxiliar: denominador de TS% rival,Aux. TS riv.,"2 × (FGA + 0,44 × FTA) del rival.",No se lee sola: es la parte de una fórmula que permite sumar partidos.,auxiliar,equipo,tiros,lnb,B,"2 × (FGA + 0,44 × FTA)",false,true,false,true,suma,rival_ts_den,,1
+team_tov_den,Auxiliar: jugadas de Boca,Auxiliar: jugadas de Boca,"FGA + 0,44 × FTA + TOV de Boca.",No se lee sola: es la parte de una fórmula que permite sumar partidos.,auxiliar,equipo,jugadas,lnb,B,"FGA + 0,44 × FTA + TOV",true,true,false,true,suma,team_tov_den,,1
+rival_tov_den,Auxiliar: jugadas del rival,Auxiliar: jugadas del rival,"FGA + 0,44 × FTA + TOV del rival.",No se lee sola: es la parte de una fórmula que permite sumar partidos.,auxiliar,equipo,jugadas,lnb,B,"FGA + 0,44 × FTA + TOV",true,true,false,true,suma,rival_tov_den,,1
+orb_chances,Auxiliar: rebotes en el aro de Boca,Auxiliar: rebotes en el aro de Boca,Rebotes ofensivos de Boca más defensivos del rival.,No se lee sola: es la parte de una fórmula que permite sumar partidos.,auxiliar,equipo,rebotes,lnb,B,ORB + DRB rival,true,true,false,true,suma,orb_chances,,1
+drb_chances,Auxiliar: rebotes en el aro rival,Auxiliar: rebotes en el aro rival,Rebotes defensivos de Boca más ofensivos del rival.,No se lee sola: es la parte de una fórmula que permite sumar partidos.,auxiliar,equipo,rebotes,lnb,B,DRB + ORB rival,true,true,false,true,suma,drb_chances,,1
+ppg_home,Puntos por partido de local,PPP local,Promedio de puntos en los partidos de local.,Más alto es mejor.,splits,jugador,puntos,lnb,B,PTS / PJ de local,true,true,false,false,metrica,,,1
+ppg_away,Puntos por partido de visitante,PPP visit.,Promedio de puntos en los partidos de visitante.,Más alto es mejor.,splits,jugador,puntos,lnb,B,PTS / PJ de visitante,true,true,false,false,metrica,,,1
+ppg_wins,Puntos por partido en victorias,PPP gan.,Promedio de puntos en los partidos que ganó Boca.,Más alto es mejor.,splits,jugador,puntos,lnb,B,PTS / PJ en partidos ganados,true,true,false,false,metrica,,,1
+ppg_losses,Puntos por partido en derrotas,PPP perd.,Promedio de puntos en los partidos que perdió Boca.,Más alto es mejor.,splits,jugador,puntos,lnb,B,PTS / PJ en partidos perdidos,true,true,false,false,metrica,,,1
+pm_wins,Más/menos en victorias,+/- gan.,Más/menos promedio en los partidos ganados.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,splits,jugador,puntos,lnb,B,+/- / PJ en partidos ganados,true,true,false,false,metrica,,,1
+pm_losses,Más/menos en derrotas,+/- perd.,Más/menos promedio en los partidos perdidos.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,splits,jugador,puntos,lnb,B,+/- / PJ en partidos perdidos,true,true,false,false,metrica,,,1
+pm_per_game,Más/menos por partido,+/- PP,Diferencia de puntos promedio mientras estuvo en cancha.,Positivo: a favor de Boca (o del jugador); negativo: en contra; cerca de 0: parejo.,splits,jugador,puntos,lnb,A,+/- / PJ,true,true,false,false,metrica,,,1
+ppg_last5,"Puntos, últimos 5",PPP últ. 5,Promedio de puntos en sus últimos 5 partidos jugados.,Más alto es mejor.,forma,jugador,puntos,lnb,B,PTS / 5 de sus últimos 5 partidos,true,true,false,false,metrica,,,1
+rpg_last5,"Rebotes, últimos 5",RPP últ. 5,Promedio de rebotes en sus últimos 5 partidos jugados.,Más alto es mejor.,forma,jugador,rebotes,lnb,B,TRB / 5 de sus últimos 5 partidos,true,true,false,false,metrica,,,1
+apg_last5,"Asistencias, últimos 5",APP últ. 5,Promedio de asistencias en sus últimos 5 partidos jugados.,Más alto es mejor.,forma,jugador,asistencias,lnb,B,AST / 5 de sus últimos 5 partidos,true,true,false,false,metrica,,,1
+mpg_last5,"Minutos, últimos 5",MPP últ. 5,Promedio de minutos en sus últimos 5 partidos jugados.,Más alto es mejor.,forma,jugador,minutos,lnb,B,Minutos / 5 de sus últimos 5 partidos,true,true,false,false,metrica,,,1
+max_pts,Máximo de puntos,Máx. pts,Mayor cantidad de puntos en un partido.,Más alto es mejor.,forma,jugador,puntos,lnb,A,,true,true,false,false,metrica,,,1
+max_trb,Máximo de rebotes,Máx. reb,Mayor cantidad de rebotes en un partido.,Más alto es mejor.,forma,jugador,rebotes,lnb,A,,true,true,false,false,metrica,,,1
+max_ast,Máximo de asistencias,Máx. ast,Mayor cantidad de asistencias en un partido.,Más alto es mejor.,forma,jugador,asistencias,lnb,A,,true,true,false,false,metrica,,,1
+max_efficiency,Mejor valoración,Máx. val,Mayor valoración de la LNB en un partido.,Más alto es mejor.,forma,jugador,puntos,lnb,A,,true,true,false,false,metrica,,,1
+aro_fga_share,Tiros cerca del aro,Aro: tiros,Parte de los tiros de campo del jugador que fueron cerca del aro.,Ni mejor ni peor por sí sola: describe el estilo (de dónde tira).,zonas,jugador,%,lnb,B,Tiros de la zona / FGA,true,true,false,false,metrica,,,1
+aro_fg_pct,Acierto cerca del aro,Aro: %,Acierto del jugador en tiros cerca del aro.,Más alto es mejor.,zonas,jugador,%,lnb,B,Convertidos / intentados de la zona,true,true,false,false,metrica,,,1
+pintura_fga_share,Tiros en el resto de la pintura,Pintura: tiros,Parte de los tiros de campo del jugador que fueron en el resto de la pintura.,Ni mejor ni peor por sí sola: describe el estilo (de dónde tira).,zonas,jugador,%,lnb,B,Tiros de la zona / FGA,true,true,false,false,metrica,,,1
+pintura_fg_pct,Acierto en el resto de la pintura,Pintura: %,Acierto del jugador en tiros en el resto de la pintura.,Más alto es mejor.,zonas,jugador,%,lnb,B,Convertidos / intentados de la zona,true,true,false,false,metrica,,,1
+media_fga_share,Tiros de media distancia,Media: tiros,Parte de los tiros de campo del jugador que fueron de media distancia.,Ni mejor ni peor por sí sola: describe el estilo (de dónde tira).,zonas,jugador,%,lnb,B,Tiros de la zona / FGA,true,true,false,false,metrica,,,1
+media_fg_pct,Acierto de media distancia,Media: %,Acierto del jugador en tiros de media distancia.,Más alto es mejor.,zonas,jugador,%,lnb,B,Convertidos / intentados de la zona,true,true,false,false,metrica,,,1
+esquina3_fga_share,Tiros de triple desde la esquina,3 esq.: tiros,Parte de los tiros de campo del jugador que fueron de triple desde la esquina.,Ni mejor ni peor por sí sola: describe el estilo (de dónde tira).,zonas,jugador,%,lnb,B,Tiros de la zona / FGA,true,true,false,false,metrica,,,1
+esquina3_fg_pct,Acierto de triple desde la esquina,3 esq.: %,Acierto del jugador en tiros de triple desde la esquina.,Más alto es mejor.,zonas,jugador,%,lnb,B,Convertidos / intentados de la zona,true,true,false,false,metrica,,,1
+frontal3_fga_share,Tiros de triple frontal o de 45°,3 front.: tiros,Parte de los tiros de campo del jugador que fueron de triple frontal o de 45°.,Ni mejor ni peor por sí sola: describe el estilo (de dónde tira).,zonas,jugador,%,lnb,B,Tiros de la zona / FGA,true,true,false,false,metrica,,,1
+frontal3_fg_pct,Acierto de triple frontal o de 45°,3 front.: %,Acierto del jugador en tiros de triple frontal o de 45°.,Más alto es mejor.,zonas,jugador,%,lnb,B,Convertidos / intentados de la zona,true,true,false,false,metrica,,,1
+team_aro_fga_share,Tiros cerca del aro,Aro: tiros,Parte de los tiros de campo de Boca que fueron cerca del aro.,Ni mejor ni peor por sí sola: describe el estilo (de dónde tira).,zonas,equipo,%,lnb,B,Tiros de la zona / FGA,true,true,false,false,promedio,team_aro_fga_share,,1
+team_aro_fg_pct,Acierto cerca del aro,Aro: %,Acierto de Boca en tiros cerca del aro.,Más alto es mejor.,zonas,equipo,%,lnb,B,Convertidos / intentados de la zona,true,true,false,false,promedio,team_aro_fg_pct,,1
+team_pintura_fga_share,Tiros en el resto de la pintura,Pintura: tiros,Parte de los tiros de campo de Boca que fueron en el resto de la pintura.,Ni mejor ni peor por sí sola: describe el estilo (de dónde tira).,zonas,equipo,%,lnb,B,Tiros de la zona / FGA,true,true,false,false,promedio,team_pintura_fga_share,,1
+team_pintura_fg_pct,Acierto en el resto de la pintura,Pintura: %,Acierto de Boca en tiros en el resto de la pintura.,Más alto es mejor.,zonas,equipo,%,lnb,B,Convertidos / intentados de la zona,true,true,false,false,promedio,team_pintura_fg_pct,,1
+team_media_fga_share,Tiros de media distancia,Media: tiros,Parte de los tiros de campo de Boca que fueron de media distancia.,Ni mejor ni peor por sí sola: describe el estilo (de dónde tira).,zonas,equipo,%,lnb,B,Tiros de la zona / FGA,true,true,false,false,promedio,team_media_fga_share,,1
+team_media_fg_pct,Acierto de media distancia,Media: %,Acierto de Boca en tiros de media distancia.,Más alto es mejor.,zonas,equipo,%,lnb,B,Convertidos / intentados de la zona,true,true,false,false,promedio,team_media_fg_pct,,1
+team_esquina3_fga_share,Tiros de triple desde la esquina,3 esq.: tiros,Parte de los tiros de campo de Boca que fueron de triple desde la esquina.,Ni mejor ni peor por sí sola: describe el estilo (de dónde tira).,zonas,equipo,%,lnb,B,Tiros de la zona / FGA,true,true,false,false,promedio,team_esquina3_fga_share,,1
+team_esquina3_fg_pct,Acierto de triple desde la esquina,3 esq.: %,Acierto de Boca en tiros de triple desde la esquina.,Más alto es mejor.,zonas,equipo,%,lnb,B,Convertidos / intentados de la zona,true,true,false,false,promedio,team_esquina3_fg_pct,,1
+team_frontal3_fga_share,Tiros de triple frontal o de 45°,3 front.: tiros,Parte de los tiros de campo de Boca que fueron de triple frontal o de 45°.,Ni mejor ni peor por sí sola: describe el estilo (de dónde tira).,zonas,equipo,%,lnb,B,Tiros de la zona / FGA,true,true,false,false,promedio,team_frontal3_fga_share,,1
+team_frontal3_fg_pct,Acierto de triple frontal o de 45°,3 front.: %,Acierto de Boca en tiros de triple frontal o de 45°.,Más alto es mejor.,zonas,equipo,%,lnb,B,Convertidos / intentados de la zona,true,true,false,false,promedio,team_frontal3_fg_pct,,1

@@ -1,46 +1,51 @@
 /*
  * Tokens de diseño (sección 9.10). Fuente única de color y tipografía: se reusan en los
- * gráficos, en los estilos de Excel y en powerbi/theme.json.
+ * gráficos, en los PNG exportados, en los estilos de Excel y en powerbi/theme.json.
+ * Violeta: solo #734f9a y #965fd4, como secundario junto al verde (cambio del 28-oct).
  *
- * Verde de la marca: #32B531 y sus variantes. Sin violeta en ningún lado (regla del prompt).
- * #32B531 sobre blanco da 2,7:1 (no llega a AA para texto): en modo claro el texto verde usa
- * #1E7A1E (5,4:1); sobre negro #32B531 da 7,8:1. Modo oscuro: negro puro («full negro»).
+ * Paleta del dueño: #222222, #328336, #64cc4f (principal), #8bd450 (reemplaza a #b2e05b desde el
+ * 2-nov) y #fbfbfd. Orden de prioridad: verde, violeta (secundario), rojo (solo lo negativo, lo peor
+ * o lo malo), azul, amarillo y después el resto.
+ *
+ * El fondo del body es liso (#fbfbfd o #222222); la profundidad la dan las capas de encima:
+ * tarjetas, header más oscuro en modo oscuro y encabezados de tabla con tinte verde.
  */
 :root {
   color-scheme: light;
 
   /* Verde de la marca y variantes */
-  --color-brand: #32b531;
-  --color-brand-700: #28962a;
-  --color-brand-800: #1e7a1e;
-  --color-brand-900: #145214;
-  --color-brand-300: #6bd06a;
-  --color-brand-200: #c3eec2;
-  --color-brand-100: #eaf8ea;
-  /* Texto sobre el verde de la marca (botones y pestañas activas): 7,8:1 */
-  --color-on-brand: #000000;
+  --color-brand: #64cc4f;
+  --color-brand-700: #4fae3c;
+  --color-brand-800: #328336;
+  --color-brand-900: #1f5a22;
+  --color-brand-300: #8bd450;
+  --color-brand-200: #d4efa6;
+  --color-brand-100: #eef8e3;
+  /* Texto sobre el verde de la marca (botones y pestañas activas) */
+  --color-on-brand: #222222;
   /* Neón: solo acentos y animaciones */
-  --color-neon: #6bd06a;
-  --color-neon-soft: #c3eec2;
+  --color-neon: #8bd450;
+  --color-neon-soft: #d4efa6;
 
+  /* Modo claro: #64CC4F sobre blanco no llega a AA; el texto verde usa #328336 (4,6:1) */
   --color-bg: #fbfbfd;
   --color-surface: #ffffff;
   --color-surface-2: #f1f3f1;
-  --color-table-head: #eaf8ea;
-  --color-text: #111111;
-  --color-text-muted: #5b5b5b;
-  --color-link: #1e7a1e;
+  --color-table-head: #eef8e3;
+  --color-text: #222222;
+  --color-text-muted: #555b55;
+  --color-link: #328336;
   --color-border: #dfe3df;
-  --color-accent-motion: #1e7a1e;
-  --color-row-hover: #f2faf2;
-  --color-row-selected: #e0f4e0;
+  --color-accent-motion: #328336;
+  --color-row-hover: #f4f9ee;
+  --color-row-selected: #e6f4d6;
   --color-header-bg: rgb(255 255 255 / 0.94);
   --color-warn: #8a5a00;
   --color-loss: #a30310;
   /* Mejor y peor del plantel o de la liga (valor del panel de contexto) */
-  --color-best: #1e7a1e;
+  --color-best: #328336;
   --color-worst: #a30310;
-  --shadow-card: 0 1px 2px rgb(17 17 17 / 0.06), 0 10px 28px -14px rgb(17 17 17 / 0.2);
+  --shadow-card: 0 1px 2px rgb(34 34 34 / 0.06), 0 10px 28px -14px rgb(34 34 34 / 0.2);
   --bg-glow: none;
   --glow-neon: 0 0 0 transparent;
 
@@ -64,47 +69,47 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     color-scheme: dark;
-    --color-bg: #000000;
-    --color-surface: #0d0d0d;
-    --color-surface-2: #161816;
-    --color-table-head: #0f2a0f;
-    --color-text: #f2f2f2;
-    --color-text-muted: #a3a3a3;
-    --color-link: #32b531;
-    --color-border: #262826;
-    --color-accent-motion: #6bd06a;
-    --color-row-hover: #111611;
-    --color-row-selected: #0f2a0f;
-    --color-header-bg: rgb(0 0 0 / 0.92);
+    --color-bg: #222222;
+    --color-surface: #2b2b2b;
+    --color-surface-2: #333533;
+    --color-table-head: #2d412e;
+    --color-text: #f4f5f4;
+    --color-text-muted: #b4b8b4;
+    --color-link: #8bd450;
+    --color-border: #3d3f3d;
+    --color-accent-motion: #8bd450;
+    --color-row-hover: #313631;
+    --color-row-selected: #2d412e;
+    --color-header-bg: rgb(26 26 26 / 0.94);
     --color-warn: #f2b33d;
-    --color-loss: #ff8a7a;
-    --color-best: #6bd06a;
-    --color-worst: #ff8a7a;
-    --shadow-card: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 12px 30px -16px rgb(0 0 0 / 0.8);
+    --color-loss: #fe897d;
+    --color-best: #64cc4f;
+    --color-worst: #fe897d;
+    --shadow-card: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 12px 30px -16px rgb(0 0 0 / 0.65);
     --bg-glow: none;
-    --glow-neon: 0 0 16px rgb(50 181 49 / 0.4);
+    --glow-neon: 0 0 16px rgb(100 204 79 / 0.35);
   }
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --color-bg: #000000;
-  --color-surface: #0d0d0d;
-  --color-surface-2: #161816;
-  --color-table-head: #0f2a0f;
-  --color-text: #f2f2f2;
-  --color-text-muted: #a3a3a3;
-  --color-link: #32b531;
-  --color-border: #262826;
-  --color-accent-motion: #6bd06a;
-  --color-row-hover: #111611;
-  --color-row-selected: #0f2a0f;
-  --color-header-bg: rgb(0 0 0 / 0.92);
+  --color-bg: #222222;
+  --color-surface: #2b2b2b;
+  --color-surface-2: #333533;
+  --color-table-head: #2d412e;
+  --color-text: #f4f5f4;
+  --color-text-muted: #b4b8b4;
+  --color-link: #8bd450;
+  --color-border: #3d3f3d;
+  --color-accent-motion: #8bd450;
+  --color-row-hover: #313631;
+  --color-row-selected: #2d412e;
+  --color-header-bg: rgb(26 26 26 / 0.94);
   --color-warn: #f2b33d;
-  --color-loss: #ff8a7a;
-  --color-best: #6bd06a;
-  --color-worst: #ff8a7a;
-  --shadow-card: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 12px 30px -16px rgb(0 0 0 / 0.8);
+  --color-loss: #fe897d;
+  --color-best: #64cc4f;
+  --color-worst: #fe897d;
+  --shadow-card: inset 0 1px 0 rgb(255 255 255 / 0.04), 0 12px 30px -16px rgb(0 0 0 / 0.65);
   --bg-glow: none;
-  --glow-neon: 0 0 16px rgb(50 181 49 / 0.4);
+  --glow-neon: 0 0 16px rgb(100 204 79 / 0.35);
 }

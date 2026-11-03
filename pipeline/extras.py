@@ -100,8 +100,31 @@ def league_ranks(players: list[dict[str, Any]], league_rows: list[dict[str, Any]
         p["league_players_ranked"] = len(pool)
 
 
-def game_extras(games: list[dict[str, Any]], team_rows: list[dict[str, str]]) -> None:
-    """Partido a partido: totales del equipo, FTr, DRB%, posesiones extra, sorpresa y forma."""
+def _totals(prefix: str, t: dict[str, float]) -> dict[str, float]:
+    """Totales de tiro y de rebote de un equipo en un partido, con el prefijo team_ o rival_."""
+    fgm, fga = t["fg2m"] + t["fg3m"], t["fg2a"] + t["fg3a"]
+    return {
+        f"{prefix}_fgm": fgm,
+        f"{prefix}_fga": fga,
+        f"{prefix}_fg2m": t["fg2m"],
+        f"{prefix}_fg2a": t["fg2a"],
+        f"{prefix}_fg3m": t["fg3m"],
+        f"{prefix}_fg3a": t["fg3a"],
+        f"{prefix}_ftm": t["ftm"],
+        f"{prefix}_fta": t["fta"],
+        f"{prefix}_trb": t["orb"] + t["drb"],
+        # Numeradores y denominadores: con ellos un rival, un mes o la temporada se calculan
+        # sumando partidos (suma sobre suma), no promediando porcentajes.
+        f"{prefix}_efg_num": fgm + 0.5 * t["fg3m"],
+        f"{prefix}_ts_den": 2 * (fga + m.FTA_WEIGHT * t["fta"]),
+        f"{prefix}_tov_den": fga + m.FTA_WEIGHT * t["fta"] + t["tov"],
+    }
+
+
+def game_extras(
+    games: list[dict[str, Any]], team_rows: list[dict[str, str]], periods: list[dict[str, str]] | None = None
+) -> None:
+    """Partido a partido: totales de los dos equipos, márgenes, cuartos, FTr, DRB%, sorpresa y forma."""
     by_game: dict[str, dict[str, dict[str, float]]] = defaultdict(dict)
     for row in team_rows:
         by_game[row["source_game_id"]][row["team_id"]] = {
@@ -131,8 +154,30 @@ def game_extras(games: list[dict[str, Any]], team_rows: list[dict[str, str]]) ->
                     # Posesiones extra (5.7): (ORB + robos − pérdidas) propios menos los del rival.
                     "extra_possessions": (own["orb"] + own["stl"] - own["tov"])
                     - (rival["orb"] + rival["stl"] - rival["tov"]),
+                    **_totals("team", own),
+                    **_totals("rival", rival),
+                    "rival_orb": rival["orb"],
+                    "rival_drb": rival["drb"],
+                    "rival_ast": rival["ast"],
+                    "rival_stl": rival["stl"],
+                    "rival_blk": rival["blk"],
+                    "rival_tov": rival["tov"],
+                    "rival_pf": rival["pf"],
+                    "orb_chances": own["orb"] + rival["drb"],
+                    "drb_chances": own["drb"] + rival["orb"],
+                    "team_fg_pct": m.ratio(own["fg2m"] + own["fg3m"], fga),
+                    "team_fg3_pct": m.ratio(own["fg3m"], own["fg3a"]),
+                    "team_ft_pct": m.ratio(own["ftm"], own["fta"]),
+                    "rival_fg3_pct": m.ratio(rival["fg3m"], rival["fg3a"]),
+                    "reb_margin": own["orb"] + own["drb"] - rival["orb"] - rival["drb"],
+                    "tov_margin": rival["tov"] - own["tov"],
+                    "ast_margin": own["ast"] - rival["ast"],
+                    "team_ast_fgm": m.ratio(own["ast"], own["fg2m"] + own["fg3m"]),
                 }
             )
+        if g.get("points_for") is not None and g.get("points_against") is not None:
+            g["net_points"] = g["points_for"] - g["points_against"]
+            g["won"] = int(g["points_for"] > g["points_against"])
         if g.get("elo_win_prob") is not None:
             g["surprise"] = float(g["won"]) - g["elo_win_prob"]  # > 0 ganó más de lo esperado
         recent = nr_history[-5:]
@@ -141,6 +186,18 @@ def game_extras(games: list[dict[str, Any]], team_rows: list[dict[str, str]]) ->
         )
         if g.get("net_rating") is not None:
             nr_history.append(g["net_rating"])
+    # Parciales (5.2): diferencia de Boca en cada cuarto y en cada mitad del partido.
+    home_of = {g["source_game_id"]: g["home"] for g in games}
+    for p in periods or []:
+        gid, q = p["source_game_id"], int(p["period"])
+        game = next((g for g in games if g["source_game_id"] == gid), None)
+        if game is None or q > 4:
+            continue
+        d = int(p["home_points"]) - int(p["away_points"])
+        d = d if home_of[gid] else -d
+        game[f"q{q}_diff"] = d
+        half = "h1_diff" if q <= 2 else "h2_diff"
+        game[half] = game.get(half, 0) + d
 
 
 def season_extras(
@@ -219,3 +276,110 @@ def home_advantage(table: list[dict[str, Any]], league_games: list[Any]) -> None
         away = statistics.fmean(a["away"]) if a["away"] else None
         row["home_win_pct"], row["away_win_pct"] = home, away
         row["home_advantage"] = round(home - away, 4) if home is not None and away is not None else None
+
+
+# Zonas de tiro de la LNB (Z1 a Z14) agrupadas en cinco. La fuente no publica qué es cada código:
+# el agrupamiento sale de las coordenadas y del acierto de cada zona en toda la liga (Z1 cerca del
+# aro con 60 %, Z10 y Z14 en las esquinas, Z11 a Z13 arriba del arco). FRANJA son triples sobre la
+# línea lateral y van con los frontales.
+ZONES = {
+    "Z1": "aro",
+    "Z2": "pintura",
+    "Z3": "pintura",
+    "Z4": "pintura",
+    "Z5": "media",
+    "Z6": "media",
+    "Z7": "media",
+    "Z8": "media",
+    "Z9": "media",
+    "Z10": "esquina3",
+    "Z14": "esquina3",
+    "Z11": "frontal3",
+    "Z12": "frontal3",
+    "Z13": "frontal3",
+    "FRANJA": "frontal3",
+}
+ZONE_NAMES = ("aro", "pintura", "media", "esquina3", "frontal3")
+
+
+def zone_of(shot: dict[str, str]) -> str | None:
+    """Zona agrupada de un tiro; un doble anotado en una zona de triple va a media distancia."""
+    zone = ZONES.get((shot.get("zone") or "").split("-")[0])
+    if zone in ("esquina3", "frontal3") and shot["shot_value"] == "2":
+        return "media"
+    return zone
+
+
+def _zone_stats(shots: list[dict[str, str]]) -> dict[str, float | None]:
+    out: dict[str, float | None] = {}
+    total = len(shots)
+    for zone in ZONE_NAMES:
+        own = [s for s in shots if zone_of(s) == zone]
+        out[f"{zone}_fga_share"] = m.ratio(len(own), total) if total else None
+        out[f"{zone}_fg_pct"] = m.ratio(sum(s["made"] == "True" for s in own), len(own)) if own else None
+    return out
+
+
+def shot_zones(
+    players: list[dict[str, Any]], games: list[dict[str, Any]], shots: list[dict[str, str]]
+) -> None:
+    """Reparto y acierto de tiro por zona (5.1): jugadores de Boca en la temporada y Boca por partido."""
+    boca = [s for s in shots if s["team_id"] == BOCA]
+    by_player: dict[str, list[dict[str, str]]] = defaultdict(list)
+    by_game: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for s in boca:
+        by_game[s["source_game_id"]].append(s)
+        if s["source_player_id"]:
+            by_player[s["source_player_id"]].append(s)
+    for p in players:
+        p.update(_zone_stats(by_player.get(p["source_player_id"], [])))
+    for g in games:
+        g.update({f"team_{k}": v for k, v in _zone_stats(by_game.get(g["source_game_id"], [])).items()})
+
+
+def player_splits(
+    players: list[dict[str, Any]], player_rows: list[dict[str, str]], games: list[dict[str, Any]]
+) -> None:
+    """Local y visitante, ganados y perdidos, forma de los últimos 5 y mejores partidos (5.3 y 5.7)."""
+    info = {g["source_game_id"]: g for g in games}
+    order = {g["source_game_id"]: i for i, g in enumerate(games)}
+    lines: dict[str, list[dict[str, str]]] = defaultdict(list)
+    for r in player_rows:
+        if r["team_id"] == BOCA and int(r["seconds"]) > 0 and r["source_game_id"] in info:
+            lines[r["source_player_id"]].append(r)
+
+    def avg(rows: list[dict[str, str]], key: str) -> float | None:
+        if not rows:
+            return None
+        if key == "trb":
+            return statistics.fmean(int(r["orb"]) + int(r["drb"]) for r in rows)
+        if key == "min":
+            return statistics.fmean(int(r["seconds"]) / 60 for r in rows)
+        return statistics.fmean(int(r[key]) for r in rows)
+
+    for p in players:
+        own = sorted(lines.get(p["source_player_id"], []), key=lambda r: order[r["source_game_id"]])
+        home = [r for r in own if info[r["source_game_id"]]["home"]]
+        away = [r for r in own if not info[r["source_game_id"]]["home"]]
+        wins = [r for r in own if info[r["source_game_id"]]["won"]]
+        losses = [r for r in own if not info[r["source_game_id"]]["won"]]
+        last5 = own[-5:]
+        p.update(
+            {
+                "ppg_home": avg(home, "pts"),
+                "ppg_away": avg(away, "pts"),
+                "ppg_wins": avg(wins, "pts"),
+                "ppg_losses": avg(losses, "pts"),
+                "pm_wins": avg(wins, "plus_minus"),
+                "pm_losses": avg(losses, "plus_minus"),
+                "ppg_last5": avg(last5, "pts"),
+                "rpg_last5": avg(last5, "trb"),
+                "apg_last5": avg(last5, "ast"),
+                "mpg_last5": avg(last5, "min"),
+                "max_pts": max((int(r["pts"]) for r in own), default=None),
+                "max_trb": max((int(r["orb"]) + int(r["drb"]) for r in own), default=None),
+                "max_ast": max((int(r["ast"]) for r in own), default=None),
+                "max_efficiency": max((int(r["efficiency"]) for r in own), default=None),
+                "pm_per_game": avg(own, "plus_minus"),
+            }
+        )

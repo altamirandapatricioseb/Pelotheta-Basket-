@@ -6,14 +6,14 @@ todavía no están en el catálogo. Sobre las estadísticas **pedidas por el pro
 
 | Estado | Cantidad | % de las pedidas |
 |---|---|---|
-| cruda | 33 | 15,6 % |
-| calculada | 146 | 68,9 % |
-| falta calcular | 20 | 9,4 % |
-| esperando datos | 7 | 3,3 % |
-| nivel C | 6 | 2,8 % |
-| **Total pedidas** | **212** | 100 % |
+| cruda | 61 | 21,7 % |
+| calculada | 187 | 66,5 % |
+| falta calcular | 20 | 7,1 % |
+| esperando datos | 7 | 2,5 % |
+| nivel C | 6 | 2,1 % |
+| **Total pedidas** | **281** | 100 % |
 
-Con datos hoy: **179 de 212 (84,4 %)**. Calculables con los datos que ya hay
+Con datos hoy: **248 de 281 (88,3 %)**. Calculables con los datos que ya hay
 pero sin implementar: 20.
 Agregadas por iniciativa propia (fuera de la cuenta):
 9.

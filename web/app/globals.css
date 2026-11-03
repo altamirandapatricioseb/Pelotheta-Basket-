@@ -459,43 +459,8 @@ h3 {
   }
 }
 
-/* Filas en cascada al cargar (9.10): solo transform y opacity, 35 ms entre filas, tope de 24. */
-.row-enter {
-  animation: row-in var(--dur-slow) var(--ease-out-expo) both;
-  animation-delay: calc(var(--i, 0) * 35ms);
-}
-@keyframes row-in {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-}
-.data-table tbody tr:focus-visible > :first-child {
-  outline: 2px solid var(--color-link);
-  outline-offset: -2px;
-}
-
-/* Botón de modo claro y oscuro: muestra el sol en oscuro y la luna en claro. */
-.theme-toggle .icon-sun {
-  display: none;
-}
-:root[data-theme='dark'] .theme-toggle .icon-sun {
-  display: block;
-}
-:root[data-theme='dark'] .theme-toggle .icon-moon {
-  display: none;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .theme-toggle .icon-sun {
-    display: block;
-  }
-  :root:not([data-theme='light']) .theme-toggle .icon-moon {
-    display: none;
-  }
-}
-
-/* Líneas de cancha en SVG como textura sutil (9.10): media cancha de básquet. */
-.court-texture {
+/* Líneas de cancha en SVG como textura sutil (9.10): mitad de cancha con área y círculo. */
+.pitch-texture {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -553,6 +518,46 @@ h3 {
   padding: 32px;
   border: 1px dashed var(--color-border);
   border-radius: 12px;
+}
+
+/* Documentación de la API (16.2): ejemplos de código y una vista por bloque desplegable. */
+.code-block {
+  /* Corta líneas en vez de desplazarse: en el celular no hay región con scroll que necesite foco. */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface-2);
+  padding: 12px 14px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+.api-view {
+  border-bottom: 1px solid var(--color-border);
+  padding-block: 8px;
+}
+.api-view summary {
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.api-view .data-table {
+  margin-top: 8px;
+}
+
+/* Filas en cascada al cargar (9.10): solo transform y opacity, 35 ms entre filas, tope de 24. */
+.row-enter {
+  animation: row-in var(--dur-slow) var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 35ms);
+}
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+.data-table tbody tr:focus-visible > :first-child {
+  outline: 2px solid var(--color-link);
+  outline-offset: -2px;
 }
 
 /* Interfaz 6: un solo botón grande, la fecha de la última actualización y el estado. */
@@ -619,74 +624,774 @@ h3 {
   }
 }
 
-/* Páginas de detalle (partido y jugador), mismo lenguaje visual que Pelotheta fútbol. */
-.match-head {
-  position: relative;
+@media (prefers-reduced-motion: reduce) {
+  /* Reducir movimiento en todo el sitio: animaciones y transiciones casi instantáneas. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Etapa 4: desplegable de conjunto, percentiles y marcas de la tabla maestra (9.1). */
+.select {
+  appearance: none;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface-2);
+  color: var(--color-text);
+  padding: 6px 32px 6px 14px;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 55%,
+    calc(100% - 13px) 55%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+.data-table td.pct-cell {
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--color-brand) 22%, transparent) var(--pct),
+    transparent var(--pct)
+  );
+  background-size: 100% 4px;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+.est-mark {
+  margin-left: 2px;
+  color: var(--color-warn);
+  font-size: 0.7em;
+  vertical-align: super;
+}
+.data-table thead tr.band-row th {
+  top: 0;
+  padding-top: 6px;
+  padding-bottom: 4px;
+  text-align: left;
+  color: var(--color-brand);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 0;
+}
+.custom-picker {
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  padding: 12px 16px;
+  columns: 16rem;
+  font-size: 0.875rem;
+}
+.custom-picker fieldset {
+  break-inside: avoid;
+  margin-bottom: 12px;
+}
+.data-table.has-bands thead tr:not(.band-row) th {
+  top: 26px;
+}
+
+/* Guía de lectura de cada estadística (pedido del dueño, 28-oct). */
+.stat-reading {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 60ch;
+  border: 1px solid color-mix(in oklab, var(--color-brand) 35%, var(--color-border));
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--color-brand) 10%, transparent);
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.stat-reading svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-brand);
+}
+.stat-reading--compact {
+  padding: 6px 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Tablero de la temporada (vista acumulada de la Interfaz 2): lienzo punteado con tarjetas. */
+.board {
   display: grid;
-  gap: 12px;
-  overflow: hidden;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 18px;
+  background-color: var(--color-bg);
+  background-image: radial-gradient(color-mix(in oklab, var(--color-text-muted) 28%, transparent) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 210px;
   border: 1px solid var(--color-border);
   border-radius: 14px;
   background: var(--color-surface);
-  padding: 18px 20px;
+  padding: 14px 14px 12px;
+  text-align: left;
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart);
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--color-brand) 55%, var(--color-border));
+}
+.stat-card[aria-pressed='true'] {
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--color-brand) 35%, transparent);
+}
+.stat-card .stat-reading {
+  margin-top: auto;
+}
+.sparkline {
+  width: 100%;
+  height: 36px;
+  overflow: visible;
+}
+.sparkline--empty {
+  display: block;
+  height: 36px;
+}
+.sparkline-line {
+  fill: none;
+  stroke: var(--color-brand);
+  stroke-width: 1.75;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+}
+.sparkline-mean {
+  stroke: var(--color-text-muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Gráficos. Paleta categórica validada con scripts/validate_palette.js de la skill dataviz, en este
+   orden de prioridad: verde (principal), violeta (secundario, siempre junto al verde), rojo (solo lo
+   negativo, lo peor o lo malo), azul y amarillo; después rosa, naranja, verde azulado y oliva. Pasa los
+   pares vecinos en claro (#ffffff) y oscuro (#2b2b2b). Amarillo y rosa (claro) y rojo (oscuro) quedan bajo
+   3:1: cada gráfico tiene tabla o etiquetas. */
+:root {
+  --series-1: #328336;
+  --series-2: #734f9a;
+  --series-3: #a30310;
+  --series-4: #2a78d6;
+  --series-5: #eda100;
+  --series-6: #e87ba4;
+  --series-7: #c2560c;
+  --series-8: #0f9b8e;
+  --series-9: #7a6a00;
+  --chart-surface: #ffffff;
+  --chart-grid: #e6e8e6;
+  --chart-axis: #c9cdc9;
+  --chart-empty: #eef0ee;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --series-1: #43ad2c;
+    --series-2: #965fd4;
+    --series-3: #bb0916;
+    --series-4: #3987e5;
+    --series-5: #c98500;
+    --series-6: #d55181;
+    --series-7: #d9741c;
+    --series-8: #1aa99b;
+    --series-9: #a09016;
+    --chart-surface: #2b2b2b;
+    --chart-grid: #3a3c3a;
+    --chart-axis: #4a4d4a;
+    --chart-empty: #333533;
+  }
+}
+:root[data-theme='dark'] {
+  --series-1: #43ad2c;
+  --series-2: #965fd4;
+  --series-3: #bb0916;
+  --series-4: #3987e5;
+  --series-5: #c98500;
+  --series-6: #d55181;
+  --series-7: #d9741c;
+  --series-8: #1aa99b;
+  --series-9: #a09016;
+  --chart-surface: #2b2b2b;
+  --chart-grid: #3a3c3a;
+  --chart-axis: #4a4d4a;
+  --chart-empty: #333533;
+}
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  padding: 14px 16px 12px;
+  min-width: 0;
   box-shadow: var(--shadow-card);
 }
-.match-score {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(8px, 2vw, 16px);
+.chart-card--empty {
+  border-style: dashed;
 }
-.match-score__team {
-  min-width: 0;
-  font-size: clamp(0.95rem, 3.4vw, 1.75rem);
-  font-weight: 800;
-  line-height: 1.15;
-  text-align: right;
-  overflow-wrap: anywhere;
+.landing-section .chart-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 420px;
 }
-.match-score__team--away {
-  text-align: left;
+/* Lugar del gráfico mientras no se montó (ver ChartCard): alto típico para no mover la página. */
+.chart-placeholder {
+  min-height: 300px;
+  border-radius: 10px;
+  background: color-mix(in oklab, var(--color-surface-2) 60%, transparent);
 }
-.match-score__points {
-  font-size: clamp(2.25rem, 7vw, 3.75rem);
-  font-weight: 800;
-  line-height: 1;
+.chart-frame {
+  position: relative;
+}
+.chart-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-size: 11px;
+}
+@media (max-width: 640px) {
+  .chart-svg {
+    font-size: 13px;
+  }
+}
+.chart-axis text {
+  fill: var(--color-text-muted);
   font-variant-numeric: tabular-nums;
 }
-.match-facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
-  gap: 10px 20px;
-  border-top: 1px solid var(--color-border);
-  padding-top: 12px;
-  font-size: 0.875rem;
+.chart-axis-title {
+  font-weight: 600;
 }
-.match-facts dt {
+.chart-grid {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+  fill: none;
+}
+.chart-baseline {
+  stroke: var(--chart-axis);
+  stroke-width: 1;
+}
+.chart-crosshair,
+.chart-reference {
+  stroke: var(--color-text-muted);
+  stroke-width: 1;
+  opacity: 0.5;
+}
+.chart-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.chart-area {
+  opacity: 0.1;
+}
+.chart-dot {
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+.chart-dot--open {
+  fill: transparent;
+  stroke-width: 1.75;
+}
+.chart-range {
+  stroke-width: 2;
+  opacity: 0.45;
+}
+.chart-bar {
+  transition: opacity var(--dur-fast) var(--ease-out-quart);
+}
+.chart-bar:hover,
+.chart-dot:hover {
+  opacity: 0.8;
+}
+.chart-center {
+  fill: var(--color-text);
+  font-size: 22px;
+  font-weight: 800;
+}
+.chart-strip-text {
+  fill: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  pointer-events: none;
+}
+.chart-pitch rect,
+.chart-pitch circle {
+  fill: none;
+  stroke: var(--chart-axis);
+  stroke-width: 1;
+}
+.chart-ring {
+  fill: none;
+}
+.chart-radar-shape {
+  stroke-width: 2;
+  fill-opacity: 0.12;
+}
+.chart-radar-label {
+  fill: var(--color-text-muted);
+}
+.chart-tip {
+  position: absolute;
+  z-index: 5;
+  display: grid;
+  gap: 2px;
+  min-width: 120px;
+  transform: translate(-50%, calc(-100% - 10px));
+  pointer-events: none;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  padding: 6px 9px;
+  color: var(--color-text);
+  font-size: 12px;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.18);
+}
+.chart-tip strong {
+  font-weight: 700;
+}
+.chart-tip span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 6px;
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+.chart-legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.chart-key {
+  display: inline-block;
+  flex-shrink: 0;
+}
+.chart-key--box {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+.chart-key--line {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+}
+.chart-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  gap: 16px;
+}
+.chart-table {
+  width: 100%;
+  font-size: 12px;
+}
+.chart-table th,
+.chart-table td {
+  padding: 3px 6px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.chart-table th:first-child,
+.chart-table td:first-child {
+  text-align: left;
+}
+.category-bar {
+  position: sticky;
+  /* Debajo del header compacto (barra + franja de actualización + borde). */
+  top: calc(var(--header-bar-h-compact) + 1px);
+  z-index: 20;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in oklab, var(--color-bg) 92%, transparent);
+  padding: 8px 0;
+  backdrop-filter: blur(8px);
+  scrollbar-width: none;
+}
+.landing-section {
+  scroll-margin-top: calc(var(--header-bar-h) + 64px);
+}
+/* Números destacados de cada sección de la landing (9.2). */
+.tile-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr));
+  gap: 12px 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface-2);
+  padding: 14px 18px;
+}
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.tile-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+.tile-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.tile-hint {
   font-size: 0.75rem;
   color: var(--color-text-muted);
 }
-.match-facts dd {
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+.icon-button {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-muted);
+  transition:
+    color var(--dur-fast) var(--ease-out-quart),
+    border-color var(--dur-fast) var(--ease-out-quart);
 }
-.match-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-  gap: 16px;
-  align-items: start;
-}
-.match-grid > * {
-  min-width: 0;
+.icon-button:hover,
+.icon-button[aria-pressed='true'] {
+  color: var(--color-text);
+  border-color: var(--color-brand);
 }
 
+/* Valor del panel de contexto: verde si es el mejor del plantel o de la liga, rojo si es el
+   peor. Siempre con un texto al lado: el color nunca es la única señal. */
+.value-best {
+  color: var(--color-best);
+}
+.value-worst {
+  color: var(--color-worst);
+}
+.rank-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Botón de modo claro y oscuro: muestra el sol en oscuro y la luna en claro. */
+.theme-toggle .icon-sun {
+  display: none;
+}
+:root[data-theme='dark'] .theme-toggle .icon-sun {
+  display: block;
+}
+:root[data-theme='dark'] .theme-toggle .icon-moon {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .theme-toggle .icon-sun {
+    display: block;
+  }
+  :root:not([data-theme='light']) .theme-toggle .icon-moon {
+    display: none;
+  }
+}
+
+/* --- Interfaz 4: Situaciones (9.6) y conclusiones ---------------------------------------- */
+.view-switch {
+  display: inline-flex;
+  gap: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  padding: 4px;
+  box-shadow: var(--shadow-card);
+}
+.view-switch__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 9px;
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  transition:
+    color var(--dur-fast) var(--ease-out-quart),
+    background-color var(--dur-fast) var(--ease-out-quart);
+}
+.view-switch__button[aria-pressed='true'] {
+  color: var(--color-text);
+  background: var(--color-surface-2);
+}
+/* Conclusiones: botón distinto al resto (el verde de la marca) para que se note que es otra cosa. */
+.view-switch__button--insight {
+  color: var(--color-link);
+}
+.view-switch__button--insight[aria-pressed='true'] {
+  color: var(--color-on-brand);
+  background: var(--color-brand);
+}
+.situ-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+}
+.situ-index {
+  position: sticky;
+  top: calc(var(--header-bar-h-compact) + 16px);
+}
+.situ-index ul {
+  display: grid;
+  gap: 2px;
+}
+.situ-index__link {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  transition: background-color var(--dur-fast) var(--ease-out-quart);
+}
+.situ-index__link:hover {
+  background: var(--color-surface-2);
+}
+.situ-index__link[aria-current='true'] {
+  color: var(--color-on-brand);
+  background: var(--color-brand);
+}
+.situ-index__link[aria-current='true'] .text-muted {
+  color: inherit;
+}
+@media (max-width: 860px) {
+  .situ-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .situ-index {
+    z-index: var(--z-sticky);
+    top: calc(var(--header-bar-h-compact) + 1px);
+    background: color-mix(in oklab, var(--color-bg) 92%, transparent);
+    padding-block: 8px;
+    backdrop-filter: blur(8px);
+  }
+  .situ-index ul {
+    display: flex;
+    overflow-x: auto;
+    gap: 6px;
+    scrollbar-width: none;
+  }
+  .situ-index__link {
+    white-space: nowrap;
+    border: 1px solid var(--color-border);
+  }
+}
+.situ-frame {
+  display: grid;
+  gap: 14px;
+  scroll-margin-top: calc(var(--header-bar-h) + 24px);
+}
+.situ-frame__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 8px;
+}
+.situ-frame__grid {
+  /* Columnas tipo mampostería: una tarjeta larga no deja huecos al lado. */
+  columns: 340px;
+  column-gap: 12px;
+}
+.situ-frame__grid > * {
+  break-inside: avoid;
+  margin-bottom: 12px;
+}
+.situ-card {
+  display: grid;
+  /* Sin esto la columna implícita crece al ancho mínimo del contenido y la tarjeta se sale en el celular. */
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  gap: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  padding: 14px;
+  box-shadow: var(--shadow-card);
+}
+.situ-card--empty {
+  border-style: dashed;
+  background: color-mix(in oklab, var(--color-surface) 60%, var(--color-surface-2));
+  color: var(--color-text-muted);
+  box-shadow: none;
+}
+.situ-rows {
+  display: grid;
+  gap: 4px;
+}
+.situ-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 5px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 6px 8px;
+  text-align: left;
+  font-size: 0.8125rem;
+  transition: background-color var(--dur-fast) var(--ease-out-quart);
+}
+.situ-row:hover,
+.situ-row--open {
+  background: var(--color-row-hover);
+}
+.situ-row__line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.situ-row__param {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.situ-row__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+.situ-row__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  border-top: 1px dashed var(--color-border);
+  padding-top: 4px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+.situ-stat strong {
+  color: var(--color-text);
+  font-weight: 700;
+}
+.reading-guide {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  padding: 10px 14px;
+  box-shadow: var(--shadow-card);
+}
+.reading-guide summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.reading-guide__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 10px 20px;
+  margin-top: 10px;
+  font-size: 0.8125rem;
+}
+.reading-guide__grid dt {
+  font-weight: 700;
+}
+.reading-guide__grid dd {
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+.situ-small {
+  border: 1px solid var(--color-warn);
+  border-radius: 999px;
+  padding: 0 6px;
+  color: var(--color-warn);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.situ-bar {
+  position: relative;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--chart-empty);
+}
+.situ-bar__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 4px;
+  background: var(--series-1);
+  transform-origin: left center;
+}
+.situ-bar__base {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--color-text);
+}
+.situ-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.situ-matches {
+  display: grid;
+  gap: 6px;
+  max-height: 220px;
+  overflow: auto;
+}
+/* Conclusiones: verde a favor, rojo a mejorar y azul para rasgos de estilo. El color nunca va
+   solo: cada recuadro lleva icono y etiqueta. */
 .concl-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 12px;
 }
 .concl {
-  --tone: var(--color-best);
+  --tone: var(--series-4);
   display: grid;
   align-content: start;
   gap: 6px;
@@ -695,6 +1400,9 @@ h3 {
   background: color-mix(in oklab, var(--tone) 10%, var(--color-surface));
   padding: 14px 16px;
   box-shadow: var(--shadow-card);
+}
+.concl--positivo {
+  --tone: var(--color-best);
 }
 .concl--negativo {
   --tone: var(--color-worst);
@@ -709,10 +1417,814 @@ h3 {
   font-weight: 800;
 }
 .concl__text {
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.45;
 }
+.concl-count {
+  --tone: var(--series-4);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid color-mix(in oklab, var(--tone) 55%, var(--color-border));
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--tone) 10%, var(--color-surface));
+  padding: 4px 12px;
+  font-weight: 700;
+}
+.concl-count[aria-pressed='true'] {
+  background: color-mix(in oklab, var(--tone) 28%, var(--color-surface));
+  border-color: var(--tone);
+}
+.concl-count svg {
+  color: var(--tone);
+}
+.concl-count--positivo {
+  --tone: var(--color-best);
+}
+.concl-count--negativo {
+  --tone: var(--color-worst);
+}
 
+/* --- Estadística desglosada (9.8) -------------------------------------------------------- */
+.window-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
+  gap: 10px;
+}
+.window-card {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-card);
+}
+.window-card--empty {
+  border-style: dashed;
+  box-shadow: none;
+}
+
+/* --- Comparar (9.7) ------------------------------------------------------------------- */
+.cmp-bar {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-card);
+}
+/* Barra fija en pantallas anchas; en el celular ocuparía media pantalla, así que va normal.
+   Pegada arriba se achica: quedan jugador y referencias, y el resto se abre con un botón. */
+.cmp-bar__toggle {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .cmp-bar {
+    position: sticky;
+    top: calc(var(--header-bar-h-compact) + 8px);
+    z-index: var(--z-sticky);
+  }
+  .cmp-bar--stuck {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-block: 8px;
+  }
+  .cmp-bar--stuck .cmp-bar__toggle {
+    display: inline-flex;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+  }
+  .cmp-bar--stuck .cmp-bar__row {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .cmp-bar--stuck .cmp-bar__row--compact {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .cmp-bar--stuck:not(.cmp-bar--open) .cmp-bar__row--compact,
+  .cmp-bar--stuck:not(.cmp-bar--open) .cmp-medias,
+  .cmp-bar--stuck .cmp-field legend {
+    display: none;
+  }
+}
+/* Los hijos de las grillas no se estiran con el contenido (la tabla ancha hace scroll adentro). */
+.cmp-bar,
+.cmp-bar__row,
+.cmp-bar__row > *,
+.cmp-head > *,
+.cmp-section,
+.cmp-section > div,
+.cmp-section .chart-card {
+  min-width: 0;
+}
+.cmp-bar__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 12px 20px;
+  align-items: start;
+}
+.cmp-bar__row--compact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 10px;
+}
+.cmp-bar .view-switch {
+  padding: 2px;
+  box-shadow: none;
+}
+.cmp-bar .view-switch__button {
+  padding: 5px 12px;
+}
+@media (max-width: 860px) {
+  .cmp-bar__row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.cmp-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  min-width: 0;
+}
+.cmp-field legend {
+  margin-bottom: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+.cmp-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.cmp-inline select:disabled {
+  opacity: 0.55;
+}
+.cmp-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface-2);
+  padding: 2px 4px 2px 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.cmp-tag--off {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+.cmp-tag__remove {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  color: var(--color-text-muted);
+}
+.cmp-tag__remove:hover:not(:disabled) {
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+.cmp-tag__remove:disabled {
+  opacity: 0.35;
+}
+.cmp-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-link);
+}
+
+.cmp-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px 24px;
+  align-items: start;
+}
+.cmp-head > :last-child {
+  grid-column: 1 / -1;
+}
+@media (max-width: 860px) {
+  .cmp-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.cmp-ref-list {
+  display: grid;
+  gap: 4px;
+  font-size: 0.875rem;
+}
+.cmp-ref-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+
+.cmp-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 12px;
+}
+.cmp-card {
+  display: grid;
+  gap: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  padding: 14px;
+  box-shadow: var(--shadow-card);
+}
+.cmp-count {
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+/* Proporción mejor / igual / peor: segmentos con 2px de separación (skill dataviz). */
+.cmp-split {
+  display: flex;
+  gap: 2px;
+  height: 8px;
+}
+.cmp-split > span {
+  flex-basis: 0;
+  min-width: 0;
+  border-radius: 4px;
+}
+.cmp-split__better {
+  background: var(--color-best);
+}
+.cmp-split__equal {
+  background: var(--color-border);
+}
+.cmp-split__worse {
+  background: var(--color-worst);
+}
+.cmp-summary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .cmp-summary-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.cmp-strengths {
+  display: grid;
+  gap: 8px;
+  margin-top: 6px;
+  counter-reset: cmp;
+}
+.cmp-strengths li {
+  display: grid;
+  gap: 1px;
+  padding-left: 22px;
+  position: relative;
+  counter-increment: cmp;
+}
+.cmp-strengths li::before {
+  content: counter(cmp);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-text-muted);
+}
+
+.cmp-section {
+  border-top: 1px solid var(--color-border);
+  padding-top: 14px;
+}
+.cmp-section > div {
+  grid-template-columns: minmax(0, 1fr);
+}
+.cmp-section .view-switch {
+  flex-wrap: wrap;
+}
+.cmp-section__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  cursor: pointer;
+  list-style: none;
+  border-radius: 8px;
+}
+.cmp-section__head::-webkit-details-marker {
+  display: none;
+}
+.cmp-section__caret {
+  align-self: center;
+  color: var(--color-text-muted);
+  transition: transform var(--dur-fast) var(--ease-out-quart);
+}
+.cmp-section:not([open]) .cmp-section__caret {
+  transform: rotate(-90deg);
+}
+.cmp-table .cmp-band {
+  text-align: right;
+  color: var(--color-text);
+}
+.cmp-table tbody tr:focus-visible > * {
+  background: var(--color-row-selected);
+}
+.cmp-row--empty > *,
+.cmp-cell--empty {
+  color: var(--color-text-muted);
+  background: color-mix(in oklab, var(--color-surface) 55%, var(--color-surface-2));
+}
+.cmp-cell--empty {
+  text-align: center !important;
+  font-style: italic;
+}
+.cmp-row__open {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 6px;
+  color: var(--color-link);
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out-quart);
+}
+.cmp-table tbody tr:hover .cmp-row__open,
+.cmp-table tbody tr:focus-within .cmp-row__open {
+  opacity: 1;
+}
+@media (hover: none) {
+  .cmp-row__open {
+    opacity: 1;
+  }
+}
+
+.cmp-chart-row {
+  cursor: pointer;
+}
+.cmp-chart-hit {
+  fill: transparent;
+}
+.cmp-chart-row:hover .cmp-chart-hit {
+  fill: var(--color-row-hover);
+}
+.cmp-bullet-range {
+  fill: color-mix(in oklab, var(--color-text-muted) 18%, transparent);
+}
+.cmp-bullet-iqr {
+  fill: color-mix(in oklab, var(--color-text-muted) 34%, transparent);
+}
+.cmp-bullet-key {
+  background: color-mix(in oklab, var(--color-text-muted) 34%, transparent);
+}
+.cmp-label {
+  fill: var(--color-text);
+}
+.cmp-value {
+  fill: var(--color-text-muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+.cmp-dot-key {
+  border-radius: 999px;
+}
+
+/* --- Página de partido ---------------------------------------------------------------- */
+.match-head {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+}
+.match-head > p:first-child {
+  text-align: center;
+}
+.match-score {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(8px, 2vw, 16px);
+}
+.match-score__team {
+  min-width: 0;
+  font-size: clamp(0.95rem, 3.4vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-align: right;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+.match-score__team--away {
+  text-align: left;
+}
+.match-score__goals {
+  font-size: clamp(2.25rem, 7vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1;
+}
+.match-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 10px 20px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
+  font-size: 0.875rem;
+}
+.match-facts dt {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+.match-facts dd {
+  font-weight: 700;
+}
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.match-grid > * {
+  min-width: 0;
+}
+.match-goals {
+  display: grid;
+  gap: 6px;
+}
+.match-goals li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* Punto del equipo que hizo el gol: el texto también lo dice, el color no es la única pista. */
+.match-goals li::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--series-1);
+}
+.match-goals .match-goal--rival::before {
+  background: var(--series-2);
+}
+.match-faceoff {
+  display: grid;
+  gap: 10px;
+}
+.match-faceoff li {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) 4rem;
+  align-items: baseline;
+  gap: 2px 8px;
+  font-size: 0.875rem;
+}
+.match-faceoff__bar {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: 2px;
+  height: 6px;
+}
+.match-faceoff__bar > span {
+  flex-basis: 0;
+  min-width: 2px;
+  border-radius: 3px;
+}
+.match-faceoff__boca {
+  background: var(--series-1);
+}
+.match-faceoff__rival {
+  background: var(--series-2);
+}
+.match-table .match-sub > * {
+  background: color-mix(in oklab, var(--color-surface) 70%, var(--color-surface-2));
+}
+.match-stat-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.match-stat-groups > * {
+  min-width: 0;
+}
+.match-caption {
+  caption-side: top;
+  padding: 10px 14px 6px;
+  text-align: left;
+  font-weight: 800;
+}
+.match-situations {
+  display: grid;
+  gap: 4px;
+  max-height: 320px;
+  overflow-y: auto;
+  font-size: 0.875rem;
+}
+
+/* --- Comparar: selectores, categorías y desglose ------------------------------------- */
+.cmp-bar__row--pick {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 10px 14px;
+}
+.cmp-bar__row--pick > .cmp-field {
+  flex: 1 1 240px;
+  max-width: 360px;
+}
+.cmp-field__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+.cmp-clear {
+  margin-left: auto;
+}
+.cmp-bar--stuck .cmp-field__label {
+  display: none;
+}
+.cmp-medias {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  font-size: 0.875rem;
+}
+.cmp-medias legend {
+  float: left;
+  margin-right: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+.cmp-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.cmp-check input {
+  accent-color: var(--color-brand);
+}
+.cmp-check--off {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.cmp-empty {
+  display: grid;
+  gap: 8px;
+}
+
+/* Selector de jugador con búsqueda (combobox). */
+.picker {
+  position: relative;
+  min-width: 0;
+}
+.picker__field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface-2);
+  padding: 0 10px 0 14px;
+}
+.picker__field:focus-within {
+  outline: 2px solid var(--color-link);
+  outline-offset: 2px;
+}
+.picker__input {
+  min-width: 0;
+  flex: 1;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  outline: none;
+}
+.picker__input::placeholder {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+.picker__clear {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  color: var(--color-text-muted);
+}
+.picker__clear:hover {
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+.picker__caret {
+  color: var(--color-text-muted);
+}
+.picker__list {
+  position: absolute;
+  z-index: var(--z-menu);
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  min-width: 260px;
+  max-height: min(360px, 60vh);
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  padding: 6px;
+  box-shadow: var(--shadow-card);
+}
+.picker__group {
+  position: sticky;
+  top: -6px;
+  z-index: 1;
+  background: var(--color-surface);
+  padding: 8px 10px 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.picker__option {
+  display: grid;
+  gap: 1px;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+.picker__option--active {
+  background: var(--color-row-hover);
+}
+.picker__option[aria-selected='true'] {
+  box-shadow: inset 3px 0 0 var(--color-brand);
+}
+.picker__empty {
+  padding: 10px;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+/* Categorías de a una (como Tarjetas y Conclusiones). */
+.cmp-cats__switch {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cmp-cats__count {
+  min-width: 1.5em;
+  border-radius: 999px;
+  background: var(--color-surface-2);
+  padding: 0 6px;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+.view-switch__button[aria-pressed='true'] .cmp-cats__count {
+  background: var(--color-surface);
+}
+.cmp-radars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 12px;
+}
+.cmp-radars > *,
+.cmp-breakdown-charts > *,
+.cmp-windows > * {
+  min-width: 0;
+}
+
+/* Desglose dentro de Comparar. */
+.cmp-breakdown-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 16px 28px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-card);
+}
+@media (max-width: 860px) {
+  .cmp-breakdown-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.cmp-who {
+  display: grid;
+  gap: 6px;
+}
+.cmp-who li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: baseline;
+  gap: 8px;
+}
+.cmp-breakdown-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 12px;
+}
+.cmp-breakdown-wide {
+  grid-column: 1 / -1;
+}
+.cmp-windows {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+  gap: 12px;
+  align-items: start;
+}
+/* Un desplegable con opciones largas no ensancha la página en el celular. */
+.cmp-inline {
+  flex-wrap: wrap;
+  max-width: 100%;
+  min-width: 0;
+}
+.cmp-inline > select {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* --- Descargar Excel (sección 10) ---------------------------------------------------- */
+.downloads {
+  position: relative;
+}
+.downloads > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.downloads > summary::-webkit-details-marker {
+  display: none;
+}
+.downloads__menu {
+  position: absolute;
+  z-index: var(--z-menu);
+  right: 0;
+  top: calc(100% + 6px);
+  display: grid;
+  gap: 8px;
+  width: min(320px, calc(100vw - 32px));
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+  padding: 12px;
+  box-shadow: var(--shadow-card);
+}
+.downloads__menu ul {
+  display: grid;
+  gap: 2px;
+}
+.downloads__menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.downloads__menu a:hover {
+  background: var(--color-row-hover);
+  color: var(--color-link);
+}
+
+/* Solo básquet: textura de cancha del panel, bloques plegables del detalle y fila con enlace. */
+.court-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: var(--color-brand);
+  opacity: 0.07;
+}
+.match-score__points {
+  font-size: clamp(2.25rem, 7vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
 .detail-block {
   border: 1px solid var(--color-border);
   border-radius: 14px;
@@ -749,14 +2261,10 @@ h3 {
   cursor: pointer;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  /* Reducir movimiento en todo el sitio: animaciones y transiciones casi instantáneas. */
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+/* Desplegables nativos: la lista de opciones la pinta el sistema y en modo oscuro quedaba texto
+   claro sobre fondo claro. Se fija el fondo y el texto del tema. */
+select option,
+select optgroup {
+  background-color: var(--color-surface);
+  color: var(--color-text);
 }
