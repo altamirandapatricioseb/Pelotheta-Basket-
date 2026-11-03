@@ -10,8 +10,22 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 | 1. Preparación | En curso: Fase 0, Supabase y repo hechos; falta el deploy en Vercel (el dueño lo hace más adelante) |
 | 3. Pipeline | En curso en local (se adelantó por pedido del dueño): adaptador LNB, validación del play-by-play y salida a CSV; falta la carga en Supabase, los workflows y la Interfaz 6 |
 | 2. Esqueleto | Hecho en local, sin desplegar: header de 6 interfaces, tokens, tema claro y oscuro, Jugadores con la tabla «Resumen» y el resto «en construcción». Falta aplicar la migración `player_summary` y cargar datos para verla con números |
-| 4. Estadísticas | En curso en local: fórmulas de 5.6 y 6, tabla de la liga, temporada de Boca y de cada jugador, y catálogo inicial. Faltan vistas SQL, Interfaces 2 y 3 completas, NR/EWA/ELA por jugador, Mejoría y Potencial |
+| 4. Estadísticas | En curso: fórmulas, tablas de temporada, catálogo, carga en Supabase (`ingest.load_batch`) e Interfaces 2 y 3 por categoría hechas. Falta la **primera carga de datos** (clave secreta) y las métricas desde el play-by-play: tácticas, NR/EWA/ELA por jugador, Mejoría y Potencial |
 | 5 a 11 | Pendientes |
+
+## Deploy (3-nov-2026)
+
+- URL: https://pelotheta-basket.vercel.app (proyecto `pelotheta-basket`, Root Directory `web`). Variables públicas cargadas el 3-nov; se aplican en el próximo deploy.
+- `pelotheta-basket-dva` es una importación duplicada del mismo repo: borrarlo desde el panel de Vercel (Settings → Delete Project).
+- Supabase: migraciones 1 a 6 aplicadas. Security Advisor sin ERROR.
+
+## Cómo cargar los datos
+
+Una de las dos:
+
+1. **Local:** poner `SUPABASE_SECRET_KEY=sb_secret_...` en `.env` (está en .gitignore) y correr
+   `uv run python -m pipeline.run` y después `uv run --env-file .env python -m pipeline.load`.
+2. **GitHub:** push y Actions → «Actualizar datos» → Run workflow (usa los Secrets `SUPABASE_URL` y `SUPABASE_SECRET_KEY`).
 
 ## Etapa 4: qué está hecho (3-nov-2026)
 
