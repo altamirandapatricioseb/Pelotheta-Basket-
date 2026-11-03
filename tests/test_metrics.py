@@ -146,3 +146,17 @@ def test_srs_promedia_cero(rows: list[tuple[str, str, int, int]]) -> None:
     games = [m.Game("2026-10-01", h, a, hp, ap) for h, a, hp, ap in rows if h != a]
     if games:
         assert sum(m.srs(games).values()) == pytest.approx(0, abs=1e-6)
+
+
+def test_per_promedia_15_en_la_liga() -> None:
+    lg = m.PerLeague(
+        pts=1000, fg=380, fga=820, ft=160, fta=220, orb=110, trb=430, ast=200, tov=150, pf=210, pace=72
+    )
+    a = {"mp": 300, "fg3": 20, "ast": 30, "fg": 70, "ft": 30, "tov": 20, "fga": 140, "fta": 40, "trb": 60,
+         "orb": 15, "stl": 10, "blk": 5, "pf": 25}  # fmt: skip
+    b = {**a, "fg": 30, "fga": 100, "ast": 5, "mp": 200}
+    ua, ub = m.unadjusted_per(a, 200, 380, lg), m.unadjusted_per(b, 200, 380, lg)
+    assert ua is not None and ub is not None and ua > ub  # más eficiente, más PER
+    scaled = m.per_scale({"a": ua, "b": ub}, {"a": 300, "b": 200})
+    assert (300 * scaled["a"] + 200 * scaled["b"]) / 500 == pytest.approx(15)
+    assert m.unadjusted_per({**a, "mp": 0}, 200, 380, lg) is None

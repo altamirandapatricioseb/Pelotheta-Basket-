@@ -357,3 +357,59 @@ def ela(minutes: float, drtg_on: float, drtg_rep: float, league_rating: float, x
     """Expected Losses Added = (Min / 40) × [Q(DRtg_on) − Q(DRtg_rep)]. Negativo = evita derrotas."""
     q_on = pythagorean_share(drtg_on, league_rating, x)
     return minutes / 40 * (q_on - pythagorean_share(drtg_rep, league_rating, x))
+
+
+# --- PER (Hollinger, metodología de Basketball-Reference) ----------------------------------------
+
+
+class PerLeague(NamedTuple):
+    """Totales de la liga que necesita el PER: se calculan con los box scores de todos los partidos."""
+
+    pts: float
+    fg: float
+    fga: float
+    ft: float
+    fta: float
+    orb: float
+    trb: float
+    ast: float
+    tov: float
+    pf: float
+    pace: float
+
+
+def unadjusted_per(p: dict[str, float], team_ast: float, team_fg: float, lg: PerLeague) -> float | None:
+    """uPER del jugador con sus totales `p` (mp, fg3, ast, fg, ft, tov, fga, fta, trb, orb, stl, blk, pf).
+
+    factor = 2/3 − (0,5 × lgAST / lgFG) / (2 × lgFG / lgFT);
+    VOP = lgPTS / (lgFGA − lgORB + lgTOV + 0,44 lgFTA); DRB% = (lgTRB − lgORB) / lgTRB.
+    Es la fórmula publicada sin cambios: los coeficientes no se calibran.
+    """
+    if p["mp"] <= 0 or team_fg <= 0 or lg.fg <= 0 or lg.ft <= 0 or lg.trb <= 0 or lg.pf <= 0:
+        return None
+    factor = 2 / 3 - (0.5 * lg.ast / lg.fg) / (2 * lg.fg / lg.ft)
+    vop = lg.pts / (lg.fga - lg.orb + lg.tov + FTA_WEIGHT * lg.fta)
+    drb_pct = (lg.trb - lg.orb) / lg.trb
+    assisted = team_ast / team_fg
+    value = (
+        p["fg3"]
+        + (2 / 3) * p["ast"]
+        + (2 - factor * assisted) * p["fg"]
+        + p["ft"] * 0.5 * (1 + (1 - assisted) + (2 / 3) * assisted)
+        - vop * p["tov"]
+        - vop * drb_pct * (p["fga"] - p["fg"])
+        - vop * 0.44 * (0.44 + 0.56 * drb_pct) * (p["fta"] - p["ft"])
+        + vop * (1 - drb_pct) * (p["trb"] - p["orb"])
+        + vop * drb_pct * p["orb"]
+        + vop * p["stl"]
+        + vop * drb_pct * p["blk"]
+        - p["pf"] * (lg.ft / lg.pf - 0.44 * (lg.fta / lg.pf) * vop)
+    )
+    return value / p["mp"]
+
+
+def per_scale(adjusted: dict[str, float], minutes: dict[str, float]) -> dict[str, float]:
+    """PER = aPER × 15 / promedio de aPER de la liga ponderado por minutos (así la liga promedia 15)."""
+    total = sum(minutes[k] for k in adjusted)
+    league_avg = sum(adjusted[k] * minutes[k] for k in adjusted) / total if total else 0
+    return {k: v * 15 / league_avg for k, v in adjusted.items()} if league_avg else {}

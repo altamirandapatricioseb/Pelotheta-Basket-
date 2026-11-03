@@ -1,18 +1,62 @@
 {
-  "run_id": "4c962505-15ce-4476-9aa7-701612a9f12d",
-  "started_at": "2026-11-03T16:08:32+00:00",
+  "run_id": "e5d8330c-0677-44c8-a907-a2851807cc22",
+  "started_at": "2026-11-03T16:58:21+00:00",
   "source": "lnb",
   "window": [
     "2026-09-01",
     "2026-11-03"
   ],
-  "scope": "boca",
-  "finished_at": "2026-11-03T16:09:11+00:00",
-  "duration_s": 40,
-  "games_loaded": 6,
+  "scope": "liga",
+  "finished_at": "2026-11-03T17:01:15+00:00",
+  "duration_s": 174,
+  "games_loaded": 49,
   "pbp_validated": [
     {
+      "game": "2026-09-30 argentino-j-vs-ferro",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-09-30 san-martin-c-vs-instituto",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-10-01 olimpico-lb-vs-platense",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-10-02 regatas-c-vs-instituto",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-10-04 gimnasia-cr-vs-la-union-fsa",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-05 quimsa-vs-atenas-c",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-06 platense-vs-la-union-fsa",
+      "fouls_validated": false
+    },
+    {
       "game": "2026-10-07 boca-vs-obera",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-07 olimpico-lb-vs-atenas-c",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-08 racing-ch-vs-san-martin-c",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-08 san-lorenzo-vs-gimnasia-cr",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-10 instituto-vs-ferro",
       "fouls_validated": false
     },
     {
@@ -20,7 +64,55 @@
       "fouls_validated": false
     },
     {
+      "game": "2026-10-10 racing-ch-vs-gimnasia-cr",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-12 argentino-j-vs-gimnasia-cr",
+      "fouls_validated": false
+    },
+    {
       "game": "2026-10-12 olimpico-lb-vs-boca",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-13 obera-vs-racing-ch",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-14 lanus-vs-penarol-mdp",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-15 la-union-fsa-vs-racing-ch",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-16 platense-vs-obera",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-10-16 san-lorenzo-vs-penarol-mdp",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-18 san-lorenzo-vs-obera",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-18 regatas-c-vs-olimpico-lb",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-19 independiente-o-vs-lanus",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-20 san-martin-c-vs-olimpico-lb",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-20 ferro-vs-platense",
       "fouls_validated": false
     },
     {
@@ -28,32 +120,158 @@
       "fouls_validated": false
     },
     {
+      "game": "2026-10-21 instituto-vs-lanus",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-23 argentino-j-vs-quimsa",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-10-23 atenas-c-vs-lanus",
+      "fouls_validated": false
+    },
+    {
       "game": "2026-10-23 racing-ch-vs-boca",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-25 racing-ch-vs-quimsa",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-10-26 lanus-vs-regatas-c",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-10-28 san-lorenzo-vs-platense",
       "fouls_validated": false
     },
     {
       "game": "2026-10-28 boca-vs-regatas-c",
       "fouls_validated": false
+    },
+    {
+      "game": "2026-10-28 gimnasia-cr-vs-ferro",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-01 atenas-c-vs-racing-ch",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-02 olimpico-lb-vs-penarol-mdp",
+      "fouls_validated": false
     }
   ],
-  "pbp_quarantined": [],
+  "pbp_quarantined": [
+    {
+      "game": "2026-09-28 lanus-vs-gimnasia-cr",
+      "problems": 4
+    },
+    {
+      "game": "2026-09-30 penarol-mdp-vs-gimnasia-cr",
+      "problems": 1
+    },
+    {
+      "game": "2026-10-03 quimsa-vs-platense",
+      "problems": 17
+    },
+    {
+      "game": "2026-10-08 independiente-o-vs-ferro",
+      "problems": 1
+    },
+    {
+      "game": "2026-10-09 lanus-vs-obera",
+      "problems": 2
+    },
+    {
+      "game": "2026-10-10 argentino-j-vs-san-martin-c",
+      "problems": 10
+    },
+    {
+      "game": "2026-10-12 atenas-c-vs-ferro",
+      "problems": 12
+    },
+    {
+      "game": "2026-10-27 penarol-mdp-vs-san-martin-c",
+      "problems": 15
+    },
+    {
+      "game": "2026-10-29 lanus-vs-san-martin-c",
+      "problems": 10
+    },
+    {
+      "game": "2026-10-31 quimsa-vs-penarol-mdp",
+      "problems": 6
+    },
+    {
+      "game": "2026-11-01 instituto-vs-gimnasia-cr",
+      "problems": 44
+    }
+  ],
   "failed": [],
   "rows": {
-    "game": 6,
-    "game_period_score": 24,
-    "team_game_stats": 12,
-    "player_game_stats": 144,
-    "shot": 796,
-    "play_by_play_event": 3297,
-    "league_result": 49
+    "game": 49,
+    "game_period_score": 201,
+    "team_game_stats": 98,
+    "player_game_stats": 1173,
+    "shot": 6270,
+    "play_by_play_event": 21938,
+    "league_result": 49,
+    "roster": 14
   },
   "input_hashes": [
+    "5fc8c19ea228e5a37bc4083d043f1872936dcba48458b33696258b243c00dc32",
+    "302f57504922c4ffaeecc70fc031f7003d5cebae29631da8042b3e6aa1283a84",
+    "2e305dd0613fe3088b4a828cfd95c845e843943dd0cc524a643d31807776b2b7",
+    "8311bb2a71a02a618a3ded7ddd7db4393a580223fe643a9eec3410a4a174cf6b",
+    "68ed70fb7256d3e5bb8228dbefe381d563d54d6313132d833d555c6b3387d7b8",
+    "e19d6b0806c670e47b8b9ea5f57ebb55e631663a4cd0757fd7d976ad72a3b080",
+    "213a4c6e58d7af04d2b327c71bd63cf4acafeb06e2696679d0950be627d0cf6a",
+    "d76466af210c7be497df4778482ead69245e6543a254419c390e11fbf9c66fad",
+    "784e3036e1d07561e4584d4f39f96959ba9b5693def929c20389e53012e51f2c",
+    "8b78191b56836316d41d609d8fe2f32123527a2d07673313918cd39b5a70d80e",
     "57c7e3822c9f71f73f3733184bab4c3756be56e37dc01d28d159a88f36ef163a",
+    "5d9c00bb3a0edbee5ed0c540d14a442ea41c9db5174c7fe32757d10084eb0985",
+    "1cba916bf1d82e072c591b2e3fe280884d2ccf03cb54ebe985ad01e4d4e1171e",
+    "9a4ad3f573ea9b2fc0db369aa964a7d037858365e792748fcdf0e937d62d00af",
+    "15ebd0c1521c158ca04a6ce57a103e44ac52c9b614665da7178ba89182e650ce",
+    "1f09aa5bc9b1c50ff217e99d35b68b44ef9cf9b148a8c5bb119d5428409c780b",
+    "3c41601472f18505243afd573cb41e95436f289ee2f3825e931f7f03cf6010f7",
+    "1af84c283ced9c10afbee27e49418f65cb81143c2f1a588b7ecab1631c13d3e0",
     "46ad71f32bcdfdd7809a123680810b17e2ce49b5740f0334b2c38457565ff4c0",
+    "033f083655c347d529b63fa98eb576b8fa75663f19aeb15dc1a2e959626bc8e5",
+    "429d102740f6890af3d1a58d9fc44a4c30631be377507a40d29c81d5b39cface",
+    "e56c48b4f4da3130c76c011c2c61841618380fba1a281015298f82adcc92be6e",
     "4667326057b8a7f7a44562a2a577071eabd22ec94893c23b83ddd496e346db5d",
+    "4a70093c6d70fcc72af5a2578096936d189fec40b7763a2ff553e867212d8a9e",
+    "ef9bb4bbdcc6196127382fd765eed8c6848a5174bc7e8075d1b8b9130876dec3",
+    "0642e1bfb861b861f11005f74bfd5ed7361896ff8d8a877bb91fa4b5d2e0ceca",
+    "6e39d85c3a973d4b861ed7a502f702d09312b2d689d1b63dc1807c9546a1e935",
+    "0c0385ac76590d7f254b9b1d3a388c0937859dadca9651e55b6d2cc4a00c3ff4",
+    "08bf5776f12b1ef2e43d7bc219f2c0b0683aab8235c4e2b44b1003361da42a32",
+    "2830308559bdfbda74801e27cc2eb1262d160c356ea00bac76d5721c21cec93e",
+    "b92e66edbdd44a8659f4376bc4b4d6c2037460143d01d4e6e720ed50aba21304",
+    "6817ed670227f1d2bc1746e3592e23623b0d44e9b1424d0032cc35e2e87e8d63",
+    "a57f5b8354336c80a07008b2f3c2f773f36be5c2b25add371b8836b6efa0dccc",
     "d05b56ab4d2c4e90e109e1f0a77da58b0d5b15a7bb177fb4fbbf57a6899bc97d",
+    "3fec3101c7bc0e7babe3ab5762061b5b4f944b0c82d44c082525684570d1d25f",
+    "0e7cd2dc5aa99c85f82e320d8ddcd4f19a9a2eab2988708f6e4db54811e1764a",
+    "08de09079c2bb5fd6b6d2b3a5a1894ce2e414f2e5c4291440cb54f56bea3aa6b",
     "6444470f7db7688067f798e5ba00e05e6fb6c91a63cfffdf7a6b83e4819b9609",
-    "18d7c0972d8f1035d06cecc79a25e172da8fbc14c0cecfd83a4e7315440fd2ac"
+    "540cb0a9ec70c08df6d9cdf95ff33fd3f211c234823fb5feede8656eb5b32d56",
+    "e7d4c61c4d86be48b93e90987efb2cda7568801af1bc71730834383cba319314",
+    "ba76f244692f9130ac5025e12dec1ff471b21d98ef2fa9ae216d156a2ab338bc",
+    "d06b9b04ff3217ad6dc523a9edd680ba349d336ef53e5b30aa1bc208e057cb22",
+    "18d7c0972d8f1035d06cecc79a25e172da8fbc14c0cecfd83a4e7315440fd2ac",
+    "595829e3270e2a37ba00d69bb71228dc261923ff4105308c3476ebf028c7e4e8",
+    "fb82fa983537931391f35381bbce8907a96376d1bf36ab65e3232e93c440a944",
+    "9f4e0fae1031cfc23248d6b9b196253d86a7e0b9eda87785d0fe5829816fc036",
+    "77077036d78c488ce3e73d7481a432f452956c44b5caee50027379d429d8b8ba",
+    "32c42803a201d48b3fe98ee65ddcc86fe7981e1c46e70d32c245ab7bad415c9e",
+    "0868433363dca684b6bb7ece44d1deb262f8c7f37d7264a08df433f7ef1f8fe6",
+    "32c169d964d929b51ada2bc74da190366138753ff12e75386f78fdb4f62892b3"
   ],
   "status": "ok"
 }

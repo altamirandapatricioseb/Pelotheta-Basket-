@@ -17,6 +17,19 @@ export type Database = {
       [_ in never]: never;
     };
     Views: {
+      ingest_history: {
+        Row: {
+          db_size_mb: number | null;
+          duration_s: number | null;
+          finished_at: string | null;
+          games_added: number | null;
+          rows_loaded: number | null;
+          started_at: string | null;
+          status: string | null;
+          trigger: string | null;
+        };
+        Relationships: [];
+      };
       boca_lineup: {
         Row: {
           lineup_key: string | null;

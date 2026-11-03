@@ -9,7 +9,7 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 |---|---|
 | 1. Preparación | Hecha: Fase 0, Supabase con RLS, Vercel (`pelotheta-basket-dva.vercel.app`) y GitHub |
 | 2. Esqueleto | Hecha: header de 6 interfaces, tokens, tema claro y oscuro |
-| 3. Pipeline | Casi hecha: adaptador LNB, validación del play-by-play, carga en Supabase, workflows mensual y keepalive, revalidación de la web. Falta la **Interfaz 6** (botón y fecha de actualización) y correr el workflow mensual una vez desde GitHub |
+| 3. Pipeline | Hecha salvo una prueba: adaptador LNB (toda la liga: 49 box scores, 38 play-by-play validados), plantel de Wikipedia, carga en Supabase, workflows, revalidación e **Interfaz 6** (`/actualizar`). Falta que el dueño corra una vez el workflow «Actualizar datos» desde GitHub Actions |
 | 4. Estadísticas | **Hecha** (3-nov): 96 estadísticas en el catálogo, Jugadores con 13 categorías y Equipo con 7 (incluye tácticas, origen de los puntos y quintetos), métricas propias (NR, On/Off, EWA, ELA, índice de rendimiento). Mejoría y Potencial implementadas y probadas, `n/d` hasta tener posición, edad y más partidos |
 | 5 a 11 | Pendientes |
 
@@ -32,6 +32,10 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 
 1. **Local:** `uv run python -m pipeline.run` y después `uv run --env-file .env python -m pipeline.load` (necesita `SUPABASE_SECRET_KEY` en `.env`).
 2. **GitHub:** Actions → «Actualizar datos» → Run workflow (Secrets `SUPABASE_URL`, `SUPABASE_SECRET_KEY` y `REVALIDATE_SECRET`).
+
+## Inventario de estadísticas (3-nov-2026)
+
+`uv run python -m scripts.inventario` → `docs/inventario_estadisticas.md`. Hoy: 177 pedidas, 121 con datos (68,4 %), 43 calculables sin implementar, 7 esperando datos y 6 de nivel C.
 
 ## Etapa 4: cierre (3-nov-2026)
 

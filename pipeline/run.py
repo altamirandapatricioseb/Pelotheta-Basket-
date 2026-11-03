@@ -26,7 +26,7 @@ from pathlib import Path
 
 from pipeline import season
 from pipeline.pbp import validate
-from sources import lnb
+from sources import lnb, wikipedia
 from sources.http_client import PoliteClient
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -154,6 +154,16 @@ def run(*, start: date, end: date, force: bool, whole_league: bool) -> dict[str,
             else:
                 quarantined.append({"game": label, "problems": len(check.critical)})
             collect(game, match, tables, pbp_ok=check.pbp_ok, fouls_ok=check.fouls_ok)
+
+    # Plantel con posición, edad, altura y peso (Wikipedia, API oficial). Si falla, se sigue sin él.
+    try:
+        with PoliteClient(source=wikipedia.SOURCE) as wiki:
+            roster, roster_sha = wikipedia.fetch_roster(wiki)
+        tables["roster"] = [r.model_dump(mode="json") for r in roster]
+        hashes.append(roster_sha)
+    except Exception as exc:
+        failed.append({"game": "wikipedia: plantel", "reason": f"{type(exc).__name__}: {exc}"[:300]})
+        tables["roster"] = []
 
     for name, rows in tables.items():
         _write_csv(name, rows)

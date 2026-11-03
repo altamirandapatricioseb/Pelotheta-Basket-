@@ -22,6 +22,7 @@ from typing import Any
 from pipeline import metrics as m
 from pipeline import own_metrics as own
 from sources.lnb import BOCA_TEAM_ID
+from sources.wikipedia import ZONE
 
 ROOT = Path(__file__).resolve().parent.parent
 PROCESSED = ROOT / "data" / "processed"
@@ -109,19 +110,31 @@ def league(results: list[dict[str, str]]) -> tuple[list[dict[str, Any]], float, 
 # --- Boca, partido a partido -------------------------------------------------------------------
 
 
-def _sides(team_rows: list[dict[str, str]]) -> dict[str, tuple[dict[str, float], dict[str, float]]]:
-    """Por partido: (totales de Boca, totales del rival), con FG y FGA ya armados desde 2P y 3P."""
+Pair = tuple[dict[str, float], dict[str, float]]
+
+
+def _pairs(team_rows: list[dict[str, str]]) -> dict[tuple[str, str], Pair]:
+    """Por (partido, equipo): (totales del equipo, totales del rival), con FG y FGA desde 2P y 3P."""
     by_game: dict[str, dict[str, dict[str, float]]] = defaultdict(dict)
     for row in team_rows:
-        t = {k: float(v) for k, v in row.items() if k not in ("source_game_id", "team_id")}
+        t = {
+            k: float(v)
+            for k, v in row.items()
+            if k not in ("source_game_id", "team_id") and v not in ("", None)
+        }
         t["fg"], t["fga"] = t["fg2m"] + t["fg3m"], t["fg2a"] + t["fg3a"]
         by_game[row["source_game_id"]][row["team_id"]] = t
     out = {}
     for gid, teams in by_game.items():
-        boca = teams.pop(str(BOCA_TEAM_ID), None)
-        if boca is not None and len(teams) == 1:
-            out[gid] = (boca, next(iter(teams.values())))
+        if len(teams) == 2:
+            (a, ta), (b, tb) = teams.items()
+            out[(gid, a)], out[(gid, b)] = (ta, tb), (tb, ta)
     return out
+
+
+def _sides(team_rows: list[dict[str, str]]) -> dict[str, Pair]:
+    """Por partido de Boca: (totales de Boca, totales del rival)."""
+    return {gid: pair for (gid, tid), pair in _pairs(team_rows).items() if tid == str(BOCA_TEAM_ID)}
 
 
 def _plays(t: dict[str, float]) -> tuple[float, float, float, float]:
@@ -248,22 +261,34 @@ COUNTS = (
 
 
 def player_season(
-    player_rows: list[dict[str, str]], team_rows: list[dict[str, str]], game_rows: list[dict[str, str]]
+    player_rows: list[dict[str, str]],
+    team_rows: list[dict[str, str]],
+    game_rows: list[dict[str, str]],
+    team_id: str | None = str(BOCA_TEAM_ID),
 ) -> list[dict[str, Any]]:
-    """Totales y tasas de cada jugador de Boca. Las tasas usan los totales del equipo y del rival
-    solo de los partidos que jugó (por eso se acumulan partido a partido)."""
-    sides = _sides(team_rows)
+    """Totales y tasas de cada jugador de un equipo (Boca por defecto; None = toda la liga).
+
+    Las tasas usan los totales del equipo y del rival solo de los partidos que jugó (por eso se
+    acumulan partido a partido).
+    """
+    pairs = _pairs(team_rows)
     team_minutes = {g["source_game_id"]: 40 + 5 * int(g["overtime_periods"]) for g in game_rows}
     acc: dict[str, dict[str, Any]] = {}
     for row in player_rows:
         gid = row["source_game_id"]
-        if row["team_id"] != str(BOCA_TEAM_ID) or gid not in sides or int(row["seconds"]) == 0:
+        key = (gid, row["team_id"])
+        if (
+            (team_id is not None and row["team_id"] != team_id)
+            or key not in pairs
+            or int(row["seconds"]) == 0
+        ):
             continue
-        boca, rival = sides[gid]
+        boca, rival = pairs[key]  # «boca» = el equipo del jugador (el nombre viene de la versión solo-Boca)
         mp = int(row["seconds"]) / 60
         p = acc.setdefault(
             row["source_player_id"],
             {
+                "team_id": row["team_id"],
                 "name": row["name"],
                 "games": 0,
                 "starts": 0,
@@ -369,6 +394,7 @@ def player_season(
         rows.append(
             {
                 "source_player_id": pid,
+                "team_id": p["team_id"],
                 "name": p["name"],
                 "games": p["games"],
                 "starts": p["starts"],
@@ -400,28 +426,112 @@ def player_season(
                 "double_doubles": p["dd"],
                 "triple_doubles": p["td"],
                 "pts_per36": r4(m.per_minutes(p["pts"], mp)),
+                "pts_per40": r4(m.per_minutes(p["pts"], mp, 40)),
+                "stl_per36": r4(m.per_minutes(p["stl"], mp)),
+                "blk_per36": r4(m.per_minutes(p["blk"], mp)),
+                "tov_per36": r4(m.per_minutes(p["tov"], mp)),
+                "fg2_pct": r4(m.ratio(p["fg2m"], p["fg2a"])),
+                # Promedios por partido jugado (lo primero que se mira de un jugador).
+                "mpg": r4(m.ratio(mp, p["games"])),
+                "ppg": r4(m.ratio(p["pts"], p["games"])),
+                "rpg": r4(m.ratio(trb, p["games"])),
+                "apg": r4(m.ratio(p["ast"], p["games"])),
+                "spg": r4(m.ratio(p["stl"], p["games"])),
+                "bpg": r4(m.ratio(p["blk"], p["games"])),
+                "tpg": r4(m.ratio(p["tov"], p["games"])),
                 "trb_per36": r4(m.per_minutes(trb, mp)),
                 "ast_per36": r4(m.per_minutes(p["ast"], mp)),
                 "streak_10_pts": m.longest_streak([v >= 10 for v in p["pts_list"]]),
             }
         )
-    total_pts = sum(r["pts"] for r in rows)
+    team_pts: dict[str, int] = defaultdict(int)
     for r in rows:
-        r["team_points_share"] = r4(m.ratio(r["pts"], total_pts))
+        team_pts[r["team_id"]] += r["pts"]
+    for r in rows:
+        r["team_points_share"] = r4(m.ratio(r["pts"], team_pts[r["team_id"]]))
     return sorted(rows, key=lambda r: -r["minutes"])
+
+
+def league_per(league_rows: list[dict[str, Any]], team_rows: list[dict[str, str]],
+               game_rows: list[dict[str, str]]) -> dict[str, float]:  # fmt: skip
+    """PER de todos los jugadores de la liga (5.6): uPER con los totales de la LNB, ajuste por el
+    ritmo de su equipo (aPER = ritmo liga / ritmo equipo × uPER) y escala para que la liga promedie 15."""
+    pairs = _pairs(team_rows)
+    team_minutes = {g["source_game_id"]: 40 + 5 * int(g["overtime_periods"]) for g in game_rows}
+    team_tot: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
+    paces: dict[str, list[float]] = defaultdict(list)
+    for (gid, tid), (mine, rival) in pairs.items():
+        for k in ("pts", "fg", "fga", "ftm", "fta", "orb", "drb", "ast", "tov", "pf"):
+            team_tot[tid][k] += mine[k]
+        pace = m.pace(m.possessions(_plays(mine), _plays(rival)), team_minutes.get(gid, 40))
+        if pace is not None:
+            paces[tid].append(pace)
+    if not team_tot:
+        return {}
+    lg = m.PerLeague(
+        pts=sum(t["pts"] for t in team_tot.values()), fg=sum(t["fg"] for t in team_tot.values()),
+        fga=sum(t["fga"] for t in team_tot.values()), ft=sum(t["ftm"] for t in team_tot.values()),
+        fta=sum(t["fta"] for t in team_tot.values()), orb=sum(t["orb"] for t in team_tot.values()),
+        trb=sum(t["orb"] + t["drb"] for t in team_tot.values()), ast=sum(t["ast"] for t in team_tot.values()),
+        tov=sum(t["tov"] for t in team_tot.values()), pf=sum(t["pf"] for t in team_tot.values()),
+        pace=statistics.fmean(v for vals in paces.values() for v in vals),
+    )  # fmt: skip
+    adjusted, minutes = {}, {}
+    for r in league_rows:
+        tid = r["team_id"]
+        p = {k: r[k] for k in ("ast", "tov", "fta", "trb", "orb", "stl", "blk", "pf")}
+        p |= {"mp": r["minutes"], "fg3": r["fg3m"], "fg": r["fg2m"] + r["fg3m"], "ft": r["ftm"]}
+        p["fga"] = r["fg2a"] + r["fg3a"]
+        u = m.unadjusted_per(p, team_tot[tid]["ast"], team_tot[tid]["fg"], lg)
+        if u is not None and paces.get(tid):
+            adjusted[r["source_player_id"]] = lg.pace / statistics.fmean(paces[tid]) * u
+            minutes[r["source_player_id"]] = r["minutes"]
+    return m.per_scale(adjusted, minutes)
+
+
+def add_roster(
+    players: list[dict[str, Any]], roster: list[dict[str, str]], player_rows: list[dict[str, str]]
+) -> None:
+    """Posición, edad, altura y peso de Wikipedia, cruzados por el dorsal que usó en Boca."""
+    shirts = {
+        row["source_player_id"]: row["shirt_number"]
+        for row in player_rows
+        if row["team_id"] == str(BOCA_TEAM_ID) and row["shirt_number"]
+    }
+    by_shirt = {r["shirt_number"]: r for r in roster}
+    for p in players:
+        bio = by_shirt.get(shirts.get(p["source_player_id"], ""))
+        p["position"] = bio["position"] if bio else None
+        p["zone"] = ZONE.get(bio["position"]) if bio else None
+        p["height_cm"] = int(bio["height_cm"]) if bio and bio["height_cm"] else None
+        p["weight_kg"] = int(bio["weight_kg"]) if bio and bio["weight_kg"] else None
+        # Edad en años enteros: Wikipedia no da la fecha de nacimiento (y así no se guarda).
+        p["age"] = int(bio["age"]) if bio and bio["age"] else None
 
 
 def main() -> None:
     table, x, league_games = league(read("league_result"))
     game_rows = read("game")
     games = boca_games(game_rows, read("team_game_stats"), league_games)
-    players = player_season(read("player_game_stats"), read("team_game_stats"), game_rows)
+    player_rows, team_rows = read("player_game_stats"), read("team_game_stats")
+    players = player_season(player_rows, team_rows, game_rows)
+    league_rows = player_season(player_rows, team_rows, game_rows, team_id=None)
+    per = league_per(league_rows, team_rows, game_rows)
+    for row in [*players, *league_rows]:
+        row["per"] = r4(per.get(row["source_player_id"]))
+    add_roster(players, read("roster"), player_rows)
     season = boca_season(games, table, x)
     season["scorer_herfindahl"] = r4(m.herfindahl([p["pts"] for p in players]))
+    # Aporte de la banca y profundidad de la rotación (5.7).
+    boca_lines = [ln for ln in player_rows if ln["team_id"] == str(BOCA_TEAM_ID) and int(ln["seconds"]) > 0]
+    bench_pts = sum(int(ln["pts"]) for ln in boca_lines if ln["started"] != "True")
+    season["bench_pts_share"] = r4(m.ratio(bench_pts, sum(int(ln["pts"]) for ln in boca_lines)))
+    season["bench_ppg"] = r4(m.ratio(bench_pts, len(games)))
+    season["rotation_depth"] = sum(1 for p in players if (p["mpg"] or 0) >= 10)
 
     # Métricas propias y tácticas desde el play-by-play validado (5.8, 6 y 6.1).
     per_game = own.game_tactics(game_rows, read("play_by_play_event"))
-    own.player_metrics(players, per_game, x)
+    own.player_metrics(players, per_game, x, reference=league_rows)
     for p in players:
         for key, value in list(p.items()):
             if isinstance(value, float):

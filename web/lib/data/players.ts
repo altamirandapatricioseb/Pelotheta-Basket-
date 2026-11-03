@@ -114,8 +114,8 @@ export async function getPlayers(): Promise<DataResult<PlayerSummary[]>> {
               shortName: r.known_as,
               position: r.position_raw,
               shirtNumber: r.shirt_number,
-              // shortcut: la LNB no publica fecha de nacimiento; la edad llega con Wikidata.
-              age: null,
+              // Edad en años del plantel de Wikipedia (llega como estadística del catálogo).
+              age: values.get(r.player_id)?.age ?? null,
               heightCm: r.height_cm,
               matches: r.matches ?? 0,
               minutes: r.minutes ?? 0,

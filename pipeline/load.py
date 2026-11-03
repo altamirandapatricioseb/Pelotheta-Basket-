@@ -25,6 +25,7 @@ import httpx
 
 from pipeline.season import PROCESSED, read
 from sources.lnb import BOCA_TEAM_ID, SOURCE
+from sources.wikipedia import POSITION_ES
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
@@ -34,7 +35,8 @@ COMPETITION = {"code": "lnb", "name_es": "Liga Nacional de Básquet", "season": 
 # Estadísticas que dependen de un modelo o de un supuesto: la web las marca como estimadas.
 ESTIMATED = frozenset({
     "elo", "elo_win_prob", "brier", "brier_mean", "pyth_wins", "possessions_on", "ortg_on", "drtg_on",
-    "net_rating_on", "net_rating_off", "on_off", "ewa", "ela", "rendimiento_indice", "possessions_pbp",
+    "net_rating_on", "net_rating_off", "on_off", "ewa", "ela", "rendimiento_indice", "possessions_pbp", "per",
+    "potencial_alpha", "potencial_beta",
 })  # fmt: skip
 
 
@@ -84,6 +86,20 @@ def build_batch(folder: Path = PROCESSED, *, run_id: str, trigger: str, started_
     # Las jugadas dicen «local» o «visitante»: se traducen al id del equipo de ese partido.
     sides = {g["source_game_id"]: {"local": g["home_team_id"], "visitante": g["away_team_id"]} for g in games}
 
+    players = {
+        ln["source_player_id"]: {"source_id": ln["source_player_id"], "name": ln["name"]} for ln in lines
+    }
+    # Datos del plantel (Wikipedia) para core.player. La edad viaja como estadística (age).
+    bios = {
+        p["source_player_id"]: {
+            "position": POSITION_ES.get(p["position"] or ""),
+            "height_cm": p["height_cm"] or None,
+            "weight_kg": p["weight_kg"] or None,
+        }
+        for p in read("player_season", folder)
+        if p.get("position")
+    }
+
     stat_values: list[dict[str, Any]] = []
     for p in read("player_season", folder):
         for stat, value in _values(p, stat_ids).items():
@@ -121,12 +137,7 @@ def build_batch(folder: Path = PROCESSED, *, run_id: str, trigger: str, started_
         "started_at": started_at,
         "competition": COMPETITION,
         "teams": list(teams.values()),
-        "players": list(
-            {
-                ln["source_player_id"]: {"source_id": ln["source_player_id"], "name": ln["name"]}
-                for ln in lines
-            }.values()
-        ),
+        "players": [{**pl, **bios.get(pid, {})} for pid, pl in players.items()],
         "games": [
             {
                 "source_id": r["source_game_id"],

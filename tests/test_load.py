@@ -125,7 +125,7 @@ def processed(tmp_path: Path) -> Path:
     )
     _write(tmp_path, "player_season", [{"source_player_id": "7", "name": "SIETE, J.", "pts": 20, "ts": ""}])
     _write(tmp_path, "league_table", [{"team_id": BOCA, "team": "BOCA", "wins": 1, "elo": 1510.0}])
-    _write(tmp_path, "boca_season", [{"ortg": 110.5, "position": 1}])
+    _write(tmp_path, "boca_season", [{"ortg": 110.5, "columna_fuera_del_catalogo": 1}])
     _write(tmp_path, "boca_game", [{"source_game_id": gid, "ortg": 110.5, "won": True, "opponent": "RIVAL"}])
     return tmp_path
 
@@ -147,7 +147,11 @@ def test_lote_completo_y_limpio(processed: Path) -> None:
     assert values[("jugador", "7", "pts")]["value"] == 20
     assert values[("jugador", "7", "ts")]["value"] is None  # n/d se carga como null, no como 0
     assert values[("equipo", BOCA, "elo")]["is_estimated"]
-    assert ("equipo", BOCA, "position") not in values  # lo que no está en el catálogo no se carga
+    assert (
+        "equipo",
+        BOCA,
+        "columna_fuera_del_catalogo",
+    ) not in values  # lo que no está en el catálogo no se carga
     assert batch["game_derived"][0]["stats"] == {"ortg": 110.5}
     assert {s["scope"] for s in batch["sets"]} == {"temporada", "partido", "quinteto"}
 

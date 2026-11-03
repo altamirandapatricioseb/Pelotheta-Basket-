@@ -55,9 +55,9 @@ efg_against,eFG% del rival,Efectividad de campo que permite Boca.,cuatro_factore
 orb_pct_team,ORB% del equipo,Rebotes ofensivos tomados de los disponibles.,cuatro_factores,equipo,%,lnb,B,ORB / (ORB + DRB_rival),true,true
 ft_per_fga,Libres por tiro de campo,Libres convertidos por cada tiro de campo (cuarto factor).,cuatro_factores,equipo,proporción,lnb,B,FT / FGA,true,true
 scorer_herfindahl,Concentración del ataque,Cuánto dependen los puntos de pocos jugadores: 1 sería un solo anotador.,anotacion,equipo,índice,lnb,B,Σ (PTS_jugador / PTS_eq)²,false,true
-per,PER,Eficiencia por minuto de Hollinger; necesita box scores de toda la liga.,valoracion,jugador,puntos,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false
-win_shares,Win Shares,Victorias atribuibles al jugador; necesita box scores de toda la liga.,valoracion,jugador,victorias,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false
-bpm,BPM,Aporte cada 100 posesiones frente a un jugador promedio; coeficientes de la NBA.,valoracion,jugador,puntos,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false
+per,PER,Eficiencia por minuto de Hollinger con las constantes y el ritmo de la LNB; la liga promedia 15.,valoracion,jugador,puntos,lnb,B,uPER × ritmo liga / ritmo equipo × 15 / aPER medio de la liga,true,true
+win_shares,Win Shares,Victorias atribuibles al jugador; necesita el ORtg individual de Oliver (pendiente).,valoracion,jugador,victorias,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false
+bpm,BPM,Aporte cada 100 posesiones frente a un promedio; coeficientes de la NBA (pendiente).,valoracion,jugador,puntos,lnb,B,Metodología de Basketball-Reference (aproximación para la LNB),true,false
 play_types,Tipos de jugada,"Pick and roll, aislamiento, poste, cortes: ninguna fuente gratuita los publica.",tacticas,equipo,,n/d,C,,true,false
 defensive_scheme,Esquema defensivo,"Zona, hombre o presión: la fuente no lo informa y no se infiere.",tacticas,equipo,,n/d,C,,true,false
 contested_shots,Tiros contestados,Requiere tracking de jugadores; no hay fuente gratuita.,tacticas,equipo,,n/d,C,,true,false
@@ -85,10 +85,10 @@ ewa,EWA,Victorias esperadas que agrega su ataque frente a un suplente promedio (
 ela,ELA,Derrotas esperadas que agrega su defensa frente a un suplente; negativo es bueno (propuesta).,metricas_propias,jugador,derrotas,lnb,B,"(Min / 40) × [Q(DRtg_on) − Q(DRtg_rep)], Q(g) = g^x / (g^x + L^x)",false,true
 rendimiento_indice,Índice de rendimiento,"Rendimiento global de 0 a 100 frente al plantel, por componentes (estimado).",evolucion,jugador,índice,lnb,B,Σ peso × promedio de percentiles por componente (pesos sin posición),true,true
 rendimiento_cobertura,Cobertura del índice,"Qué parte de los pesos del índice tiene datos; menos de 0,6 deja el índice n/d.",evolucion,jugador,proporción,lnb,B,Σ pesos de los componentes con datos,true,true
-mejoria_alpha,Mejoría α,Cuánto cambió su rendimiento reciente frente al resto de su temporada. Necesita posición y 20 partidos.,evolucion,jugador,índice,n/d,B,"50 + 16,7 × w × Z",true,false
+mejoria_alpha,Mejoría α,Cuánto cambió su rendimiento reciente frente al resto de su temporada. Necesita 20 partidos.,evolucion,jugador,índice,n/d,B,"50 + 16,7 × w × Z",true,false
 mejoria_beta,Mejoría β,Puntos que subió o bajó su índice de rendimiento entre dos bloques de partidos. Necesita 12 partidos.,evolucion,jugador,puntos,n/d,B,R_reciente − R_anterior,true,false
-potencial_alpha,Potencial α,"Percentil esperado en su pico según la edad. Necesita posición y edad, que la LNB no publica.",evolucion,jugador,percentil,n/d,B,"min(100, N + G × años × (1 + λ × M))",true,false
-potencial_beta,Potencial β,"Índice de nivel, tendencia y edad para ordenar el plantel. Necesita la edad.",evolucion,jugador,índice,n/d,B,"0,60 R* + 0,25 T + 0,15 × 100 × F_edad",true,false
+potencial_alpha,Potencial α,Percentil esperado en su pico según la edad (rango ± 8). Sin Mejoría α todavía: usa M = 0.,evolucion,jugador,percentil,lnb,B,"min(100, N + G × años × (1 + λ × M))",true,true
+potencial_beta,Potencial β,"Índice de nivel, tendencia y edad para ordenar el plantel. Sin Mejoría β todavía: T = R*.",evolucion,jugador,índice,lnb,B,"0,60 R* + 0,25 T + 0,15 × 100 × F_edad",true,true
 ast_per36,Asistencias cada 36 minutos,Asistencias llevadas a 36 minutos.,creacion,jugador,asistencias,lnb,B,AST × 36 / MP,true,true
 pf_per36,Faltas cada 36 minutos,Faltas llevadas a 36 minutos.,disciplina,jugador,faltas,lnb,B,PF × 36 / MP,false,true
 game_score_per36,Game Score cada 36 minutos,Game Score total llevado a 36 minutos.,valoracion,jugador,puntos,lnb,B,Σ Game Score × 36 / MP,true,true
@@ -113,3 +113,27 @@ quarter_end_diff,Diferencia en los cierres de cuarto,Diferencia de puntos en los
 clutch_net,Diferencia en el clutch,Diferencia de puntos en los últimos 5 minutos con el partido a 5 puntos o menos.,tacticas,equipo,puntos,lnb,B,PTS − PTS_rival en el clutch,true,true
 timeouts,Tiempos muertos pedidos,Tiempos muertos que pidió Boca.,tacticas,equipo,tiempos muertos,lnb,A,,true,true
 possessions_pbp,Posesiones (desde las jugadas),Posesiones estimadas sumando las jugadas del partido; se compara con la del box score.,ritmo,equipo,posesiones,lnb,B,"0,5 × (FGA + 0,44 FTA − ORB + TOV) desde el play-by-play",true,true
+age,Edad,Edad en años informada en el plantel de Wikipedia.,resumen,jugador,años,wikipedia,A,,false,true
+height_cm,Altura,Altura informada en el plantel de Wikipedia.,resumen,jugador,cm,wikipedia,A,,true,true
+weight_kg,Peso,Peso informado en el plantel de Wikipedia.,resumen,jugador,kg,wikipedia,A,,true,true
+pts_per40,Puntos cada 40 minutos,Puntos llevados a un partido completo de 40 minutos.,anotacion,jugador,puntos,lnb,B,PTS × 40 / MP,true,true
+stl_per36,Robos cada 36 minutos,Robos llevados a 36 minutos.,defensa,jugador,robos,lnb,B,STL × 36 / MP,true,true
+blk_per36,Tapas cada 36 minutos,Tapas llevadas a 36 minutos.,defensa,jugador,tapas,lnb,B,BLK × 36 / MP,true,true
+tov_per36,Pérdidas cada 36 minutos,Pérdidas llevadas a 36 minutos.,creacion,jugador,pérdidas,lnb,B,TOV × 36 / MP,false,true
+fg2_pct,% de dobles,Tiros de 2 convertidos sobre intentados.,eficiencia_tiro,jugador,%,lnb,B,2P / 2PA,true,true
+mpg,Minutos por partido,Minutos promedio en los partidos que jugó.,promedios,jugador,minutos,lnb,B,MP / PJ,true,true
+ppg,Puntos por partido,Puntos promedio por partido jugado.,promedios,jugador,puntos,lnb,B,PTS / PJ,true,true
+rpg,Rebotes por partido,Rebotes promedio por partido jugado.,promedios,jugador,rebotes,lnb,B,TRB / PJ,true,true
+apg,Asistencias por partido,Asistencias promedio por partido jugado.,promedios,jugador,asistencias,lnb,B,AST / PJ,true,true
+spg,Robos por partido,Robos promedio por partido jugado.,promedios,jugador,robos,lnb,B,STL / PJ,true,true
+bpg,Tapas por partido,Tapas promedio por partido jugado.,promedios,jugador,tapas,lnb,B,BLK / PJ,true,true
+tpg,Pérdidas por partido,Pérdidas promedio por partido jugado.,promedios,jugador,pérdidas,lnb,B,TOV / PJ,false,true
+bench_pts_share,% de puntos de la banca,Parte de los puntos de Boca que hicieron los suplentes.,origen_puntos,equipo,%,lnb,B,PTS suplentes / PTS,true,true
+bench_ppg,Puntos de la banca por partido,Puntos de los suplentes por partido.,origen_puntos,equipo,puntos,lnb,B,PTS suplentes / PJ,true,true
+rotation_depth,Profundidad de la rotación,Jugadores con 10 o más minutos por partido.,tacticas,equipo,jugadores,lnb,B,Conteo de jugadores con MP/PJ ≥ 10,true,true
+pyth_losses,Derrotas pitagóricas,Derrotas que corresponden a los puntos a favor y en contra.,resultados,equipo,derrotas,lnb,B,PJ − victorias pitagóricas,false,true
+longest_win_streak,Racha de victorias,Mayor cantidad de partidos ganados seguidos en la temporada.,resultados,equipo,partidos,lnb,B,Racha máxima,true,true
+home_win_pct,% de victorias de local,Partidos ganados de local sobre jugados de local.,resultados,equipo,%,lnb,B,W local / PJ local,true,true
+away_win_pct,% de victorias de visitante,Partidos ganados de visitante sobre jugados de visitante.,resultados,equipo,%,lnb,B,W visitante / PJ visitante,true,true
+net_rating_stdev,Consistencia del NR,Cuánto varía el Net Rating de un partido a otro: más bajo es más regular.,resultados,equipo,puntos,lnb,B,Desvío estándar muestral del NR por partido,false,true
+position,Posición en la tabla,Puesto en la tabla de la liga ordenada por % de victorias.,resultados,equipo,puesto,lnb,B,Orden por % de victorias y MOV,false,true

@@ -27,12 +27,15 @@ MIN_MINUTES_PERCENTILE = 40  # jugadores con menos minutos no entran en la refer
 SMALL_SAMPLE_MINUTES = 400  # aviso de muestra pequeña (6)
 MIN_LINEUP_POSSESSIONS = 30  # quintetos con menos posesiones se marcan «muestra pequeña» (5.8)
 
-REASONS = {
-    "mejoria_alpha": "Necesita la posición del jugador (la LNB no la publica) y 20 partidos.",
-    "mejoria_beta": "Necesita dos bloques de 6 apariciones o más (12 partidos con minutos).",
-    "potencial_alpha": "Necesita la posición y la edad; la LNB no publica ninguna de las dos.",
-    "potencial_beta": "Necesita la edad (fecha de nacimiento); la LNB no la publica.",
-}
+# Sets de la Mejoría α y del nivel del Potencial α por zona (6.1.2): (estadística, mayor es mejor, peso).
+ALPHA_SETS: dict[str, list[tuple[str, bool, int]]] = {
+    "base_escolta": [("ts", True, 1), ("ast_pct", True, 1), ("tov_pct", False, 1), ("pts_per36", True, 1),
+                     ("game_score_per36", True, 2)],
+    "alero": [("ts", True, 1), ("three_rate", True, 1), ("stl_pct", True, 1), ("trb_pct", True, 1),
+              ("game_score_per36", True, 2)],
+    "interno": [("ts", True, 1), ("trb_pct", True, 1), ("blk_pct", True, 1), ("ft_rate", True, 1),
+                ("game_score_per36", True, 2)],
+}  # fmt: skip
 
 # Componentes del índice de rendimiento (6.1.1): (estadística, mayor es mejor).
 COMPONENTS: dict[str, list[tuple[str, bool]]] = {
@@ -142,7 +145,12 @@ def lineups(per_game: dict[str, GameTactics], names: dict[str, str]) -> list[dic
     return sorted(rows, key=lambda r: -r["minutes"])
 
 
-def player_metrics(players: list[dict[str, Any]], per_game: dict[str, GameTactics], x: float) -> None:
+def player_metrics(
+    players: list[dict[str, Any]],
+    per_game: dict[str, GameTactics],
+    x: float,
+    reference: list[dict[str, Any]] | None = None,
+) -> None:
     """Agrega a cada fila de player_season sus métricas propias (modifica la lista)."""
     on: dict[str, Split] = defaultdict(Split)
     team = Split()
@@ -176,30 +184,68 @@ def player_metrics(players: list[dict[str, Any]], per_game: dict[str, GameTactic
         if p["drtg_on"] is not None and drtg_rep is not None:
             p["ela"] = m.ela(p["minutes"], p["drtg_on"], drtg_rep, league, x)
 
-    # Índice de rendimiento (6.1.1) contra el plantel, con los pesos «sin posición».
+    # Índice de rendimiento (6.1.1). Referencia: la liga (hay box scores de todos los equipos) con
+    # el mínimo de minutos; las estadísticas que solo existen para Boca (On/Off, % de minutos) se
+    # comparan contra el plantel. Pesos según la posición de Wikipedia, o «sin posición».
     # shortcut: 40 minutos por partido sin contar suplementarios; sumar 5 por suplementario si aparecen.
     team_minutes = 40.0 * len(per_game)
     for p in players:
-        p["ast_per36"] = m.per_minutes(p["ast"], p["minutes"])
-        p["pf_per36"] = m.per_minutes(p["pf"], p["minutes"])
-        p["game_score_per36"] = m.per_minutes(p["game_score_avg"] * p["games"], p["minutes"])
         p["team_minutes_share"] = m.ratio(p["minutes"], team_minutes)
-    reference = [p for p in players if p["minutes"] >= MIN_MINUTES_PERCENTILE]
+    for row in [*players, *(reference or [])]:
+        add_per36(row)
+    pool_rows = [q for q in (reference or players) if q["minutes"] >= MIN_MINUTES_PERCENTILE]
+    squad_rows = [q for q in players if q["minutes"] >= MIN_MINUTES_PERCENTILE]
+
+    def percentile(p: dict[str, Any], stat: str, higher: bool) -> float | None:
+        pool = [q[stat] for q in pool_rows if q.get(stat) is not None]
+        if len(pool) < 2:
+            pool = [q[stat] for q in squad_rows if q.get(stat) is not None]
+        return (
+            proj.percent_rank(pool, p[stat], higher) if p.get(stat) is not None and len(pool) >= 2 else None
+        )
+
     for p in players:
         comps: dict[str, float | None] = {}
         for comp, stats in COMPONENTS.items():
-            pcts = []
-            for stat, higher in stats:
-                pool = [q[stat] for q in reference if q.get(stat) is not None]
-                if p.get(stat) is not None and len(pool) >= 2:
-                    pct = proj.percent_rank(pool, p[stat], higher)
-                    if pct is not None:
-                        pcts.append(pct)
+            pcts = [v for stat, higher in stats if (v := percentile(p, stat, higher)) is not None]
             comps[comp] = statistics.fmean(pcts) if pcts else None
-        index, coverage = proj.performance_index(comps, proj.WEIGHTS["sin_posicion"])
+        zone = p.get("zone") or "sin_posicion"
+        index, coverage = proj.performance_index(comps, proj.WEIGHTS[zone])
         p["rendimiento_indice"] = None if p["minutes"] < MIN_MINUTES_PERCENTILE else index
         p["rendimiento_cobertura"] = round(coverage, 2)
-        # Mejoría y Potencial: las fórmulas están en pipeline/projection.py; con los datos de hoy
-        # no hay posición, edad ni partidos suficientes (REASONS).
-        for metric in REASONS:
-            p[metric] = None
+
+        # Mejoría α (8 + 12 partidos) y β (dos bloques de 6) todavía no tienen partidos suficientes.
+        p["mejoria_alpha"] = p["mejoria_beta"] = None
+        # Potencial α: nivel = promedio de percentiles del set de su posición (6.1.2, el Game Score
+        # cuenta doble), con la Mejoría α en n/d -> M = 0 (se avisa en el catálogo).
+        age = p.get("age")
+        stats_set = ALPHA_SETS.get(zone)
+        level_pcts = []
+        if stats_set:
+            for stat, higher, weight in stats_set:
+                v = percentile(p, stat, higher)
+                if v is not None:
+                    level_pcts += [v] * weight
+        result = (
+            proj.potencial_alpha(statistics.fmean(level_pcts), p["minutes"], age, None)
+            if level_pcts and age is not None and len(level_pcts) >= 3
+            else None
+        )
+        p["potencial_alpha"], p["potencial_alpha_low"], p["potencial_alpha_high"] = result or (
+            None,
+            None,
+            None,
+        )
+        published = p["rendimiento_indice"]  # el mismo índice que se muestra (n/d con menos de 40 minutos)
+        p["potencial_beta"] = (
+            proj.potencial_beta(published, p["minutes"], age, None)
+            if published is not None and age is not None
+            else None
+        )
+
+
+def add_per36(row: dict[str, Any]) -> None:
+    """Valores por 36 que usa el índice, para cualquier jugador de la liga."""
+    row["ast_per36"] = m.per_minutes(row["ast"], row["minutes"])
+    row["pf_per36"] = m.per_minutes(row["pf"], row["minutes"])
+    row["game_score_per36"] = m.per_minutes((row["game_score_avg"] or 0) * row["games"], row["minutes"])
