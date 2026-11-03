@@ -9,7 +9,15 @@ Para retomar en un chat nuevo: leer este archivo, `../PROMPT-2-BOCA-BASQUET.md` 
 |---|---|
 | 1. Preparación | En curso: Fase 0, Supabase y repo hechos; falta el deploy en Vercel (el dueño lo hace más adelante) |
 | 3. Pipeline | En curso en local (se adelantó por pedido del dueño): adaptador LNB, validación del play-by-play y salida a CSV; falta la carga en Supabase, los workflows y la Interfaz 6 |
-| 2 y 4 a 11 | Pendientes |
+| 2. Esqueleto | Hecho en local, sin desplegar: header de 6 interfaces, tokens, tema claro y oscuro, Jugadores con la tabla «Resumen» y el resto «en construcción». Falta aplicar la migración `player_summary` y cargar datos para verla con números |
+| 4 a 11 | Pendientes |
+
+## Etapa 2: qué está hecho (3-nov-2026)
+
+- Reusado del fútbol: header fijo (se compacta al bajar, subrayado animado, menú de celular), botón de tema con cookie, número animado y la tabla «Resumen» con panel de contexto, orden por columna, búsqueda y navegación con teclado.
+- Adaptado al básquet: tokens nuevos (#32B531, modo oscuro negro puro, sin violeta; contrastes AA verificados), columnas PJ, Tit., Min., PTS, REB, AST y VAL, «Cada 36 minutos», textura de media cancha de básquet y sin filtro de posición (la LNB no publica posiciones en el box score).
+- `supabase/migrations/20261103000300_player_summary.sql`: vista `api.player_summary` (**no aplicada**: Supabase quedó para después).
+- Verificado en local a 1280 px y 375 px: header completo, sin scroll horizontal, consola sin errores. `/jugadores` muestra el error controlado PEL-DB-001 porque la vista todavía no existe en la base.
 
 ## Etapa 3: qué está hecho (3-nov-2026)
 

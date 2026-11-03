@@ -17,6 +17,24 @@ export type Database = {
       [_ in never]: never;
     };
     Views: {
+      player_summary: {
+        Row: {
+          ast: number | null;
+          efficiency: number | null;
+          full_name: string | null;
+          height_cm: number | null;
+          known_as: string | null;
+          matches: number | null;
+          minutes: number | null;
+          player_id: number | null;
+          position_raw: string | null;
+          pts: number | null;
+          reb: number | null;
+          shirt_number: number | null;
+          starts: number | null;
+        };
+        Relationships: [];
+      };
       system_status: {
         Row: {
           key: string | null;
