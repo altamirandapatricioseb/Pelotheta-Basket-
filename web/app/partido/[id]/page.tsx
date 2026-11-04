@@ -255,7 +255,9 @@ export default async function PartidoPage({ params }: PageProps) {
                     return (
                       <tr key={key}>
                         <th scope="row" title={c.description} className="text-left">
-                          {c.name}
+                          <Link href={`/estadistica/${key}?entidad=equipo`} className="focus-ring hover:underline">
+                            {c.name}
+                          </Link>
                         </th>
                         <td className="font-bold">{formatValue(v, c)}</td>
                         <td>{formatValue(average(key), c)}</td>

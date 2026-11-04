@@ -85,3 +85,34 @@ g74,tabla,jugadores,conjunto=carga,Origen: Jugadores › Carga de minutos
 g75,tabla,jugadores,conjunto=marcas,Origen: Jugadores › Marcas
 g75,comparar,comparar,,Origen: Comparar jugadores
 g76,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g07,desglosada,estadistica,stat=net_points&entidad=equipo,Desglosada: Diferencia de puntos
+g08,desglosada,estadistica,stat=points_for&entidad=equipo,Desglosada: Puntos a favor
+g09,desglosada,estadistica,stat=pace&entidad=equipo,Desglosada: Ritmo
+g10,desglosada,estadistica,stat=ortg&entidad=equipo,Desglosada: ORtg
+g11,desglosada,estadistica,stat=net_rating&entidad=equipo,Desglosada: Net Rating
+g12,desglosada,estadistica,stat=points_for&entidad=equipo,Desglosada: Puntos a favor
+g13,desglosada,estadistica,stat=points_for&entidad=equipo,Desglosada: Puntos a favor
+g14,desglosada,estadistica,stat=pace&entidad=equipo,Desglosada: Ritmo
+g18,desglosada,estadistica,stat=h1_diff&entidad=equipo,Desglosada: Diferencia en el 1.er tiempo
+g20,desglosada,estadistica,stat=efg&entidad=equipo,Desglosada: eFG%
+g21,desglosada,estadistica,stat=efg&entidad=equipo,Desglosada: eFG%
+g22,desglosada,estadistica,stat=ts&entidad=equipo,Desglosada: TS%
+g23,desglosada,estadistica,stat=tov_pct&entidad=equipo,Desglosada: TOV%
+g24,desglosada,estadistica,stat=ft_per_fga&entidad=equipo,Desglosada: Libres por tiro de campo
+g27,desglosada,estadistica,stat=team_fga&entidad=equipo,Desglosada: Tiros de campo del equipo
+g28,desglosada,estadistica,stat=team_fg3_pct&entidad=equipo,Desglosada: % de triples
+g29,desglosada,estadistica,stat=three_rate&entidad=equipo,Desglosada: 3PAr
+g30,desglosada,estadistica,stat=team_fg3m&entidad=equipo,Desglosada: Triples convertidos
+g31,desglosada,estadistica,stat=team_fta&entidad=equipo,Desglosada: Libres del equipo
+g32,desglosada,estadistica,stat=rival_fga&entidad=equipo,Desglosada: Tiros del rival
+g33,desglosada,estadistica,stat=team_trb&entidad=equipo,Desglosada: Rebotes totales
+g34,desglosada,estadistica,stat=orb_pct_team&entidad=equipo,Desglosada: ORB% del equipo
+g35,desglosada,estadistica,stat=team_tov&entidad=equipo,Desglosada: Pérdidas del equipo
+g36,desglosada,estadistica,stat=team_ast&entidad=equipo,Desglosada: Asistencias del equipo
+g37,desglosada,estadistica,stat=extra_possessions&entidad=equipo,Desglosada: Posesiones extra
+g38,desglosada,estadistica,stat=team_ast_fgm&entidad=equipo,Desglosada: Canastas asistidas
+g52,desglosada,estadistica,stat=rest_days&entidad=equipo,Desglosada: Días de descanso
+g55,desglosada,estadistica,stat=elo_pre&entidad=equipo,Desglosada: Elo de Boca antes del partido
+g61,desglosada,estadistica,stat=team_fta&entidad=equipo,Desglosada: Libres del equipo
+g63,desglosada,estadistica,stat=net_rating&entidad=equipo,Desglosada: Net Rating
+g68,desglosada,estadistica,stat=elo_win_prob&entidad=equipo,Desglosada: Probabilidad de ganar antes del partido

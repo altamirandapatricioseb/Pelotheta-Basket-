@@ -156,6 +156,12 @@ export function TeamTableView({ matches, catalog, sets, otherRows, initialSet, i
         if (only) router.push(`/partido/${String(only.matchId)}`);
       },
     };
+    // La tecla D abre la estadística desglosada de la columna actual (9.8).
+    if ((event.key === 'd' || event.key === 'D') && column) {
+      event.preventDefault();
+      router.push(`/estadistica/${column.id}?entidad=equipo`);
+      return;
+    }
     const action = actions[event.key];
     if (action) {
       event.preventDefault();
@@ -387,14 +393,20 @@ export function TeamTableView({ matches, catalog, sets, otherRows, initialSet, i
               hoverStat(null);
             }}
             onDoubleClick={(e) => {
-              // Doble clic en un partido (su nombre o cualquier celda de la fila): su página.
+              // Doble clic en una celda: la estadística desglosada (9.8); en el nombre del partido: su página.
+              const stat = (e.target as HTMLElement).closest<HTMLElement>('td[data-stat]')?.dataset.stat;
+              if (stat) {
+                router.push(`/estadistica/${stat}?entidad=equipo`);
+                return;
+              }
               const match = (e.target as HTMLElement).closest<HTMLElement>('tr[data-match]')?.dataset.match;
               if (match) router.push(`/partido/${match}`);
             }}
           >
             <caption className="sr-only">
-              Tabla del equipo, {set?.name}. Doble clic o Enter en un partido abre su página. Flechas arriba y abajo
-              cambian la fila; izquierda y derecha, la estadística.
+              Tabla del equipo, {set?.name}. Doble clic en una celda o la tecla D abre la estadística desglosada; doble
+              clic o Enter en un partido abre su página. Flechas arriba y abajo cambian la fila; izquierda y derecha, la
+              estadística.
             </caption>
             <thead>
               <tr>

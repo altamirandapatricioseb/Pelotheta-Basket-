@@ -166,7 +166,12 @@ export default async function JugadorPage({ params }: PageProps) {
                     return (
                       <tr key={key}>
                         <th scope="row" title={c.description} className="text-left">
-                          {c.name}
+                          <Link
+                            href={`/estadistica/${key}?entidad=jugador&id=${String(player.playerId)}`}
+                            className="focus-ring hover:underline"
+                          >
+                            {c.name}
+                          </Link>
                           {!c.higherIsBetter ? <span className="ml-1 text-xs text-muted">(menos es mejor)</span> : null}
                         </th>
                         <td className="font-bold">{formatValue(player.values[key], c)}</td>

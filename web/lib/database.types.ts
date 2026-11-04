@@ -135,6 +135,63 @@ export type Database = {
         };
         Relationships: [];
       };
+      situational_catalog: {
+        Row: {
+          card_id: string | null;
+          category: string | null;
+          title_es: string | null;
+          condition_es: string | null;
+          params_es: string | null;
+          measured_es: string | null;
+          required_data: string | null;
+          level: string | null;
+          available: boolean | null;
+          estimated: boolean | null;
+          reason_es: string | null;
+          sort_order: number | null;
+          main_metric: string | null;
+          extra_metrics: string | null;
+        };
+        Relationships: [];
+      };
+      situational_result: {
+        Row: {
+          card_id: string | null;
+          param_value: string | null;
+          param_order: number | null;
+          n: number | null;
+          w: number | null;
+          d: number | null;
+          l: number | null;
+          win_pct: number | null;
+          pf_avg: number | null;
+          pa_avg: number | null;
+          margin: number | null;
+          base_win_pct: number | null;
+          delta: number | null;
+          base_pf: number | null;
+          base_pa: number | null;
+          base_margin: number | null;
+          stats: Json | null;
+          base_stats: Json | null;
+          computed_at: string | null;
+        };
+        Relationships: [];
+      };
+      situational_match: {
+        Row: {
+          card_id: string | null;
+          param_value: string | null;
+          match_id: number | null;
+          match_date: string | null;
+          opponent: string | null;
+          home: boolean | null;
+          points_for: number | null;
+          points_against: number | null;
+          result: string | null;
+        };
+        Relationships: [];
+      };
       league_game: {
         Row: {
           game_id: number | null;
@@ -243,7 +300,40 @@ export type Database = {
       };
     };
     Functions: {
-      [_ in never]: never;
+      stat_series: {
+        Args: { p_stat: string; p_entity: string; p_id?: number | null };
+        Returns: {
+          match_id: number;
+          match_date: string;
+          competition_code: string;
+          competition_name: string;
+          opponent: string;
+          home: boolean;
+          result: string;
+          points_for: number;
+          points_against: number;
+          minutes: number | null;
+          num: number | null;
+          den: number | null;
+          factor: number;
+          value: number | null;
+        }[];
+      };
+      stat_windows: {
+        Args: { p_stat: string; p_entity: string; p_id?: number | null };
+        Returns: {
+          window_key: string;
+          label: string;
+          sort_order: number;
+          n: number;
+          value: number | null;
+          total: number | null;
+          best: number | null;
+          worst: number | null;
+          season: number | null;
+          delta: number | null;
+        }[];
+      };
     };
     Enums: {
       [_ in never]: never;

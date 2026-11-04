@@ -19,6 +19,8 @@ CHARTS = charts.load_charts()
 SOURCES = charts.load_sources()
 with (ROOT / "data" / "stat_sets.csv").open(encoding="utf-8", newline="") as fh:
     SETS = {s["set_id"]: s for s in csv.DictReader(fh)}
+with (ROOT / "data" / "stat_catalog.csv").open(encoding="utf-8", newline="") as fh:
+    STATS = {s["id"]: s for s in csv.DictReader(fh)}
 
 
 def test_al_menos_cincuenta_graficos_con_datos_e_ids_unicos() -> None:
@@ -42,8 +44,14 @@ def test_todo_destino_de_origen_existe() -> None:
     for s in SOURCES:
         assert s.chart_id in chart_ids, s.chart_id
         assert s.destino_ref in charts.TARGET_PAGES[s.destino_tipo], s
-        assert (ROOT / "web" / "app" / s.destino_ref / "page.tsx").exists(), s
         params = dict(p.split("=") for p in s.parametros.split("&") if p)
+        if s.destino_tipo == "desglosada":
+            # Página dinámica /estadistica/[stat] y estadística del catálogo con datos.
+            assert (ROOT / "web" / "app" / "estadistica" / "[stat]" / "page.tsx").exists(), s
+            assert params.get("stat") in STATS and STATS[params["stat"]]["available"] == "true", s
+            assert s.href().startswith(f"/estadistica/{params['stat']}?entidad=")
+            continue
+        assert (ROOT / "web" / "app" / s.destino_ref / "page.tsx").exists(), s
         if "conjunto" in params:
             stat_set = SETS.get(params["conjunto"])
             assert stat_set is not None, s
@@ -52,7 +60,8 @@ def test_todo_destino_de_origen_existe() -> None:
 
 def test_etiqueta_nombra_el_origen() -> None:
     for s in SOURCES:
-        assert s.etiqueta_es.startswith("Origen: "), s.chart_id
+        prefix = "Desglosada: " if s.destino_tipo == "desglosada" else "Origen: "
+        assert s.etiqueta_es.startswith(prefix), s.chart_id
         assert s.href().startswith("/")
 
 

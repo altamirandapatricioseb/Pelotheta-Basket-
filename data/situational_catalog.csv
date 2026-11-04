@@ -1,0 +1,119 @@
+id,categoria,titulo_es,condicion,parametros,resultado_medido,datos_requeridos,nivel,available,estimada,motivo,metrica_principal,metricas_extra
+s001,A,Ventaja al descanso,Ventaja al descanso,"+1 a +5, +6 a +10, +11 o más",Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s002,A,Desventaja al descanso,Desventaja al descanso,"−1 a −5, −6 a −10, −11 o más",Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s003,A,Empate al descanso,Empate al descanso,,Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s004,A,Ventaja al final del 3.er cuarto,Ventaja al final del 3.er cuarto,"+1 a +5, +6 a +10, +11 o más",Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s005,A,Desventaja al final del 3.er cuarto,Desventaja al final del 3.er cuarto,"−1 a −5, −6 a −10, −11 o más",Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s006,A,Ventaja al final del 1.er cuarto,Ventaja al final del 1.er cuarto,"+1 a +5, +6 o más",Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s007,A,Desventaja al final del 1.er cuarto,Desventaja al final del 1.er cuarto,"−1 a −5, −6 o más",Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s008,A,Cuartos ganados y resultado final,Cuartos ganados y resultado final,0 a 4 cuartos,Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s009,A,Partidos decididos por 5 puntos o menos,Partidos decididos por 5 puntos o menos,"5 o menos, 6 o más",Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s010,A,Partidos por 1 a 3 puntos y con suplementario,Partidos por 1 a 3 puntos y con suplementario,,Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s011,A,Ventaja máxima alcanzada,Ventaja máxima alcanzada,"menos de 10, 10 a 19, 20 o más",Resultado del partido,parciales por cuarto (LNB),B,true,false,,win_pct,ortg drtg pace
+s012,A,Remontadas: desventaja máxima superada,Remontadas: desventaja máxima superada,"5, 10 o 15 o más abajo",Resultado del partido,parciales por cuarto (LNB),B,true,false,,win_pct,ortg drtg pace
+s013,A,Victorias y derrotas por 15 puntos o más,Victorias y derrotas por 15 puntos o más,,Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s014,A,Último cuarto: quién lo ganó,Último cuarto: quién lo ganó,,Resultado del partido,parciales por cuarto (LNB),A,true,false,,win_pct,ortg drtg pace
+s015,B,"Anotar 80, 90 o 100 puntos o más","Anotar 80, 90 o 100 puntos o más","80, 90, 100",Resultado del partido,box score y parciales (LNB),A,true,false,,win_pct,ortg pace team_fg3m
+s016,B,"Recibir 70, 75 u 80 puntos o menos","Recibir 70, 75 u 80 puntos o menos","70, 75, 80",Resultado del partido,box score y parciales (LNB),A,true,false,,win_pct,ortg pace team_fg3m
+s017,B,Ritmo alto y bajo,Ritmo alto y bajo,posesiones cada 40 minutos,Resultado del partido,box score y parciales (LNB),B,true,false,,win_pct,ortg pace team_fg3m
+s018,B,ORtg de 110 o más y de 90 o menos,ORtg de 110 o más y de 90 o menos,,Resultado del partido,box score y parciales (LNB),B,true,false,,win_pct,ortg pace team_fg3m
+s019,B,DRtg de 95 o menos y de 110 o más,DRtg de 95 o menos y de 110 o más,,Resultado del partido,box score y parciales (LNB),B,true,false,,win_pct,ortg pace team_fg3m
+s020,B,Net Rating de +10 o más y de −10 o menos,Net Rating de +10 o más y de −10 o menos,,Resultado del partido,box score y parciales (LNB),B,true,false,,win_pct,ortg pace team_fg3m
+s021,B,Puntos totales del partido,Puntos totales del partido,"160, 170, 180",Resultado del partido,box score y parciales (LNB),A,true,false,,win_pct,ortg pace team_fg3m
+s022,B,Cuartos de 25 puntos o más a favor,Cuartos de 25 puntos o más a favor,"0, 1, 2 o más",Resultado del partido,box score y parciales (LNB),A,true,false,,win_pct,ortg pace team_fg3m
+s023,B,Primer cuarto de 20 puntos o más,Primer cuarto de 20 puntos o más,,Resultado del partido,box score y parciales (LNB),A,true,false,,win_pct,ortg pace team_fg3m
+s024,B,Recibir 25 puntos o más en un cuarto,Recibir 25 puntos o más en un cuarto,,Resultado del partido,box score y parciales (LNB),A,true,false,,win_pct,ortg pace team_fg3m
+s025,B,Puntos en la pintura,Puntos en la pintura,,Resultado del partido,box score y parciales (LNB),C,false,false,la LNB no separa los puntos en la pintura en el box score; el acierto por zona está en la tarjeta 39,win_pct,ortg pace team_fg3m
+s026,B,Puntos de segunda oportunidad,Puntos de segunda oportunidad,"10 o más, menos de 10",Resultado del partido,box score y parciales (LNB),B,true,false,,win_pct,ortg pace team_fg3m
+s027,C,"Triples convertidos: 8, 10 o 12 o más","Triples convertidos: 8, 10 o 12 o más","8, 10, 12",Resultado del partido,box score y zonas de tiro (LNB),A,true,false,,win_pct,efg team_fg3_pct team_fta
+s028,C,% de triples de 40 % o más y de 28 % o menos,% de triples de 40 % o más y de 28 % o menos,,Resultado del partido,box score y zonas de tiro (LNB),B,true,false,,win_pct,efg team_fg3_pct team_fta
+s029,C,30 triples intentados o más,30 triples intentados o más,,Resultado del partido,box score y zonas de tiro (LNB),A,true,false,,win_pct,efg team_fg3_pct team_fta
+s030,C,eFG% de 55 % o más y de 45 % o menos,eFG% de 55 % o más y de 45 % o menos,,Resultado del partido,box score y zonas de tiro (LNB),B,true,false,,win_pct,efg team_fg3_pct team_fta
+s031,C,TS% de 58 % o más,TS% de 58 % o más,,Resultado del partido,box score y zonas de tiro (LNB),B,true,false,,win_pct,efg team_fg3_pct team_fta
+s032,C,25 tiros libres intentados o más,25 tiros libres intentados o más,,Resultado del partido,box score y zonas de tiro (LNB),A,true,false,,win_pct,efg team_fg3_pct team_fta
+s033,C,% de libres de 75 % o más y de 65 % o menos,% de libres de 75 % o más y de 65 % o menos,,Resultado del partido,box score y zonas de tiro (LNB),B,true,false,,win_pct,efg team_fg3_pct team_fta
+s034,C,% de dobles de 50 % o más,% de dobles de 50 % o más,,Resultado del partido,box score y zonas de tiro (LNB),B,true,false,,win_pct,efg team_fg3_pct team_fta
+s035,C,Más tiros de campo intentados que el rival,Más tiros de campo intentados que el rival,,Resultado del partido,box score y zonas de tiro (LNB),A,true,false,,win_pct,efg team_fg3_pct team_fta
+s036,C,eFG% del rival de 48 % o menos,eFG% del rival de 48 % o menos,,Resultado del partido,box score y zonas de tiro (LNB),B,true,false,,win_pct,efg team_fg3_pct team_fta
+s037,C,Triples del rival: 10 o más,Triples del rival: 10 o más,,Resultado del partido,box score y zonas de tiro (LNB),A,true,false,,win_pct,efg team_fg3_pct team_fta
+s038,C,Tiros libres del rival: 25 o más,Tiros libres del rival: 25 o más,,Resultado del partido,box score y zonas de tiro (LNB),A,true,false,,win_pct,efg team_fg3_pct team_fta
+s039,C,Precisión por zona de la cancha,Precisión por zona de la cancha,cerca del aro y triple frontal,Resultado del partido,box score y zonas de tiro (LNB),B,true,false,,win_pct,efg team_fg3_pct team_fta
+s040,C,3PAr de 40 % o más (estilo de triples),3PAr de 40 % o más (estilo de triples),,Resultado del partido,box score y zonas de tiro (LNB),B,true,false,,win_pct,efg team_fg3_pct team_fta
+s041,D,Más rebotes que el rival,Más rebotes que el rival,,Resultado del partido,box score (LNB),A,true,false,,win_pct,reb_margin orb_pct_team team_tov
+s042,D,Rebotes ofensivos: 12 o más,Rebotes ofensivos: 12 o más,,Resultado del partido,box score (LNB),A,true,false,,win_pct,reb_margin orb_pct_team team_tov
+s043,D,ORB% de 30 % o más,ORB% de 30 % o más,,Resultado del partido,box score (LNB),B,true,false,,win_pct,reb_margin orb_pct_team team_tov
+s044,D,DRB% de 75 % o más,DRB% de 75 % o más,,Resultado del partido,box score (LNB),B,true,false,,win_pct,reb_margin orb_pct_team team_tov
+s045,D,Segundas oportunidades concedidas,Segundas oportunidades concedidas,"10 o más, menos de 10",Resultado del partido,box score (LNB),B,true,false,,win_pct,reb_margin orb_pct_team team_tov
+s046,D,Diferencia de rebotes de +10 o −10,Diferencia de rebotes de +10 o −10,,Resultado del partido,box score (LNB),A,true,false,,win_pct,reb_margin orb_pct_team team_tov
+s047,D,Posesiones extra (ORB + robos − pérdidas),Posesiones extra (ORB + robos − pérdidas),"a favor, en contra",Resultado del partido,box score (LNB),B,true,false,,win_pct,reb_margin orb_pct_team team_tov
+s048,D,Pérdidas: 10 o menos y 18 o más,Pérdidas: 10 o menos y 18 o más,,Resultado del partido,box score (LNB),A,true,false,,win_pct,reb_margin orb_pct_team team_tov
+s049,D,Robos: 10 o más,Robos: 10 o más,,Resultado del partido,box score (LNB),A,true,false,,win_pct,reb_margin orb_pct_team team_tov
+s050,D,Tapas: 5 o más,Tapas: 5 o más,,Resultado del partido,box score (LNB),A,true,false,,win_pct,reb_margin orb_pct_team team_tov
+s051,E,Asistencias: 20 o más y 12 o menos,Asistencias: 20 o más y 12 o menos,,Resultado del partido,box score de los jugadores (LNB),A,true,false,,win_pct,team_ast team_tov efg
+s052,E,"AST/TOV de 1,5 o más","AST/TOV de 1,5 o más",,Resultado del partido,box score de los jugadores (LNB),B,true,false,,win_pct,team_ast team_tov efg
+s053,E,60 % o más de canastas asistidas,60 % o más de canastas asistidas,,Resultado del partido,box score de los jugadores (LNB),B,true,false,,win_pct,team_ast team_tov efg
+s054,E,Puntos de la banca: 30 o más y 15 o menos,Puntos de la banca: 30 o más y 15 o menos,,Resultado del partido,box score de los jugadores (LNB),A,true,false,,win_pct,team_ast team_tov efg
+s055,E,Jugadores con 10 puntos o más,Jugadores con 10 puntos o más,"1, 2, 3, 4 o más",Resultado del partido,box score de los jugadores (LNB),A,true,false,,win_pct,team_ast team_tov efg
+s056,E,Un jugador con 30 % o más de uso,Un jugador con 30 % o más de uso,,Resultado del partido,box score de los jugadores (LNB),B,true,false,,win_pct,team_ast team_tov efg
+s057,F,Faltas cometidas: 25 o más y 18 o menos,Faltas cometidas: 25 o más y 18 o menos,,Resultado del partido,box score de los dos equipos (LNB),A,true,false,,win_pct,drtg rival_fg3m team_fta
+s058,F,Faltas del rival: 25 o más,Faltas del rival: 25 o más,,Resultado del partido,box score de los dos equipos (LNB),A,true,false,,win_pct,drtg rival_fg3m team_fta
+s059,F,Jugadores con 4 faltas o más o descalificados,Jugadores con 4 faltas o más o descalificados,,Resultado del partido,box score de los dos equipos (LNB),A,true,false,,win_pct,drtg rival_fg3m team_fta
+s060,F,Faltas técnicas y antideportivas,Faltas técnicas y antideportivas,,Resultado del partido,box score de los dos equipos (LNB),C,false,false,el box score de la LNB no distingue las faltas técnicas ni las antideportivas,win_pct,drtg rival_fg3m team_fta
+s061,F,Tiros libres concedidos frente al resultado,Tiros libres concedidos frente al resultado,"15 o menos, 16 a 24, 25 o más",Resultado del partido,box score de los dos equipos (LNB),A,true,false,,win_pct,drtg rival_fg3m team_fta
+s062,F,El rival anota 90 puntos o más,El rival anota 90 puntos o más,,Resultado del partido,box score de los dos equipos (LNB),A,true,false,,win_pct,drtg rival_fg3m team_fta
+s063,F,Rival con un anotador de 25 puntos o más,Rival con un anotador de 25 puntos o más,,Resultado del partido,box score de los dos equipos (LNB),A,true,false,,win_pct,drtg rival_fg3m team_fta
+s064,F,Resultado según el máximo anotador del rival,Resultado según el máximo anotador del rival,"menos de 15, 15 a 19, 20 a 24, 25 o más",Resultado del partido,box score de los dos equipos (LNB),A,true,false,,win_pct,drtg rival_fg3m team_fta
+s065,G,Local y visitante,Local y visitante,,Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",A,true,false,,win_pct,ortg drtg pace
+s066,G,Local y visitante por competición,Local y visitante por competición,,Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",A,true,false,,win_pct,ortg drtg pace
+s067,G,Descanso desde el partido anterior,Descanso desde el partido anterior,"días consecutivos, 1 o 2 días, 3 o más",Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",A,true,false,,win_pct,ortg drtg pace
+s068,G,Partidos en 7 días,Partidos en 7 días,"1, 2, 3 o más",Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",A,true,false,,win_pct,ortg drtg pace
+s069,G,Después de un partido de Champions Américas,Después de un partido de Champions Américas,,Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",C,false,false,"la BCL Américas solo publica estadísticas en FIBA, cuyos términos no permiten copiarlas",win_pct,ortg drtg pace
+s070,G,Día de la semana,Día de la semana,,Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",A,true,false,,win_pct,ortg drtg pace
+s071,G,Franja horaria,Franja horaria,"antes de las 20, 20 a 21:59, 22 o más tarde",Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",A,true,false,,win_pct,ortg drtg pace
+s072,G,Mes del año,Mes del año,,Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",A,true,false,,win_pct,ortg drtg pace
+s073,G,Fase de la temporada,Fase de la temporada,"primeras 10 fechas, resto, playoffs",Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",A,true,false,,win_pct,ortg drtg pace
+s074,G,Rival según su Elo antes del partido,Rival según su Elo antes del partido,"1530, 1500, 1470",Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",B,true,false,,win_pct,ortg drtg pace
+s075,G,Rival según su puesto en la tabla,Rival según su puesto en la tabla,"1.º a 4.º, 5.º a 8.º, 9.º a 12.º, 13.º o más abajo",Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",A,true,false,,win_pct,ortg drtg pace
+s076,G,Rival rápido o lento,Rival rápido o lento,posesiones por partido contra el promedio de la liga,Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",B,true,false,,win_pct,ortg drtg pace
+s077,G,Historial contra cada rival,Historial contra cada rival,una fila por rival,Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",A,true,false,,win_pct,ortg drtg pace
+s078,G,Series de playoffs: tras ganar o perder el primer juego,Series de playoffs: tras ganar o perder el primer juego,,Resultado del partido,"fechas, horarios, tabla y Elo (LNB)",C,false,false,todavía no se jugaron los playoffs de la temporada,win_pct,ortg drtg pace
+s079,H,Después de una victoria o de una derrota,Después de una victoria o de una derrota,,Resultado del partido siguiente,resultados en orden (LNB),A,true,false,,win_pct,ortg drtg efg
+s080,H,Después de una paliza a favor o en contra,Después de una paliza a favor o en contra,15 puntos o más,Resultado del partido siguiente,resultados en orden (LNB),A,true,false,,win_pct,ortg drtg efg
+s081,H,Después de 3 o más victorias o derrotas seguidas,Después de 3 o más victorias o derrotas seguidas,,Resultado del partido siguiente,resultados en orden (LNB),A,true,false,,win_pct,ortg drtg efg
+s082,H,Forma de los últimos 5: resultado siguiente,Forma de los últimos 5: resultado siguiente,"0-1, 2-3, 4-5 victorias",Resultado del partido,resultados en orden (LNB),A,true,false,,win_pct,ortg drtg efg
+s083,H,Después de anotar 90 puntos o más,Después de anotar 90 puntos o más,,Resultado del partido siguiente,resultados en orden (LNB),A,true,false,,win_pct,ortg drtg efg
+s084,H,Después de un partido con 8 triples o más,Después de un partido con 8 triples o más,,Resultado del partido siguiente,resultados en orden (LNB),A,true,false,,win_pct,ortg drtg efg
+s085,H,Después de un partido con suplementario,Después de un partido con suplementario,,Resultado del partido siguiente,resultados en orden (LNB),A,true,false,,win_pct,ortg drtg efg
+s086,H,Después de una derrota por 1 a 3 puntos,Después de una derrota por 1 a 3 puntos,,Resultado del partido siguiente,resultados en orden (LNB),A,true,false,,win_pct,ortg drtg efg
+s087,H,Rachas más largas de la temporada,Rachas más largas de la temporada,,Resultado del partido,resultados en orden (LNB),A,true,false,,win_pct,ortg drtg efg
+s088,H,Tendencia del Net Rating de los 3 anteriores,Tendencia del Net Rating de los 3 anteriores,"positivo, negativo",Resultado del partido,resultados en orden (LNB),B,true,false,,win_pct,ortg drtg efg
+s089,I,Con X de titular y sin X de titular,Con X de titular y sin X de titular,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s090,I,Cuando X anota 20 o más,Cuando X anota 20 o más,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s091,I,Cuando X hace doble-doble,Cuando X hace doble-doble,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s092,I,Cuando X tiene 4 faltas o más,Cuando X tiene 4 faltas o más,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s093,I,Cuando X juega 30 minutos o más,Cuando X juega 30 minutos o más,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s094,I,Cuando X juega menos de 20 minutos,Cuando X juega menos de 20 minutos,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s095,I,Cuando X acierta 40 % de triples o más (5 intentos),Cuando X acierta 40 % de triples o más (5 intentos),una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",B,true,false,,win_pct,ortg efg team_ast
+s096,I,Cuando X tira más de 15 veces,Cuando X tira más de 15 veces,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s097,I,Cuando X tiene 6 pérdidas o más,Cuando X tiene 6 pérdidas o más,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s098,I,Cuando X reparte 6 asistencias o más,Cuando X reparte 6 asistencias o más,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s099,I,Cuando X toma 10 rebotes o más,Cuando X toma 10 rebotes o más,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s100,I,Cuando X tiene Game Score de 20 o más,Cuando X tiene Game Score de 20 o más,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",B,true,false,,win_pct,ortg efg team_ast
+s101,I,Mejor jugador del partido (Game Score) frente al resultado,Mejor jugador del partido (Game Score) frente al resultado,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",B,true,false,,win_pct,ortg efg team_ast
+s102,I,Mismo quinteto titular o cambios en el quinteto,Mismo quinteto titular o cambios en el quinteto,,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s103,I,Quintetos con mejor y peor +/−,Quintetos con mejor y peor +/−,,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",C,false,false,"los quintetos se guardan sumados en la temporada, no partido por partido; están en Equipo › Quintetos",win_pct,ortg efg team_ast
+s104,I,Pares de jugadores juntos en cancha,Pares de jugadores juntos en cancha,,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",C,false,false,"los minutos compartidos se calculan sumados en la temporada, no partido por partido",win_pct,ortg efg team_ast
+s105,I,Titulares con 32 minutos o más,Titulares con 32 minutos o más,"0, 1, 2 o más",Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s106,I,Banca que anota más que la del rival,Banca que anota más que la del rival,,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s107,I,Edad promedio de los que jugaron,Edad promedio de los que jugaron,"28 años o más, menos de 28",Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s108,I,Extranjeros en cancha,Extranjeros en cancha,"0, 1, 2 o más",Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s109,I,Rotación: jugadores con 10 minutos o más,Rotación: jugadores con 10 minutos o más,"8 o menos, 9, 10 o más",Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s110,I,Jugador más usado (USG%) frente al resultado,Jugador más usado (USG%) frente al resultado,una fila por jugador,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",B,true,false,,win_pct,ortg efg team_ast
+s111,I,Quinteto titular con 2 grandes o con 1,Quinteto titular con 2 grandes o con 1,,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s112,I,Más de 35 minutos en días consecutivos,Más de 35 minutos en días consecutivos,,Resultado del partido,"box score de los jugadores y fichas (LNB, Wikipedia)",A,true,false,,win_pct,ortg efg team_ast
+s113,J,Mejor cuarto de Boca en cada partido,Mejor cuarto de Boca en cada partido,1.º a 4.º,Resultado del partido,parciales y play-by-play (LNB),A,true,false,,win_pct,ortg drtg pace
+s114,J,Primera mitad frente a segunda mitad,Primera mitad frente a segunda mitad,,Resultado del partido,parciales y play-by-play (LNB),A,true,false,,win_pct,ortg drtg pace
+s115,J,"Cuartos ganados por Boca, cuarto por cuarto","Cuartos ganados por Boca, cuarto por cuarto",1.º a 4.º,Resultado del partido,parciales y play-by-play (LNB),A,true,false,,win_pct,ortg drtg pace
+s116,J,Arranques de cuarto (play-by-play),Arranques de cuarto (play-by-play),,Resultado del partido,parciales y play-by-play (LNB),B,true,false,,win_pct,ortg drtg pace
+s117,J,Cierres en partidos ajustados (play-by-play),Cierres en partidos ajustados (play-by-play),,Resultado del partido,parciales y play-by-play (LNB),B,true,false,,win_pct,ortg drtg pace
+s118,J,Cuarto de menos puntos frente al resultado,Cuarto de menos puntos frente al resultado,"15 o menos, 16 o más",Resultado del partido,parciales y play-by-play (LNB),A,true,false,,win_pct,ortg drtg pace

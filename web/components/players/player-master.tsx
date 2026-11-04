@@ -207,6 +207,12 @@ export function PlayerMasterView({
       router.push(`/jugador/${String(selectedId)}`);
       return;
     }
+    // La tecla D abre la estadística desglosada de la columna actual (9.8).
+    if ((event.key === 'd' || event.key === 'D') && column && selectedId !== null) {
+      event.preventDefault();
+      router.push(`/estadistica/${column.id}?entidad=jugador&id=${String(selectedId)}`);
+      return;
+    }
     const action = keyActions[event.key];
     if (action) {
       event.preventDefault();
@@ -473,14 +479,18 @@ export function PlayerMasterView({
             hoverStat(null);
           }}
           onDoubleClick={(e) => {
-            // Doble clic en un jugador (su nombre o cualquier celda de la fila): su página de detalle.
-            const owner = (e.target as HTMLElement).closest<HTMLElement>('tr[data-player]')?.dataset.player;
-            if (owner) router.push(`/jugador/${owner}`);
+            // Doble clic en una celda: la estadística desglosada (9.8); en el nombre: el detalle del jugador.
+            const target = e.target as HTMLElement;
+            const owner = target.closest<HTMLElement>('tr[data-player]')?.dataset.player;
+            const stat = target.closest<HTMLElement>('td[data-stat]')?.dataset.stat;
+            if (owner && stat) router.push(`/estadistica/${stat}?entidad=jugador&id=${owner}`);
+            else if (owner) router.push(`/jugador/${owner}`);
           }}
         >
           <caption className="sr-only">
-            {activeSet?.name ?? 'Personalizado'}, {competitionName}. Doble clic o Enter en un jugador abre su detalle.
-            Flechas arriba y abajo cambian el jugador; izquierda y derecha, la estadística.
+            {activeSet?.name ?? 'Personalizado'}, {competitionName}. Doble clic en una celda o la tecla D abre la
+            estadística desglosada; doble clic o Enter en un jugador abre su detalle. Flechas arriba y abajo cambian el
+            jugador; izquierda y derecha, la estadística.
           </caption>
           <thead>
             {bands.length ? (

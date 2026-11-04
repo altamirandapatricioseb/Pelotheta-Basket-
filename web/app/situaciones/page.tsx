@@ -1,15 +1,30 @@
 import type { Metadata } from 'next';
 
-import { UnderConstruction } from '@/components/under-construction';
+import { SituationsBoard } from '@/components/situations/board';
+import { getSituations } from '@/lib/data/situations';
 
-export const metadata: Metadata = { title: 'Situaciones' };
+export const metadata: Metadata = {
+  title: 'Situaciones',
+  description:
+    'Más de 100 situaciones de partido de Boca Juniors básquet: qué pasa cuando gana al descanso, cuando convierte 10 triples, de visitante, según el rival o cuando un jugador anota 20.',
+};
 
-export default function Page() {
+export default async function Page() {
+  const result = await getSituations();
+  if (!result.ok) {
+    return (
+      <div role="alert" className="under-construction">
+        <p className="font-bold">PEL-DB-001: la base de datos no responde.</p>
+        <p className="text-muted">Puede estar pausada por inactividad. Probá de nuevo en unos minutos.</p>
+      </div>
+    );
+  }
   return (
-    <UnderConstruction
-      title="Situaciones"
-      stage={6}
-      description="Tablero con más de 100 estadísticas complejas por situación: clutch, corridas, quintetos, arranques y cierres de cuarto, bonus y tiempos muertos."
+    <SituationsBoard
+      cards={result.data.cards}
+      matches={result.data.matches}
+      baseWinPct={result.data.baseWinPct}
+      conclusions={result.data.conclusions}
     />
   );
 }

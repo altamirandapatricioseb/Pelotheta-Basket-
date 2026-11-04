@@ -23,7 +23,7 @@ from typing import Any
 
 import httpx
 
-from pipeline import charts
+from pipeline import charts, situations
 from pipeline.season import PROCESSED, read
 from sources.lnb import BOCA_TEAM_ID, SOURCE
 from sources.wikipedia import POSITION_ES
@@ -260,6 +260,14 @@ def send_charts(client: httpx.Client | None = None) -> Any:
     return rpc("load_charts", body, url, key, client)
 
 
+def send_situations(client: httpx.Client | None = None) -> Any:
+    """Catálogo de Situaciones (`data/situational_catalog.csv`); la base recalcula las tarjetas."""
+    url = os.environ.get("SUPABASE_URL", "").strip()
+    key = os.environ.get("SUPABASE_SECRET_KEY", "").strip()
+    cards = situations.to_payload(situations.load_cards())
+    return rpc("load_situations", {"p_cards": cards}, url, key, client)
+
+
 def revalidate_site(client: httpx.Client | None = None) -> str:
     """Pide a la web que descarte su caché de datos (8.9). Sin SITE_URL o sin secreto, no hace nada.
 
@@ -288,6 +296,7 @@ def main() -> None:
     started = last_run.get("started_at") or datetime.now(UTC).isoformat(timespec="seconds")
     result = load(run_id=last_run["run_id"], trigger=trigger, started_at=started)
     result["graficos"] = send_charts()
+    result["situaciones"] = send_situations()
     print(json.dumps({**result, "revalidacion_web": revalidate_site()}, ensure_ascii=False))
 
 
