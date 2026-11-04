@@ -87,7 +87,7 @@ export default async function PartidoPage({ params }: PageProps) {
   const [left, right] = game.isHome ? [home, away] : [away, home];
 
   return (
-    <div className="grid gap-8">
+    <div className="grid grid-cols-1 gap-8">
       <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-sm text-muted">
         <Link href="/equipo?conjunto=partidos" className="chip focus-ring">
           <ArrowLeftIcon size={14} aria-hidden="true" /> Partidos
@@ -154,7 +154,8 @@ export default async function PartidoPage({ params }: PageProps) {
           <h2 id="cuartos" className="text-xl font-bold">
             Por cuarto
           </h2>
-          <div className="data-table-wrap">
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- región desplazable con nombre (axe) */}
+          <div className="data-table-wrap" tabIndex={0} role="region" aria-label="Tabla (se desplaza de costado)">
             <table className="data-table tabular">
               <caption className="sr-only">Puntos por cuarto</caption>
               <thead>
@@ -187,7 +188,8 @@ export default async function PartidoPage({ params }: PageProps) {
           <h2 id="factores" className="text-xl font-bold">
             Cuatro factores
           </h2>
-          <div className="data-table-wrap">
+          {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- región desplazable con nombre (axe) */}
+          <div className="data-table-wrap" tabIndex={0} role="region" aria-label="Tabla (se desplaza de costado)">
             <table className="data-table tabular">
               <caption className="sr-only">Cuatro factores de Boca y del rival</caption>
               <thead>
@@ -234,7 +236,8 @@ export default async function PartidoPage({ params }: PageProps) {
             <summary>
               {set.name} <span className="text-xs font-semibold text-muted">{set.statIds.length}</span>
             </summary>
-            <div className="data-table-wrap">
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- región desplazable con nombre (axe) */}
+            <div className="data-table-wrap" tabIndex={0} role="region" aria-label="Tabla (se desplaza de costado)">
               <table className="data-table tabular">
                 <caption className="sr-only">{set.name}</caption>
                 <thead>

@@ -1,0 +1,17 @@
+id,riesgo,probabilidad,impacto,nivel,control,responsable,estado,fecha_revision
+R01,"Clave secreta de Supabase filtrada al navegador o al repositorio",baja,alto,medio,"Cliente en módulos server-only; gitleaks en CI y semanal sobre todo el historial; .env en .gitignore",dueño,mitigado,2026-11-04
+R02,"Escritura o lectura indebida en la base con la clave pública",baja,alto,medio,"Tablas en core no expuesto; la web solo ve vistas de api; RLS sin políticas de escritura; tests/test_rls.py y pgTAP 10/10",dueño,mitigado,2026-11-04
+R03,"Supabase Free se pausa tras 7 días sin actividad",media,medio,medio,"keepalive.yml lunes y jueves; salud cada 6 h (health.yml); playbook «Supabase pausado»",dueño,mitigado,2026-11-04
+R04,"La LNB cambia su HTML o bloquea el acceso",media,alto,alto,"Adaptador con pruebas sobre fixtures guardados; caché de partidos terminados; ingest_log; respaldo manual en data/manual/",dueño,mitigado,2026-11-04
+R05,"Una fuente devuelve datos alterados (play-by-play que no cuadra con el box score)",media,medio,medio,"Validación con pydantic; cuarentena de partidos con tácticas en n/d (5.8); textos como texto",dueño,mitigado,2026-11-04
+R06,"Incumplir términos o robots.txt de una fuente",baja,alto,medio,"docs/source_audit.md y compliance_register.md; FIBA y Sofascore no se automatizan; solo estadísticas derivadas",dueño,mitigado,2026-11-04
+R07,"Republicar datos crudos (play-by-play, coordenadas de tiros)",baja,medio,bajo,"Tablas crudas sin acceso de anon (pgTAP 7); la web y los exportes publican solo derivadas",dueño,mitigado,2026-11-04
+R08,"Abuso de /api/revalidar",baja,bajo,bajo,"Solo POST con secreto de 32 caracteres o más en tiempo constante; sin secreto queda cerrada",dueño,mitigado,2026-11-04
+R09,"El workflow mensual falla y la web muestra datos viejos sin aviso",media,medio,medio,"Fallo registrado en ingest_log; resumen en la corrida; /actualizar muestra la última carga; fecha en el header",dueño,mitigado,2026-11-04
+R10,"Dependencia comprometida (npm o PyPI)",baja,alto,medio,"Lockfiles congelados; pnpm audit y pip-audit; acciones por SHA; Dependabot, CodeQL y Semgrep",dueño,mitigado,2026-11-04
+R11,"La base supera los 500 MB del plan gratuito",baja,medio,bajo,"Toda la liga ocupa pocos MB; tamaño en ingest_log",dueño,mitigado,2026-11-04
+R12,"Datos personales de jugadores publicados de más (Ley 25.326)",baja,medio,bajo,"Solo los que usa una estadística; la fecha de nacimiento no se expone a anon; /privacidad con contacto para corrección o baja",dueño,mitigado,2026-11-04
+R13,"Contraseña de powerbi_reader débil o filtrada en un .pbix",baja,bajo,bajo,"Nace sin login; solo SELECT como anon; 60 s y 5 conexiones; revocable con nologin",dueño,mitigado,2026-11-04
+R14,"Caída del sitio o de la base sin que nadie se entere",media,medio,medio,"/api/health cada 6 h con issue tras dos fallas; keepalive",dueño,mitigado,2026-11-04
+R15,"Vulnerabilidad del framework (salteo de proxy)",media,medio,medio,"Ninguna protección depende del proxy; la última defensa es la RLS; Next.js al día",dueño,mitigado,2026-11-04
+R16,"Cuenta del dueño comprometida sin 2FA confirmado",baja,alto,medio,"RLS sin escritura para anon y authenticated; backup cifrado mensual con la clave privada fuera de las cuentas",dueño,aceptado,2026-11-04

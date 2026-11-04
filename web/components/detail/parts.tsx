@@ -64,7 +64,8 @@ export function BoxScore({ team, lines, linkPlayers }: { team: string; lines: re
   return (
     <section aria-label={`Box score de ${team}`} className="grid gap-2">
       <h3 className="text-lg font-bold">{team}</h3>
-      <div className="data-table-wrap">
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- región desplazable con nombre (axe) */}
+      <div className="data-table-wrap" tabIndex={0} role="region" aria-label="Tabla (se desplaza de costado)">
         <table className="data-table tabular">
           <caption className="sr-only">Box score de {team}</caption>
           <thead>

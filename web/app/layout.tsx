@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Montserrat, Noto_Sans } from 'next/font/google';
 import { cookies } from 'next/headers';
@@ -55,7 +56,18 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         </MotionProvider>
         <footer className="page pt-0 pb-10 text-sm text-muted">
           Proyecto de portfolio sin fines comerciales. Datos: Liga Nacional de Básquet (laliganacional.com.ar), solo
-          estadísticas derivadas. Las interfaces se publican por etapas.
+          estadísticas derivadas.{' '}
+          <Link href="/privacidad" className="focus-ring underline">
+            Privacidad
+          </Link>{' '}
+          ·{' '}
+          <Link href="/actualizar" className="focus-ring underline">
+            Estado de los datos
+          </Link>{' '}
+          ·{' '}
+          <a href="/api/health" className="focus-ring underline">
+            Salud
+          </a>
         </footer>
       </body>
     </html>

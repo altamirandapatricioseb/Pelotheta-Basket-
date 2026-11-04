@@ -62,7 +62,7 @@ export default async function JugadorPage({ params }: PageProps) {
   const played = log.filter((g) => (g.line.minutes ?? 0) > 0).length;
 
   return (
-    <div className="grid gap-8">
+    <div className="grid grid-cols-1 gap-8">
       <nav aria-label="Migas de pan" className="flex flex-wrap items-center gap-2 text-sm text-muted">
         <Link href="/jugadores" className="chip focus-ring">
           <ArrowLeftIcon size={14} aria-hidden="true" /> Jugadores
@@ -144,7 +144,8 @@ export default async function JugadorPage({ params }: PageProps) {
             <summary>
               {set.name} <span className="text-xs font-semibold text-muted">{set.statIds.length}</span>
             </summary>
-            <div className="data-table-wrap">
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- región desplazable con nombre (axe) */}
+            <div className="data-table-wrap" tabIndex={0} role="region" aria-label="Tabla (se desplaza de costado)">
               <table className="data-table tabular">
                 <caption className="sr-only">
                   {set.name} de {player.name}
@@ -192,7 +193,8 @@ export default async function JugadorPage({ params }: PageProps) {
         <h2 id="partidos" className="text-xl font-bold">
           Sus partidos ({played} jugados de {log.length} en la planilla)
         </h2>
-        <div className="data-table-wrap">
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- región desplazable con nombre (axe) */}
+        <div className="data-table-wrap" tabIndex={0} role="region" aria-label="Tabla (se desplaza de costado)">
           <table className="data-table tabular">
             <caption className="sr-only">Partidos de {player.name}</caption>
             <thead>

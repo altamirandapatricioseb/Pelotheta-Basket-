@@ -339,6 +339,12 @@ h3 {
 
 /* --- Tabla «Resumen» ---------------------------------------------------------------- */
 
+/* Un hijo de grilla no achica por debajo de su contenido: una tabla ancha estiraba toda la página en
+   el celular. Con mínimo 0, la tabla se desplaza dentro de su contenedor. */
+#contenido .grid > * {
+  min-width: 0;
+}
+
 .data-table-wrap {
   /* Relativo: los textos para lectores de pantalla (absolutos) no escapan del scroll. */
   position: relative;
@@ -592,7 +598,8 @@ h3 {
   padding: 12px 28px;
   border-radius: 999px;
   background: var(--color-brand);
-  color: var(--color-brand-900);
+  /* Más oscuro que brand-900: 18 px no cuenta como texto grande y sobre el verde pide 4,5:1 (axe). */
+  color: #0f2a11;
   font-size: 1.125rem;
   font-weight: 700;
   transition:

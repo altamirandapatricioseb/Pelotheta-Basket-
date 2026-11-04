@@ -5,7 +5,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set local search_path = extensions, public;
 
-select plan(7);
+select plan(10);
 
 select is(
   (select count(*) from pg_class c join pg_namespace n on n.oid = c.relnamespace
@@ -42,7 +42,21 @@ select ok(
           where r.rolname = 'anon' and exists (select 1 from unnest(s.setconfig) c where c like 'statement_timeout=%')),
   'anon tiene statement_timeout propio');
 
--- Los controles de powerbi_reader (etapa 9) y del bucket exports (etapa 8) se suman en esas etapas.
+-- Etapa 9: powerbi_reader sin login y sin escritura.
+select is(
+  (select rolcanlogin from pg_roles where rolname = 'powerbi_reader'), false,
+  'powerbi_reader nace sin login (la contraseña la pone el dueño)');
+
+select is(
+  (select count(*) from information_schema.role_table_grants
+   where grantee = 'powerbi_reader' and privilege_type <> 'SELECT'),
+  0::bigint, 'powerbi_reader solo puede leer');
+
+-- Etapa 8: el bucket exports es público para leer, con tamaño y tipos acotados.
+select ok(
+  exists (select 1 from storage.buckets where id = 'exports' and public and file_size_limit <= 10485760
+          and allowed_mime_types is not null),
+  'bucket exports público con tamaño máximo y tipos MIME permitidos');
 
 select is(
   (select count(*) from (values ('play_by_play_event'), ('shot'), ('audit_log'), ('source_id_map')) t(name)

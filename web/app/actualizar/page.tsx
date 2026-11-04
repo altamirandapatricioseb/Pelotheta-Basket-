@@ -74,7 +74,8 @@ export default async function ActualizarPage() {
             <h2 id="historial" className="text-lg font-bold">
               Historial de cargas
             </h2>
-            <div className="data-table-wrap">
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- región desplazable con nombre (axe) */}
+            <div className="data-table-wrap" tabIndex={0} role="region" aria-label="Tabla (se desplaza de costado)">
               <table className="data-table tabular">
                 <caption className="sr-only">Historial de cargas de datos</caption>
                 <thead>
