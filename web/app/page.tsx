@@ -5,7 +5,6 @@ import { getChartCatalog } from '@/lib/data/charts';
 import { getLandingData } from '@/lib/data/landing';
 
 export const metadata: Metadata = {
-  title: 'Gráficos',
   description:
     'Boca Juniors básquet en 76 gráficos por categoría: forma, puntos y ritmo, cuartos, cuatro factores, tiros, rebote, jugadores, liga, métricas propias y modelos.',
 };

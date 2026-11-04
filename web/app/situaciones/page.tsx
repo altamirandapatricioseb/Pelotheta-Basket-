@@ -4,7 +4,6 @@ import { SituationsBoard } from '@/components/situations/board';
 import { getSituations } from '@/lib/data/situations';
 
 export const metadata: Metadata = {
-  title: 'Situaciones',
   description:
     'Más de 100 situaciones de partido de Boca Juniors básquet: qué pasa cuando gana al descanso, cuando convierte 10 triples, de visitante, según el rival o cuando un jugador anota 20.',
 };

@@ -11,7 +11,6 @@ import { gameConclusions, type GameStat, standing } from '@/lib/stats/conclusion
 import { formatValue } from '@/lib/stats/summary-columns';
 
 export const metadata: Metadata = {
-  title: 'Partido',
   description: 'Un partido de Boca Juniors básquet: resultado, cuartos, box score, conclusiones y estadísticas.',
 };
 

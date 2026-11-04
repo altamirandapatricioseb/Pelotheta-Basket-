@@ -8,7 +8,6 @@ import { getCatalog, getPlayerRows } from '@/lib/data/catalog';
 import { getBreakdown, getPlayerPositions } from '@/lib/data/compare';
 
 export const metadata: Metadata = {
-  title: 'Comparar',
   description:
     'Comparación de un jugador de Boca Juniors básquet contra la media del plantel, de una zona, de su posición u otro jugador, por categoría y con el desglose de cada estadística.',
 };

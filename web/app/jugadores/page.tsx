@@ -6,7 +6,6 @@ import { PlayerMasterView } from '@/components/players/player-master';
 import { getCatalog, getPlayerRows, getStatSets } from '@/lib/data/catalog';
 
 export const metadata: Metadata = {
-  title: 'Jugadores',
   description:
     'Estadísticas del plantel de Boca Juniors básquet por categoría: anotación, tiro, zonas, rebote, creación, defensa, impacto, forma y más.',
 };

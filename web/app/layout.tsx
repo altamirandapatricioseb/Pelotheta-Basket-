@@ -33,7 +33,8 @@ const greek = Noto_Sans({
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: { default: SYSTEM_NAME, template: `%s · ${SYSTEM_NAME}` },
+  // Siempre el mismo título en la pestaña, en todas las páginas (pedido del dueño).
+  title: SYSTEM_NAME,
   description: SITE_DESCRIPTION,
   robots: { index: true, follow: true },
 };

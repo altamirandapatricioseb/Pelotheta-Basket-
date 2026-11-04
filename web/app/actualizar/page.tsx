@@ -5,7 +5,6 @@ import { getUpdates } from '@/lib/data/updates';
 import { formatDateTime, formatNumber } from '@/lib/format';
 
 export const metadata: Metadata = {
-  title: 'Actualizar',
   description: 'Fecha y hora de la última actualización de los datos, estado de cada fuente e historial de cargas.',
 };
 

@@ -11,7 +11,6 @@ import { playerConclusions, type RankedStat, standing } from '@/lib/stats/conclu
 import { columnValue, formatValue } from '@/lib/stats/summary-columns';
 
 export const metadata: Metadata = {
-  title: 'Jugador',
   description: 'Un jugador de Boca Juniors básquet: ficha, conclusiones, todas sus estadísticas y sus partidos.',
 };
 

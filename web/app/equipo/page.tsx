@@ -7,7 +7,6 @@ import { getCatalog, getStatSets, getTeamMatches } from '@/lib/data/catalog';
 import { getTeamRows } from '@/lib/data/players';
 
 export const metadata: Metadata = {
-  title: 'Equipo',
   description:
     'Tablas de Boca Juniors básquet por categoría: partido a partido, por rival, por mes y acumulada, con cuatro factores, tiro, zonas, rebote, rival y la tabla de la Liga Nacional.',
 };
