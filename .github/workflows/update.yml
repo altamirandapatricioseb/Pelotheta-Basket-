@@ -47,6 +47,22 @@ jobs:
           SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
           SITE_URL: https://pelotheta-basket-dva.vercel.app
           REVALIDATE_SECRET: ${{ secrets.REVALIDATE_SECRET }}
+      # Libro de Excel (sección 10): se arma con los datos recién cargados y se sube al bucket
+      # público `exports`, sobrescribiendo el anterior. Si falla, los datos ya quedaron cargados:
+      # el paso avisa en el resumen sin marcar la corrida como fallida.
+      - name: Libro de Excel
+        id: excel
+        continue-on-error: true
+        run: uv run python -m pipeline.excel 2>&1 | tee excel.log; exit ${PIPESTATUS[0]}
+        shell: bash
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+      - name: Resumen del Excel
+        if: always()
+        run: |
+          echo "### Libro de Excel (${{ steps.excel.outcome }})" >> "$GITHUB_STEP_SUMMARY"
+          tail -10 excel.log 2>/dev/null | sed 's/^/    /' >> "$GITHUB_STEP_SUMMARY" || true
       - uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         if: always()
         with:

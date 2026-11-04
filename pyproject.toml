@@ -50,6 +50,11 @@ ignore = ["RUF001", "RUF002", "RUF003"]  # permitimos letras griegas (α, β, Θ
 strict = true
 python_version = "3.13"
 
+[[tool.mypy.overrides]]
+# xlsxwriter no trae tipos.
+module = ["xlsxwriter", "xlsxwriter.*"]
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"

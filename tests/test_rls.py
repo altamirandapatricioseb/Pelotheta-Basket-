@@ -69,3 +69,20 @@ def test_anon_no_ve_el_detalle_del_log(client: httpx.Client) -> None:
     # La vista pública expone el estado de cada carga, nunca los mensajes internos del log.
     response = client.get("/v_last_update", params={"select": "message"})
     assert response.status_code == 400
+
+
+def test_bucket_exports_se_lee_pero_no_se_escribe_con_la_clave_publica() -> None:
+    """Etapa 8: el libro de Excel se descarga sin clave y la clave pública no puede subir nada."""
+    with httpx.Client(base_url=f"{URL}/storage/v1/object", timeout=30) as storage:
+        download = storage.get("/public/exports/pelotheta-basquet.xlsx")
+        assert download.status_code == 200
+        upload = storage.post(
+            "/exports/prueba-rls.xlsx",
+            content=b"x",
+            headers={
+                "apikey": KEY,
+                "Authorization": f"Bearer {KEY}",
+                "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            },
+        )
+        assert upload.status_code >= 400

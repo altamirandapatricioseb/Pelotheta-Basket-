@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { z } from 'zod';
 
+import { ExcelDownloads } from '@/components/excel-downloads';
 import { TeamTableView } from '@/components/team/team-table';
 import { getCatalog, getStatSets, getTeamMatches } from '@/lib/data/catalog';
 import { getTeamRows } from '@/lib/data/players';
@@ -45,6 +46,7 @@ export default async function EquipoPage({ searchParams }: PageProps) {
           </h1>
           <p className="mt-2 text-muted">Boca Juniors · Liga Nacional 2026-27 · una categoría por vez</p>
         </div>
+        <ExcelDownloads />
       </div>
       {matches.ok && catalog.ok && sets.ok ? (
         <TeamTableView

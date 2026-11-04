@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { z } from 'zod';
 
+import { ExcelDownloads } from '@/components/excel-downloads';
 import { PlayerMasterView } from '@/components/players/player-master';
 import { getCatalog, getPlayerRows, getStatSets } from '@/lib/data/catalog';
 
@@ -36,11 +37,14 @@ export default async function JugadoresPage({ searchParams }: PageProps) {
 
   return (
     <div className="grid gap-6">
-      <div>
-        <h1 className="page-title">
-          <span className="title-trace">Jugadores</span>
-        </h1>
-        <p className="mt-2 text-muted">Plantel de Boca · Liga Nacional 2026-27 · una tabla por categoría</p>
+      <div className="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="page-title">
+            <span className="title-trace">Jugadores</span>
+          </h1>
+          <p className="mt-2 text-muted">Plantel de Boca · Liga Nacional 2026-27 · una tabla por categoría</p>
+        </div>
+        <ExcelDownloads />
       </div>
       {!catalog.ok || !sets.ok || !players.ok ? (
         <div role="alert" className="under-construction">
