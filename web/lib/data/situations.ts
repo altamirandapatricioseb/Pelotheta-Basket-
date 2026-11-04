@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { getCatalog, getPlayerRows } from '@/lib/data/catalog';
 import { type DataResult, fetchAll } from '@/lib/data/players';
 import {
   CATEGORY_NAMES,
@@ -10,6 +11,7 @@ import {
   type SituationMatch,
   type SituationRow,
 } from '@/lib/situations/board';
+import { playerStrengthConclusions } from '@/lib/stats/conclusions';
 import { createApiClient } from '@/lib/supabase/server';
 
 const METRIC_IDS = new Set(Object.keys(METRICS));
@@ -214,7 +216,13 @@ export async function getSituations(): Promise<DataResult<SituationsData>> {
       const name = b.known_as ?? b.full_name;
       if (b.player_id !== null && name) players.set(name, { id: b.player_id, position: b.position_raw });
     }
-    return { ok: true, data: { cards, matches, baseWinPct, conclusions: conclusionsOf(cards, players) } };
+    // Sin las tablas de jugadores quedan solo las conclusiones de las tarjetas: no vale perder la página.
+    const [rows, stats] = await Promise.all([getPlayerRows(), getCatalog()]);
+    const strengths = rows.ok && stats.ok ? playerStrengthConclusions(rows.data, stats.data) : [];
+    return {
+      ok: true,
+      data: { cards, matches, baseWinPct, conclusions: [...conclusionsOf(cards, players), ...strengths] },
+    };
   } catch (cause) {
     return fail(cause);
   }

@@ -49,7 +49,8 @@ percentil». Doble clic en el nombre abre el detalle del jugador.
 118 tarjetas en 10 marcos del tipo «cuando pasa X, ¿cómo le va a Boca?» (marcador y cuartos, rival,
 calendario, ritmo, tiro, rebote, jugadores, rachas). Cada fila compara con la temporada completa
 (verde mejor, rojo peor, siempre con el texto). «Ver los partidos» lista los partidos de la fila. Arriba,
-las conclusiones del equipo y de los jugadores.
+las conclusiones del equipo y de los jugadores: las filas que se alejan de la temporada y, para cada
+jugador con 36 minutos o más, su punto más fuerte y el más débil dentro del plantel.
 
 ## Comparar
 

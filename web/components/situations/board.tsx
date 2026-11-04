@@ -492,7 +492,8 @@ function ConclusionsView({ conclusions, onShowCards }: { conclusions: Conclusion
                   </p>
                   <p className="concl__text">{c.text}</p>
                   <p className="text-xs text-muted">
-                    Tarjeta {c.cardId.slice(1)} · {c.n} partidos de la temporada
+                    {c.cardId ? `Tarjeta ${c.cardId.slice(1)}` : 'Comparado con el plantel'} · {c.n} partidos de la
+                    temporada
                   </p>
                   {c.entityId > 0 ? (
                     <Link
