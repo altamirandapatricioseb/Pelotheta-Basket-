@@ -7,8 +7,8 @@ body:
     id: pagina
     attributes:
       label: Página
-      description: Se completa sola desde el enlace «Reportar un dato incorrecto».
-      placeholder: https://pelotheta-basket.vercel.app/...
+      description: La dirección de la página donde viste el dato.
+      placeholder: https://pelotheta-basket-dva.vercel.app/...
     validations:
       required: true
   - type: input
@@ -34,7 +34,7 @@ body:
     id: fuente
     attributes:
       label: Dónde se ve el valor correcto
-      description: Un enlace a la fuente (sitio oficial, Promiedos, otra).
+      description: Un enlace a la fuente (planilla de la Liga Nacional u otra).
   - type: dropdown
     id: severidad
     attributes:

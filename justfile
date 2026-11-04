@@ -30,22 +30,14 @@ security:
 types:
     npx supabase gen types typescript --project-id jztmmfdkbajdrmzilxlt --schema api > web/lib/database.types.ts
 
-# Levanta todo desde cero en una máquina nueva (16.5): ver scripts/bootstrap.sh
-bootstrap:
-    bash scripts/bootstrap.sh
-
 # Backup cifrado local de las vistas de api (14.2); --verify <archivo> para probar la restauración
 backup *args:
-    uv run --with pyrage==1.2.5 python -m scripts.backup {{args}}
-
-# Regenera la especificación OpenAPI de la API de solo lectura (16.2)
-openapi:
-    uv run python -m scripts.openapi
+    uv run --env-file .env --with pyrage==1.2.5 python -m scripts.backup {{args}}
 
 # Diccionario, glosario y PDF único de entrega (sección 15)
 docs:
-    uv run python -m scripts.diccionario
-    uv run --group notebooks python -m scripts.entrega
+    uv run --env-file .env python -m scripts.diccionario
+    uv run --with mistune==3.1.4 python -m scripts.entrega
     cd web; node scripts/pdf.ts
 
 # Sonda de la Fase 0 de una fuente, por ejemplo: just probe api_football

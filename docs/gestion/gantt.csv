@@ -1,0 +1,12 @@
+etapa,plan_inicio,plan_fin,real_inicio,real_fin,commit_de_cierre
+1. Preparación y Fase 0,2026-11-03 01:30,2026-11-03 03:30,2026-11-03 01:30,2026-11-03 02:04,feat(etapa-1): Fase 0 base de Supabase con RLS y web mínima
+2. Esqueleto,2026-11-03 03:30,2026-11-03 05:30,2026-11-03 02:53,2026-11-03 03:13,feat(etapa-2): esqueleto web con header de 6 interfaces y tabla Resumen
+3. Pipeline,2026-11-03 05:30,2026-11-03 07:30,2026-11-03 02:04,2026-11-03 02:53,feat(etapa-3): adaptador de la LNB y validación del play-by-play
+4. Estadísticas y tablas,2026-11-03 07:30,2026-11-03 11:30,2026-11-03 03:13,2026-11-03 18:05,feat: Equipo y Jugadores iguales a Pelotheta fútbol
+5. Gráficos,2026-11-03 11:30,2026-11-03 13:30,2026-11-03 18:05,2026-11-03 19:26,feat(etapa-5): Gráficos como Pelotheta fútbol
+6. Situaciones y desglosada,2026-11-03 13:30,2026-11-03 15:30,2026-11-03 19:26,2026-11-03 21:30,feat(etapa-6): Situaciones y estadística desglosada
+7. Comparar,2026-11-03 15:30,2026-11-03 17:30,2026-11-03 21:30,2026-11-03 22:46,feat(web): etapa 7 Comparar
+8. Excel,2026-11-03 17:30,2026-11-03 19:30,2026-11-03 22:46,2026-11-04 00:27,feat: etapa 8 libro de Excel
+9. Power BI,2026-11-03 19:30,2026-11-03 21:30,2026-11-04 00:27,2026-11-04 01:33,feat: etapa 9 modelo de Power BI
+10. Pulido,2026-11-03 21:30,2026-11-03 23:30,2026-11-04 01:33,2026-11-04 02:37,feat: etapa 10 pulido de seguridad y accesibilidad
+11. Documentación y entrega,2026-11-03 23:30,2026-11-04 01:30,2026-11-04 02:37,,en curso

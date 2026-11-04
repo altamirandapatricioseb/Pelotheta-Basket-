@@ -15,7 +15,7 @@ C13,"Acciones fijadas por SHA, permisos mínimos y timeouts en workflows",V15 Ar
 C14,"gitleaks en cada push y semanal sobre todo el historial",V13 Configuración,A02 Security Misconfiguration,3.11,A.8.12,ci.yml; security_weekly.yml,implementado
 C15,"pip-audit, pnpm audit, Dependabot, CodeQL y Semgrep",V15 Arquitectura segura,A03 Software Supply Chain Failures,7.1,A.8.8,ci.yml; codeql.yml; .github/dependabot.yml,implementado
 C16,"ZAP baseline semanal contra producción",V15 Arquitectura segura,A02 Security Misconfiguration,7.5,A.8.8,security_weekly.yml,implementado
-C17,"Salud cada 6 h con issue automático y página /estado",V16 Registro y errores,A09 Logging and Alerting Failures,8.2,A.8.16,health.yml; web/app/api/health/route.ts; web/app/actualizar/page.tsx,implementado
+C17,"Salud cada 6 h con issue automático y última carga en /actualizar",V16 Registro y errores,A09 Logging and Alerting Failures,8.2,A.8.16,health.yml; web/app/api/health/route.ts; web/app/actualizar/page.tsx,implementado
 C18,"Registro de cada corrida (ingest_log, audit_log)",V16 Registro y errores,A09 Logging and Alerting Failures,8.2,A.8.15,core.ingest_log; core.audit_log,parcial
 C19,"Backup mensual cifrado con age y restauración probada",V14 Protección de datos,A06 Insecure Design,11.2,A.8.13,.github/workflows/backup.yml; scripts/backup.py (restauración verificada el 4-nov-2026),implementado
 C20,"Plan de respuesta a incidentes con playbooks",—,A09 Logging and Alerting Failures,17.1,A.5.24,docs/security/incident_response.md,implementado

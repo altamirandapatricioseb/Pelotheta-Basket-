@@ -1,0 +1,279 @@
+# Glosario
+
+Generado por `scripts/diccionario.py` desde `data/stat_catalog.csv`.
+
+## Términos
+
+- **n/d:** Sin dato: ninguna fuente lo publica o no alcanza la muestra. Nunca es cero.
+- **Nivel A, B o C:** A viene de una fuente; B la calcula el sistema desde datos crudos; C no tiene dato.
+- **Estimada:** El cálculo usa un supuesto; la web lo marca.
+- **Cada 36 minutos:** Valor dividido por los minutos jugados y multiplicado por 36.
+- **Percentil:** Porcentaje del plantel que queda por debajo; 50 es el medio.
+- **Ventana:** Partidos (últimos N, últimos días, local, por rival) sobre los que se resume un dato.
+- **Elo:** Fuerza de un equipo que cambia con cada resultado de la liga.
+- **Posesiones:** Ataques de un equipo; se estiman del box score o se cuentan en el play-by-play.
+- **ORtg, DRtg y NR:** Puntos anotados y recibidos cada 100 posesiones, y su diferencia.
+- **Zona:** Exteriores (base y escolta), aleros e interiores (ala-pívot y pívot).
+- **Cuarentena:** Partido cuyo play-by-play no cuadra con el box score: sus tácticas quedan en n/d.
+- **Situación:** Condición de un partido (por ejemplo, perder al descanso) y cómo le fue a Boca.
+- **Desglosada:** Página de una estadística por ventanas de tiempo, con sus partidos.
+
+## Estadísticas
+
+- **% de campo** (jugador): Tiros de campo convertidos sobre intentados.
+- **% de dobles** (jugador): Tiros de 2 convertidos sobre intentados.
+- **% de libres** (jugador): Libres convertidos sobre intentados.
+- **% de los minutos del equipo** (jugador): Parte de los minutos de juego de Boca que estuvo en cancha.
+- **% de los puntos del equipo** (jugador): Qué parte de los puntos de Boca anotó.
+- **% de minutos de 22 a 26 años** (equipo): Parte de los minutos jugada por jugadores de 22 a 26 años.
+- **% de minutos de 27 a 31 años** (equipo): Parte de los minutos jugada por jugadores de 27 a 31 años.
+- **% de minutos de 32 años o más** (equipo): Parte de los minutos jugada por jugadores de 32 años o más.
+- **% de minutos de hasta 21 años** (equipo): Parte de los minutos jugada por jugadores de 21 años o menos.
+- **% de puntos asistidos** (equipo): Parte de los puntos de Boca que llegaron con una asistencia.
+- **% de puntos de la banca** (equipo): Parte de los puntos de Boca que hicieron los suplentes.
+- **% de puntos de libre** (equipo): Parte de los puntos de Boca que fueron de tiro libre.
+- **% de puntos de triple** (equipo): Parte de los puntos de Boca que fueron de triple.
+- **% de triples** (jugador): Triples convertidos sobre intentados.
+- **% de triples del rival** (equipo): Acierto en triples que le permitió Boca al rival.
+- **% de victorias** (equipo): Partidos ganados sobre jugados.
+- **% de victorias de local** (equipo): Partidos ganados de local sobre jugados de local.
+- **% de victorias de visitante** (equipo): Partidos ganados de visitante sobre jugados de visitante.
+- **+/−** (jugador): Diferencia del marcador con el jugador en cancha.
+- **3PAr** (jugador): Qué parte de sus tiros de campo son triples.
+- **Acierto cerca del aro** (jugador): Acierto del jugador en tiros cerca del aro.
+- **Acierto de media distancia** (jugador): Acierto del jugador en tiros de media distancia.
+- **Acierto de triple desde la esquina** (jugador): Acierto del jugador en tiros de triple desde la esquina.
+- **Acierto de triple frontal o de 45°** (jugador): Acierto del jugador en tiros de triple frontal o de 45°.
+- **Acierto en el resto de la pintura** (jugador): Acierto del jugador en tiros en el resto de la pintura.
+- **Altura** (jugador): Altura informada en el plantel de Wikipedia.
+- **Asistencias** (jugador): Último pase antes de una canasta de un compañero, según la planilla.
+- **Asistencias cada 100 posesiones** (jugador): Asistencias por cada 100 posesiones con él en cancha (estimado).
+- **Asistencias cada 36 minutos** (jugador): Asistencias llevadas a 36 minutos.
+- **Asistencias del equipo** (equipo): Asistencias de Boca en el partido.
+- **Asistencias del rival** (equipo): Asistencias del rival.
+- **Asistencias por partido** (jugador): Asistencias promedio por partido jugado.
+- **Asistencias por pérdida** (jugador): Asistencias que da por cada pelota que pierde.
+- **Asistencias, últimos 5** (jugador): Promedio de asistencias en sus últimos 5 partidos jugados.
+- **AST%** (jugador): Parte de las canastas de sus compañeros en cancha que asistió.
+- **Auxiliar: denominador de TS%** (equipo): 2 × (FGA + 0,44 × FTA) de Boca.
+- **Auxiliar: denominador de TS% rival** (equipo): 2 × (FGA + 0,44 × FTA) del rival.
+- **Auxiliar: jugadas de Boca** (equipo): FGA + 0,44 × FTA + TOV de Boca.
+- **Auxiliar: jugadas del rival** (equipo): FGA + 0,44 × FTA + TOV del rival.
+- **Auxiliar: numerador de eFG%** (equipo): FGM + 0,5 × 3PM de Boca. Sirve para calcular el eFG% de varios partidos.
+- **Auxiliar: numerador de eFG% rival** (equipo): FGM + 0,5 × 3PM del rival.
+- **Auxiliar: rebotes en el aro de Boca** (equipo): Rebotes ofensivos de Boca más defensivos del rival.
+- **Auxiliar: rebotes en el aro rival** (equipo): Rebotes defensivos de Boca más ofensivos del rival.
+- **BLK%** (jugador): Dobles del rival que tapa mientras juega.
+- **BPM** (jugador): Aporte cada 100 posesiones frente a un promedio; coeficientes de la NBA (pendiente).
+- **Brier del Elo** (equipo): Error medio de las probabilidades del Elo en la temporada: más bajo es mejor.
+- **Brier del partido** (equipo): Error de la probabilidad del Elo en ese partido: más bajo es mejor.
+- **Calificación de medios** (jugador): Nota por partido; ninguna fuente gratuita automatizable la publica para la LNB.
+- **Cambios de líder** (equipo): Veces que la ventaja pasó de un equipo al otro.
+- **Canastas asistidas** (equipo): Parte de las canastas de campo de Boca que llegaron con asistencia.
+- **Canastas del rival** (equipo): Tiros de campo convertidos por el rival.
+- **Cobertura de box score** (equipo): Partidos de Boca con box score sobre los jugados.
+- **Cobertura de play-by-play** (equipo): Partidos de Boca con play-by-play validado.
+- **Cobertura del índice** (jugador): Qué parte de los pesos del índice tiene datos; menos de 0,6 deja el índice n/d.
+- **Concentración del ataque** (equipo): Cuánto dependen los puntos de pocos jugadores: 1 sería un solo anotador.
+- **Consistencia (desvío del Game Score)** (jugador): Cuánto varía su Game Score entre partidos: más bajo es más regular.
+- **Consistencia del NR** (equipo): Cuánto varía el Net Rating de un partido a otro: más bajo es más regular.
+- **Corridas de 8-0 o más** (equipo): Veces que Boca anotó 8 puntos o más seguidos.
+- **Corridas de 8-0 o más en contra** (equipo): Veces que el rival anotó 8 puntos o más seguidos.
+- **Derrotas** (equipo): Partidos perdidos.
+- **Derrotas pitagóricas** (equipo): Derrotas que corresponden a los puntos a favor y en contra.
+- **Diferencia de asistencias** (equipo): Asistencias de Boca menos asistencias del rival.
+- **Diferencia de puntos** (equipo): Puntos a favor menos puntos en contra.
+- **Diferencia de pérdidas** (equipo): Pérdidas del rival menos pérdidas de Boca: positivo, Boca cuidó más la pelota.
+- **Diferencia de rebotes** (equipo): Rebotes de Boca menos rebotes del rival.
+- **Diferencia en el 1.er cuarto** (equipo): Diferencia de puntos promedio en el primer cuarto.
+- **Diferencia en el 1.er tiempo** (equipo): Diferencia de puntos de Boca en el primer y segundo cuarto.
+- **Diferencia en el 2.º cuarto** (equipo): Diferencia de puntos promedio en el segundo cuarto.
+- **Diferencia en el 2.º tiempo** (equipo): Diferencia de puntos de Boca en el tercer y cuarto cuarto.
+- **Diferencia en el 3.er cuarto** (equipo): Diferencia de puntos promedio en el tercer cuarto.
+- **Diferencia en el 4.º cuarto** (equipo): Diferencia de puntos promedio en el último cuarto.
+- **Diferencia en el clutch** (equipo): Diferencia de puntos en los últimos 5 minutos con el partido a 5 puntos o menos.
+- **Diferencia en los arranques de cuarto** (equipo): Diferencia de puntos en los primeros 3 minutos de cada cuarto.
+- **Diferencia en los cierres de cuarto** (equipo): Diferencia de puntos en los últimos 3 minutos de cada cuarto.
+- **Dobles convertidos** (jugador): Tiros de 2 convertidos en la temporada.
+- **Dobles del rival** (equipo): Dobles convertidos por el rival.
+- **Dobles intentados** (jugador): Tiros de 2 intentados en la temporada.
+- **Dobles intentados del rival** (equipo): Dobles intentados por el rival.
+- **Dobles y triples convertidos** (equipo): Tiros de campo convertidos por Boca.
+- **Dobles-dobles** (jugador): Partidos con 10 o más en dos de puntos, rebotes, asistencias, robos y tapas.
+- **DRB%** (jugador): Rebotes defensivos que toma de los disponibles mientras juega.
+- **DRB% del equipo** (equipo): Rebotes defensivos tomados de los disponibles.
+- **DRtg** (equipo): Puntos en contra cada 100 posesiones.
+- **DRtg en cancha** (jugador): Puntos del rival cada 100 posesiones con el jugador en cancha (estimado).
+- **Días de descanso** (equipo): Días desde el partido anterior de Boca.
+- **Edad** (jugador): Edad en años informada en el plantel de Wikipedia.
+- **eFG%** (jugador): Efectividad de campo que cuenta el triple como 1,5 dobles.
+- **eFG% del rival** (equipo): Efectividad de campo que permite Boca.
+- **ELA** (jugador): Derrotas esperadas que agrega su defensa frente a un suplente; negativo es bueno (propuesta).
+- **Elo** (equipo): Fuerza estimada del equipo según sus resultados (estimado).
+- **Elo de Boca antes del partido** (equipo): Rating Elo de Boca antes de jugar el partido (K = 20 y 100 puntos de localía).
+- **Elo del rival antes del partido** (equipo): Rating Elo del rival antes de jugar el partido.
+- **Esquema defensivo** (equipo): Zona, hombre o presión: la fuente no lo informa y no se infiere.
+- **Estabilidad del quinteto titular** (equipo): Titulares repetidos entre partidos seguidos (1 = siempre los mismos).
+- **EWA** (jugador): Victorias esperadas que agrega su ataque frente a un suplente promedio (propuesta de este sistema).
+- **Extranjero** (jugador): 1 si su nacionalidad deportiva no es argentina (Wikipedia).
+- **Faltas cada 36 minutos** (jugador): Faltas llevadas a 36 minutos.
+- **Faltas cometidas** (jugador): Faltas personales del jugador.
+- **Faltas del equipo** (equipo): Faltas de Boca en el partido.
+- **Faltas del rival** (equipo): Faltas personales del rival.
+- **Faltas por partido** (jugador): Faltas personales promedio por partido jugado.
+- **Faltas recibidas** (jugador): Faltas que le cometieron en la temporada.
+- **FTr** (jugador): Cuántos libres genera por cada tiro de campo.
+- **FTr del equipo** (equipo): Libres intentados por cada tiro de campo de Boca.
+- **Game Score cada 36 minutos** (jugador): Game Score total llevado a 36 minutos.
+- **Game Score medio** (jugador): Resumen de un partido en un número, en la escala de los puntos (Hollinger).
+- **Libres convertidos** (jugador): Tiros libres convertidos en la temporada.
+- **Libres del equipo** (equipo): Tiros libres intentados por Boca en el partido.
+- **Libres del rival** (equipo): Tiros libres convertidos por el rival.
+- **Libres intentados** (jugador): Tiros libres intentados en la temporada.
+- **Libres intentados del rival** (equipo): Tiros libres intentados por el rival.
+- **Libres por tiro de campo** (equipo): Libres convertidos por cada tiro de campo (cuarto factor).
+- **Libres por tiro del rival** (equipo): Libres que convierte el rival por cada tiro de campo.
+- **Mayor corrida a favor** (equipo): Mayor cantidad de puntos seguidos de Boca sin que anote el rival.
+- **Mayor corrida en contra** (equipo): Mayor cantidad de puntos seguidos del rival.
+- **Mayor desventaja** (equipo): Mayor diferencia en contra de Boca durante el partido.
+- **Mayor ventaja** (equipo): Mayor diferencia a favor de Boca durante el partido.
+- **Mejor valoración** (jugador): Mayor valoración de la LNB en un partido.
+- **Mejoría α** (jugador): Cuánto cambió su rendimiento reciente frente al resto de su temporada. Necesita 20 partidos.
+- **Mejoría β** (jugador): Puntos que subió o bajó su índice de rendimiento entre dos bloques de partidos. Necesita 12 partidos.
+- **Minutos** (jugador): Minutos jugados en la temporada, desde el tiempo de cada box score.
+- **Minutos abajo** (equipo): Minutos de juego con Boca en desventaja.
+- **Minutos arriba** (equipo): Minutos de juego con Boca en ventaja.
+- **Minutos empatado** (equipo): Minutos de juego con el marcador igualado.
+- **Minutos en los últimos 14 días** (jugador): Carga de minutos de las últimas dos semanas.
+- **Minutos en los últimos 28 días** (jugador): Carga de minutos de las últimas cuatro semanas.
+- **Minutos en los últimos 7 días** (jugador): Carga de minutos de la última semana hasta el último partido.
+- **Minutos por partido** (jugador): Minutos promedio en los partidos que jugó.
+- **Minutos, últimos 5** (jugador): Promedio de minutos en sus últimos 5 partidos jugados.
+- **MOV** (equipo): Diferencia media de puntos por partido.
+- **Más/menos en derrotas** (jugador): Más/menos promedio en los partidos perdidos.
+- **Más/menos en victorias** (jugador): Más/menos promedio en los partidos ganados.
+- **Más/menos por partido** (jugador): Diferencia de puntos promedio mientras estuvo en cancha.
+- **Máximo de asistencias** (jugador): Mayor cantidad de asistencias en un partido.
+- **Máximo de puntos** (jugador): Mayor cantidad de puntos en un partido.
+- **Máximo de rebotes** (jugador): Mayor cantidad de rebotes en un partido.
+- **Net Rating** (equipo): Diferencia de puntos cada 100 posesiones.
+- **NR contra el tercio alto** (equipo): NR promedio contra los equipos del tercio alto de la tabla.
+- **NR contra el tercio bajo** (equipo): NR promedio contra los equipos del tercio bajo de la tabla.
+- **NR contra el tercio medio** (equipo): NR promedio contra los equipos del tercio medio de la tabla.
+- **NR de los últimos 5** (equipo): Net Rating promedio de los últimos 5 partidos.
+- **NR en cancha** (jugador): Diferencia de puntos cada 100 posesiones con él en cancha. Es del equipo, no producción individual.
+- **NR frente a los 5 anteriores** (equipo): Cuánto mejor o peor fue el NR del partido que el promedio de los 5 previos.
+- **NR fuera de cancha** (jugador): Diferencia de puntos cada 100 posesiones con el jugador en el banco.
+- **On/Off** (jugador): Cuánto mejor (o peor) le va a Boca con el jugador en cancha que sin él, cada 100 posesiones.
+- **ORB%** (jugador): Rebotes ofensivos que toma de los disponibles mientras juega.
+- **ORB% del equipo** (equipo): Rebotes ofensivos tomados de los disponibles.
+- **ORB% del rival** (equipo): Rebotes ofensivos que le permite tomar al rival.
+- **ORtg** (equipo): Puntos a favor cada 100 posesiones.
+- **ORtg en cancha** (jugador): Puntos de Boca cada 100 posesiones con el jugador en cancha (estimado).
+- **Partidos desde el banco** (jugador): Partidos en los que entró desde el banco.
+- **Partidos detrás del líder** (equipo): Distancia en la tabla con el primero.
+- **Partidos jugados** (jugador): Partidos en los que estuvo en cancha al menos un segundo.
+- **Partidos jugados (equipo)** (equipo): Partidos de liga jugados en la temporada.
+- **PER** (jugador): Eficiencia por minuto de Hollinger con las constantes y el ritmo de la LNB; la liga promedia 15.
+- **Peso** (jugador): Peso informado en el plantel de Wikipedia.
+- **PIE** (jugador): Parte de lo que pasó en sus partidos que se explica por él.
+- **Posesiones** (equipo): Posesiones estimadas de cada equipo en el partido.
+- **Posesiones (desde las jugadas)** (equipo): Posesiones estimadas sumando las jugadas del partido; se compara con la del box score.
+- **Posesiones en cancha** (jugador): Posesiones estimadas de Boca y del rival mientras el jugador estaba en cancha.
+- **Posesiones extra** (equipo): Rebotes ofensivos, robos y pérdidas propios menos los del rival.
+- **Posición en la tabla** (equipo): Puesto en la tabla de la liga ordenada por % de victorias.
+- **Potencial α** (jugador): Percentil esperado en su pico según la edad (rango ± 8). Sin Mejoría α todavía: usa M = 0.
+- **Potencial β** (jugador): Índice de nivel, tendencia y edad para ordenar el plantel. Sin Mejoría β todavía: T = R*.
+- **Probabilidad de ganar antes del partido** (equipo): Lo que daba el Elo antes de cada partido (estimado).
+- **Profundidad de la rotación** (equipo): Jugadores con 10 o más minutos por partido.
+- **Puesto en asistencias por partido** (jugador): Lugar entre los jugadores de la liga con 3 partidos o más.
+- **Puesto en PER** (jugador): Lugar entre los jugadores de la liga con 3 partidos o más.
+- **Puesto en puntos por partido** (jugador): Lugar entre los jugadores de la liga con 3 partidos o más.
+- **Puesto en rebotes por partido** (jugador): Lugar entre los jugadores de la liga con 3 partidos o más.
+- **Puesto en robos por partido** (jugador): Lugar entre los jugadores de la liga con 3 partidos o más.
+- **Puesto en tapas por partido** (jugador): Lugar entre los jugadores de la liga con 3 partidos o más.
+- **Puntos** (jugador): Puntos convertidos con dobles, triples y libres.
+- **Puntos a favor** (equipo): Puntos de Boca en el partido.
+- **Puntos a favor por partido** (equipo): Promedio de puntos anotados.
+- **Puntos cada 100 posesiones** (jugador): Puntos por cada 100 posesiones con él en cancha (estimado).
+- **Puntos cada 36 minutos** (jugador): Puntos llevados a 36 minutos para comparar jugadores con distinto tiempo.
+- **Puntos cada 40 minutos** (jugador): Puntos llevados a un partido completo de 40 minutos.
+- **Puntos de la banca por partido** (equipo): Puntos de los suplentes por partido.
+- **Puntos de segunda oportunidad** (equipo): Puntos de Boca después de un rebote ofensivo propio, hasta perder la pelota.
+- **Puntos de segunda oportunidad del rival** (equipo): Puntos del rival después de su rebote ofensivo.
+- **Puntos en contra** (equipo): Puntos del rival en el partido.
+- **Puntos en contra por partido** (equipo): Promedio de puntos recibidos.
+- **Puntos por partido** (jugador): Puntos promedio por partido jugado.
+- **Puntos por partido de local** (jugador): Promedio de puntos en los partidos de local.
+- **Puntos por partido de visitante** (jugador): Promedio de puntos en los partidos de visitante.
+- **Puntos por partido en derrotas** (jugador): Promedio de puntos en los partidos que perdió Boca.
+- **Puntos por partido en victorias** (jugador): Promedio de puntos en los partidos que ganó Boca.
+- **Puntos por tiro de campo** (jugador): Puntos que produce cada tiro de campo, sin contar libres.
+- **Puntos, últimos 5** (jugador): Promedio de puntos en sus últimos 5 partidos jugados.
+- **Pérdidas** (jugador): Posesiones perdidas sin tirar.
+- **Pérdidas cada 36 minutos** (jugador): Pérdidas llevadas a 36 minutos.
+- **Pérdidas del equipo** (equipo): Pérdidas de Boca en el partido.
+- **Pérdidas del rival** (equipo): Pérdidas del rival: más es mejor para Boca.
+- **Pérdidas por partido** (jugador): Pérdidas promedio por partido jugado.
+- **Racha de 10 o más puntos** (jugador): Mayor cantidad de partidos seguidos con 10 o más puntos.
+- **Racha de 40 % en triples** (jugador): Partidos seguidos con 40 % o más en triples (3 intentos o más).
+- **Racha de dobles-dobles** (jugador): Mayor cantidad de partidos seguidos con doble-doble.
+- **Racha de victorias** (equipo): Mayor cantidad de partidos ganados seguidos en la temporada.
+- **Rebotes** (jugador): Rebotes ofensivos más defensivos.
+- **Rebotes cada 100 posesiones** (jugador): Rebotes por cada 100 posesiones con él en cancha (estimado).
+- **Rebotes defensivos** (jugador): Rebotes tomados en el aro propio, que cierran la posesión rival.
+- **Rebotes defensivos del equipo** (equipo): Rebotes defensivos de Boca en el partido.
+- **Rebotes defensivos del rival** (equipo): Rebotes defensivos que tomó el rival.
+- **Rebotes del rival** (equipo): Rebotes totales del rival.
+- **Rebotes ofensivos** (jugador): Rebotes tomados en el aro rival, que dan una posesión extra.
+- **Rebotes ofensivos del equipo** (equipo): Rebotes ofensivos de Boca en el partido.
+- **Rebotes ofensivos del rival** (equipo): Rebotes ofensivos que tomó el rival.
+- **Rebotes por partido** (jugador): Rebotes promedio por partido jugado.
+- **Rebotes totales** (equipo): Rebotes ofensivos más defensivos de Boca.
+- **Rebotes, últimos 5** (jugador): Promedio de rebotes en sus últimos 5 partidos jugados.
+- **Ritmo** (equipo): Posesiones cada 40 minutos de juego.
+- **Robos** (jugador): Pelotas recuperadas al rival.
+- **Robos cada 36 minutos** (jugador): Robos llevados a 36 minutos.
+- **Robos del equipo** (equipo): Robos de Boca en el partido.
+- **Robos del rival** (equipo): Robos del rival (pelotas que perdió Boca por robo).
+- **Robos por partido** (jugador): Robos promedio por partido jugado.
+- **Sorpresa** (equipo): Resultado menos la probabilidad del Elo: positivo, ganó más de lo esperado (estimado).
+- **SOS** (equipo): Dificultad del calendario: promedio del SRS de los rivales.
+- **SRS** (equipo): Diferencia de puntos ajustada por la dificultad de los rivales.
+- **STL%** (jugador): Posesiones rivales que termina con un robo mientras juega.
+- **Tapas** (jugador): Tiros del rival bloqueados.
+- **Tapas cada 36 minutos** (jugador): Tapas llevadas a 36 minutos.
+- **Tapas del equipo** (equipo): Tapas de Boca en el partido.
+- **Tapas del rival** (equipo): Tapas que recibió Boca.
+- **Tapas por partido** (jugador): Tapas promedio por partido jugado.
+- **Tiempos muertos pedidos** (equipo): Tiempos muertos que pidió Boca.
+- **Tipos de jugada** (equipo): Pick and roll, aislamiento, poste, cortes: ninguna fuente gratuita los publica.
+- **Tiros cerca del aro** (jugador): Parte de los tiros de campo del jugador que fueron cerca del aro.
+- **Tiros contestados** (equipo): Requiere tracking de jugadores; no hay fuente gratuita.
+- **Tiros de campo convertidos** (jugador): Dobles más triples convertidos en la temporada.
+- **Tiros de campo del equipo** (equipo): Tiros de campo intentados por Boca en el partido.
+- **Tiros de campo intentados** (jugador): Dobles más triples intentados en la temporada.
+- **Tiros de media distancia** (jugador): Parte de los tiros de campo del jugador que fueron de media distancia.
+- **Tiros de triple desde la esquina** (jugador): Parte de los tiros de campo del jugador que fueron de triple desde la esquina.
+- **Tiros de triple frontal o de 45°** (jugador): Parte de los tiros de campo del jugador que fueron de triple frontal o de 45°.
+- **Tiros del rival** (equipo): Tiros de campo intentados por el rival.
+- **Tiros en el resto de la pintura** (jugador): Parte de los tiros de campo del jugador que fueron en el resto de la pintura.
+- **Titularidades** (jugador): Partidos que empezó en el quinteto inicial.
+- **TOV%** (jugador): Pérdidas cada 100 jugadas que termina.
+- **TOV% del rival** (equipo): Pérdidas del rival cada 100 jugadas: más alto es mejor para Boca.
+- **TRB%** (jugador): Rebotes totales que toma de los disponibles mientras juega.
+- **Triples convertidos** (jugador): Tiros de 3 convertidos en la temporada.
+- **Triples del equipo** (equipo): Triples intentados por Boca en el partido.
+- **Triples del rival** (equipo): Triples convertidos por el rival.
+- **Triples intentados** (jugador): Tiros de 3 intentados en la temporada.
+- **Triples intentados del rival** (equipo): Triples intentados por el rival.
+- **Triples-dobles** (jugador): Partidos con 10 o más en tres de esas cinco categorías.
+- **TS%** (jugador): Efectividad total: cuántos puntos saca por cada intento, incluidos los libres.
+- **USG%** (jugador): Parte de las jugadas del equipo que termina él mientras está en cancha.
+- **Valoración** (jugador): Índice de la planilla FIBA que publica la liga.
+- **Ventaja de localía** (equipo): % de victorias de local menos % de victorias de visitante.
+- **Victorias** (equipo): Partidos ganados.
+- **Victorias en los últimos 5** (equipo): Partidos ganados en los últimos 5.
+- **Victorias pitagóricas** (equipo): Victorias que corresponden a los puntos a favor y en contra.
+- **Win Shares** (jugador): Victorias atribuibles al jugador; necesita el ORtg individual de Oliver (pendiente).
+- **Índice de rendimiento** (jugador): Rendimiento global de 0 a 100 frente al plantel, por componentes (estimado).
