@@ -1,0 +1,118 @@
+﻿chart_id,destino_tipo,destino_ref,parametros,etiqueta_es
+g01,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g02,tabla,equipo,conjunto=tabla_liga,Origen: Equipo › Tabla de la liga
+g03,tabla,equipo,conjunto=tabla_liga,Origen: Equipo › Tabla de la liga
+g04,tabla,equipo,conjunto=localia,Origen: Equipo › Localía de la liga
+g05,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g06,tabla,equipo,conjunto=tabla_liga,Origen: Equipo › Tabla de la liga
+g07,tabla,equipo,conjunto=margenes,Origen: Equipo › Resultados y márgenes
+g08,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g09,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g10,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g11,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g12,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g13,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g14,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g15,tabla,equipo,conjunto=cuartos_equipo,Origen: Equipo › Cuartos y mitades
+g16,tabla,equipo,conjunto=cuartos_equipo,Origen: Equipo › Cuartos y mitades
+g17,tabla,equipo,conjunto=cuartos_equipo,Origen: Equipo › Cuartos y mitades
+g18,tabla,equipo,conjunto=cuartos_equipo,Origen: Equipo › Cuartos y mitades
+g19,tabla,equipo,conjunto=cuatro_factores,Origen: Equipo › Cuatro factores
+g20,tabla,equipo,conjunto=cuatro_factores,Origen: Equipo › Cuatro factores
+g21,tabla,equipo,conjunto=cuatro_factores,Origen: Equipo › Cuatro factores
+g22,tabla,equipo,conjunto=tiro_equipo,Origen: Equipo › Tiro
+g23,tabla,equipo,conjunto=cuatro_factores,Origen: Equipo › Cuatro factores
+g24,tabla,equipo,conjunto=cuatro_factores,Origen: Equipo › Cuatro factores
+g25,tabla,equipo,conjunto=zonas_equipo,Origen: Equipo › Zonas de tiro
+g26,tabla,equipo,conjunto=zonas_equipo,Origen: Equipo › Zonas de tiro
+g27,tabla,equipo,conjunto=tiro_detalle,Origen: Equipo › Tiro de Boca
+g28,tabla,equipo,conjunto=tiro_detalle,Origen: Equipo › Tiro de Boca
+g29,tabla,equipo,conjunto=tiro_detalle,Origen: Equipo › Tiro de Boca
+g30,tabla,equipo,conjunto=tiro_detalle,Origen: Equipo › Tiro de Boca
+g31,tabla,equipo,conjunto=tiro_detalle,Origen: Equipo › Tiro de Boca
+g32,tabla,equipo,conjunto=rival_box,Origen: Equipo › Box score del rival
+g33,tabla,equipo,conjunto=volumen_equipo,Origen: Equipo › Volumen por partido
+g34,tabla,equipo,conjunto=cuatro_factores,Origen: Equipo › Cuatro factores
+g35,tabla,equipo,conjunto=volumen_equipo,Origen: Equipo › Volumen por partido
+g36,tabla,equipo,conjunto=volumen_equipo,Origen: Equipo › Volumen por partido
+g37,tabla,equipo,conjunto=margenes,Origen: Equipo › Resultados y márgenes
+g38,tabla,equipo,conjunto=tiro_detalle,Origen: Equipo › Tiro de Boca
+g39,tabla,jugadores,conjunto=resumen,Origen: Jugadores › Resumen
+g39,comparar,comparar,,Origen: Comparar jugadores
+g40,tabla,jugadores,conjunto=resumen,Origen: Jugadores › Resumen
+g40,comparar,comparar,,Origen: Comparar jugadores
+g41,tabla,jugadores,conjunto=resumen,Origen: Jugadores › Resumen
+g41,comparar,comparar,,Origen: Comparar jugadores
+g42,tabla,jugadores,conjunto=forma,Origen: Jugadores › Forma y mejores partidos
+g43,tabla,jugadores,conjunto=carga,Origen: Jugadores › Carga de minutos
+g44,tabla,jugadores,conjunto=resumen,Origen: Jugadores › Resumen
+g44,comparar,comparar,,Origen: Comparar jugadores
+g45,tabla,jugadores,conjunto=eficiencia_tiro,Origen: Jugadores › Eficiencia de tiro
+g45,comparar,comparar,,Origen: Comparar jugadores
+g46,tabla,jugadores,conjunto=anotacion,Origen: Jugadores › Anotación
+g47,tabla,jugadores,conjunto=valoracion,Origen: Jugadores › Valoración global
+g48,tabla,jugadores,conjunto=marcas,Origen: Jugadores › Marcas
+g49,tabla,jugadores,conjunto=carga,Origen: Jugadores › Carga de minutos
+g50,tabla,jugadores,conjunto=resumen,Origen: Jugadores › Resumen
+g51,tabla,jugadores,conjunto=carga,Origen: Jugadores › Carga de minutos
+g52,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g53,tabla,jugadores,conjunto=evolucion,Origen: Jugadores › Evolución y proyección
+g53,comparar,comparar,,Origen: Comparar jugadores
+g54,tabla,equipo,conjunto=tabla_liga,Origen: Equipo › Tabla de la liga
+g55,tabla,equipo,conjunto=contexto_partido,Origen: Equipo › Contexto del partido
+g56,tabla,equipo,conjunto=tabla_liga,Origen: Equipo › Tabla de la liga
+g57,tabla,equipo,conjunto=tabla_liga,Origen: Equipo › Tabla de la liga
+g58,tabla,jugadores,conjunto=liga,Origen: Jugadores › Lugar en la liga
+g58,comparar,comparar,,Origen: Comparar jugadores
+g59,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g60,tabla,jugadores,conjunto=disciplina,Origen: Jugadores › Disciplina
+g60,comparar,comparar,,Origen: Comparar jugadores
+g61,tabla,equipo,conjunto=rival_box,Origen: Equipo › Box score del rival
+g62,tabla,jugadores,conjunto=metricas_propias,Origen: Jugadores › Métricas propias
+g63,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g64,tabla,jugadores,conjunto=resumen,Origen: Jugadores › Resumen
+g64,comparar,comparar,,Origen: Comparar jugadores
+g65,tabla,equipo,conjunto=cuartos_equipo,Origen: Equipo › Cuartos y mitades
+g66,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g67,tabla,equipo,conjunto=tiro_detalle,Origen: Equipo › Tiro de Boca
+g68,tabla,equipo,conjunto=contexto_partido,Origen: Equipo › Contexto del partido
+g69,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g70,tabla,equipo,conjunto=localia,Origen: Equipo › Localía de la liga
+g71,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g72,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g73,tabla,equipo,conjunto=quintetos,Origen: Equipo › Quintetos
+g74,tabla,jugadores,conjunto=carga,Origen: Jugadores › Carga de minutos
+g75,tabla,jugadores,conjunto=marcas,Origen: Jugadores › Marcas
+g75,comparar,comparar,,Origen: Comparar jugadores
+g76,tabla,equipo,conjunto=partidos,Origen: Equipo › Partido a partido
+g07,desglosada,estadistica,stat=net_points&entidad=equipo,Desglosada: Diferencia de puntos
+g08,desglosada,estadistica,stat=points_for&entidad=equipo,Desglosada: Puntos a favor
+g09,desglosada,estadistica,stat=pace&entidad=equipo,Desglosada: Ritmo
+g10,desglosada,estadistica,stat=ortg&entidad=equipo,Desglosada: ORtg
+g11,desglosada,estadistica,stat=net_rating&entidad=equipo,Desglosada: Net Rating
+g12,desglosada,estadistica,stat=points_for&entidad=equipo,Desglosada: Puntos a favor
+g13,desglosada,estadistica,stat=points_for&entidad=equipo,Desglosada: Puntos a favor
+g14,desglosada,estadistica,stat=pace&entidad=equipo,Desglosada: Ritmo
+g18,desglosada,estadistica,stat=h1_diff&entidad=equipo,Desglosada: Diferencia en el 1.er tiempo
+g20,desglosada,estadistica,stat=efg&entidad=equipo,Desglosada: eFG%
+g21,desglosada,estadistica,stat=efg&entidad=equipo,Desglosada: eFG%
+g22,desglosada,estadistica,stat=ts&entidad=equipo,Desglosada: TS%
+g23,desglosada,estadistica,stat=tov_pct&entidad=equipo,Desglosada: TOV%
+g24,desglosada,estadistica,stat=ft_per_fga&entidad=equipo,Desglosada: Libres por tiro de campo
+g27,desglosada,estadistica,stat=team_fga&entidad=equipo,Desglosada: Tiros de campo del equipo
+g28,desglosada,estadistica,stat=team_fg3_pct&entidad=equipo,Desglosada: % de triples
+g29,desglosada,estadistica,stat=three_rate&entidad=equipo,Desglosada: 3PAr
+g30,desglosada,estadistica,stat=team_fg3m&entidad=equipo,Desglosada: Triples convertidos
+g31,desglosada,estadistica,stat=team_fta&entidad=equipo,Desglosada: Libres del equipo
+g32,desglosada,estadistica,stat=rival_fga&entidad=equipo,Desglosada: Tiros del rival
+g33,desglosada,estadistica,stat=team_trb&entidad=equipo,Desglosada: Rebotes totales
+g34,desglosada,estadistica,stat=orb_pct_team&entidad=equipo,Desglosada: ORB% del equipo
+g35,desglosada,estadistica,stat=team_tov&entidad=equipo,Desglosada: Pérdidas del equipo
+g36,desglosada,estadistica,stat=team_ast&entidad=equipo,Desglosada: Asistencias del equipo
+g37,desglosada,estadistica,stat=extra_possessions&entidad=equipo,Desglosada: Posesiones extra
+g38,desglosada,estadistica,stat=team_ast_fgm&entidad=equipo,Desglosada: Canastas asistidas
+g52,desglosada,estadistica,stat=rest_days&entidad=equipo,Desglosada: Días de descanso
+g55,desglosada,estadistica,stat=elo_pre&entidad=equipo,Desglosada: Elo de Boca antes del partido
+g61,desglosada,estadistica,stat=team_fta&entidad=equipo,Desglosada: Libres del equipo
+g63,desglosada,estadistica,stat=net_rating&entidad=equipo,Desglosada: Net Rating
+g68,desglosada,estadistica,stat=elo_win_prob&entidad=equipo,Desglosada: Probabilidad de ganar antes del partido

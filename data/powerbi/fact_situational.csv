@@ -1,0 +1,235 @@
+﻿card_id,categoria,tarjeta,fila,partidos,ganados,perdidos,pct_victorias,dif_vs_base,pf,pc,diferencia
+s001,A,Ventaja al descanso,'+1 a +5,2,1,1,50.0,0.0,88.0,88.5,-0.5
+s001,A,Ventaja al descanso,'+11 o más,2,2,0,100.0,50.0,95.5,78.0,17.5
+s002,A,Desventaja al descanso,−1 a −5,1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s002,A,Desventaja al descanso,−11 o más,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s004,A,Ventaja al final del 3.er cuarto,'+1 a +5,1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s004,A,Ventaja al final del 3.er cuarto,'+6 a +10,1,1,0,100.0,50.0,80.0,72.0,8.0
+s004,A,Ventaja al final del 3.er cuarto,'+11 o más,2,2,0,100.0,50.0,95.5,78.0,17.5
+s005,A,Desventaja al final del 3.er cuarto,−1 a −5,1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s005,A,Desventaja al final del 3.er cuarto,−11 o más,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s006,A,Ventaja al final del 1.er cuarto,'+1 a +5,1,1,0,100.0,50.0,96.0,73.0,23.0
+s006,A,Ventaja al final del 1.er cuarto,'+6 o más,3,2,1,66.7,16.7,90.3,86.7,3.7
+s007,A,Desventaja al final del 1.er cuarto,−1 a −5,1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s007,A,Desventaja al final del 1.er cuarto,−6 o más,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s008,A,Cuartos ganados y resultado final,1 cuarto,3,0,3,0.0,-50.0,86.0,94.0,-8.0
+s008,A,Cuartos ganados y resultado final,2 cuartos,3,3,0,100.0,50.0,90.3,76.0,14.3
+s009,A,Partidos decididos por 5 puntos o menos,Por 5 o menos,1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s009,A,Partidos decididos por 5 puntos o menos,Por 6 o más,5,3,2,60.0,10.0,89.4,85.2,4.2
+s010,A,Partidos por 1 a 3 puntos y con suplementario,Por 1 a 3 puntos,1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s011,A,Ventaja máxima alcanzada,Menos de 10,2,0,2,0.0,-50.0,81.0,88.5,-7.5
+s011,A,Ventaja máxima alcanzada,10 a 19,2,1,1,50.0,0.0,88.0,88.5,-0.5
+s011,A,Ventaja máxima alcanzada,20 o más,2,2,0,100.0,50.0,95.5,78.0,17.5
+s012,A,Remontadas: desventaja máxima superada,5 o más abajo,4,1,3,25.0,-25.0,84.5,88.5,-4.0
+s012,A,Remontadas: desventaja máxima superada,10 o más abajo,2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s012,A,Remontadas: desventaja máxima superada,15 o más abajo,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s013,A,Victorias y derrotas por 15 puntos o más,Ganó por 15 o más,1,1,0,100.0,50.0,96.0,73.0,23.0
+s014,A,Último cuarto: quién lo ganó,Perdió el 4.º cuarto,6,3,3,50.0,0.0,88.2,85.0,3.2
+s015,B,"Anotar 80, 90 o 100 puntos o más",80 o más,6,3,3,50.0,0.0,88.2,85.0,3.2
+s015,B,"Anotar 80, 90 o 100 puntos o más",90 o más,3,2,1,66.7,16.7,95.7,87.0,8.7
+s016,B,"Recibir 70, 75 u 80 puntos o menos",75 o menos,2,2,0,100.0,50.0,88.0,72.5,15.5
+s016,B,"Recibir 70, 75 u 80 puntos o menos",80 o menos,2,2,0,100.0,50.0,88.0,72.5,15.5
+s017,B,Ritmo alto y bajo,76 o más,2,2,0,100.0,50.0,95.5,78.0,17.5
+s017,B,Ritmo alto y bajo,"72 a 75,9",2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s017,B,Ritmo alto y bajo,Menos de 72,2,1,1,50.0,0.0,81.0,78.0,3.0
+s018,B,ORtg de 110 o más y de 90 o menos,ORtg 110 o más,6,3,3,50.0,0.0,88.2,85.0,3.2
+s019,B,DRtg de 95 o menos y de 110 o más,DRtg 95 o menos,1,1,0,100.0,50.0,96.0,73.0,23.0
+s019,B,DRtg de 95 o menos y de 110 o más,DRtg 110 o más,3,0,3,0.0,-50.0,86.0,94.0,-8.0
+s020,B,Net Rating de +10 o más y de −10 o menos,Net Rating +10 o más,3,3,0,100.0,50.0,90.3,76.0,14.3
+s020,B,Net Rating de +10 o más y de −10 o menos,Net Rating −10 o menos,2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s021,B,Puntos totales del partido,160 o menos,1,1,0,100.0,50.0,80.0,72.0,8.0
+s021,B,Puntos totales del partido,161 a 170,2,1,1,50.0,0.0,89.0,78.5,10.5
+s021,B,Puntos totales del partido,171 a 180,2,1,1,50.0,0.0,87.5,88.0,-0.5
+s021,B,Puntos totales del partido,Más de 180,1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s022,B,Cuartos de 25 puntos o más a favor,Ningún cuarto de 25,2,1,1,50.0,0.0,81.0,78.0,3.0
+s022,B,Cuartos de 25 puntos o más a favor,1 cuarto de 25 o más,3,1,2,33.3,-16.7,90.3,93.7,-3.3
+s022,B,Cuartos de 25 puntos o más a favor,2 o más cuartos de 25,1,1,0,100.0,50.0,96.0,73.0,23.0
+s023,B,Primer cuarto de 20 puntos o más,Primer cuarto de 20 o más,5,3,2,60.0,10.0,89.8,83.4,6.4
+s023,B,Primer cuarto de 20 puntos o más,Primer cuarto de menos de 20,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s024,B,Recibir 25 puntos o más en un cuarto,Recibió 25 o más en un cuarto,5,2,3,40.0,-10.0,86.6,87.4,-0.8
+s024,B,Recibir 25 puntos o más en un cuarto,Nunca recibió 25 en un cuarto,1,1,0,100.0,50.0,96.0,73.0,23.0
+s026,B,Puntos de segunda oportunidad,10 o más,6,3,3,50.0,0.0,88.2,85.0,3.2
+s027,C,"Triples convertidos: 8, 10 o 12 o más",8 o más,5,3,2,60.0,10.0,89.8,83.4,6.4
+s027,C,"Triples convertidos: 8, 10 o 12 o más",10 o más,5,3,2,60.0,10.0,89.8,83.4,6.4
+s027,C,"Triples convertidos: 8, 10 o 12 o más",12 o más,5,3,2,60.0,10.0,89.8,83.4,6.4
+s028,C,% de triples de 40 % o más y de 28 % o menos,40 % o más,2,1,1,50.0,0.0,95.5,94.0,1.5
+s028,C,% de triples de 40 % o más y de 28 % o menos,28 % o menos,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s029,C,30 triples intentados o más,30 o más intentos,4,3,1,75.0,25.0,88.3,78.0,10.3
+s029,C,30 triples intentados o más,Menos de 30,2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s030,C,eFG% de 55 % o más y de 45 % o menos,eFG% 55 % o más,3,2,1,66.7,16.7,90.3,86.7,3.7
+s031,C,TS% de 58 % o más,TS% 58 % o más,3,2,1,66.7,16.7,95.7,87.0,8.7
+s031,C,TS% de 58 % o más,TS% menor a 58 %,3,1,2,33.3,-16.7,80.7,83.0,-2.3
+s032,C,25 tiros libres intentados o más,25 o más libres,1,1,0,100.0,50.0,96.0,73.0,23.0
+s032,C,25 tiros libres intentados o más,Menos de 25,5,2,3,40.0,-10.0,86.6,87.4,-0.8
+s033,C,% de libres de 75 % o más y de 65 % o menos,75 % o más,5,2,3,40.0,-10.0,89.8,87.6,2.2
+s033,C,% de libres de 75 % o más y de 65 % o menos,65 % o menos,1,1,0,100.0,50.0,80.0,72.0,8.0
+s034,C,% de dobles de 50 % o más,50 % o más,6,3,3,50.0,0.0,88.2,85.0,3.2
+s035,C,Más tiros de campo intentados que el rival,Más que el rival,2,0,2,0.0,-50.0,81.0,88.5,-7.5
+s035,C,Más tiros de campo intentados que el rival,Igual o menos,4,3,1,75.0,25.0,91.8,83.3,8.5
+s036,C,eFG% del rival de 48 % o menos,Rival con 48 % o menos,1,1,0,100.0,50.0,96.0,73.0,23.0
+s036,C,eFG% del rival de 48 % o menos,Rival con más de 48 %,5,2,3,40.0,-10.0,86.6,87.4,-0.8
+s037,C,Triples del rival: 10 o más,Rival con 10 o más triples,4,1,3,25.0,-25.0,88.3,91.3,-3.0
+s037,C,Triples del rival: 10 o más,Rival con menos de 10,2,2,0,100.0,50.0,88.0,72.5,15.5
+s038,C,Tiros libres del rival: 25 o más,Rival con menos de 25,6,3,3,50.0,0.0,88.2,85.0,3.2
+s039,C,Precisión por zona de la cancha,Cerca del aro 60 % o más,2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s039,C,Precisión por zona de la cancha,Cerca del aro menos de 60 %,4,3,1,75.0,25.0,88.3,78.0,10.3
+s039,C,Precisión por zona de la cancha,Triple frontal 35 % o más,3,2,1,66.7,16.7,95.7,87.0,8.7
+s040,C,3PAr de 40 % o más (estilo de triples),40 % o más de los tiros son triples,6,3,3,50.0,0.0,88.2,85.0,3.2
+s041,D,Más rebotes que el rival,Más rebotes,6,3,3,50.0,0.0,88.2,85.0,3.2
+s042,D,Rebotes ofensivos: 12 o más,12 o más,3,2,1,66.7,16.7,91.0,80.0,11.0
+s042,D,Rebotes ofensivos: 12 o más,Menos de 12,3,1,2,33.3,-16.7,85.3,90.0,-4.7
+s043,D,ORB% de 30 % o más,30 % o más,6,3,3,50.0,0.0,88.2,85.0,3.2
+s044,D,DRB% de 75 % o más,75 % o más,4,2,2,50.0,0.0,88.0,85.8,2.3
+s044,D,DRB% de 75 % o más,Menos de 75 %,2,1,1,50.0,0.0,88.5,83.5,5.0
+s045,D,Segundas oportunidades concedidas,10 o más concedidos,3,1,2,33.3,-16.7,91.0,90.7,0.3
+s045,D,Segundas oportunidades concedidas,Menos de 10,3,2,1,66.7,16.7,85.3,79.3,6.0
+s046,D,Diferencia de rebotes de +10 o −10,'+10 o más,3,2,1,66.7,16.7,85.3,79.3,6.0
+s047,D,Posesiones extra (ORB + robos − pérdidas),A favor,2,1,1,50.0,0.0,89.0,78.5,10.5
+s047,D,Posesiones extra (ORB + robos − pérdidas),En contra,4,2,2,50.0,0.0,87.8,88.3,-0.5
+s048,D,Pérdidas: 10 o menos y 18 o más,10 o menos,2,1,1,50.0,0.0,89.0,78.5,10.5
+s049,D,Robos: 10 o más,Menos de 10,6,3,3,50.0,0.0,88.2,85.0,3.2
+s050,D,Tapas: 5 o más,Menos de 5,6,3,3,50.0,0.0,88.2,85.0,3.2
+s051,E,Asistencias: 20 o más y 12 o menos,12 o menos,1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s052,E,"AST/TOV de 1,5 o más","AST/TOV 1,5 o más",1,1,0,100.0,50.0,96.0,73.0,23.0
+s052,E,"AST/TOV de 1,5 o más","Menos de 1,5",5,2,3,40.0,-10.0,86.6,87.4,-0.8
+s053,E,60 % o más de canastas asistidas,60 % o más asistidas,1,1,0,100.0,50.0,96.0,73.0,23.0
+s053,E,60 % o más de canastas asistidas,Menos de 60 %,5,2,3,40.0,-10.0,86.6,87.4,-0.8
+s054,E,Puntos de la banca: 30 o más y 15 o menos,30 o más,4,3,1,75.0,25.0,88.3,78.0,10.3
+s055,E,Jugadores con 10 puntos o más,2,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s055,E,Jugadores con 10 puntos o más,4 o más,5,3,2,60.0,10.0,89.8,83.4,6.4
+s056,E,Un jugador con 30 % o más de uso,Con un jugador de 30 % o más de uso,3,2,1,66.7,16.7,90.7,83.3,7.3
+s056,E,Un jugador con 30 % o más de uso,Uso repartido,3,1,2,33.3,-16.7,85.7,86.7,-1.0
+s057,F,Faltas cometidas: 25 o más y 18 o menos,18 o menos,2,2,0,100.0,50.0,87.5,77.5,10.0
+s058,F,Faltas del rival: 25 o más,Rival con 25 o más,1,1,0,100.0,50.0,96.0,73.0,23.0
+s058,F,Faltas del rival: 25 o más,Rival con menos de 25,5,2,3,40.0,-10.0,86.6,87.4,-0.8
+s059,F,Jugadores con 4 faltas o más o descalificados,0 con 4 faltas,2,2,0,100.0,50.0,95.5,78.0,17.5
+s059,F,Jugadores con 4 faltas o más o descalificados,1 con 4 faltas,2,1,1,50.0,0.0,81.0,78.0,3.0
+s059,F,Jugadores con 4 faltas o más o descalificados,2 o más con 4 faltas,2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s059,F,Jugadores con 4 faltas o más o descalificados,Con un descalificado,1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s061,F,Tiros libres concedidos frente al resultado,15 o menos,4,3,1,75.0,25.0,88.3,78.0,10.3
+s061,F,Tiros libres concedidos frente al resultado,16 a 24,2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s062,F,El rival anota 90 puntos o más,Rival con 90 o más,2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s062,F,El rival anota 90 puntos o más,Rival con menos de 90,4,3,1,75.0,25.0,88.3,78.0,10.3
+s063,F,Rival con un anotador de 25 puntos o más,Con un anotador de 25 o más,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s063,F,Rival con un anotador de 25 puntos o más,Sin anotador de 25,5,3,2,60.0,10.0,89.8,83.4,6.4
+s064,F,Resultado según el máximo anotador del rival,Menos de 15,1,1,0,100.0,50.0,96.0,73.0,23.0
+s064,F,Resultado según el máximo anotador del rival,20 a 24,4,2,2,50.0,0.0,88.3,86.0,2.3
+s064,F,Resultado según el máximo anotador del rival,25 o más,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s065,G,Local y visitante,Local,2,2,0,100.0,50.0,95.5,78.0,17.5
+s065,G,Local y visitante,Visitante,4,1,3,25.0,-25.0,84.5,88.5,-4.0
+s066,G,Local y visitante por competición,Liga Nacional · local,2,2,0,100.0,50.0,95.5,78.0,17.5
+s066,G,Local y visitante por competición,Liga Nacional · visitante,4,1,3,25.0,-25.0,84.5,88.5,-4.0
+s067,G,Descanso desde el partido anterior,1 o 2 días libres,3,1,2,33.3,-16.7,85.3,90.0,-4.7
+s067,G,Descanso desde el partido anterior,3 días libres o más,2,1,1,50.0,0.0,88.5,83.5,5.0
+s068,G,Partidos en 7 días,1 en 7 días,2,1,1,50.0,0.0,89.0,78.5,10.5
+s068,G,Partidos en 7 días,2 en 7 días,3,2,1,66.7,16.7,90.3,86.7,3.7
+s068,G,Partidos en 7 días,3 o más en 7 días,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s070,G,Día de la semana,Lunes,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s070,G,Día de la semana,Miércoles,3,2,1,66.7,16.7,91.0,80.0,11.0
+s070,G,Día de la semana,Viernes,1,1,0,100.0,50.0,80.0,72.0,8.0
+s070,G,Día de la semana,Sábado,1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s071,G,Franja horaria,20 a 21:59,4,2,2,50.0,0.0,92.3,86.3,6.0
+s071,G,Franja horaria,22 o más tarde,2,1,1,50.0,0.0,80.0,82.5,-2.5
+s072,G,Mes del año,Octubre,6,3,3,50.0,0.0,88.2,85.0,3.2
+s073,G,Fase de la temporada,Primeras 10 fechas,6,3,3,50.0,0.0,88.2,85.0,3.2
+s074,G,Rival según su Elo antes del partido,1500 a 1529,4,2,2,50.0,0.0,88.5,83.5,5.0
+s074,G,Rival según su Elo antes del partido,1470 a 1499,2,1,1,50.0,0.0,87.5,88.0,-0.5
+s075,G,Rival según su puesto en la tabla,Rival del 1.º al 4.º,1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s075,G,Rival según su puesto en la tabla,5.º al 8.º,1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s075,G,Rival según su puesto en la tabla,9.º al 12.º,2,1,1,50.0,0.0,80.0,82.5,-2.5
+s075,G,Rival según su puesto en la tabla,13.º o más abajo,2,2,0,100.0,50.0,95.5,78.0,17.5
+s076,G,Rival rápido o lento,Rival rápido,2,1,1,50.0,0.0,88.0,83.0,5.0
+s076,G,Rival rápido o lento,Rival lento,4,2,2,50.0,0.0,88.3,86.0,2.3
+s077,G,Historial contra cada rival,ARGENTINO (J),1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s077,G,Historial contra cada rival,OBERÁ,1,1,0,100.0,50.0,96.0,73.0,23.0
+s077,G,Historial contra cada rival,OLIMPICO (LB),1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s077,G,Historial contra cada rival,QUIMSA,1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s077,G,Historial contra cada rival,RACING (CH),1,1,0,100.0,50.0,80.0,72.0,8.0
+s077,G,Historial contra cada rival,REGATAS (C),1,1,0,100.0,50.0,95.0,83.0,12.0
+s079,H,Después de una victoria o de una derrota,Tras ganar,2,1,1,50.0,0.0,95.5,94.0,1.5
+s079,H,Después de una victoria o de una derrota,Tras perder,3,1,2,33.3,-16.7,80.7,83.0,-2.3
+s080,H,Después de una paliza a favor o en contra,Tras ganar por 15 o más,1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s081,H,Después de 3 o más victorias o derrotas seguidas,Tras 3 o más derrotas seguidas,1,1,0,100.0,50.0,80.0,72.0,8.0
+s082,H,Forma de los últimos 5: resultado siguiente,2 o 3 victorias en 5,1,1,0,100.0,50.0,95.0,83.0,12.0
+s083,H,Después de anotar 90 puntos o más,Venía de anotar 90 o más,2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s083,H,Después de anotar 90 puntos o más,Venía de anotar menos de 90,3,2,1,66.7,16.7,85.7,79.7,6.0
+s084,H,Después de un partido con 8 triples o más,Venía de 8 triples o más,4,2,2,50.0,0.0,87.8,88.3,-0.5
+s084,H,Después de un partido con 8 triples o más,Venía de menos de 8,1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s086,H,Después de una derrota por 1 a 3 puntos,Tras perder por 1 a 3,1,1,0,100.0,50.0,80.0,72.0,8.0
+s087,H,Rachas más largas de la temporada,Racha de victorias más larga (2),2,2,0,100.0,50.0,87.5,77.5,10.0
+s087,H,Rachas más largas de la temporada,Racha de derrotas más larga (3),3,0,3,0.0,-50.0,86.0,94.0,-8.0
+s088,H,Tendencia del Net Rating de los 3 anteriores,Venía con Net Rating negativo,3,2,1,66.7,16.7,85.7,79.7,6.0
+s089,I,Con X de titular y sin X de titular,"WARREN, M.: titular",5,3,2,60.0,10.0,89.8,83.4,6.4
+s089,I,Con X de titular y sin X de titular,"WARREN, M.: sin ser titular",1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s089,I,Con X de titular y sin X de titular,"VILDOZA, J.: titular",6,3,3,50.0,0.0,88.2,85.0,3.2
+s089,I,Con X de titular y sin X de titular,"MONACCHI, T.: titular",6,3,3,50.0,0.0,88.2,85.0,3.2
+s089,I,Con X de titular y sin X de titular,"LEMA, L.: titular",6,3,3,50.0,0.0,88.2,85.0,3.2
+s089,I,Con X de titular y sin X de titular,"CAFFARO, F.: titular",6,3,3,50.0,0.0,88.2,85.0,3.2
+s089,I,Con X de titular y sin X de titular,"CUELLO, M.: titular",1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s089,I,Con X de titular y sin X de titular,"CUELLO, M.: sin ser titular",5,3,2,60.0,10.0,89.8,83.4,6.4
+s090,I,Cuando X anota 20 o más,"VILDOZA, J.",2,2,0,100.0,50.0,95.5,78.0,17.5
+s090,I,Cuando X anota 20 o más,"LEMA, L.",1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s090,I,Cuando X anota 20 o más,"CAFFARO, F.",2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s091,I,Cuando X hace doble-doble,"CAFFARO, F.",3,1,2,33.3,-16.7,85.3,90.0,-4.7
+s092,I,Cuando X tiene 4 faltas o más,"WARREN, M.",1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s092,I,Cuando X tiene 4 faltas o más,"HELMANIS, K.",1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s092,I,Cuando X tiene 4 faltas o más,"VILDOZA, J.",1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s092,I,Cuando X tiene 4 faltas o más,"MONACCHI, T.",1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s092,I,Cuando X tiene 4 faltas o más,"BARREIRO, A.",2,0,2,0.0,-50.0,89.0,94.5,-5.5
+s092,I,Cuando X tiene 4 faltas o más,"LEMA, L.",1,1,0,100.0,50.0,80.0,72.0,8.0
+s093,I,Cuando X juega 30 minutos o más,"VILDOZA, J.",1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s094,I,Cuando X juega menos de 20 minutos,"WARREN, M.",2,1,1,50.0,0.0,88.5,83.5,5.0
+s094,I,Cuando X juega menos de 20 minutos,"FAGGIANO, L.",6,3,3,50.0,0.0,88.2,85.0,3.2
+s094,I,Cuando X juega menos de 20 minutos,"STENTA, N.",6,3,3,50.0,0.0,88.2,85.0,3.2
+s094,I,Cuando X juega menos de 20 minutos,"HELMANIS, K.",6,3,3,50.0,0.0,88.2,85.0,3.2
+s094,I,Cuando X juega menos de 20 minutos,"MONACCHI, T.",1,1,0,100.0,50.0,96.0,73.0,23.0
+s094,I,Cuando X juega menos de 20 minutos,"FINETTI, V.",1,1,0,100.0,50.0,96.0,73.0,23.0
+s094,I,Cuando X juega menos de 20 minutos,"TORRENS, E.",1,1,0,100.0,50.0,96.0,73.0,23.0
+s094,I,Cuando X juega menos de 20 minutos,"BARREIRO, A.",6,3,3,50.0,0.0,88.2,85.0,3.2
+s094,I,Cuando X juega menos de 20 minutos,"CAFFARO, F.",1,1,0,100.0,50.0,96.0,73.0,23.0
+s094,I,Cuando X juega menos de 20 minutos,"CUELLO, M.",4,2,2,50.0,0.0,88.0,85.8,2.3
+s095,I,Cuando X acierta 40 % de triples o más (5 intentos),"WARREN, M.",3,2,1,66.7,16.7,90.7,83.3,7.3
+s095,I,Cuando X acierta 40 % de triples o más (5 intentos),"VILDOZA, J.",4,3,1,75.0,25.0,88.3,78.0,10.3
+s095,I,Cuando X acierta 40 % de triples o más (5 intentos),"BARREIRO, A.",1,1,0,100.0,50.0,80.0,72.0,8.0
+s095,I,Cuando X acierta 40 % de triples o más (5 intentos),"LEMA, L.",2,1,1,50.0,0.0,95.5,94.0,1.5
+s098,I,Cuando X reparte 6 asistencias o más,"VILDOZA, J.",2,1,1,50.0,0.0,95.5,94.0,1.5
+s099,I,Cuando X toma 10 rebotes o más,"CAFFARO, F.",3,1,2,33.3,-16.7,85.3,90.0,-4.7
+s100,I,Cuando X tiene Game Score de 20 o más,"VILDOZA, J.",2,2,0,100.0,50.0,95.5,78.0,17.5
+s100,I,Cuando X tiene Game Score de 20 o más,"LEMA, L.",1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s100,I,Cuando X tiene Game Score de 20 o más,"CAFFARO, F.",1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s101,I,Mejor jugador del partido (Game Score) frente al resultado,"HELMANIS, K.",1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s101,I,Mejor jugador del partido (Game Score) frente al resultado,"VILDOZA, J.",2,2,0,100.0,50.0,95.5,78.0,17.5
+s101,I,Mejor jugador del partido (Game Score) frente al resultado,"BARREIRO, A.",1,1,0,100.0,50.0,80.0,72.0,8.0
+s101,I,Mejor jugador del partido (Game Score) frente al resultado,"LEMA, L.",1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s101,I,Mejor jugador del partido (Game Score) frente al resultado,"CAFFARO, F.",1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s102,I,Mismo quinteto titular o cambios en el quinteto,Mismo quinteto que el anterior,3,2,1,66.7,16.7,90.3,86.7,3.7
+s102,I,Mismo quinteto titular o cambios en el quinteto,Con cambios en el quinteto,2,0,2,0.0,-50.0,81.0,88.5,-7.5
+s105,I,Titulares con 32 minutos o más,0 con 32 minutos,5,3,2,60.0,10.0,89.8,83.4,6.4
+s105,I,Titulares con 32 minutos o más,1 con 32 minutos,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s106,I,Banca que anota más que la del rival,La banca anota más que la del rival,4,3,1,75.0,25.0,88.3,78.0,10.3
+s106,I,Banca que anota más que la del rival,Igual o menos,2,0,2,0.0,-50.0,88.0,99.0,-11.0
+s107,I,Edad promedio de los que jugaron,Promedio de 28 años o más,5,2,3,40.0,-10.0,86.6,87.4,-0.8
+s107,I,Edad promedio de los que jugaron,Promedio de menos de 28,1,1,0,100.0,50.0,96.0,73.0,23.0
+s108,I,Extranjeros en cancha,2 extranjeros o más,6,3,3,50.0,0.0,88.2,85.0,3.2
+s109,I,Rotación: jugadores con 10 minutos o más,9,1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s109,I,Rotación: jugadores con 10 minutos o más,10 o más,5,3,2,60.0,10.0,89.8,83.4,6.4
+s110,I,Jugador más usado (USG%) frente al resultado,"STENTA, N.",1,1,0,100.0,50.0,80.0,72.0,8.0
+s110,I,Jugador más usado (USG%) frente al resultado,"VILDOZA, J.",2,1,1,50.0,0.0,89.0,78.5,10.5
+s110,I,Jugador más usado (USG%) frente al resultado,"MONACCHI, T.",1,0,1,0.0,-50.0,80.0,93.0,-13.0
+s110,I,Jugador más usado (USG%) frente al resultado,"LEMA, L.",1,1,0,100.0,50.0,95.0,83.0,12.0
+s110,I,Jugador más usado (USG%) frente al resultado,"CAFFARO, F.",1,0,1,0.0,-50.0,96.0,105.0,-9.0
+s111,I,Quinteto titular con 2 grandes o con 1,2 grandes,6,3,3,50.0,0.0,88.2,85.0,3.2
+s113,J,Mejor cuarto de Boca en cada partido,1.º cuarto,2,1,1,50.0,0.0,95.5,94.0,1.5
+s113,J,Mejor cuarto de Boca en cada partido,2.º cuarto,1,1,0,100.0,50.0,96.0,73.0,23.0
+s113,J,Mejor cuarto de Boca en cada partido,3.º cuarto,3,1,2,33.3,-16.7,80.7,83.0,-2.3
+s114,J,Primera mitad frente a segunda mitad,Ganó las dos mitades,1,1,0,100.0,50.0,80.0,72.0,8.0
+s114,J,Primera mitad frente a segunda mitad,Ganó solo la primera,3,2,1,66.7,16.7,95.7,87.0,8.7
+s114,J,Primera mitad frente a segunda mitad,Ganó solo la segunda,2,0,2,0.0,-50.0,81.0,88.5,-7.5
+s115,J,"Cuartos ganados por Boca, cuarto por cuarto",Ganó el 1.º cuarto,4,3,1,75.0,25.0,91.8,83.3,8.5
+s115,J,"Cuartos ganados por Boca, cuarto por cuarto",Ganó el 2.º cuarto,2,2,0,100.0,50.0,95.5,78.0,17.5
+s115,J,"Cuartos ganados por Boca, cuarto por cuarto",Ganó el 3.º cuarto,3,1,2,33.3,-16.7,80.7,83.0,-2.3
+s116,J,Arranques de cuarto (play-by-play),Arranques a favor,2,2,0,100.0,50.0,95.5,78.0,17.5
+s116,J,Arranques de cuarto (play-by-play),Arranques parejos o en contra,4,1,3,25.0,-25.0,84.5,88.5,-4.0
+s117,J,Cierres en partidos ajustados (play-by-play),Cierre parejo o en contra,1,0,1,0.0,-50.0,82.0,84.0,-2.0
+s118,J,Cuarto de menos puntos frente al resultado,Algún cuarto de 15 o menos,1,1,0,100.0,50.0,80.0,72.0,8.0
+s118,J,Cuarto de menos puntos frente al resultado,Todos los cuartos de 16 o más,5,2,3,40.0,-10.0,89.8,87.6,2.2

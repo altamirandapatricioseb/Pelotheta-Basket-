@@ -1,0 +1,119 @@
+﻿stat_id,nombre,abrev,grupo,unidad,descripcion_es,formula,nivel,mas_es_mejor,estimada,por36
+games,Partidos jugados,PJ,resumen,partidos,Partidos en los que estuvo en cancha al menos un segundo.,Partidos con minutos > 0,B,1,0,0
+starts,Titularidades,Tit.,resumen,partidos,Partidos que empezó en el quinteto inicial.,,A,1,0,0
+minutes,Minutos,Min,resumen,minutos,"Minutos jugados en la temporada, desde el tiempo de cada box score.",Σ minutos por partido,B,1,0,0
+pts,Puntos,Pts,anotacion,puntos,"Puntos convertidos con dobles, triples y libres.",2 × 2P + 3 × 3P + TL,B,1,0,1
+trb,Rebotes,Reb,rebote,rebotes,Rebotes ofensivos más defensivos.,ORB + DRB,B,1,0,1
+orb,Rebotes ofensivos,RO,rebote,rebotes,"Rebotes tomados en el aro rival, que dan una posesión extra.",,A,1,0,1
+drb,Rebotes defensivos,RD,rebote,rebotes,"Rebotes tomados en el aro propio, que cierran la posesión rival.",,A,1,0,1
+ast,Asistencias,Ast,creacion,asistencias,"Último pase antes de una canasta de un compañero, según la planilla.",,A,1,0,1
+stl,Robos,Rob,defensa,robos,Pelotas recuperadas al rival.,,A,1,0,1
+blk,Tapas,Tap,defensa,tapas,Tiros del rival bloqueados.,,A,1,0,1
+tov,Pérdidas,Pér,creacion,pérdidas,Posesiones perdidas sin tirar.,,A,0,0,1
+pf,Faltas cometidas,Fal,disciplina,faltas,Faltas personales del jugador.,,A,0,0,1
+fg_pct,% de campo,TC%,eficiencia_tiro,%,Tiros de campo convertidos sobre intentados.,FG / FGA,B,1,0,0
+fg3_pct,% de triples,3P%,eficiencia_tiro,%,Triples convertidos sobre intentados.,3P / 3PA,B,1,0,0
+ft_pct,% de libres,TL%,eficiencia_tiro,%,Libres convertidos sobre intentados.,TL / TLI,B,1,0,0
+efg,eFG%,eFG%,eficiencia_tiro,%,"Efectividad de campo que cuenta el triple como 1,5 dobles.","(FG + 0,5 × 3P) / FGA",B,1,0,0
+ts,TS%,TS%,eficiencia_tiro,%,"Efectividad total: cuántos puntos saca por cada intento, incluidos los libres.","PTS / (2 × (FGA + 0,44 × FTA))",B,1,0,0
+points_per_shot,Puntos por tiro de campo,Puntos por tiro de campo,eficiencia_tiro,puntos,"Puntos que produce cada tiro de campo, sin contar libres.",(2 × (FG − 3P) + 3 × 3P) / FGA,B,1,0,0
+three_rate,3PAr,3PAr,eficiencia_tiro,proporción,Qué parte de sus tiros de campo son triples.,3PA / FGA,B,1,0,0
+ft_rate,FTr,FTr,eficiencia_tiro,proporción,Cuántos libres genera por cada tiro de campo.,FTA / FGA,B,1,0,0
+ast_to,Asistencias por pérdida,Asistencias por pérdida,creacion,proporción,Asistencias que da por cada pelota que pierde.,AST / TOV,B,1,0,0
+tov_pct,TOV%,TOV%,creacion,%,Pérdidas cada 100 jugadas que termina.,"100 × TOV / (FGA + 0,44 × FTA + TOV)",B,0,0,0
+usg_pct,USG%,USG%,creacion,%,Parte de las jugadas del equipo que termina él mientras está en cancha.,"100 × ((FGA + 0,44 FTA + TOV) × MinEq/5) / (MP × (FGA_eq + 0,44 FTA_eq + TOV_eq))",B,1,0,0
+ast_pct,AST%,AST%,creacion,%,Parte de las canastas de sus compañeros en cancha que asistió.,100 × AST / ((MP / (MinEq/5)) × FG_eq − FG),B,1,0,0
+orb_pct,ORB%,ORB%,rebote,%,Rebotes ofensivos que toma de los disponibles mientras juega.,100 × (ORB × MinEq/5) / (MP × (ORB_eq + DRB_rival)),B,1,0,0
+drb_pct,DRB%,DRB%,rebote,%,Rebotes defensivos que toma de los disponibles mientras juega.,100 × (DRB × MinEq/5) / (MP × (DRB_eq + ORB_rival)),B,1,0,0
+trb_pct,TRB%,TRB%,rebote,%,Rebotes totales que toma de los disponibles mientras juega.,100 × (TRB × MinEq/5) / (MP × (TRB_eq + TRB_rival)),B,1,0,0
+stl_pct,STL%,STL%,defensa,%,Posesiones rivales que termina con un robo mientras juega.,100 × (STL × MinEq/5) / (MP × Pos_rival),B,1,0,0
+blk_pct,BLK%,BLK%,defensa,%,Dobles del rival que tapa mientras juega.,100 × (BLK × MinEq/5) / (MP × 2PA_rival),B,1,0,0
+game_score_avg,Game Score medio,Game Score medio,valoracion,puntos,"Resumen de un partido en un número, en la escala de los puntos (Hollinger).","PTS + 0,4 FG − 0,7 FGA − 0,4 (FTA − FT) + 0,7 ORB + 0,3 DRB + STL + 0,7 AST + 0,7 BLK − 0,4 PF − TOV",B,1,0,0
+game_score_stdev,Consistencia (desvío del Game Score),Consistencia (desvío del Game Score),valoracion,puntos,Cuánto varía su Game Score entre partidos: más bajo es más regular.,Desvío estándar muestral,B,0,0,0
+pie,PIE,PIE,valoracion,proporción,Parte de lo que pasó en sus partidos que se explica por él.,Suma del jugador / misma suma de ambos equipos,B,1,0,0
+double_doubles,Dobles-dobles,Dobles-dobles,marcas,partidos,"Partidos con 10 o más en dos de puntos, rebotes, asistencias, robos y tapas.",Conteo,B,1,0,0
+triple_doubles,Triples-dobles,Triples-dobles,marcas,partidos,Partidos con 10 o más en tres de esas cinco categorías.,Conteo,B,1,0,0
+pts_per36,Puntos cada 36 minutos,Puntos cada 36 minutos,anotacion,puntos,Puntos llevados a 36 minutos para comparar jugadores con distinto tiempo.,PTS × 36 / MP,B,1,0,0
+team_points_share,% de los puntos del equipo,% de los puntos del equipo,anotacion,%,Qué parte de los puntos de Boca anotó.,PTS / PTS_eq,B,1,0,0
+streak_10_pts,Racha de 10 o más puntos,Racha de 10 o más puntos,marcas,partidos,Mayor cantidad de partidos seguidos con 10 o más puntos.,Racha máxima,B,1,0,0
+efficiency,Valoración,Val,valoracion,puntos,Índice de la planilla FIBA que publica la liga.,,A,1,0,0
+plus_minus,'+/−,'+/-,impacto,puntos,Diferencia del marcador con el jugador en cancha.,,A,1,0,0
+per,PER,PER,valoracion,puntos,Eficiencia por minuto de Hollinger con las constantes y el ritmo de la LNB; la liga promedia 15.,uPER × ritmo liga / ritmo equipo × 15 / aPER medio de la liga,B,1,0,0
+possessions_on,Posesiones en cancha,Posesiones en cancha,tacticas,posesiones,Posesiones estimadas de Boca y del rival mientras el jugador estaba en cancha.,"0,5 × (FGA + 0,44 FTA − ORB + TOV) de los tramos con él en cancha",B,1,1,0
+ortg_on,ORtg en cancha,ORtg en cancha,metricas_propias,puntos,Puntos de Boca cada 100 posesiones con el jugador en cancha (estimado).,100 × PTS_eq en cancha / Pos en cancha,B,1,1,0
+drtg_on,DRtg en cancha,DRtg en cancha,metricas_propias,puntos,Puntos del rival cada 100 posesiones con el jugador en cancha (estimado).,100 × PTS_rival en cancha / Pos en cancha,B,0,1,0
+net_rating_on,NR en cancha,NR en cancha,metricas_propias,puntos,"Diferencia de puntos cada 100 posesiones con él en cancha. Es del equipo, no producción individual.",ORtg en cancha − DRtg en cancha,B,1,0,0
+net_rating_off,NR fuera de cancha,NR fuera de cancha,metricas_propias,puntos,Diferencia de puntos cada 100 posesiones con el jugador en el banco.,ORtg fuera − DRtg fuera,B,0,0,0
+on_off,On/Off,On/Off,impacto,puntos,"Cuánto mejor (o peor) le va a Boca con el jugador en cancha que sin él, cada 100 posesiones.",NR en cancha − NR fuera,B,1,0,0
+ewa,EWA,EWA,metricas_propias,victorias,Victorias esperadas que agrega su ataque frente a un suplente promedio (propuesta de este sistema).,"(Min / 40) × [P(ORtg_on) − P(ORtg_rep)], P(a) = a^x / (a^x + L^x)",B,1,0,0
+ela,ELA,ELA,metricas_propias,derrotas,Derrotas esperadas que agrega su defensa frente a un suplente; negativo es bueno (propuesta).,"(Min / 40) × [Q(DRtg_on) − Q(DRtg_rep)], Q(g) = g^x / (g^x + L^x)",B,0,0,0
+rendimiento_indice,Índice de rendimiento,Índice de rendimiento,evolucion,índice,"Rendimiento global de 0 a 100 frente al plantel, por componentes (estimado).",Σ peso × promedio de percentiles por componente (pesos sin posición),B,1,0,0
+rendimiento_cobertura,Cobertura del índice,Cobertura del índice,evolucion,proporción,"Qué parte de los pesos del índice tiene datos; menos de 0,6 deja el índice n/d.",Σ pesos de los componentes con datos,B,1,0,0
+potencial_alpha,Potencial α,Potencial α,evolucion,percentil,Percentil esperado en su pico según la edad (rango ± 8). Sin Mejoría α todavía: usa M = 0.,"min(100, N + G × años × (1 + λ × M))",B,1,0,0
+potencial_beta,Potencial β,Potencial β,evolucion,índice,"Índice de nivel, tendencia y edad para ordenar el plantel. Sin Mejoría β todavía: T = R*.","0,60 R* + 0,25 T + 0,15 × 100 × F_edad",B,1,0,0
+ast_per36,Asistencias cada 36 minutos,Asistencias cada 36 minutos,creacion,asistencias,Asistencias llevadas a 36 minutos.,AST × 36 / MP,B,1,0,0
+pf_per36,Faltas cada 36 minutos,Faltas cada 36 minutos,disciplina,faltas,Faltas llevadas a 36 minutos.,PF × 36 / MP,B,0,0,0
+game_score_per36,Game Score cada 36 minutos,Game Score cada 36 minutos,valoracion,puntos,Game Score total llevado a 36 minutos.,Σ Game Score × 36 / MP,B,1,0,0
+team_minutes_share,% de los minutos del equipo,% de los minutos del equipo,tacticas,%,Parte de los minutos de juego de Boca que estuvo en cancha.,MP / minutos de juego del equipo,B,1,0,0
+pts_per40,Puntos cada 40 minutos,Puntos cada 40 minutos,anotacion,puntos,Puntos llevados a un partido completo de 40 minutos.,PTS × 40 / MP,B,1,0,0
+stl_per36,Robos cada 36 minutos,Robos cada 36 minutos,defensa,robos,Robos llevados a 36 minutos.,STL × 36 / MP,B,1,0,0
+blk_per36,Tapas cada 36 minutos,Tapas cada 36 minutos,defensa,tapas,Tapas llevadas a 36 minutos.,BLK × 36 / MP,B,1,0,0
+tov_per36,Pérdidas cada 36 minutos,Pérdidas cada 36 minutos,creacion,pérdidas,Pérdidas llevadas a 36 minutos.,TOV × 36 / MP,B,0,0,0
+fg2_pct,% de dobles,2P%,eficiencia_tiro,%,Tiros de 2 convertidos sobre intentados.,2P / 2PA,B,1,0,0
+mpg,Minutos por partido,MPP,promedios,minutos,Minutos promedio en los partidos que jugó.,MP / PJ,B,1,0,0
+ppg,Puntos por partido,PPP,promedios,puntos,Puntos promedio por partido jugado.,PTS / PJ,B,1,0,0
+rpg,Rebotes por partido,RPP,promedios,rebotes,Rebotes promedio por partido jugado.,TRB / PJ,B,1,0,0
+apg,Asistencias por partido,APP,promedios,asistencias,Asistencias promedio por partido jugado.,AST / PJ,B,1,0,0
+spg,Robos por partido,RoPP,promedios,robos,Robos promedio por partido jugado.,STL / PJ,B,1,0,0
+bpg,Tapas por partido,TaPP,promedios,tapas,Tapas promedio por partido jugado.,BLK / PJ,B,1,0,0
+tpg,Pérdidas por partido,PéPP,promedios,pérdidas,Pérdidas promedio por partido jugado.,TOV / PJ,B,0,0,0
+fgm,Tiros de campo convertidos,Tiros de campo convertidos,anotacion,tiros,Dobles más triples convertidos en la temporada.,2P + 3P,B,1,0,1
+fga,Tiros de campo intentados,Tiros de campo intentados,anotacion,tiros,Dobles más triples intentados en la temporada.,2PA + 3PA,B,1,0,1
+fg2m,Dobles convertidos,Dobles convertidos,anotacion,tiros,Tiros de 2 convertidos en la temporada.,,A,1,0,1
+fg2a,Dobles intentados,Dobles intentados,anotacion,tiros,Tiros de 2 intentados en la temporada.,,A,1,0,1
+fg3m,Triples convertidos,Triples convertidos,anotacion,tiros,Tiros de 3 convertidos en la temporada.,,A,1,0,1
+fg3a,Triples intentados,Triples intentados,anotacion,tiros,Tiros de 3 intentados en la temporada.,,A,1,0,1
+ftm,Libres convertidos,Libres convertidos,anotacion,tiros,Tiros libres convertidos en la temporada.,,A,1,0,1
+fta,Libres intentados,Libres intentados,anotacion,tiros,Tiros libres intentados en la temporada.,,A,1,0,1
+pf_drawn,Faltas recibidas,Faltas recibidas,disciplina,faltas,Faltas que le cometieron en la temporada.,,A,1,0,1
+bench_games,Partidos desde el banco,Partidos desde el banco,resumen,partidos,Partidos en los que entró desde el banco.,PJ − titularidades,B,1,0,0
+fpg,Faltas por partido,Faltas por partido,disciplina,faltas,Faltas personales promedio por partido jugado.,PF / PJ,B,0,0,0
+pts_per100,Puntos cada 100 posesiones,Puntos cada 100 posesiones,anotacion,puntos,Puntos por cada 100 posesiones con él en cancha (estimado).,100 × PTS / posesiones en cancha,B,1,0,0
+trb_per100,Rebotes cada 100 posesiones,Rebotes cada 100 posesiones,rebote,rebotes,Rebotes por cada 100 posesiones con él en cancha (estimado).,100 × TRB / posesiones en cancha,B,1,0,0
+ast_per100,Asistencias cada 100 posesiones,Asistencias cada 100 posesiones,creacion,asistencias,Asistencias por cada 100 posesiones con él en cancha (estimado).,100 × AST / posesiones en cancha,B,1,0,0
+minutes_last_7d,Minutos en los últimos 7 días,Minutos en los últimos 7 días,carga,minutos,Carga de minutos de la última semana hasta el último partido.,Σ MP de los últimos 7 días,B,0,0,0
+minutes_last_14d,Minutos en los últimos 14 días,Minutos en los últimos 14 días,carga,minutos,Carga de minutos de las últimas dos semanas.,Σ MP de los últimos 14 días,B,0,0,0
+minutes_last_28d,Minutos en los últimos 28 días,Minutos en los últimos 28 días,carga,minutos,Carga de minutos de las últimas cuatro semanas.,Σ MP de los últimos 28 días,B,0,0,0
+streak_double_double,Racha de dobles-dobles,Racha de dobles-dobles,marcas,partidos,Mayor cantidad de partidos seguidos con doble-doble.,Racha máxima,B,1,0,0
+streak_three_40,Racha de 40 % en triples,Racha de 40 % en triples,marcas,partidos,Partidos seguidos con 40 % o más en triples (3 intentos o más).,Racha máxima,B,1,0,0
+rank_ppg,Puesto en puntos por partido,Puesto en puntos por partido,liga,puesto,Lugar entre los jugadores de la liga con 3 partidos o más.,Orden de PTS/PJ en la liga,B,0,0,0
+rank_rpg,Puesto en rebotes por partido,Puesto en rebotes por partido,liga,puesto,Lugar entre los jugadores de la liga con 3 partidos o más.,Orden de TRB/PJ en la liga,B,0,0,0
+rank_apg,Puesto en asistencias por partido,Puesto en asistencias por partido,liga,puesto,Lugar entre los jugadores de la liga con 3 partidos o más.,Orden de AST/PJ en la liga,B,0,0,0
+rank_spg,Puesto en robos por partido,Puesto en robos por partido,liga,puesto,Lugar entre los jugadores de la liga con 3 partidos o más.,Orden de STL/PJ en la liga,B,0,0,0
+rank_bpg,Puesto en tapas por partido,Puesto en tapas por partido,liga,puesto,Lugar entre los jugadores de la liga con 3 partidos o más.,Orden de BLK/PJ en la liga,B,0,0,0
+rank_per,Puesto en PER,Puesto en PER,liga,puesto,Lugar entre los jugadores de la liga con 3 partidos o más.,Orden de PER en la liga,B,0,0,0
+ppg_home,Puntos por partido de local,PPP local,splits,puntos,Promedio de puntos en los partidos de local.,PTS / PJ de local,B,1,0,0
+ppg_away,Puntos por partido de visitante,PPP visit.,splits,puntos,Promedio de puntos en los partidos de visitante.,PTS / PJ de visitante,B,1,0,0
+ppg_wins,Puntos por partido en victorias,PPP gan.,splits,puntos,Promedio de puntos en los partidos que ganó Boca.,PTS / PJ en partidos ganados,B,1,0,0
+ppg_losses,Puntos por partido en derrotas,PPP perd.,splits,puntos,Promedio de puntos en los partidos que perdió Boca.,PTS / PJ en partidos perdidos,B,1,0,0
+pm_wins,Más/menos en victorias,'+/- gan.,splits,puntos,Más/menos promedio en los partidos ganados.,'+/- / PJ en partidos ganados,B,1,0,0
+pm_losses,Más/menos en derrotas,'+/- perd.,splits,puntos,Más/menos promedio en los partidos perdidos.,'+/- / PJ en partidos perdidos,B,1,0,0
+pm_per_game,Más/menos por partido,'+/- PP,splits,puntos,Diferencia de puntos promedio mientras estuvo en cancha.,'+/- / PJ,A,1,0,0
+ppg_last5,"Puntos, últimos 5",PPP últ. 5,forma,puntos,Promedio de puntos en sus últimos 5 partidos jugados.,PTS / 5 de sus últimos 5 partidos,B,1,0,0
+rpg_last5,"Rebotes, últimos 5",RPP últ. 5,forma,rebotes,Promedio de rebotes en sus últimos 5 partidos jugados.,TRB / 5 de sus últimos 5 partidos,B,1,0,0
+apg_last5,"Asistencias, últimos 5",APP últ. 5,forma,asistencias,Promedio de asistencias en sus últimos 5 partidos jugados.,AST / 5 de sus últimos 5 partidos,B,1,0,0
+mpg_last5,"Minutos, últimos 5",MPP últ. 5,forma,minutos,Promedio de minutos en sus últimos 5 partidos jugados.,Minutos / 5 de sus últimos 5 partidos,B,1,0,0
+max_pts,Máximo de puntos,Máx. pts,forma,puntos,Mayor cantidad de puntos en un partido.,,A,1,0,0
+max_trb,Máximo de rebotes,Máx. reb,forma,rebotes,Mayor cantidad de rebotes en un partido.,,A,1,0,0
+max_ast,Máximo de asistencias,Máx. ast,forma,asistencias,Mayor cantidad de asistencias en un partido.,,A,1,0,0
+max_efficiency,Mejor valoración,Máx. val,forma,puntos,Mayor valoración de la LNB en un partido.,,A,1,0,0
+aro_fga_share,Tiros cerca del aro,Aro: tiros,zonas,%,Parte de los tiros de campo del jugador que fueron cerca del aro.,Tiros de la zona / FGA,B,1,0,0
+aro_fg_pct,Acierto cerca del aro,Aro: %,zonas,%,Acierto del jugador en tiros cerca del aro.,Convertidos / intentados de la zona,B,1,0,0
+pintura_fga_share,Tiros en el resto de la pintura,Pintura: tiros,zonas,%,Parte de los tiros de campo del jugador que fueron en el resto de la pintura.,Tiros de la zona / FGA,B,1,0,0
+pintura_fg_pct,Acierto en el resto de la pintura,Pintura: %,zonas,%,Acierto del jugador en tiros en el resto de la pintura.,Convertidos / intentados de la zona,B,1,0,0
+media_fga_share,Tiros de media distancia,Media: tiros,zonas,%,Parte de los tiros de campo del jugador que fueron de media distancia.,Tiros de la zona / FGA,B,1,0,0
+media_fg_pct,Acierto de media distancia,Media: %,zonas,%,Acierto del jugador en tiros de media distancia.,Convertidos / intentados de la zona,B,1,0,0
+esquina3_fga_share,Tiros de triple desde la esquina,3 esq.: tiros,zonas,%,Parte de los tiros de campo del jugador que fueron de triple desde la esquina.,Tiros de la zona / FGA,B,1,0,0
+esquina3_fg_pct,Acierto de triple desde la esquina,3 esq.: %,zonas,%,Acierto del jugador en tiros de triple desde la esquina.,Convertidos / intentados de la zona,B,1,0,0
+frontal3_fga_share,Tiros de triple frontal o de 45°,3 front.: tiros,zonas,%,Parte de los tiros de campo del jugador que fueron de triple frontal o de 45°.,Tiros de la zona / FGA,B,1,0,0
+frontal3_fg_pct,Acierto de triple frontal o de 45°,3 front.: %,zonas,%,Acierto del jugador en tiros de triple frontal o de 45°.,Convertidos / intentados de la zona,B,1,0,0

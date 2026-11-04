@@ -1,0 +1,470 @@
+﻿equipo,stat_id,valor
+ARGENTINO (J),drtg,105.9482
+ARGENTINO (J),efg,0.5156
+ARGENTINO (J),elo,1495.5
+ARGENTINO (J),ft_per_fga,0.2281
+ARGENTINO (J),gb,2.5
+ARGENTINO (J),home_win_pct,0.6
+ARGENTINO (J),losses,2.0
+ARGENTINO (J),mov,1.8
+ARGENTINO (J),net_rating,2.4201
+ARGENTINO (J),orb_pct_team,0.2872
+ARGENTINO (J),ortg,108.3683
+ARGENTINO (J),played,5.0
+ARGENTINO (J),points_against_pg,78.8
+ARGENTINO (J),points_for_pg,80.6
+ARGENTINO (J),position,5.0
+ARGENTINO (J),pyth_losses,1.9933
+ARGENTINO (J),pyth_wins,3.0067
+ARGENTINO (J),sos,1.7234
+ARGENTINO (J),srs,3.5234
+ARGENTINO (J),tov_pct,14.2497
+ARGENTINO (J),win_pct,0.6
+ARGENTINO (J),wins,3.0
+ATENAS (C),away_win_pct,0.5
+ATENAS (C),drtg,110.0489
+ATENAS (C),efg,0.5721
+ATENAS (C),elo,1525.3
+ATENAS (C),ft_per_fga,0.2163
+ATENAS (C),gb,1.5
+ATENAS (C),home_advantage,0.5
+ATENAS (C),home_win_pct,1.0
+ATENAS (C),losses,1.0
+ATENAS (C),mov,3.0
+ATENAS (C),net_rating,3.9397
+ATENAS (C),orb_pct_team,0.2372
+ATENAS (C),ortg,113.9885
+ATENAS (C),played,5.0
+ATENAS (C),points_against_pg,83.8
+ATENAS (C),points_for_pg,86.8
+ATENAS (C),position,3.0
+ATENAS (C),pyth_losses,1.7261
+ATENAS (C),pyth_wins,3.2739
+ATENAS (C),sos,1.6093
+ATENAS (C),srs,4.6093
+ATENAS (C),tov_pct,13.8783
+ATENAS (C),win_pct,0.8
+ATENAS (C),wins,4.0
+BOCA,away_win_pct,0.25
+BOCA,bench_ppg,29.6667
+BOCA,bench_pts_share,0.3365
+BOCA,big_runs,46.0
+BOCA,big_runs_rival,53.0
+BOCA,brier_mean,0.1858
+BOCA,clutch_net,13.0
+BOCA,coverage_box_score,1.0
+BOCA,coverage_pbp,1.0
+BOCA,drtg,114.7357
+BOCA,efg,0.554
+BOCA,elo,1505.9
+BOCA,ft_per_fga,0.2211
+BOCA,gb,3.0
+BOCA,home_advantage,0.75
+BOCA,home_win_pct,1.0
+BOCA,last5_net_rating,-1.13
+BOCA,last5_wins,2.0
+BOCA,lead_changes,290.0
+BOCA,longest_win_streak,2.0
+BOCA,losses,3.0
+BOCA,max_deficit,24.0
+BOCA,max_lead,29.0
+BOCA,max_run,16.0
+BOCA,max_run_rival,15.0
+BOCA,min_share_age_21,0.0038
+BOCA,min_share_age_22_26,0.2727
+BOCA,min_share_age_27_31,0.5648
+BOCA,min_share_age_32,0.1587
+BOCA,minutes_leading,751.7
+BOCA,minutes_tied,117.2
+BOCA,minutes_trailing,681.1
+BOCA,mov,3.1667
+BOCA,net_rating,4.2745
+BOCA,net_rating_stdev,17.9297
+BOCA,net_rating_vs_bottom,22.36
+BOCA,net_rating_vs_mid,-3.16
+BOCA,net_rating_vs_top,-7.39
+BOCA,orb_pct_team,0.37
+BOCA,ortg,119.0101
+BOCA,pace,74.0833
+BOCA,played,6.0
+BOCA,points_against_pg,85.0
+BOCA,points_for_pg,88.1667
+BOCA,position,8.0
+BOCA,pts_3_share,0.3419
+BOCA,pts_assisted_share,0.3987
+BOCA,pts_ft_share,0.1889
+BOCA,pts_second_chance,395.0
+BOCA,pts_second_chance_rival,375.0
+BOCA,pyth_losses,2.0367
+BOCA,pyth_wins,3.9633
+BOCA,q1_diff,3.33
+BOCA,q2_diff,1.17
+BOCA,q3_diff,1.67
+BOCA,q4_diff,-3.0
+BOCA,quarter_end_diff,44.0
+BOCA,quarter_start_diff,-40.0
+BOCA,rotation_depth,10.0
+BOCA,scorer_herfindahl,0.1192
+BOCA,sos,0.8353
+BOCA,srs,4.002
+BOCA,starters_jaccard,0.867
+BOCA,timeouts,141.0
+BOCA,tov_pct,14.5728
+BOCA,win_pct,0.5
+BOCA,wins,3.0
+FERRO,away_win_pct,0.2
+FERRO,drtg,105.8081
+FERRO,efg,0.4773
+FERRO,elo,1492.6
+FERRO,ft_per_fga,0.2846
+FERRO,gb,4.0
+FERRO,home_advantage,0.8
+FERRO,home_win_pct,1.0
+FERRO,losses,4.0
+FERRO,mov,-3.5
+FERRO,net_rating,-4.3313
+FERRO,orb_pct_team,0.2291
+FERRO,ortg,101.4768
+FERRO,played,6.0
+FERRO,points_against_pg,85.5
+FERRO,points_for_pg,82.0
+FERRO,position,14.0
+FERRO,pyth_losses,4.089
+FERRO,pyth_wins,1.911
+FERRO,sos,1.5477
+FERRO,srs,-1.9523
+FERRO,tov_pct,13.9519
+FERRO,win_pct,0.3333
+FERRO,wins,2.0
+GIMNASIA (CR),away_win_pct,0.6667
+GIMNASIA (CR),drtg,99.4575
+GIMNASIA (CR),efg,0.5115
+GIMNASIA (CR),elo,1549.0
+GIMNASIA (CR),ft_per_fga,0.1456
+GIMNASIA (CR),gb,1.0
+GIMNASIA (CR),home_advantage,0.3333
+GIMNASIA (CR),home_win_pct,1.0
+GIMNASIA (CR),losses,2.0
+GIMNASIA (CR),mov,3.375
+GIMNASIA (CR),net_rating,4.6061
+GIMNASIA (CR),orb_pct_team,0.2332
+GIMNASIA (CR),ortg,104.0636
+GIMNASIA (CR),played,8.0
+GIMNASIA (CR),points_against_pg,72.875
+GIMNASIA (CR),points_for_pg,76.25
+GIMNASIA (CR),position,4.0
+GIMNASIA (CR),pyth_losses,2.4394
+GIMNASIA (CR),pyth_wins,5.5606
+GIMNASIA (CR),sos,-0.7717
+GIMNASIA (CR),srs,2.6033
+GIMNASIA (CR),tov_pct,12.2752
+GIMNASIA (CR),win_pct,0.75
+GIMNASIA (CR),wins,6.0
+INDEPENDIENTE (O),drtg,119.9344
+INDEPENDIENTE (O),efg,0.6194
+INDEPENDIENTE (O),elo,1494.1
+INDEPENDIENTE (O),ft_per_fga,0.2537
+INDEPENDIENTE (O),gb,3.0
+INDEPENDIENTE (O),home_win_pct,0.5
+INDEPENDIENTE (O),losses,1.0
+INDEPENDIENTE (O),mov,5.0
+INDEPENDIENTE (O),net_rating,6.3123
+INDEPENDIENTE (O),orb_pct_team,0.2923
+INDEPENDIENTE (O),ortg,126.2467
+INDEPENDIENTE (O),played,2.0
+INDEPENDIENTE (O),points_against_pg,95.0
+INDEPENDIENTE (O),points_for_pg,100.0
+INDEPENDIENTE (O),position,7.0
+INDEPENDIENTE (O),pyth_losses,0.5644
+INDEPENDIENTE (O),pyth_wins,1.4356
+INDEPENDIENTE (O),sos,-3.1381
+INDEPENDIENTE (O),srs,1.8619
+INDEPENDIENTE (O),tov_pct,13.366
+INDEPENDIENTE (O),win_pct,0.5
+INDEPENDIENTE (O),wins,1.0
+INSTITUTO,away_win_pct,0.5
+INSTITUTO,drtg,93.8575
+INSTITUTO,efg,0.4934
+INSTITUTO,elo,1506.4
+INSTITUTO,ft_per_fga,0.2525
+INSTITUTO,gb,2.5
+INSTITUTO,home_advantage,0.1667
+INSTITUTO,home_win_pct,0.6667
+INSTITUTO,losses,2.0
+INSTITUTO,mov,0.4
+INSTITUTO,net_rating,0.506
+INSTITUTO,orb_pct_team,0.2134
+INSTITUTO,ortg,94.3635
+INSTITUTO,played,5.0
+INSTITUTO,points_against_pg,74.2
+INSTITUTO,points_for_pg,74.6
+INSTITUTO,position,6.0
+INSTITUTO,pyth_losses,2.3778
+INSTITUTO,pyth_wins,2.6222
+INSTITUTO,sos,-3.3954
+INSTITUTO,srs,-2.9954
+INSTITUTO,tov_pct,18.498
+INSTITUTO,win_pct,0.6
+INSTITUTO,wins,3.0
+LA UNION FSA,away_win_pct,0.5
+LA UNION FSA,drtg,111.9502
+LA UNION FSA,efg,0.5467
+LA UNION FSA,elo,1493.3
+LA UNION FSA,ft_per_fga,0.2473
+LA UNION FSA,gb,3.5
+LA UNION FSA,home_advantage,-0.5
+LA UNION FSA,home_win_pct,0.0
+LA UNION FSA,losses,2.0
+LA UNION FSA,mov,-2.6667
+LA UNION FSA,net_rating,-3.554
+LA UNION FSA,orb_pct_team,0.2842
+LA UNION FSA,ortg,108.3963
+LA UNION FSA,played,3.0
+LA UNION FSA,points_against_pg,84.0
+LA UNION FSA,points_for_pg,81.3333
+LA UNION FSA,position,13.0
+LA UNION FSA,pyth_losses,1.9281
+LA UNION FSA,pyth_wins,1.0719
+LA UNION FSA,sos,0.2722
+LA UNION FSA,srs,-2.3945
+LA UNION FSA,tov_pct,15.9617
+LA UNION FSA,win_pct,0.3333
+LA UNION FSA,wins,1.0
+LANÚS,away_win_pct,0.0
+LANÚS,drtg,103.0289
+LANÚS,efg,0.4582
+LANÚS,elo,1477.6
+LANÚS,ft_per_fga,0.2626
+LANÚS,gb,4.0
+LANÚS,home_advantage,0.6
+LANÚS,home_win_pct,0.6
+LANÚS,losses,5.0
+LANÚS,mov,-3.25
+LANÚS,net_rating,-4.2385
+LANÚS,orb_pct_team,0.23
+LANÚS,ortg,98.7904
+LANÚS,played,8.0
+LANÚS,points_against_pg,79.0
+LANÚS,points_for_pg,75.75
+LANÚS,position,12.0
+LANÚS,pyth_losses,5.4588
+LANÚS,pyth_wins,2.5412
+LANÚS,sos,-1.0739
+LANÚS,srs,-4.3239
+LANÚS,tov_pct,12.2843
+LANÚS,win_pct,0.375
+LANÚS,wins,3.0
+OBERÁ,away_win_pct,0.25
+OBERÁ,drtg,105.7182
+OBERÁ,efg,0.4465
+OBERÁ,elo,1479.7
+OBERÁ,ft_per_fga,0.2294
+OBERÁ,gb,4.5
+OBERÁ,home_advantage,-0.25
+OBERÁ,home_win_pct,0.0
+OBERÁ,losses,4.0
+OBERÁ,mov,-7.8
+OBERÁ,net_rating,-10.1552
+OBERÁ,orb_pct_team,0.2472
+OBERÁ,ortg,95.563
+OBERÁ,played,5.0
+OBERÁ,points_against_pg,81.2
+OBERÁ,points_for_pg,73.4
+OBERÁ,position,17.0
+OBERÁ,pyth_losses,4.3136
+OBERÁ,pyth_wins,0.6864
+OBERÁ,sos,-1.2757
+OBERÁ,srs,-9.0757
+OBERÁ,tov_pct,14.3918
+OBERÁ,win_pct,0.2
+OBERÁ,wins,1.0
+OLIMPICO (LB),away_win_pct,1.0
+OLIMPICO (LB),drtg,106.8412
+OLIMPICO (LB),efg,0.5384
+OLIMPICO (LB),elo,1495.9
+OLIMPICO (LB),ft_per_fga,0.2455
+OLIMPICO (LB),gb,3.0
+OLIMPICO (LB),home_advantage,-0.75
+OLIMPICO (LB),home_win_pct,0.25
+OLIMPICO (LB),losses,3.0
+OLIMPICO (LB),mov,1.8333
+OLIMPICO (LB),net_rating,2.3226
+OLIMPICO (LB),orb_pct_team,0.2153
+OLIMPICO (LB),ortg,109.1639
+OLIMPICO (LB),played,6.0
+OLIMPICO (LB),points_against_pg,84.3333
+OLIMPICO (LB),points_for_pg,86.1667
+OLIMPICO (LB),position,9.0
+OLIMPICO (LB),pyth_losses,2.4203
+OLIMPICO (LB),pyth_wins,3.5797
+OLIMPICO (LB),sos,0.45
+OLIMPICO (LB),srs,2.2834
+OLIMPICO (LB),tov_pct,13.4095
+OLIMPICO (LB),win_pct,0.5
+OLIMPICO (LB),wins,3.0
+PEÑAROL (MDP),away_win_pct,0.75
+PEÑAROL (MDP),drtg,96.7449
+PEÑAROL (MDP),efg,0.5025
+PEÑAROL (MDP),elo,1543.1
+PEÑAROL (MDP),ft_per_fga,0.243
+PEÑAROL (MDP),gb,1.0
+PEÑAROL (MDP),home_advantage,0.25
+PEÑAROL (MDP),home_win_pct,1.0
+PEÑAROL (MDP),losses,1.0
+PEÑAROL (MDP),mov,7.6667
+PEÑAROL (MDP),net_rating,9.9558
+PEÑAROL (MDP),orb_pct_team,0.2451
+PEÑAROL (MDP),ortg,106.7007
+PEÑAROL (MDP),played,6.0
+PEÑAROL (MDP),points_against_pg,74.5
+PEÑAROL (MDP),points_for_pg,82.1667
+PEÑAROL (MDP),position,2.0
+PEÑAROL (MDP),pyth_losses,0.8638
+PEÑAROL (MDP),pyth_wins,5.1362
+PEÑAROL (MDP),sos,0.0428
+PEÑAROL (MDP),srs,7.7095
+PEÑAROL (MDP),tov_pct,13.2948
+PEÑAROL (MDP),win_pct,0.8333
+PEÑAROL (MDP),wins,5.0
+PLATENSE,away_win_pct,0.5
+PLATENSE,drtg,104.7735
+PLATENSE,efg,0.5129
+PLATENSE,elo,1504.0
+PLATENSE,ft_per_fga,0.2134
+PLATENSE,gb,3.0
+PLATENSE,home_advantage,0.0
+PLATENSE,home_win_pct,0.5
+PLATENSE,losses,3.0
+PLATENSE,mov,0.0
+PLATENSE,net_rating,0.0
+PLATENSE,orb_pct_team,0.242
+PLATENSE,ortg,104.7735
+PLATENSE,played,6.0
+PLATENSE,points_against_pg,80.3333
+PLATENSE,points_for_pg,80.3333
+PLATENSE,position,10.0
+PLATENSE,pyth_losses,3.0
+PLATENSE,pyth_wins,3.0
+PLATENSE,sos,-0.3166
+PLATENSE,srs,-0.3166
+PLATENSE,tov_pct,14.0252
+PLATENSE,win_pct,0.5
+PLATENSE,wins,3.0
+QUIMSA,away_win_pct,1.0
+QUIMSA,drtg,97.179
+QUIMSA,efg,0.5647
+QUIMSA,elo,1553.0
+QUIMSA,ft_per_fga,0.3247
+QUIMSA,gb,0.0
+QUIMSA,home_advantage,0.0
+QUIMSA,home_win_pct,1.0
+QUIMSA,losses,0.0
+QUIMSA,mov,10.5
+QUIMSA,net_rating,13.82
+QUIMSA,orb_pct_team,0.1765
+QUIMSA,ortg,110.999
+QUIMSA,played,6.0
+QUIMSA,points_against_pg,73.8333
+QUIMSA,points_for_pg,84.3333
+QUIMSA,position,1.0
+QUIMSA,pyth_losses,0.49
+QUIMSA,pyth_wins,5.51
+QUIMSA,sos,3.0096
+QUIMSA,srs,13.5096
+QUIMSA,tov_pct,15.6507
+QUIMSA,win_pct,1.0
+QUIMSA,wins,6.0
+RACING (CH),away_win_pct,0.6667
+RACING (CH),drtg,110.8939
+RACING (CH),efg,0.5167
+RACING (CH),elo,1487.1
+RACING (CH),ft_per_fga,0.2494
+RACING (CH),gb,3.5
+RACING (CH),home_advantage,-0.4167
+RACING (CH),home_win_pct,0.25
+RACING (CH),losses,4.0
+RACING (CH),mov,-2.0
+RACING (CH),net_rating,-2.6314
+RACING (CH),orb_pct_team,0.2374
+RACING (CH),ortg,108.2625
+RACING (CH),played,7.0
+RACING (CH),points_against_pg,84.2857
+RACING (CH),points_for_pg,82.2857
+RACING (CH),position,11.0
+RACING (CH),pyth_losses,4.2529
+RACING (CH),pyth_wins,2.7471
+RACING (CH),sos,0.5298
+RACING (CH),srs,-1.4702
+RACING (CH),tov_pct,11.2985
+RACING (CH),win_pct,0.4286
+RACING (CH),wins,3.0
+REGATAS (C),away_win_pct,0.0
+REGATAS (C),drtg,102.2274
+REGATAS (C),efg,0.4732
+REGATAS (C),elo,1479.2
+REGATAS (C),ft_per_fga,0.1992
+REGATAS (C),gb,4.0
+REGATAS (C),home_advantage,0.5
+REGATAS (C),home_win_pct,0.5
+REGATAS (C),losses,3.0
+REGATAS (C),mov,-3.5
+REGATAS (C),net_rating,-4.5725
+REGATAS (C),orb_pct_team,0.2199
+REGATAS (C),ortg,97.655
+REGATAS (C),played,4.0
+REGATAS (C),points_against_pg,78.25
+REGATAS (C),points_for_pg,74.75
+REGATAS (C),position,15.0
+REGATAS (C),pyth_losses,2.7878
+REGATAS (C),pyth_wins,1.2122
+REGATAS (C),sos,-0.2585
+REGATAS (C),srs,-3.7585
+REGATAS (C),tov_pct,13.6175
+REGATAS (C),win_pct,0.25
+REGATAS (C),wins,1.0
+SAN LORENZO,drtg,106.5514
+SAN LORENZO,efg,0.5021
+SAN LORENZO,elo,1469.0
+SAN LORENZO,ft_per_fga,0.2773
+SAN LORENZO,gb,4.0
+SAN LORENZO,home_win_pct,0.25
+SAN LORENZO,losses,3.0
+SAN LORENZO,mov,-4.5
+SAN LORENZO,net_rating,-5.9379
+SAN LORENZO,orb_pct_team,0.2047
+SAN LORENZO,ortg,100.6136
+SAN LORENZO,played,4.0
+SAN LORENZO,points_against_pg,80.75
+SAN LORENZO,points_for_pg,76.25
+SAN LORENZO,position,16.0
+SAN LORENZO,pyth_losses,2.9582
+SAN LORENZO,pyth_wins,1.0418
+SAN LORENZO,sos,0.2301
+SAN LORENZO,srs,-4.2699
+SAN LORENZO,tov_pct,15.6461
+SAN LORENZO,win_pct,0.25
+SAN LORENZO,wins,1.0
+SAN MARTÍN (C),away_win_pct,0.0
+SAN MARTÍN (C),drtg,119.5812
+SAN MARTÍN (C),efg,0.5584
+SAN MARTÍN (C),elo,1449.4
+SAN MARTÍN (C),ft_per_fga,0.2052
+SAN MARTÍN (C),gb,6.0
+SAN MARTÍN (C),home_advantage,0.0
+SAN MARTÍN (C),home_win_pct,0.0
+SAN MARTÍN (C),losses,6.0
+SAN MARTÍN (C),mov,-10.3333
+SAN MARTÍN (C),net_rating,-12.9843
+SAN MARTÍN (C),orb_pct_team,0.2341
+SAN MARTÍN (C),ortg,106.5969
+SAN MARTÍN (C),played,6.0
+SAN MARTÍN (C),points_against_pg,95.1667
+SAN MARTÍN (C),points_for_pg,84.8333
+SAN MARTÍN (C),position,18.0
+SAN MARTÍN (C),pyth_losses,5.3407
+SAN MARTÍN (C),pyth_wins,0.6593
+SAN MARTÍN (C),sos,0.7878
+SAN MARTÍN (C),srs,-9.5455
+SAN MARTÍN (C),tov_pct,15.8155
+SAN MARTÍN (C),win_pct,0.0
+SAN MARTÍN (C),wins,0.0

@@ -1,0 +1,134 @@
+﻿set_id,conjunto,stat_id,orden
+resumen,Resumen,games,1
+resumen,Resumen,starts,2
+resumen,Resumen,minutes,3
+resumen,Resumen,pts,4
+resumen,Resumen,trb,5
+resumen,Resumen,ast,6
+resumen,Resumen,efficiency,7
+anotacion,Anotación,pts,1
+anotacion,Anotación,pts_per36,2
+anotacion,Anotación,team_points_share,3
+anotacion,Anotación,points_per_shot,4
+anotacion,Anotación,fg_pct,5
+anotacion,Anotación,fg3_pct,6
+anotacion,Anotación,ft_pct,7
+anotacion,Anotación,streak_10_pts,8
+eficiencia_tiro,Eficiencia de tiro,efg,1
+eficiencia_tiro,Eficiencia de tiro,ts,2
+eficiencia_tiro,Eficiencia de tiro,three_rate,3
+eficiencia_tiro,Eficiencia de tiro,ft_rate,4
+eficiencia_tiro,Eficiencia de tiro,fg_pct,5
+eficiencia_tiro,Eficiencia de tiro,fg2_pct,6
+eficiencia_tiro,Eficiencia de tiro,fg3_pct,7
+eficiencia_tiro,Eficiencia de tiro,ft_pct,8
+rebote,Rebote,trb,1
+rebote,Rebote,orb,2
+rebote,Rebote,drb,3
+rebote,Rebote,orb_pct,4
+rebote,Rebote,drb_pct,5
+rebote,Rebote,trb_pct,6
+creacion,Creación,ast,1
+creacion,Creación,tov,2
+creacion,Creación,ast_to,3
+creacion,Creación,ast_pct,4
+creacion,Creación,tov_pct,5
+creacion,Creación,usg_pct,6
+defensa,Defensa,stl,1
+defensa,Defensa,blk,2
+defensa,Defensa,stl_per36,3
+defensa,Defensa,blk_per36,4
+defensa,Defensa,stl_pct,5
+defensa,Defensa,blk_pct,6
+valoracion,Valoración global,per,1
+valoracion,Valoración global,game_score_avg,2
+valoracion,Valoración global,game_score_stdev,3
+valoracion,Valoración global,pie,4
+valoracion,Valoración global,efficiency,5
+impacto,Impacto,plus_minus,1
+impacto,Impacto,on_off,2
+impacto,Impacto,net_rating_on,3
+impacto,Impacto,net_rating_off,4
+impacto,Impacto,game_score_avg,5
+impacto,Impacto,pie,6
+disciplina,Disciplina,pf,1
+disciplina,Disciplina,fpg,2
+disciplina,Disciplina,pf_per36,3
+disciplina,Disciplina,pf_drawn,4
+marcas,Marcas,starts,1
+marcas,Marcas,double_doubles,2
+marcas,Marcas,triple_doubles,3
+marcas,Marcas,streak_10_pts,4
+marcas,Marcas,streak_double_double,5
+marcas,Marcas,streak_three_40,6
+metricas_propias,Métricas propias,net_rating_on,1
+metricas_propias,Métricas propias,net_rating_off,2
+metricas_propias,Métricas propias,on_off,3
+metricas_propias,Métricas propias,ewa,4
+metricas_propias,Métricas propias,ela,5
+evolucion,Evolución y proyección,minutes,2
+evolucion,Evolución y proyección,rendimiento_indice,3
+evolucion,Evolución y proyección,rendimiento_cobertura,4
+evolucion,Evolución y proyección,potencial_alpha,7
+evolucion,Evolución y proyección,potencial_beta,8
+tacticas,Tácticas,team_minutes_share,1
+tacticas,Tácticas,possessions_on,2
+tacticas,Tácticas,ortg_on,3
+tacticas,Tácticas,drtg_on,4
+tacticas,Tácticas,on_off,5
+promedios,Promedios por partido,games,1
+promedios,Promedios por partido,mpg,2
+promedios,Promedios por partido,ppg,3
+promedios,Promedios por partido,rpg,4
+promedios,Promedios por partido,apg,5
+promedios,Promedios por partido,spg,6
+promedios,Promedios por partido,bpg,7
+promedios,Promedios por partido,tpg,8
+tiro_totales,Tiros (totales),fgm,1
+tiro_totales,Tiros (totales),fga,2
+tiro_totales,Tiros (totales),fg2m,3
+tiro_totales,Tiros (totales),fg2a,4
+tiro_totales,Tiros (totales),fg3m,5
+tiro_totales,Tiros (totales),fg3a,6
+tiro_totales,Tiros (totales),ftm,7
+tiro_totales,Tiros (totales),fta,8
+por_100,Por 100 posesiones,possessions_on,1
+por_100,Por 100 posesiones,pts_per100,2
+por_100,Por 100 posesiones,trb_per100,3
+por_100,Por 100 posesiones,ast_per100,4
+liga,Lugar en la liga,rank_ppg,1
+liga,Lugar en la liga,rank_rpg,2
+liga,Lugar en la liga,rank_apg,3
+liga,Lugar en la liga,rank_spg,4
+liga,Lugar en la liga,rank_bpg,5
+liga,Lugar en la liga,rank_per,6
+carga,Carga de minutos,mpg,1
+carga,Carga de minutos,minutes_last_7d,2
+carga,Carga de minutos,minutes_last_14d,3
+carga,Carga de minutos,minutes_last_28d,4
+carga,Carga de minutos,bench_games,5
+splits,"Local, visitante y resultado",ppg_home,1
+splits,"Local, visitante y resultado",ppg_away,2
+splits,"Local, visitante y resultado",ppg_wins,3
+splits,"Local, visitante y resultado",ppg_losses,4
+splits,"Local, visitante y resultado",pm_per_game,5
+splits,"Local, visitante y resultado",pm_wins,6
+splits,"Local, visitante y resultado",pm_losses,7
+forma,Forma y mejores partidos,ppg_last5,1
+forma,Forma y mejores partidos,rpg_last5,2
+forma,Forma y mejores partidos,apg_last5,3
+forma,Forma y mejores partidos,mpg_last5,4
+forma,Forma y mejores partidos,max_pts,5
+forma,Forma y mejores partidos,max_trb,6
+forma,Forma y mejores partidos,max_ast,7
+forma,Forma y mejores partidos,max_efficiency,8
+zonas,Zonas de tiro,aro_fga_share,1
+zonas,Zonas de tiro,aro_fg_pct,2
+zonas,Zonas de tiro,pintura_fga_share,3
+zonas,Zonas de tiro,pintura_fg_pct,4
+zonas,Zonas de tiro,media_fga_share,5
+zonas,Zonas de tiro,media_fg_pct,6
+zonas,Zonas de tiro,esquina3_fga_share,7
+zonas,Zonas de tiro,esquina3_fg_pct,8
+zonas,Zonas de tiro,frontal3_fga_share,9
+zonas,Zonas de tiro,frontal3_fg_pct,10

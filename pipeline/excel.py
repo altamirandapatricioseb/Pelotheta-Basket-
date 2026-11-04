@@ -337,7 +337,10 @@ def fetch(url: str, key: str) -> Data:
                 unit=r.get("unit") or "",
                 description=r.get("description_es") or "",
                 rule=r.get("rule") or "metrica",
-                factor=float(r.get("factor") or 1) if r.get("rule") == "cociente" else 1.0,
+                # En los jugadores el valor es numerador / denominador, sin factor (api.stat_match_series).
+                factor=float(r.get("factor") or 1)
+                if r.get("rule") == "cociente" and r["entity"] == "equipo"
+                else 1.0,
                 higher_is_better=bool(r["higher_is_better"]),
             )
             for r in catalog

@@ -1,0 +1,251 @@
+// Pelotheta Θ básquet — medidas de Power BI (sección 11), las mismas de Pelotheta fútbol con datos
+// de básquet (cada 36 en vez de cada 90, sin empates, zonas en vez de líneas).
+//
+// Modelo: los CSV de data/powerbi/ (o las vistas api por PostgreSQL con powerbi_reader).
+// Cómo usarlo: en Power BI Desktop, Modelado → Nueva medida, y pegá cada bloque (nombre = expresión).
+// Las tablas calculadas (ejes) van en Modelado → Nueva tabla. Paso a paso en docs/powerbi_guia.md.
+//
+// Convenciones:
+// - Los valores salen de fact_player_stat en formato largo: el segmentador de dim_stat elige qué
+//   estadística muestra cada gráfico, sin una medida por columna.
+// - Las medias de referencia excluyen al jugador comparado y piden un mínimo de minutos (400, como
+//   la web; a principio de temporada el pipeline baja al 40 % del que más jugó).
+
+// ============================================================================================
+// Tablas calculadas
+
+// Ejes de la dispersión configurable (gráfico 2): copias desconectadas de dim_stat.
+Eje X = SELECTCOLUMNS ( dim_stat, "stat_id", dim_stat[stat_id], "nombre", dim_stat[nombre] )
+Eje Y = SELECTCOLUMNS ( dim_stat, "stat_id", dim_stat[stat_id], "nombre", dim_stat[nombre] )
+
+// Mínimo de minutos para las medias (parámetro de hipótesis, por defecto 400).
+Mínimo de minutos = GENERATESERIES ( 0, 1200, 50 )
+// Columna: [Value] → renombrala a [Mínimo].
+Mínimo valor = SELECTEDVALUE ( 'Mínimo de minutos'[Mínimo], 400 )
+
+// ============================================================================================
+// Selección actual
+
+Jugador actual = SELECTEDVALUE ( dim_player[nombre], "Varios jugadores" )
+
+Estadística actual = SELECTEDVALUE ( dim_stat[nombre], "Elegí una estadística" )
+
+Descripción de la estadística = SELECTEDVALUE ( dim_stat[descripcion_es] )
+
+Ficha del jugador actual =
+IF (
+    HASONEVALUE ( dim_player[player_id] ),
+    SELECTEDVALUE ( dim_player[posicion], "Posición n/d" ) & " · " & SELECTEDVALUE ( dim_player[zona], "zona n/d" )
+        & " · " & FORMAT ( [Partidos jugados], "0" ) & " partidos · " & FORMAT ( [Minutos], "0" ) & " minutos"
+)
+
+// Cada 36 cuando la estadística lo admite; si no, el valor tal cual (porcentajes, promedios).
+Valor seleccionado =
+IF (
+    HASONEVALUE ( dim_stat[stat_id] ),
+    IF (
+        SELECTEDVALUE ( dim_stat[por36] ) = 1,
+        AVERAGE ( fact_player_stat[valor_36] ),
+        AVERAGE ( fact_player_stat[valor] )
+    )
+)
+
+Total seleccionado =
+IF ( HASONEVALUE ( dim_stat[stat_id] ), AVERAGE ( fact_player_stat[valor] ) )
+
+// 100 = el mejor del plantel, según el sentido de la estadística.
+Percentil seleccionado =
+IF ( HASONEVALUE ( dim_stat[stat_id] ), AVERAGE ( fact_player_stat[percentil] ) )
+
+Aviso de estimación =
+IF ( MAX ( fact_player_stat[estimada] ) = 1, "Estimada: leer con cuidado", BLANK () )
+
+Puesto =
+VAR mejorEsMas = SELECTEDVALUE ( dim_stat[mas_es_mejor], 1 ) = 1
+RETURN
+    IF (
+        NOT ISBLANK ( [Valor seleccionado] ),
+        IF (
+            mejorEsMas,
+            RANKX ( ALLSELECTED ( dim_player[nombre] ), [Valor seleccionado], , DESC, DENSE ),
+            RANKX ( ALLSELECTED ( dim_player[nombre] ), [Valor seleccionado], , ASC, DENSE )
+        )
+    )
+
+// ============================================================================================
+// Medias de referencia (excluyen al jugador comparado, con el mínimo de minutos)
+
+Minutos = SUM ( fact_player_minutes[minutos] )
+
+Partidos jugados = SUM ( fact_player_minutes[partidos] )
+
+Minutos como titular = SUM ( fact_player_minutes[minutos_titular] )
+
+Minutos desde el banco = [Minutos] - [Minutos como titular]
+
+Minutos por partido = DIVIDE ( [Minutos], [Partidos jugados] )
+
+Media del plantel (sin el jugador) =
+VAR actual = SELECTEDVALUE ( dim_player[player_id] )
+RETURN
+    CALCULATE (
+        AVERAGEX (
+            FILTER ( VALUES ( dim_player[player_id] ), [Minutos] >= [Mínimo valor] ),
+            [Valor seleccionado]
+        ),
+        REMOVEFILTERS ( dim_player ),
+        dim_player[player_id] <> actual
+    )
+
+// Exteriores (base y escolta), aleros o interiores (ala-pívot y pívot).
+Media de su zona (sin el jugador) =
+VAR actual = SELECTEDVALUE ( dim_player[player_id] )
+VAR zona = SELECTEDVALUE ( dim_player[zona] )
+RETURN
+    CALCULATE (
+        AVERAGEX (
+            FILTER ( VALUES ( dim_player[player_id] ), [Minutos] >= [Mínimo valor] ),
+            [Valor seleccionado]
+        ),
+        REMOVEFILTERS ( dim_player ),
+        dim_player[zona] = zona,
+        dim_player[player_id] <> actual
+    )
+
+Media de su posición (sin el jugador) =
+VAR actual = SELECTEDVALUE ( dim_player[player_id] )
+VAR posicion = SELECTEDVALUE ( dim_player[posicion] )
+RETURN
+    CALCULATE (
+        AVERAGEX (
+            FILTER ( VALUES ( dim_player[player_id] ), [Minutos] >= [Mínimo valor] ),
+            [Valor seleccionado]
+        ),
+        REMOVEFILTERS ( dim_player ),
+        dim_player[posicion] = posicion,
+        dim_player[player_id] <> actual
+    )
+
+// Con ALLEXCEPT: media de todos los jugadores de la zona filtrada en la página (incluye a todos).
+Media de la zona filtrada =
+CALCULATE (
+    AVERAGEX ( FILTER ( VALUES ( dim_player[player_id] ), [Minutos] >= [Mínimo valor] ), [Valor seleccionado] ),
+    ALLEXCEPT ( dim_player, dim_player[zona] )
+)
+
+Diferencia con el plantel = [Valor seleccionado] - [Media del plantel (sin el jugador)]
+
+Diferencia con su zona = [Valor seleccionado] - [Media de su zona (sin el jugador)]
+
+Diferencia con su posición = [Valor seleccionado] - [Media de su posición (sin el jugador)]
+
+// «Mejor» o «peor» según el sentido de la estadística (barras divergentes de Comparación directa).
+Diferencia con sentido =
+VAR d = [Diferencia con el plantel]
+RETURN IF ( SELECTEDVALUE ( dim_stat[mas_es_mejor], 1 ) = 1, d, -d )
+
+// Dispersión configurable: valor del jugador en la estadística elegida en cada eje.
+Valor eje X =
+VAR s = SELECTEDVALUE ( 'Eje X'[stat_id] )
+RETURN CALCULATE ( [Valor seleccionado], TREATAS ( { s }, dim_stat[stat_id] ) )
+
+Valor eje Y =
+VAR s = SELECTEDVALUE ( 'Eje Y'[stat_id] )
+RETURN CALCULATE ( [Valor seleccionado], TREATAS ( { s }, dim_stat[stat_id] ) )
+
+// ============================================================================================
+// Valores fijos (cada 36, porcentajes y métricas propias)
+
+Puntos cada 36 = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "pts" )
+Rebotes cada 36 = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "trb" )
+Asistencias cada 36 = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "ast" )
+Robos cada 36 = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "stl" )
+Tapas cada 36 = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "blk" )
+Puntos = CALCULATE ( [Total seleccionado], dim_stat[stat_id] = "pts" )
+TS% = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "ts" )
+eFG% = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "efg" )
+USG% = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "usg_pct" )
+PER = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "per" )
+Game Score medio = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "game_score_avg" )
+Más/menos = CALCULATE ( [Total seleccionado], dim_stat[stat_id] = "plus_minus" )
+
+// Métricas propias (6): NR en cancha, On/Off, EWA y ELA. Formato condicional por signo (gráfico 13).
+NR en cancha = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "net_rating_on" )
+On/Off = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "on_off" )
+EWA = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "ewa" )
+ELA = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "ela" )
+Índice de rendimiento = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "rendimiento_indice" )
+Potencial α = CALCULATE ( [Valor seleccionado], dim_stat[stat_id] = "potencial_alpha" )
+Aviso 6.1 = "Estimación del sistema: orienta, no predice."
+Color por signo = IF ( [Valor seleccionado] < 0, "#a30310", "#328336" )
+
+// ============================================================================================
+// Equipo y partidos (en el básquet no hay empates)
+
+Partidos = COUNTROWS ( fact_match )
+Ganados = CALCULATE ( COUNTROWS ( fact_match ), fact_match[resultado] = "G" )
+Perdidos = CALCULATE ( COUNTROWS ( fact_match ), fact_match[resultado] = "P" )
+% de victorias = DIVIDE ( [Ganados], [Partidos] )
+Puntos a favor = SUM ( fact_match[puntos_favor] )
+Puntos en contra = SUM ( fact_match[puntos_contra] )
+Puntos a favor por partido = DIVIDE ( [Puntos a favor], [Partidos] )
+Puntos en contra por partido = DIVIDE ( [Puntos en contra], [Partidos] )
+Diferencia de puntos = [Puntos a favor] - [Puntos en contra]
+
+Victorias acumuladas =
+VAR hasta = MAX ( fact_match[fecha] )
+RETURN CALCULATE ( [Ganados], REMOVEFILTERS ( dim_date ), fact_match[fecha] <= hasta )
+
+Color por resultado = SWITCH ( SELECTEDVALUE ( fact_match[resultado] ), "G", "#328336", "P", "#a30310" )
+
+// Estadística del equipo por partido (fact_team_match_stat, clave elegida con un segmentador):
+// ortg, drtg, net_rating, pace, efg, tov_pct, orb_pct_team, ft_per_fga y los de los rivales.
+Valor del equipo = AVERAGE ( fact_team_match_stat[valor] )
+ORtg = CALCULATE ( [Valor del equipo], fact_team_match_stat[clave] = "ortg" )
+DRtg = CALCULATE ( [Valor del equipo], fact_team_match_stat[clave] = "drtg" )
+NR = CALCULATE ( [Valor del equipo], fact_team_match_stat[clave] = "net_rating" )
+
+// Rendimiento por cuarto (gráfico 8).
+Puntos en el cuarto = SUM ( fact_match_period[puntos_favor] )
+Diferencia en el cuarto = SUM ( fact_match_period[puntos_favor] ) - SUM ( fact_match_period[puntos_contra] )
+
+// Cuatro factores y pitagóricas de la liga (gráficos 7 y 9), de fact_team_season.
+Valor de temporada del equipo = AVERAGE ( fact_team_season[valor] )
+Victorias = CALCULATE ( [Valor de temporada del equipo], fact_team_season[stat_id] = "wins" )
+Victorias pitagóricas = CALCULATE ( [Valor de temporada del equipo], fact_team_season[stat_id] = "pyth_wins" )
+Promedio de la liga =
+CALCULATE ( [Valor de temporada del equipo], REMOVEFILTERS ( dim_team ), dim_team[es_boca] = 0 )
+Puesto en la tabla = CALCULATE ( [Valor de temporada del equipo], fact_team_season[stat_id] = "position" )
+
+// Estadística por partido (desglosada, drill-through): jugador o equipo, con su media móvil de 5.
+Valor por partido = AVERAGE ( fact_stat_match_value[valor] )
+Media móvil de 5 = AVERAGE ( fact_stat_match_value[rolling_5] )
+
+Valor por partido del jugador =
+CALCULATE (
+    [Valor por partido],
+    fact_stat_match_value[entidad] = "jugador",
+    TREATAS ( VALUES ( dim_player[player_id] ), fact_stat_match_value[entity_id] )
+)
+
+// Ventana: suma sobre suma (en los cocientes, igual que la web).
+Valor de la ventana =
+DIVIDE ( SUM ( fact_stat_match_value[numerador] ), SUM ( fact_stat_match_value[denominador] ) )
+
+// ============================================================================================
+// Situaciones, distribución, correlación
+
+% de victorias en la situación = AVERAGE ( fact_situational[pct_victorias] )
+Partidos en la situación = SUM ( fact_situational[partidos] )
+Diferencia con la base = AVERAGE ( fact_situational[dif_vs_base] )
+
+Jugadores en el intervalo = SUM ( stat_distribution[jugadores] )
+
+Correlación = AVERAGE ( stat_correlation[pearson] )
+
+// ============================================================================================
+// «Ver origen» (9.9): solo se muestra si el gráfico tiene a dónde llevar.
+
+Origen del gráfico = SELECTEDVALUE ( chart_source_map[etiqueta_es] )
+Tiene origen = IF ( COUNTROWS ( chart_source_map ) > 0, 1, 0 )
+Texto del botón origen = IF ( [Tiene origen] = 1, "Ver origen: " & [Origen del gráfico], BLANK () )
