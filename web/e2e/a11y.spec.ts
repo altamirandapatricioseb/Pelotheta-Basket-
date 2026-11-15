@@ -5,6 +5,9 @@ import { expect, test } from '@playwright/test';
 // último partido (142) y una estadística desglosada de cada entidad.
 const ROUTES = [
   '/',
+  '/graficos',
+  '/elegir',
+  '/elegir?pais=argentina&categoria=liga-nacional&equipo=boca-juniors',
   '/equipo',
   '/jugadores',
   '/situaciones',

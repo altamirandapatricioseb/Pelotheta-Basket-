@@ -26,7 +26,8 @@ propias.
 
 | Interfaz | Qué hace |
 |---|---|
-| [Gráficos](https://pelotheta-basket-dva.vercel.app/) | 76 gráficos en 13 categorías (73 con datos), con PNG, CSV, tabla y «Ver origen» |
+| [Portada](https://pelotheta-basket-dva.vercel.app/) | Presentación del sistema y selector de equipo en tres pasos (país, categoría, equipo); hoy solo Boca tiene datos |
+| [Gráficos](https://pelotheta-basket-dva.vercel.app/graficos) | 76 gráficos en 13 categorías (73 con datos), con PNG, CSV, tabla y «Ver origen» |
 | [Equipo](https://pelotheta-basket-dva.vercel.app/equipo) | Boca por partido, rival, mes, competición o acumulado, 15 categorías |
 | [Jugadores](https://pelotheta-basket-dva.vercel.app/jugadores) | Tabla maestra del plantel con percentiles, cada 36 y el panel del jugador, 21 categorías |
 | [Situaciones](https://pelotheta-basket-dva.vercel.app/situaciones) | 118 tarjetas («cuando pasa X, ¿cómo le va a Boca?»), calculadas en SQL, 107 con casos |

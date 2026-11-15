@@ -9,7 +9,7 @@ import { chromium } from '@playwright/test';
 const BASE = process.env.BASE_URL ?? 'http://localhost:3000';
 const OUT = fileURLToPath(new URL('../../docs/capturas/', import.meta.url));
 const PAGES: [string, string][] = [
-  ['graficos', '/'],
+  ['graficos', '/graficos'],
   ['equipo', '/equipo'],
   ['jugadores', '/jugadores'],
   ['situaciones', '/situaciones'],

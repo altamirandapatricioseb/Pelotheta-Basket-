@@ -7,8 +7,9 @@ interfaces, una página por estadística desglosada, una por partido y una por j
 
 ## Lo común a todas las páginas
 
-- **Header:** a la izquierda, Boca Juniors (vuelve al inicio); al centro, las interfaces; a la derecha, el
-  nombre del sistema y el botón de tema claro u oscuro.
+- **Header:** a la izquierda, Boca Juniors (lleva a Gráficos); al centro, las interfaces; a la derecha, el
+  nombre del sistema (vuelve a la portada) y el botón de tema claro u oscuro. La portada y el selector de
+  equipo no tienen header.
 - **Frescura:** el header dice cuándo se actualizaron los datos.
 - **`n/d`:** el dato no existe en la fuente o no alcanza la muestra. Nunca es cero.
 - **Nivel A, B o C:** A viene de la LNB; B lo calcula el sistema; C no tiene dato. «Estimada» quiere decir
@@ -16,7 +17,14 @@ interfaces, una página por estadística desglosada, una por partido y una por j
 - **Estado en la dirección:** filtros, jugador y estadística quedan en la URL; se puede compartir el enlace.
 - **Errores:** cada aviso trae un código estable (`PEL-DB-001`, `PEL-NF-404`; ver `docs/soporte/`).
 
-## Gráficos (inicio)
+## Portada y selector de equipo
+
+La portada (`/`) presenta el sistema: qué fuentes entran, las 24 métricas propias y las seis interfaces
+sobre una pizarra de básquet. «Elegir equipo» abre el selector (`/elegir`) en tres pasos: país, categoría
+y equipo. Hoy solo se puede elegir Boca Juniors (Argentina, Liga Nacional); el resto se ve como «Sin datos
+todavía». Al elegir el equipo aparecen las seis interfaces.
+
+## Gráficos (`/graficos`)
 
 ![Gráficos](capturas/graficos-claro.png)
 

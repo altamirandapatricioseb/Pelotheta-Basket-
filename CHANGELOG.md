@@ -3,6 +3,18 @@
 Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y versionado semántico. Commits en
 Conventional Commits.
 
+## [Sin publicar]
+
+### Agregado
+- Portada del sistema en `/` y selector de equipo en `/elegir` (país, categoría, equipo), portados de
+  Pelotheta fútbol: mapa de tiro por zonas que arma la Θ, pipeline, las 24 métricas propias, las seis
+  interfaces sobre una pizarra de básquet y Sudamérica punteada. Solo Boca Juniors se puede elegir.
+
+### Cambiado
+- Gráficos pasa de `/` a `/graficos`. El header no se muestra en la portada ni en el selector, y el
+  nombre del sistema lleva a la portada.
+- Logo de Pelotheta Θ: la barra del medio ya no toca el anillo.
+
 ## [1.0.0] - 2026-11-04
 
 Primera versión completa: las 11 etapas del pedido, como sistema hermano de Pelotheta fútbol.
