@@ -13,7 +13,8 @@ export interface ShowcaseData {
 /** Lo mínimo que necesita la portada; si la base no responde, la portada igual se dibuja. */
 export async function getShowcaseData(): Promise<ShowcaseData> {
   try {
-    const { data } = await createApiClient().from('boca_game').select('stats').limit(200);
+    // Con orden fijo el dibujo no cambia entre cargas (el generador consume los partidos en fila).
+    const { data } = await createApiClient().from('boca_game').select('stats').order('game_date').limit(200);
     const games = (data ?? []).flatMap(({ stats }): ZoneGame[] => {
       if (!stats || typeof stats !== 'object' || Array.isArray(stats)) return [];
       const num = (key: string) => {
@@ -29,7 +30,11 @@ export async function getShowcaseData(): Promise<ShowcaseData> {
       }
       return [{ fga, zones }];
     });
-    return { shots: zoneShots(games) };
+    // La Θ tiene unos 1.200 puntos: con la temporada avanzada se toma un tiro de cada k, que
+    // conserva el reparto por zona y el acierto.
+    const all = zoneShots(games);
+    const k = Math.max(1, Math.ceil(all.length / 1200));
+    return { shots: all.filter((_, i) => i % k === 0) };
   } catch {
     return { shots: [] };
   }

@@ -114,7 +114,7 @@ const HOME: Player[] = [
   { n: 5, pct: 0.86, pos: same([250, 730], [260, 740], [340, 400]) },
   { n: 7, pct: 0.74, pos: same([430, 730], [420, 740], [545, 290]) },
   { n: 11, pct: 0.62, pos: same([170, 860], [180, 850], [135, 290]) },
-  { n: 14, pct: 0.55, pos: same([510, 860], [440, 880], [490, 110]) },
+  { n: 14, pct: 0.55, pos: same([510, 860], [440, 880], [455, 150]) },
   { n: 21, pct: 0.9, pos: same([340, 905], [340, 905], [265, 170]) },
 ];
 // Índices dentro de HOME: el cargado de faltas del paso 3 y los dos comparados del paso 2.
@@ -214,8 +214,14 @@ function Panel({
     [0, 1, 1, last ? 1 : 0],
   );
   const y = useTransform(progress, [from, from + H], [first ? 0 : 32, 0]);
+  // Los paneles apagados salen del orden de tabulación: el foco nunca cae en un enlace invisible.
+  const visibility = useTransform(opacity, (v) => (v > 0.01 ? 'visible' : 'hidden'));
   return (
-    <motion.article className="show-pitch__panel" data-side={index % 2 === 0 ? 'left' : 'right'} style={{ opacity, y }}>
+    <motion.article
+      className="show-pitch__panel"
+      data-side={index % 2 === 0 ? 'left' : 'right'}
+      style={{ opacity, y, visibility }}
+    >
       <p className="show-pitch__index tabular">
         {String(index + 1).padStart(2, '0')} · {label}
       </p>

@@ -14,6 +14,8 @@ Conventional Commits.
 - Gráficos pasa de `/` a `/graficos`. El header no se muestra en la portada ni en el selector, y el
   nombre del sistema lleva a la portada.
 - Logo de Pelotheta Θ: la barra del medio ya no toca el anillo.
+- La portada y el selector no tienen versión con «reducir movimiento» (decisión del dueño, igual que en
+  fútbol); el resto del sitio la sigue respetando.
 
 ## [1.0.0] - 2026-11-04
 

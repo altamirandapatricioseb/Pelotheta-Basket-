@@ -46,3 +46,17 @@ Las fórmulas están implementadas y probadas con los ejemplos del prompt (Mejor
 ## Lo que no se calcula (nivel C)
 
 Tipos de jugada, esquemas defensivos, tiros contestados y calidad de tiro con tracking: ninguna fuente gratuita los publica y estimarlos exigiría supuestos que no se pueden defender.
+
+## Las 24 de la portada
+
+La portada (`web/components/showcase/metric-families.ts`) agrupa en seis familias las métricas que
+calcula el sistema y que la liga no publica. Cada una es una estadística de `data/stat_catalog.csv`:
+
+| Familia | Métricas (id en el catálogo) |
+|---|---|
+| Fuerza (equipo) | Elo (`elo`), Probabilidad previa (`elo_win_prob`), Sorpresa (`surprise`), Brier (`brier`) |
+| Ritmo y eficiencia (equipo) | Posesiones (`possessions`), Ritmo (`pace`), ORtg (`ortg`), DRtg (`drtg`) |
+| Rendimiento esperado (equipo) | Net Rating (`net_rating`), Pitagórico (`pyth_wins`), NR por tercio (`net_rating_vs_top`, `_mid`, `_bottom`) |
+| Estado de forma (equipo) | Rachas (`longest_win_streak`), Forma (`last5_net_rating`), Consistencia (`net_rating_stdev`) |
+| Jugador en cancha | NR en cancha (`net_rating_on`), NR fuera (`net_rating_off`), On/Off (`on_off`), EWA (`ewa`), ELA (`ela`) |
+| Mejoría y Potencial (jugador) | Índice de rendimiento (`rendimiento_indice`), Mejoría α y β (`mejoria_alpha`, `mejoria_beta`), Potencial α y β (`potencial_alpha`, `potencial_beta`) |

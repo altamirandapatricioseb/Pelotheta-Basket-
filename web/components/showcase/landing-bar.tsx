@@ -29,6 +29,8 @@ export function LandingBar({ afterScroll = false, back = false }: { afterScroll?
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       style={{ pointerEvents: shown ? 'auto' : 'none' }}
       aria-hidden={!shown}
+      // Oculta, la barra tampoco recibe foco (el botón de tema no tiene tabIndex propio).
+      inert={!shown}
     >
       {back ? (
         <Link href="/" className="show-bar__back focus-ring" tabIndex={shown ? 0 : -1}>

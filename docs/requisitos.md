@@ -23,7 +23,7 @@
 | RNF02 | Seguridad | CSP con nonce, HSTS, nosniff, COOP y Permissions-Policy en todas las páginas |
 | RNF03 | Seguridad | Parámetros de URL validados con Zod; un valor inválido vuelve al de defecto |
 | RNF04 | Accesibilidad | WCAG 2.2 AA (axe sin violaciones) en todas las rutas, en los dos temas y en celular |
-| RNF05 | Accesibilidad | Las animaciones respetan «reducir movimiento» |
+| RNF05 | Accesibilidad | Las animaciones respetan «reducir movimiento», salvo la portada y el selector de equipo (decisión del dueño, igual que en fútbol) |
 | RNF06 | Disponibilidad | 99 % mensual medido cada 6 horas; frescura de datos de 35 días o menos |
 | RNF07 | Responsive | Ninguna página se desplaza de costado en 375 px |
 | RNF08 | Datos | Solo estadísticas derivadas: el play-by-play crudo y las coordenadas de los tiros no se publican |

@@ -42,7 +42,7 @@ flowchart LR
 
 ### CU1 Ver los gráficos de la temporada
 - **Actor:** Visitante. **Precondición:** la base responde.
-- **Flujo principal:** 1. Abre `/`. 2. El sistema muestra 13 categorías con números destacados y 76
+- **Flujo principal:** 1. Abre `/graficos`. 2. El sistema muestra 13 categorías con números destacados y 76
   gráficos. 3. Elige filtros (competición, localía). 4. El sistema redibuja los gráficos.
 - **Alternativos:** 2a. La base no responde: aviso `PEL-DB-001`. 3a. Un gráfico sin datos muestra «Sin
   datos» con el motivo.

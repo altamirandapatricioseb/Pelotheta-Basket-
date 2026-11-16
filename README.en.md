@@ -10,6 +10,7 @@ system of Pelotheta fútbol: the same experience, with basketball data. The site
 
 | Interface | What it shows |
 |---|---|
+| Landing | System presentation and a three-step team chooser (country, league, team); only Boca has data today |
 | Charts | 76 charts in 13 categories (73 with real data), with PNG, CSV, table and "view source" |
 | Team | Boca by game, opponent, month, competition or cumulative, one category at a time |
 | Players | Squad master table with percentiles, per-36 values and a current-player panel |

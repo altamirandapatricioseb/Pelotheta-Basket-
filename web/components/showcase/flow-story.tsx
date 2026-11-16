@@ -34,7 +34,7 @@ export const STEPS = [
   {
     at: 0.3,
     title: 'Un pipeline en Python',
-    text: 'Limpia, cruza y valida todo: unifica nombres de jugadores y rivales, reconstruye quién estaba en cancha en cada jugada y deja cada partido con sus valores base y sus métricas calculadas.',
+    text: 'Limpia, cruza y valida todo: concilia el jugada a jugada contra el box score, reconstruye quién estaba en cancha en cada jugada y deja cada partido con sus valores base y sus métricas calculadas.',
   },
   {
     at: 0.5,

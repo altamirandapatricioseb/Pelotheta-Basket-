@@ -19,7 +19,7 @@ plataformas (Vercel, Supabase, GitHub) y las fuentes de terceros, salvo sus resp
 | Unidad (web) | Vitest | Catálogo, orden, conclusiones, desglosada, Comparar, Situaciones, transformaciones de gráficos, CSP, bloqueo de sondas, xlsx |
 | Integración | pytest contra la base real | RLS con la clave publicable (lee y no escribe; el bucket no acepta subidas) |
 | Base | pgTAP (MCP o SQL Editor) | RLS, permisos, `ingest`, `security_invoker`, `powerbi_reader`, bucket |
-| Punta a punta | Playwright con axe | WCAG 2.2 AA y sin desplazamiento de costado en 11 rutas, dos temas, escritorio y celular |
+| Punta a punta | Playwright con axe | WCAG 2.2 AA y sin desplazamiento de costado en 14 rutas, dos temas, escritorio y celular |
 | Seguridad | CodeQL, Semgrep, gitleaks, ZAP, auditorías | En CI y en el control semanal contra producción |
 
 ## Entornos
@@ -39,10 +39,10 @@ El código compila (tipos), el lint pasa y la rama tiene las pruebas de la lógi
 
 | Criterio | Umbral | Resultado (4-nov-2026) |
 |---|---|---|
-| Pruebas automatizadas | 0 fallas | 321 casos (pytest 152, Vitest 103, Playwright 66): 321 pasan, 0 fallan |
+| Pruebas automatizadas | 0 fallas | 345 casos (pytest 152, Vitest 109, Playwright 84): 345 pasan, 0 fallan |
 | Cobertura del pipeline | ≥ 85 % (meta de fútbol) | **79 %: no se alcanza.** Bajan el promedio `own_metrics.py` (17 %), `extras.py` (44 %) y `season.py` (56 %), que se prueban por sus resultados en la carga real; las fórmulas (`metrics.py` 100 %, `pbp.py` 99 %, `projection.py` 97 %) sí están cubiertas |
 | Cobertura de la web | ≥ 80 % de líneas | 97 % |
-| Accesibilidad | 0 violaciones de axe | 0 en 11 rutas, 2 temas y 2 dispositivos |
+| Accesibilidad | 0 violaciones de axe | 0 en 14 rutas, 2 temas y 2 dispositivos |
 | Seguridad de la base | pgTAP completo | 10/10 |
 | RLS en vivo | Lee y no escribe | 10/10 (`tests/test_rls.py`) |
 

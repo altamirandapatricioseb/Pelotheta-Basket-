@@ -13,9 +13,9 @@ para quedar igual a fútbol.
 
 | Métrica | Valor |
 |---|---|
-| Pruebas automatizadas | 321 casos (pytest 152, Vitest 103, Playwright 66): 0 fallan |
+| Pruebas automatizadas | 345 casos (pytest 152, Vitest 109, Playwright 84): 0 fallan |
 | Cobertura | Pipeline 79 % (debajo de la meta de 85; ver `docs/pruebas/plan_de_pruebas.md`), web 97 % de líneas |
-| Accesibilidad | 0 violaciones de axe en 11 rutas, 2 temas, escritorio y celular |
+| Accesibilidad | 0 violaciones de axe en 14 rutas, 2 temas, escritorio y celular |
 | Seguridad de la base | pgTAP 10/10; Security Advisor 0 ERROR y 0 WARN |
 | Backup | Restauración verificada: 20 vistas, 8.502 filas |
 | Base | 24 MB de 500 MB (5 %) |
