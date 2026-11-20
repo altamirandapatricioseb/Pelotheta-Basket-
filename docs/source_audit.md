@@ -57,6 +57,18 @@ Tipos de evento vistos: `INICIO/FINAL-PARTIDO`, `INICIO/FINAL-PERIODO`, `CANASTA
 - **TheSportsDB:** equipo 139585 = Boca Juniors, liga «Argentine LNB». Con la clave de prueba `eventslast` devuelve un solo partido (27-sep-2026, Intercontinental Cup, 93-62). Sirve como respaldo de resultados de otras competiciones.
 - **API-Basketball:** la liga 18 («Liga A», Argentina) declara `statistics.players = true` para 2023-24, 2024-25, 2025-26 y 2026-27, pero el plan gratuito responde `Free plans do not have access to this season, try from 2022 to 2024`. Queda desactivada; se puede usar para backfill histórico de 2022-24 si el dueño lo pide.
 
+## Fuentes para los modelos (sondeo del 18-nov-2026)
+
+- **Valores de mercado:** no hay fuente abierta para la LNB (Transfermarkt no cubre básquet; Eurobasket y
+  Proballers no lo publican ni permiten automatizar). Valor modela los minutos y queda listo para valores
+  cargados a mano en `data/manual/market_values.csv` (`jugador,valor_usd,fecha,fuente,url`).
+- **Jugadores de otros clubes:** la página de cada partido de la LNB trae el box score de los dos equipos;
+  con `--liga` entran los 18 clubes. Las fichas dan la edad (dato personal: solo se usa para calcularla).
+- **Temporadas pasadas:** la API del fixture de la LNB solo responde la temporada en curso. TheSportsDB
+  gratis corta en 15 partidos por temporada. API-Basketball (plan gratis, 2022 a 2024) da la LNB y las
+  ligas de la zona (NBB, LUB, Chile, Paraguay, Liga Sudamericana, BCL Americas): `sources/api_basketball.py`,
+  activo cuando hay `API_BASKETBALL_KEY` (en GitHub Secrets).
+
 ## Dato crudo mínimo → qué se deriva (regla 8e)
 
 | Dato crudo | Fuente | Qué se deriva | Si cae la fuente |

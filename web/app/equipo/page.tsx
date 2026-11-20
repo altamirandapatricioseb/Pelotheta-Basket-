@@ -5,6 +5,10 @@ import { ExcelDownloads } from '@/components/excel-downloads';
 import { TeamTableView } from '@/components/team/team-table';
 import { getCatalog, getStatSets, getTeamMatches } from '@/lib/data/catalog';
 import { getTeamRows } from '@/lib/data/players';
+import { Section } from '@/components/models/common';
+import { ProbabilityPanel } from '@/components/models/probability-panel';
+import { CURRENT_TEAM } from '@/config/teams';
+import { getStatTests } from '@/lib/data/models';
 
 export const metadata: Metadata = {
   description:
@@ -28,12 +32,13 @@ interface PageProps {
 export default async function EquipoPage({ searchParams }: PageProps) {
   const raw = await searchParams;
   const params = searchSchema.parse({ conjunto: raw.conjunto, vista: raw.vista });
-  const [matches, catalog, sets, league, lineups] = await Promise.all([
+  const [matches, catalog, sets, league, lineups, tests] = await Promise.all([
     getTeamMatches(),
     getCatalog(),
     getStatSets('equipo'),
     getTeamRows('temporada'),
     getTeamRows('quinteto'),
+    getStatTests(CURRENT_TEAM.slug),
   ]);
 
   return (
@@ -62,6 +67,15 @@ export default async function EquipoPage({ searchParams }: PageProps) {
           <p className="text-muted">Puede estar pausada por inactividad. Probá de nuevo en unos minutos.</p>
         </div>
       )}
+      {tests.ok && tests.data.length > 0 ? (
+        <Section
+          id="probabilidad"
+          title="Probabilidad"
+          intro="Pruebas de hipótesis e intervalos con los partidos de liga. El predictor de partidos que se apoya en estas distribuciones está en Predictor."
+        >
+          <ProbabilityPanel tests={tests.data} updated={null} />
+        </Section>
+      ) : null}
     </div>
   );
 }

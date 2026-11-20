@@ -394,7 +394,80 @@ const ZONES = [
 ] as const;
 const winPct = (rows: TeamMatchRow[]) => pct(rows.filter((m) => result(m) === 'G').length, rows.length);
 
+const plainName = (s: string) =>
+  s
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\(.*?\)/g, '')
+    .trim();
+
 export const CHARTS: Record<string, ChartRender> = {
+  // --- Modelos (Valor y Predictor) -----------------------------------------------------------
+  g77: ({ data }) => {
+    const rows = data.models.values.filter((r) => r.actual !== null && r.predicted !== null);
+    if (rows.length === 0) return { empty: 'Todavía no corrió el modelo de Valor.' };
+    return {
+      node: (
+        <ScatterChart
+          points={rows.map((r) => ({ x: r.predicted ?? 0, y: r.actual ?? 0, label: r.name }))}
+          xLabel="Minutos que su producción justifica"
+          yLabel="Minutos que juega"
+          diagonal
+          label="Minutos por partido reales contra los que su producción justifica"
+        />
+      ),
+      table: {
+        head: ['Jugador', 'Minutos reales', 'Esperados', 'Diferencia %'],
+        rows: rows.map((r) => [r.name, r.actual, r.predicted, r.residualPct]),
+      },
+      coverage: 'Arriba de la diagonal juega más de lo que su producción justifica; abajo, menos',
+    };
+  },
+  g78: ({ data }) => {
+    const rows = data.models.backtest;
+    if (rows.length === 0) return { empty: 'Todavía no hay partidos evaluados por el predictor.' };
+    const isOwn = (name: string) => plainName(name) === plainName('Boca');
+    const win = (p: (typeof rows)[number]) => (isOwn(p.home) ? p.pHome : p.pAway);
+    const res = (p: (typeof rows)[number]) => {
+      const own = isOwn(p.home) ? p.actualHome : p.actualAway;
+      const other = isOwn(p.home) ? p.actualAway : p.actualHome;
+      return own === null || other === null ? '' : own > other ? 'G' : 'P';
+    };
+    return {
+      node: (
+        <LineChart
+          labels={rows.map((p) => `${(p.date ?? '').slice(8, 10)}/${(p.date ?? '').slice(5, 7)}`)}
+          series={[{ id: 'pg', label: 'Probabilidad previa de ganar', slot: 1, values: rows.map(win) }]}
+          pointSlots={rows.map((p) => RESULT_SLOT[res(p)] ?? null)}
+          label="Probabilidad de ganar que daba el modelo antes de cada partido, coloreada por el resultado"
+        />
+      ),
+      table: {
+        head: ['Fecha', 'Partido', 'P(gana)', 'Resultado'],
+        rows: rows.map((p) => [p.date, `${p.home} ${String(p.actualHome)}-${String(p.actualAway)} ${p.away}`, win(p), RESULT_NAME[res(p)] ?? null]),
+      },
+      coverage: 'Cada punto: lo que el modelo daba antes del partido, solo con lo jugado hasta ahí. Color: resultado',
+    };
+  },
+  g79: ({ data }) => {
+    const rows = [...data.models.clubs].filter((s) => s.elo !== null).sort((a, b) => (b.elo ?? 0) - (a.elo ?? 0));
+    if (rows.length === 0) return { empty: 'Todavía no corrió el predictor.' };
+    return {
+      node: (
+        <BarChart
+          labels={rows.map((s) => s.team)}
+          horizontal
+          highlight={rows.findIndex((s) => plainName(s.team) === plainName('Boca'))}
+          series={[{ id: 'elo', label: 'Elo', slot: 1, values: rows.map((s) => s.elo) }]}
+          label="Elo de cada club de la Liga Nacional"
+        />
+      ),
+      table: { head: ['Club', 'Elo', 'PJ'], rows: rows.map((s) => [s.team, s.elo, s.games]) },
+      coverage: 'Fuerza acumulada partido a partido (1500 = promedio): una de las variables del predictor',
+    };
+  },
+
   // --- A. Forma y resultados -----------------------------------------------------------------
   g01: ({ matches }) => {
     if (!matches.length) return { empty: 'No hay partidos en el filtro elegido.' };

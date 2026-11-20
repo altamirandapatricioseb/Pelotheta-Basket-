@@ -1,6 +1,6 @@
 'use client';
 
-// Las seis interfaces como tarjetas grandes: en la portada (fila ligada al scroll) y al final del
+// Las interfaces como tarjetas grandes: en la portada (fila ligada al scroll) y al final del
 // selector de equipo (grilla). Entran escalonadas con curva exponencial de salida (9.10).
 
 import { motion, stagger, type Variants } from 'motion/react';
@@ -10,11 +10,14 @@ import { InterfaceIcon } from '@/components/header/interface-icon';
 import { INTERFACES, type InterfaceLink } from '@/config/navigation';
 
 const COPY: Record<InterfaceLink['icon'], string> = {
-  graficos: '76 gráficos por categoría: forma, puntos y ritmo, cuartos, cuatro factores, tiros, rebote y modelos.',
+  graficos: '79 gráficos por categoría: forma, puntos y ritmo, cuartos, cuatro factores, tiros, rebote y modelos.',
   equipo: 'Tablas por partido, por rival, por mes, por competición y acumuladas, con descarga a Excel.',
   jugadores: 'El plantel completo con percentiles, conjuntos de estadísticas y la ficha de cada jugador.',
   situaciones: 'Qué pasa cuando se va al descanso abajo, cuando mete doce triples o cuando gana el rebote.',
   comparar: 'Dos jugadores frente a frente, estadística por estadística, con el plantel como referencia.',
+  valor: 'Los minutos que le da el entrenador a cada jugador contra los que su producción justifica, con toda la liga.',
+  alternativas: 'Para cada jugador, los más parecidos de la liga con K-means: de otro club, en dupla o del plantel.',
+  predictor: 'Probabilidad de ganar contra cualquier rival o la media de una liga, con backtest y pruebas.',
   actualizar: 'La carga de datos a un botón: última actualización, estado de cada fuente e historial de cargas.',
 };
 
@@ -45,7 +48,7 @@ export function InterfaceCard({ item }: { item: InterfaceLink }) {
   );
 }
 
-/** Grilla de las seis interfaces, que entra cuando aparece en pantalla. */
+/** Grilla de las interfaces, que entra cuando aparece en pantalla. */
 export function InterfaceGrid() {
   return (
     <motion.ul className="show-grid" variants={LIST_VARIANTS} initial="hidden" animate="show">

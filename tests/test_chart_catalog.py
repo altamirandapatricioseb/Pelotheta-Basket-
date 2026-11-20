@@ -28,7 +28,7 @@ def test_al_menos_cincuenta_graficos_con_datos_e_ids_unicos() -> None:
     assert len(ids) == len(set(ids))
     assert len(CHARTS) >= 50
     assert sum(c.available for c in CHARTS) >= 50
-    # Numerados como 9.2.1: del 1 al 76 sin huecos.
+    # Numerados como 9.2.1: del 1 al 79 sin huecos.
     assert ids == [f"g{n:02d}" for n in range(1, len(ids) + 1)]
 
 

@@ -1,11 +1,12 @@
 'use client';
 
-// Las seis interfaces contadas sobre una pizarra táctica. La sección queda pegada durante 600 vh: la
-// cancha de básquet (vista desde arriba, vertical) va en el centro y la cámara se mueve con el
-// scroll. Primero se ve el partido entero (Equipo), después se acerca a los cinco puntos del equipo
-// (Jugadores), aísla a dos (Comparar), sienta a uno cargado de faltas (Situaciones), se aleja para
-// trazar una jugada hasta el aro (Gráficos) y vuelve al círculo central (Actualizar). El texto de
-// cada interfaz aparece a un costado y cambia de lado en cada paso.
+// Las nueve interfaces contadas sobre una pizarra táctica. La sección queda pegada (100 vh por paso
+// en escritorio, 80 en el celular): la cancha de básquet (vista desde arriba, vertical) va en el
+// centro y la cámara se mueve con el scroll. Partido entero (Equipo), los cinco puntos (Jugadores),
+// dos aislados (Comparar), uno y sus parecidos del rival (Alternativas), la línea real contra
+// esperado (Valor), uno cargado de faltas (Situaciones), la barra de probabilidades (Predictor),
+// una jugada hasta el aro (Gráficos) y vuelta al círculo central (Actualizar). El texto cambia de
+// lado en cada paso; en el celular va debajo de la cancha.
 
 import { motion, type MotionValue, useMotionValueEvent, useScroll, useSpring, useTransform } from 'motion/react';
 import Link from 'next/link';
@@ -13,28 +14,22 @@ import { useRef } from 'react';
 
 import { INTERFACES, type InterfaceLink } from '@/config/navigation';
 
-const N = 6;
-/** Medio ancho de la transición alrededor de cada frontera entre pasos (en progreso 0 a 1). */
-const H = 0.045;
-
-type Six<T> = readonly [T, T, T, T, T, T];
-
 /** Entrada y salida para useTransform: cada valor se mantiene en su paso y cambia en la frontera. */
-function hold<T>(values: Six<T>): { input: number[]; output: T[] } {
+function hold<T>(values: readonly T[]): { input: number[]; output: T[] } {
   const input = [0];
-  const output: T[] = [values[0]];
+  const output: T[] = [values[0] as T];
   values.slice(1).forEach((v, i) => {
     const k = i + 1;
     input.push(k / N - H, k / N + H);
     output.push(values[i] as T, v);
   });
   input.push(1);
-  output.push(values[5]);
+  output.push(values[N - 1] as T);
   return { input, output };
 }
 
 /** Lo mismo que `hold`, evaluado a mano (para la cámara, que se escribe como atributo SVG). */
-function at(values: Six<number>, p: number): number {
+function at(values: readonly number[], p: number): number {
   const { input, output } = hold(values);
   for (let i = 1; i < input.length; i++) {
     const a = input[i - 1] ?? 0;
@@ -46,7 +41,7 @@ function at(values: Six<number>, p: number): number {
       return from + ((output[i] ?? from) - from) * e;
     }
   }
-  return values[5];
+  return values[N - 1] ?? 0;
 }
 
 interface StepCopy {
@@ -55,7 +50,7 @@ interface StepCopy {
   text: string;
 }
 
-const STEPS: Six<StepCopy> = [
+const STEPS: readonly StepCopy[] = [
   {
     icon: 'equipo',
     lead: 'El partido entero, de arriba.',
@@ -72,21 +67,48 @@ const STEPS: Six<StepCopy> = [
     text: 'Estadística por estadística, en totales o cada 36 minutos, con la media del plantel y la de su posición como referencia.',
   },
   {
+    icon: 'alternativas',
+    lead: 'Si se va, ¿quién se le parece?',
+    text: 'Para cada jugador, los más parecidos de toda la Liga Nacional con K-means: uno de otro club, una dupla o un compañero, del mejor al peor, con su comparación completa.',
+  },
+  {
+    icon: 'valor',
+    lead: '¿Juega lo que vale su juego?',
+    text: 'Los minutos que le da el entrenador contra los que su producción justifica, con una regresión lineal entrenada con toda la liga. Abajo de la línea, el «barato» de Moneyball.',
+  },
+  {
     icon: 'situaciones',
     lead: '¿Y si se va al descanso abajo?',
     text: 'Más de cien situaciones de partido: llegar abajo al descanso, meter doce triples, ganar el rebote, jugar de visitante o tener a un jugador cargado de faltas. Cada una contra el promedio de la temporada.',
   },
   {
+    icon: 'predictor',
+    lead: 'El próximo partido, en porcentajes.',
+    text: 'Probabilidad de ganar contra cualquier rival de la zona o la media de una liga, con los puntos esperados, el ritmo y los cuatro factores, y un backtest de cuánto acierta.',
+  },
+  {
     icon: 'graficos',
     lead: 'Cada jugada termina en un gráfico.',
-    text: '76 gráficos en 13 categorías: forma, puntos y ritmo, cuartos, cuatro factores, tiros, rebote, jugadores, métricas propias y modelos. Todos se exportan como imagen o tabla.',
+    text: '79 gráficos en 13 categorías: forma, puntos y ritmo, cuartos, cuatro factores, tiros, rebote, jugadores, métricas propias y modelos. Todos se exportan como imagen o tabla.',
   },
   {
     icon: 'actualizar',
     lead: 'Vuelta al círculo central.',
-    text: 'Los datos se cargan solos el día 1 de cada mes y un botón trae la última carga. Se ve la última actualización, el estado de cada fuente y el historial.',
+    text: 'Los datos se cargan solos el día 1 de cada mes y un botón trae la última carga, con los tres modelos vueltos a entrenar. Se ve la última actualización, el estado de cada fuente y el historial.',
   },
 ];
+
+const N = STEPS.length;
+/** Medio ancho de la transición alrededor de cada frontera entre pasos (en progreso 0 a 1). */
+const H = 0.028;
+const stepOf = (icon: InterfaceLink['icon']) => STEPS.findIndex((s) => s.icon === icon);
+const RED = stepOf('situaciones');
+const GRAF = stepOf('graficos');
+
+/** Un valor por paso: el de base, salvo en los pasos que se nombran. */
+function per<T>(base: T, overrides: Partial<Record<InterfaceLink['icon'], T>>): T[] {
+  return STEPS.map((s) => overrides[s.icon] ?? base);
+}
 
 // Cancha FIBA de 15 × 28 m a 36 px por metro, centrada en el lienzo de 680 × 1050 (queda el margen
 // del banco a los costados). Aros a 1,575 m del fondo; línea de tres a 6,75 m del aro.
@@ -96,17 +118,18 @@ const ARC_TOP = 'M102.4 21V128.6A243 243 0 0 0 577.6 128.6V21';
 const ARC_BOTTOM = 'M102.4 1029V921.4A243 243 0 0 1 577.6 921.4V1029';
 
 // Cámara por paso: zoom y punto de la cancha que queda en el centro.
-const ZOOM: Six<number> = [1, 1.6, 1.9, 1.6, 1.05, 1];
-const FOCUS_X: Six<number> = [340, 340, 340, 340, 340, 340];
-const FOCUS_Y: Six<number> = [525, 722, 720, 722, 470, 525];
+const ZOOM = per(1, { jugadores: 1.6, comparar: 1.9, alternativas: 1.35, valor: 1.25, situaciones: 1.6, predictor: 1.15, graficos: 1.05 });
+const FOCUS_X = per(340, {});
+const FOCUS_Y = per(525, { jugadores: 722, comparar: 720, alternativas: 600, valor: 640, situaciones: 722, graficos: 470 });
 
 type Pos = readonly [number, number];
 interface Player {
   n: number;
   pct: number;
-  pos: Six<Pos>;
+  pos: Pos[];
 }
-const same = (p: Pos, s3: Pos, s4: Pos): Six<Pos> => [p, p, p, s3, s4, p];
+// Tres formas del equipo: la base, con el pivot en el banco (Situaciones) y atacando (Gráficos).
+const same = (p: Pos, red: Pos, attack: Pos): Pos[] => STEPS.map((_, i) => (i === RED ? red : i === GRAF ? attack : p));
 
 // El equipo propio ataca hacia arriba. Pasos 0 a 2: defensa en su zona. Paso 3: el pivot, con cinco
 // faltas, al banco. Paso 4: el equipo ataca el aro de arriba.
@@ -121,30 +144,35 @@ const HOME: Player[] = [
 const FOULED_OUT = 4;
 const PAIR = [0, 1];
 
-const RIVAL: Six<Pos>[] = HOME.map(({ pos }) => {
-  const [x, y] = pos[0];
+const RIVAL: Pos[][] = HOME.map(({ pos }) => {
+  const [x, y] = pos[0] ?? [340, 525];
   const base: Pos = [680 - x, 1050 - y];
   const deep: Pos = [680 - x, 60 + (1050 - y - 60) * 0.8];
   return same(base, base, deep);
 });
 
 // La jugada del paso 4: del base al aro, pasando por el escolta, el ala-pivot y el pivot.
-const PLAY = [0, 1, 3, 4].map((i) => HOME[i]?.pos[4] ?? ([340, 525] as const));
+const PLAY = [0, 1, 3, 4].map((i) => HOME[i]?.pos[GRAF] ?? ([340, 525] as const));
 const PLAY_PATH = `${PLAY.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${String(x)} ${String(y)}`).join(' ')} L340 ${String(HOOP_TOP)}`;
 
 function Dot({ player, index, progress }: { player: Player; index: number; progress: MotionValue<number> }) {
-  const xs = hold(player.pos.map((p) => p[0]) as unknown as Six<number>);
-  const ys = hold(player.pos.map((p) => p[1]) as unknown as Six<number>);
+  const xs = hold(player.pos.map((p) => p[0]));
+  const ys = hold(player.pos.map((p) => p[1]));
   const x = useTransform(progress, xs.input, xs.output);
   const y = useTransform(progress, ys.input, ys.output);
   const paired = PAIR.includes(index);
-  const dim = hold<number>(index === FOULED_OUT ? [1, 1, 0.25, 0.14, 1, 1] : [1, 1, paired ? 1 : 0.25, 1, 1, 1]);
+  const target = index === PAIR[0];
+  const dim = hold(
+    index === FOULED_OUT
+      ? per(1, { comparar: 0.25, alternativas: 0.25, situaciones: 0.14 })
+      : per(1, { comparar: paired ? 1 : 0.25, alternativas: target ? 1 : 0.25 }),
+  );
   const opacity = useTransform(progress, dim.input, dim.output);
-  const grow = hold<number>([1, 1, paired ? 1.45 : 1, 1, 1, 1]);
+  const grow = hold(per(1, { comparar: paired ? 1.45 : 1, alternativas: target ? 1.45 : 1 }));
   const scale = useTransform(progress, grow.input, grow.output);
-  const ring = hold<number>([0, 1, paired ? 1 : 0.2, 0.5, 0, 0]);
+  const ring = hold(per(0, { jugadores: 1, comparar: paired ? 1 : 0.2, alternativas: target ? 1 : 0, valor: 1, situaciones: 0.5 }));
   const ringOpacity = useTransform(progress, ring.input, ring.output);
-  const label = hold<number>([0, 1, 1, 1, 0, 0]);
+  const label = hold(per(0, { jugadores: 1, comparar: 1, alternativas: 1, valor: 1, situaciones: 1 }));
   const labelOpacity = useTransform(progress, label.input, label.output);
   const c = 2 * Math.PI * 33;
   return (
@@ -164,12 +192,12 @@ function Dot({ player, index, progress }: { player: Player; index: number; progr
   );
 }
 
-function RivalDot({ pos, progress }: { pos: Six<Pos>; progress: MotionValue<number> }) {
-  const xs = hold(pos.map((p) => p[0]) as unknown as Six<number>);
-  const ys = hold(pos.map((p) => p[1]) as unknown as Six<number>);
+function RivalDot({ pos, progress }: { pos: Pos[]; progress: MotionValue<number> }) {
+  const xs = hold(pos.map((p) => p[0]));
+  const ys = hold(pos.map((p) => p[1]));
   const x = useTransform(progress, xs.input, xs.output);
   const y = useTransform(progress, ys.input, ys.output);
-  const fade = hold<number>([0.55, 0.2, 0.12, 0.3, 0.6, 0.55]);
+  const fade = hold(per(0.55, { jugadores: 0.2, comparar: 0.12, alternativas: 0.7, valor: 0.2, situaciones: 0.3, predictor: 0.45, graficos: 0.6 }));
   const opacity = useTransform(progress, fade.input, fade.output);
   return <motion.circle r={18} className="show-pitch__rival" style={{ x, y, opacity }} />;
 }
@@ -184,8 +212,7 @@ function Layer({
   progress: MotionValue<number>;
   children: React.ReactNode;
 }) {
-  const values = [0, 0, 0, 0, 0, 0].map((_, i) => (i === step ? 1 : 0)) as unknown as Six<number>;
-  const { input, output } = hold(values);
+  const { input, output } = hold(STEPS.map((_, i) => (i === step ? 1 : 0)));
   const opacity = useTransform(progress, input, output);
   return <motion.g style={{ opacity }}>{children}</motion.g>;
 }
@@ -241,7 +268,7 @@ export function PitchStory() {
   const play = useRef<SVGPathElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   const progress = useSpring(scrollYProgress, { stiffness: 110, damping: 28, mass: 0.7 });
-  const playDraw = useTransform(progress, [4 / N + H, 5 / N - H], [0, 1]);
+  const playDraw = useTransform(progress, [GRAF / N + H, (GRAF + 1) / N - H], [0, 1]);
 
   // Cámara y pelota: se escriben como atributos SVG en cada cambio de progreso, sin re-render.
   useMotionValueEvent(progress, 'change', (p) => {
@@ -256,12 +283,12 @@ export function PitchStory() {
     const b = ball.current;
     const path = play.current;
     if (!b || !path) return;
-    const t = Math.min(1, Math.max(0, (p - (4 / N + H)) / (1 / N - 2 * H)));
-    const back = Math.min(1, Math.max(0, (p - (5 / N - H)) / (2 * H)));
+    const t = Math.min(1, Math.max(0, (p - (GRAF / N + H)) / (1 / N - 2 * H)));
+    const back = Math.min(1, Math.max(0, (p - ((GRAF + 1) / N - H)) / (2 * H)));
     const pt = path.getPointAtLength(path.getTotalLength() * t);
     b.setAttribute('cx', String(pt.x + (340 - pt.x) * back));
     b.setAttribute('cy', String(pt.y + (525 - pt.y) * back));
-    b.setAttribute('opacity', p > 4 / N ? '1' : '0');
+    b.setAttribute('opacity', p > GRAF / N && p < (GRAF + 1) / N + H ? '1' : '0');
   });
 
   const byIcon = new Map(INTERFACES.map((i) => [i.icon, i]));
@@ -270,7 +297,7 @@ export function PitchStory() {
     <section ref={ref} className="show-pitch show-bleed" aria-labelledby="pitch-title">
       <div className="show-pitch__stage">
         <h2 id="pitch-title" className="sr-only">
-          Las seis interfaces
+          Las nueve interfaces
         </h2>
         <div className="show-pitch__panels">
           {STEPS.map((s, i) => {
@@ -295,7 +322,7 @@ export function PitchStory() {
         >
           <g ref={camera}>
             <rect x="0" y="0" width="680" height="1050" className="show-pitch__grass" />
-            <Layer step={0} progress={progress}>
+            <Layer step={stepOf('equipo')} progress={progress}>
               <path d={`${ARC_TOP}Z`} className="show-pitch__zone" style={{ opacity: 0.1 }} />
               <path d={`${ARC_BOTTOM}Z`} className="show-pitch__zone" style={{ opacity: 0.1 }} />
               <rect
@@ -330,7 +357,36 @@ export function PitchStory() {
               <circle cx="340" cy={HOOP_TOP} r="8.3" />
               <circle cx="340" cy={HOOP_BOTTOM} r="8.3" />
             </g>
-            <Layer step={2} progress={progress}>
+            <Layer step={stepOf('alternativas')} progress={progress}>
+              {/* Del jugador elegido a los rivales que más se le parecen. */}
+              {[0, 2, 1].map((j, i) => (
+                <line
+                  key={j}
+                  x1="250"
+                  y1="730"
+                  x2={RIVAL[j]?.[0]?.[0] ?? 340}
+                  y2={RIVAL[j]?.[0]?.[1] ?? 300}
+                  className="show-pitch__link"
+                  style={{ opacity: 1 - i * 0.3 }}
+                />
+              ))}
+            </Layer>
+            <Layer step={stepOf('valor')} progress={progress}>
+              <line x1="120" y1="900" x2="560" y2="460" className="show-pitch__link" />
+            </Layer>
+            <Layer step={stepOf('predictor')} progress={progress}>
+              <g transform="translate(340 525)">
+                <rect x="-210" y="-26" width="294" height="52" rx="10" className="show-pitch__bar" />
+                <rect x="84" y="-26" width="126" height="52" rx="10" className="show-pitch__bar show-pitch__bar--alt" />
+                <text x="-63" textAnchor="middle" dy="8" className="show-pitch__odds">
+                  70 %
+                </text>
+                <text x="147" textAnchor="middle" dy="8" className="show-pitch__odds">
+                  30 %
+                </text>
+              </g>
+            </Layer>
+            <Layer step={stepOf('comparar')} progress={progress}>
               <line x1="250" x2="430" y1="730" y2="730" className="show-pitch__link" />
               {[0.7, -0.45, 0.3, -0.8, 0.55].map((v, i) => (
                 <rect
@@ -344,11 +400,11 @@ export function PitchStory() {
                 />
               ))}
             </Layer>
-            <Layer step={4} progress={progress}>
+            <Layer step={GRAF} progress={progress}>
               <motion.path ref={play} d={PLAY_PATH} className="show-pitch__play" style={{ pathLength: playDraw }} />
               <circle cx="340" cy={HOOP_TOP} r="26" className="show-pitch__xg" />
             </Layer>
-            <Layer step={5} progress={progress}>
+            <Layer step={stepOf('actualizar')} progress={progress}>
               {[0, 1, 2].map((i) => (
                 <circle
                   key={i}
@@ -366,7 +422,7 @@ export function PitchStory() {
             {HOME.map((player, i) => (
               <Dot key={player.n} player={player} index={i} progress={progress} />
             ))}
-            <Layer step={3} progress={progress}>
+            <Layer step={RED} progress={progress}>
               {/* Las cinco faltas del pivot, como las luces del tablero. */}
               {[0, 1, 2, 3, 4].map((i) => (
                 <circle key={i} cx={316 + i * 12} cy="862" r="4.5" className="show-pitch__card" />

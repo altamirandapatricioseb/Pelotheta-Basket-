@@ -116,3 +116,6 @@ g55,desglosada,estadistica,stat=elo_pre&entidad=equipo,Desglosada: Elo de Boca a
 g61,desglosada,estadistica,stat=team_fta&entidad=equipo,Desglosada: Libres del equipo
 g63,desglosada,estadistica,stat=net_rating&entidad=equipo,Desglosada: Net Rating
 g68,desglosada,estadistica,stat=elo_win_prob&entidad=equipo,Desglosada: Probabilidad de ganar antes del partido
+g77,tabla,valor,,Origen: Valor › El plantel
+g78,tabla,predictor,,Origen: Predictor › Backtest
+g79,tabla,predictor,,Origen: Predictor › El modelo

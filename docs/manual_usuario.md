@@ -28,7 +28,7 @@ todavía». Al elegir el equipo aparecen las seis interfaces.
 
 ![Gráficos](capturas/graficos-claro.png)
 
-76 gráficos en 13 categorías (73 con datos), con números destacados arriba de cada sección y una barra de
+79 gráficos en 13 categorías (76 con datos), con números destacados arriba de cada sección y una barra de
 categorías que acompaña el scroll. Cada gráfico tiene «Ver como tabla», «Descargar PNG», «Descargar los
 datos (CSV)» y «Ver origen de los datos». Doble clic sobre un gráfico abre la estadística desglosada.
 
@@ -80,6 +80,30 @@ desglose de cada estadística. Excel y PNG.
 - **Partido:** marcador, cuartos, box score de los dos equipos y conclusiones.
 - **Jugador:** ficha, conclusiones, todas sus estadísticas por categoría con percentil y puesto, y sus
   partidos.
+
+## Valor
+
+La Liga Nacional no publica sueldos ni valores de pase, así que el «precio» medible es el que paga el
+entrenador: los minutos. Una regresión lineal entrenada con toda la liga dice cuántos minutos justifica
+la producción de cada jugador (cada 36 minutos y edad). La tabla ordena como el resto del sistema; al
+tocar un jugador se abre su pantalla con seis gráficos: aportes, paso a paso, la liga entera, comparables,
+el plantel y los errores del modelo. Si se cargan valores en `data/manual/market_values.csv`, el modelo
+pasa a predecir el valor en dólares.
+
+## Alternativas
+
+Elegí un jugador y aparecen tres listas, de la mejor opción a la peor: otro club 1 a 1, una dupla de otro
+club y un compañero del plantel. Parecido = cercanía en 12 estadísticas cada 36 minutos entre todos los
+jugadores de la liga con 120 minutos o más. Tocar una fila abre la comparación completa (perfil, qué se
+gana y qué se pierde, dónde está la diferencia y minutos contra parecido).
+
+## Predictor
+
+Por defecto compara a Boca con la media de toda la zona. Con los selectores de país y liga se elige la
+media de un país, de una liga o un club puntual, y dónde se juega (local, visitante o neutral). Muestra
+la probabilidad de ganar, los puntos esperados, cómo puede terminar el margen y qué variable decide el
+partido, más el backtest y las pruebas de hipótesis. Un club sin resultados abiertos cuenta como un club
+promedio de la Liga Nacional y se marca como estimado.
 
 ## Actualizar (Interfaz 6)
 

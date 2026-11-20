@@ -62,6 +62,127 @@ export type Database = {
         };
         Relationships: [];
       };
+      model_run: {
+        Row: {
+          model: string | null;
+          team_slug: string | null;
+          status: string | null;
+          n: number | null;
+          metrics: Json | null;
+          params: Json | null;
+          message: string | null;
+          trained_at: string | null;
+        };
+        Relationships: [];
+      };
+      market_value_prediction: {
+        Row: {
+          team_slug: string | null;
+          player_id: number | null;
+          player_name: string | null;
+          position_group: string | null;
+          actual_eur: number | null;
+          predicted_eur: number | null;
+          low_eur: number | null;
+          high_eur: number | null;
+          residual_pct: number | null;
+          features: Json | null;
+          detail: Json | null;
+        };
+        Relationships: [];
+      };
+      market_value_coef: {
+        Row: {
+          team_slug: string | null;
+          feature: string | null;
+          coef: number | null;
+          std_err: number | null;
+          t_stat: number | null;
+          p_value: number | null;
+          ci_low: number | null;
+          ci_high: number | null;
+        };
+        Relationships: [];
+      };
+      player_style: {
+        Row: {
+          team_slug: string | null;
+          player_id: number | null;
+          player_name: string | null;
+          position_group: string | null;
+          cluster: number | null;
+          cluster_label: string | null;
+          pc1: number | null;
+          pc2: number | null;
+          features: Json | null;
+          z: Json | null;
+          percentiles: Json | null;
+        };
+        Relationships: [];
+      };
+      player_alternative: {
+        Row: {
+          team_slug: string | null;
+          player_id: number | null;
+          section: string | null;
+          rank: number | null;
+          members: Json | null;
+          similarity: number | null;
+          total_value_eur: number | null;
+          savings_eur: number | null;
+        };
+        Relationships: [];
+      };
+      match_prediction: {
+        Row: {
+          team_slug: string | null;
+          kind: string | null;
+          match_date: string | null;
+          home_team: string | null;
+          away_team: string | null;
+          pts_home: number | null;
+          pts_away: number | null;
+          p_home: number | null;
+          p_away: number | null;
+          margin_sd: number | null;
+          detail: Json | null;
+          actual_home: number | null;
+          actual_away: number | null;
+          competition: string | null;
+          neutral: boolean | null;
+        };
+        Relationships: [];
+      };
+      team_strength: {
+        Row: {
+          team_slug: string | null;
+          team_name: string | null;
+          competition: string | null;
+          country: string | null;
+          league: string | null;
+          estimated: boolean | null;
+          games: number | null;
+          points_for: number | null;
+          points_against: number | null;
+          profile: Json | null;
+          elo: number | null;
+          form: number | null;
+        };
+        Relationships: [];
+      };
+      stat_test: {
+        Row: {
+          team_slug: string | null;
+          test_id: string | null;
+          title_es: string | null;
+          statistic: number | null;
+          df: number | null;
+          p_value: number | null;
+          decision_es: string | null;
+          detail: Json | null;
+        };
+        Relationships: [];
+      };
       stat_catalog: {
         Row: {
           available: boolean | null;
