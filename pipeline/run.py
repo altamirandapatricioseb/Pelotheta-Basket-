@@ -155,18 +155,28 @@ def run(*, start: date, end: date, force: bool, whole_league: bool) -> dict[str,
                 quarantined.append({"game": label, "problems": len(check.critical)})
             collect(game, match, tables, pbp_ok=check.pbp_ok, fouls_ok=check.fouls_ok)
 
-    # Fecha de nacimiento y nombre completo de cada jugador de Boca (ficha de la LNB). Dato personal:
+    # Fecha de nacimiento y nombre completo de cada jugador (ficha de la LNB): de Boca siempre y, con
+    # --liga, de toda la liga (la edad entra en los modelos de Valor y Alternativas). Dato personal:
     # queda en data/processed (no se versiona) y en core.player.birth_date, que no es pública.
     boca_ids = sorted(
-        {str(r["source_player_id"]) for r in tables["player_game_stats"] if r["team_id"] == lnb.BOCA_TEAM_ID}
+        {
+            str(r["source_player_id"])
+            for r in tables["player_game_stats"]
+            if whole_league or r["team_id"] == lnb.BOCA_TEAM_ID
+        }
     )
+    own_ids = {
+        str(r["source_player_id"]) for r in tables["player_game_stats"] if r["team_id"] == lnb.BOCA_TEAM_ID
+    }
     tables["player_bio"] = []
     with PoliteClient(source=lnb.SOURCE) as client:
         for pid in boca_ids:
             try:
                 tables["player_bio"].append(lnb.fetch_player(client, str(pid)).model_dump(mode="json"))
             except lnb.ParseError as exc:
-                failed.append({"game": f"ficha {pid}", "reason": str(exc)})
+                # Sin la ficha de un rival solo falta su edad: no es una falla de la corrida.
+                if pid in own_ids:
+                    failed.append({"game": f"ficha {pid}", "reason": str(exc)})
 
     # Plantel con posición, edad, altura y peso (Wikipedia, API oficial). Si falla, se sigue sin él.
     try:
