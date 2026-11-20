@@ -75,3 +75,6 @@ g73,M,Estabilidad del quinteto titular,linea,titulares de cada partido,equipo:qu
 g74,M,Minutos por tramo de edad,barras,fecha de nacimiento y minutos,jugadores:carga,sí,sí,true,
 g75,M,Rachas de jugadores,barras_horizontales,box score de cada jugador,jugadores:marcas,sí,sí,true,
 g76,M,Temporada actual frente a la anterior,linea,resultados de la temporada anterior,equipo:partidos,sí,sí,false,"No se carga la temporada anterior (decisión del dueño, 3-nov-2026)."
+g77,M,Minutos reales contra los que su producción justifica,dispersion,box score de toda la liga y modelo de Valor,jugadores:carga,sí,sí,true,
+g78,M,Probabilidad previa de ganar y resultado,linea,predictor de partidos (backtest),equipo:partidos,sí,sí,true,
+g79,M,Fuerza (Elo) de cada club de la liga,barras_horizontales,resultados de toda la liga,equipo:partidos,sí,sí,true,

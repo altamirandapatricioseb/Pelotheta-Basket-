@@ -5,7 +5,9 @@ import { notFound } from 'next/navigation';
 import { z } from 'zod';
 
 import { BoxScore, ConclusionCards, day } from '@/components/detail/parts';
+import { CURRENT_TEAM } from '@/config/teams';
 import { getGameDetail } from '@/lib/data/details';
+import { getPredictions } from '@/lib/data/models';
 import { NOT_AVAILABLE } from '@/lib/format';
 import { gameConclusions, type GameStat, standing } from '@/lib/stats/conclusions';
 import { formatValue } from '@/lib/stats/summary-columns';
@@ -48,7 +50,7 @@ interface PageProps {
 export default async function PartidoPage({ params }: PageProps) {
   const parsed = paramsSchema.safeParse(await params);
   if (!parsed.success) notFound();
-  const detail = await getGameDetail(parsed.data.id);
+  const [detail, preds] = await Promise.all([getGameDetail(parsed.data.id), getPredictions(CURRENT_TEAM.slug)]);
   if (detail === null) notFound();
   if (!detail.ok) {
     return (
@@ -84,6 +86,9 @@ export default async function PartidoPage({ params }: PageProps) {
   const home = { name: 'Boca Juniors', points: game.pointsFor };
   const away = { name: game.opponent, points: game.pointsAgainst };
   const [left, right] = game.isHome ? [home, away] : [away, home];
+  // Lo que daba el predictor antes del partido (backtest: solo con lo jugado hasta ese día).
+  const before = preds.ok ? preds.data.predictions.find((p) => p.kind === 'backtest' && p.date === game.date.slice(0, 10)) : undefined;
+  const pBefore = before ? (game.isHome ? before.pHome : before.pAway) : null;
 
   return (
     <div className="grid grid-cols-1 gap-8">
@@ -131,6 +136,7 @@ export default async function PartidoPage({ params }: PageProps) {
             ['Rating defensivo', stat('drtg')],
             ['Rating neto', stat('net_rating')],
             ['Prob. de ganar (Elo)', stat('elo_win_prob')],
+            ['Prob. de ganar (Predictor)', pBefore === null ? NOT_AVAILABLE : `${String(Math.round(pBefore * 100))} %`],
             ['Máxima ventaja', stat('max_lead')],
             ['Cambios de líder', stat('lead_changes')],
             ['Días de descanso', stat('rest_days')],

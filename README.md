@@ -27,11 +27,14 @@ propias.
 | Interfaz | Qué hace |
 |---|---|
 | [Portada](https://pelotheta-basket-dva.vercel.app/) | Presentación del sistema y selector de equipo en tres pasos (país, categoría, equipo); hoy solo Boca tiene datos |
-| [Gráficos](https://pelotheta-basket-dva.vercel.app/graficos) | 76 gráficos en 13 categorías (73 con datos), con PNG, CSV, tabla y «Ver origen» |
+| [Gráficos](https://pelotheta-basket-dva.vercel.app/graficos) | 79 gráficos en 13 categorías (76 con datos), con PNG, CSV, tabla y «Ver origen» |
 | [Equipo](https://pelotheta-basket-dva.vercel.app/equipo) | Boca por partido, rival, mes, competición o acumulado, 15 categorías |
 | [Jugadores](https://pelotheta-basket-dva.vercel.app/jugadores) | Tabla maestra del plantel con percentiles, cada 36 y el panel del jugador, 21 categorías |
 | [Situaciones](https://pelotheta-basket-dva.vercel.app/situaciones) | 118 tarjetas («cuando pasa X, ¿cómo le va a Boca?»), calculadas en SQL, 107 con casos |
 | [Comparar](https://pelotheta-basket-dva.vercel.app/comparar) | Un jugador contra plantel, zona, posición u otro jugador |
+| [Valor](https://pelotheta-basket-dva.vercel.app/valor) | Minutos que juega cada jugador contra los que su producción justifica (regresión lineal con toda la liga); pantalla por jugador con 6 gráficos |
+| [Alternativas](https://pelotheta-basket-dva.vercel.app/alternativas) | K-means sobre los jugadores de toda la Liga Nacional: reemplazo 1 a 1 de otro club, dupla y compañero, con la comparación completa |
+| [Predictor](https://pelotheta-basket-dva.vercel.app/predictor) | Probabilidad de ganar contra un club o la media de una liga, un país o toda la zona; regresión de puntos, margen normal, backtest y pruebas |
 | [Actualizar](https://pelotheta-basket-dva.vercel.app/actualizar) | Fecha de la última carga e historial; detecta una carga nueva sin escribir |
 | Estadística desglosada | Doble clic en cualquier número: ventanas de tiempo, gráficos y partidos |
 

@@ -5,7 +5,10 @@ import { notFound } from 'next/navigation';
 import { z } from 'zod';
 
 import { ConclusionCards, day } from '@/components/detail/parts';
+import { Tiles } from '@/components/models/common';
+import { CURRENT_TEAM } from '@/config/teams';
 import { getPlayerDetail } from '@/lib/data/details';
+import { getAlternatives, getMarketValues } from '@/lib/data/models';
 import { formatNumber, NOT_AVAILABLE } from '@/lib/format';
 import { playerConclusions, type RankedStat, standing } from '@/lib/stats/conclusions';
 import { columnValue, formatValue } from '@/lib/stats/summary-columns';
@@ -30,7 +33,11 @@ interface PageProps {
 export default async function JugadorPage({ params }: PageProps) {
   const parsed = paramsSchema.safeParse(await params);
   if (!parsed.success) notFound();
-  const detail = await getPlayerDetail(parsed.data.id);
+  const [detail, values, alts] = await Promise.all([
+    getPlayerDetail(parsed.data.id),
+    getMarketValues(CURRENT_TEAM.slug),
+    getAlternatives(CURRENT_TEAM.slug),
+  ]);
   if (detail === null) notFound();
   if (!detail.ok) {
     return (
@@ -59,6 +66,14 @@ export default async function JugadorPage({ params }: PageProps) {
     return c ? formatValue(player.values[key], c) : NOT_AVAILABLE;
   };
   const played = log.filter((g) => (g.line.minutes ?? 0) > 0).length;
+  // Lo que dicen los modelos de este jugador (si tiene minutos suficientes para entrar).
+  const value = values.ok ? values.data.rows.find((r) => r.playerId === player.playerId) : undefined;
+  const style = alts.ok ? alts.data.styles.find((s) => s.playerId === player.playerId) : undefined;
+  const best = alts.ok
+    ? alts.data.alternatives
+        .filter((a) => a.playerId === player.playerId && a.section === 'externo')
+        .sort((a, b) => b.similarity - a.similarity)[0]
+    : undefined;
 
   return (
     <div className="grid grid-cols-1 gap-8">
@@ -130,6 +145,58 @@ export default async function JugadorPage({ params }: PageProps) {
         items={conclusions}
         basis={`Percentil entre los ${String(pool.length)} jugadores de Boca con al menos el 25 % de los minutos del más usado; los conteos se comparan cada 36 minutos.`}
       />
+
+      {value || style ? (
+        <section aria-labelledby="modelos" className="grid gap-3">
+          <h2 id="modelos" className="text-xl font-bold">
+            Lo que dicen los modelos
+          </h2>
+          <Tiles
+            items={[
+              ...(value
+                ? [
+                    {
+                      label: 'Minutos: real y esperado',
+                      value: `${formatNumber(value.actual, 1)} y ${formatNumber(value.predicted, 1)}`,
+                      hint: value.residualPct !== null ? `Diferencia ${formatNumber(value.residualPct, 1)} %` : undefined,
+                      help: 'Minutos por partido que juega contra los que su producción justifica, según la regresión de toda la liga (Valor).',
+                    },
+                  ]
+                : []),
+              ...(style
+                ? [
+                    {
+                      label: 'Perfil de juego',
+                      value: style.label,
+                      help: 'Grupo de K-means entre todos los jugadores de la liga: el nombre sale de sus dos rasgos más fuertes (Alternativas).',
+                    },
+                  ]
+                : []),
+              ...(best
+                ? [
+                    {
+                      label: 'Más parecido de otro club',
+                      value: best.members.map((m) => m.name).join(' + '),
+                      hint: `${formatNumber(best.similarity, 1)} % · ${best.members[0]?.team ?? ''}`,
+                    },
+                  ]
+                : []),
+            ]}
+          />
+          <p className="flex flex-wrap gap-2">
+            {value ? (
+              <Link href={`/valor/${String(player.playerId)}`} className="chip focus-ring">
+                Ver su análisis en Valor
+              </Link>
+            ) : null}
+            {style ? (
+              <Link href={`/alternativas?jugador=${String(player.playerId)}`} className="chip focus-ring">
+                Ver sus alternativas
+              </Link>
+            ) : null}
+          </p>
+        </section>
+      ) : null}
 
       <section aria-labelledby="todas" className="grid gap-3">
         <h2 id="todas" className="text-xl font-bold">

@@ -6,6 +6,14 @@ Conventional Commits.
 ## [Sin publicar]
 
 ### Agregado
+- Interfaces Valor, Alternativas y Predictor, portadas de Pelotheta fútbol y adaptadas al básquet
+  (`pipeline/analytics.py`, migración `20261118120000_modelos.sql`): Valor modela minutos con toda la
+  liga (no hay valores de mercado abiertos de la LNB); Alternativas usa el box score de los 18 clubes;
+  el Predictor es una regresión de puntos con margen normal, con selector de país, liga y medias.
+- La corrida con `--liga` baja la ficha (edad) de todos los jugadores y entrena los modelos.
+- API-Basketball (opcional, `API_BASKETBALL_KEY`): temporadas pasadas y ligas de la zona para el predictor.
+- Gráficos 77 a 79 (modelos), bloque de modelos en la ficha del jugador, probabilidad previa en el
+  partido y panel Probabilidad en Equipo. La portada cuenta las nueve interfaces y se arregla en el celular.
 - Portada del sistema en `/` y selector de equipo en `/elegir` (país, categoría, equipo), portados de
   Pelotheta fútbol: mapa de tiro por zonas que arma la Θ, pipeline, las 24 métricas propias, las seis
   interfaces sobre una pizarra de básquet y Sudamérica punteada. Solo Boca Juniors se puede elegir.

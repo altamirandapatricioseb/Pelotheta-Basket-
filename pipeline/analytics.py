@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import html
 import json
 import os
 import re
@@ -60,7 +61,7 @@ STAT_KEYS = (
 
 def pretty_person(name: str) -> str:
     """«STENTA, NICOLAS» → «Nicolas Stenta»; «WHITFIELD, R.» → «R. Whitfield»."""
-    last, _, first = name.partition(",")
+    last, _, first = html.unescape(name).partition(",")  # la ficha de la LNB trae entidades («Mat&#xcd;as»)
     full = f"{first.strip()} {last.strip()}".strip() if first else last.strip()
     return " ".join(w.capitalize() if len(w) > 2 or not w.endswith(".") else w.upper() for w in full.split())
 

@@ -1,15 +1,15 @@
 {
-  "run_id": "3351ebfd-e715-4134-a4fa-75e17414a505",
-  "started_at": "2026-11-03T18:28:39+00:00",
+  "run_id": "f2483bf5-515f-40c9-89a2-7dc55a97c3fd",
+  "started_at": "2026-11-19T01:58:17+00:00",
   "source": "lnb",
   "window": [
     "2026-09-01",
-    "2026-11-03"
+    "2026-11-18"
   ],
   "scope": "liga",
-  "finished_at": "2026-11-03T18:32:25+00:00",
-  "duration_s": 226,
-  "games_loaded": 49,
+  "finished_at": "2026-11-19T02:13:20+00:00",
+  "duration_s": 902,
+  "games_loaded": 78,
   "pbp_validated": [
     {
       "game": "2026-09-30 argentino-j-vs-ferro",
@@ -162,6 +162,94 @@
     {
       "game": "2026-11-02 olimpico-lb-vs-penarol-mdp",
       "fouls_validated": false
+    },
+    {
+      "game": "2026-11-03 instituto-vs-racing-ch",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-03 atenas-c-vs-gimnasia-cr",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-03 la-union-fsa-vs-argentino-j",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-04 olimpico-lb-vs-lanus",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-05 independiente-o-vs-gimnasia-cr",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-06 san-lorenzo-vs-regatas-c",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-11-08 san-lorenzo-vs-san-martin-c",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-08 quimsa-vs-instituto",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-09 boca-vs-la-union-fsa",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-11-09 gimnasia-cr-vs-obera",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-11-10 argentino-j-vs-regatas-c",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-10 olimpico-lb-vs-instituto",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-11 platense-vs-penarol-mdp",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-11 lanus-vs-la-union-fsa",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-12 atenas-c-vs-san-lorenzo",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-11-13 ferro-vs-penarol-mdp",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-14 gimnasia-cr-vs-platense",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-14 independiente-o-vs-san-lorenzo",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-15 san-martin-c-vs-quimsa",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-17 racing-ch-vs-lanus",
+      "fouls_validated": false
+    },
+    {
+      "game": "2026-11-17 obera-vs-atenas-c",
+      "fouls_validated": true
+    },
+    {
+      "game": "2026-11-17 regatas-c-vs-quimsa",
+      "fouls_validated": false
     }
   ],
   "pbp_quarantined": [
@@ -208,18 +296,46 @@
     {
       "game": "2026-11-01 instituto-vs-gimnasia-cr",
       "problems": 44
+    },
+    {
+      "game": "2026-11-05 obera-vs-argentino-j",
+      "problems": 4
+    },
+    {
+      "game": "2026-11-06 quimsa-vs-lanus",
+      "problems": 3
+    },
+    {
+      "game": "2026-11-06 boca-vs-san-martin-c",
+      "problems": 6
+    },
+    {
+      "game": "2026-11-08 racing-ch-vs-regatas-c",
+      "problems": 10
+    },
+    {
+      "game": "2026-11-10 ferro-vs-san-martin-c",
+      "problems": 4
+    },
+    {
+      "game": "2026-11-15 la-union-fsa-vs-atenas-c",
+      "problems": 19
+    },
+    {
+      "game": "2026-11-16 instituto-vs-san-lorenzo",
+      "problems": 6
     }
   ],
   "failed": [],
   "rows": {
-    "game": 49,
-    "game_period_score": 201,
-    "team_game_stats": 98,
-    "player_game_stats": 1173,
-    "shot": 6270,
-    "play_by_play_event": 21938,
-    "league_result": 49,
-    "player_bio": 13,
+    "game": 78,
+    "game_period_score": 320,
+    "team_game_stats": 156,
+    "player_game_stats": 1869,
+    "shot": 10006,
+    "play_by_play_event": 34358,
+    "league_result": 78,
+    "player_bio": 254,
     "roster": 14
   },
   "input_hashes": [
@@ -269,9 +385,38 @@
     "595829e3270e2a37ba00d69bb71228dc261923ff4105308c3476ebf028c7e4e8",
     "fb82fa983537931391f35381bbce8907a96376d1bf36ab65e3232e93c440a944",
     "9f4e0fae1031cfc23248d6b9b196253d86a7e0b9eda87785d0fe5829816fc036",
-    "77077036d78c488ce3e73d7481a432f452956c44b5caee50027379d429d8b8ba",
-    "32c42803a201d48b3fe98ee65ddcc86fe7981e1c46e70d32c245ab7bad415c9e",
-    "0868433363dca684b6bb7ece44d1deb262f8c7f37d7264a08df433f7ef1f8fe6",
+    "2f5455f958a1cef128ab056823a5bfeda054db8bb96a3a88e2dffe37f2957aa8",
+    "7cf39745130d81d366e20fa72c1fd1c9fe9e89bd20176d5002ed9221e87b5cf1",
+    "8306561d7069b5fe867d1571081efb8f36573ac4a79c464b45c5f8c20207aaea",
+    "5ab902a20677835b4be5580a65dca95ecd64cd121bbc719aa01f9a748000c6f8",
+    "255f1e0d0fe70231b9afd174bb8bfc45b3a3db9d5335bc241141a1c1458896cc",
+    "b4f879c7e8193b5a36f69003ef09be471d823ee4b6e7934dbbdbe2be7c9c91d8",
+    "8fe3aab70d034991028e6944951098ec7be17a7800a67dbf08adaeebfc687b9d",
+    "5cf258e583af71e0478270883ea12929a4dd5746cca3f8a00c5a66c7911e8220",
+    "f35b23077ca33082f3db9ade7bcdf0128aadfcaaaa7c1292af8395c5e7889c00",
+    "751cbd1e03a412c7261e98398e5c2c5f30fcf0e5db61ea734d3b9a50f64820db",
+    "08350e30f6316f405b9b42a7e2a26fab682f2777c46a326c1dca891b6a970d8e",
+    "eb2d0d5dc8279f4057d6cc3abcf16530f86023ce344b78cf0a21652c3e5fa99b",
+    "4cc8e2d0a33fc70eab7a533295b0cfd758995de6ddd1f16fd218b3f752048768",
+    "c2442987a05aea1f5a3d7b1ce6472cdd93e10b4316e223901c30b4e9e0e3c005",
+    "e12a3a1818d3eedd39860b4c9e62c04cbd92d86765741185a312de43b7ee4037",
+    "fe8573f46afe687cc2806e377accf6f35cc7249fb3e8adcd9b4a87a92667ef92",
+    "af42c1bff8c90a37e4d9f2f50690fc3ff72c2b9483054994ad94be9e93aa9f2e",
+    "e735700672224b12c3cea44ad645e7f378c1ebb3c3125caa499642da9b27b9c5",
+    "55adf516cb212f387d1479669e396f18ac9f595445f2a69c62cd564c33b17771",
+    "209b7aa0755e75da09a47283b2fdd9c8158dfd6a356ca5fca1297855b0256861",
+    "c5351693f3a01822f081200784dad2d8aea7f600f9c69b0e3bd19ccea6599d0f",
+    "8ed58ebf85edb2ddfa40d4a985007da7d74392ae527185514d1b3da6a74c0c93",
+    "be2165cbcb8494e7d5e0bf70c355ee1a9240173bf2bc953761e01e2584cea230",
+    "1bad7eb321a909481175e1b2030a8ff07218882b6c9cc9babc60c48a5d64fcb9",
+    "d0aa6dd137be9ea5aebe90b77f82d1c9c7b022d2d46c0f44f5c18d5fdc65fa48",
+    "13a67c28b7d1e6bf2cc9f84e7f6e1bf9f2a56b094f6c8f117fa2bd544737e92f",
+    "4526372ce5c6758e39f938ec1321cd1727a61bcb9741614685f780f2f703cca9",
+    "db4056bda2fa901bab9f6d32c9caea5b40a34fcd2cd7b622e062dc728c9c605d",
+    "7002b3ed643a7032d74fb70e7591c1b8db44925ab109d30d830a5bc07c45e252",
+    "915f0e2ddc6f3d1bb4a482ce438bd6506cdb8465c5ff99196bf8665570e81ffc",
+    "e817d8ae1013410ebbf8a04408307e1797f9332b08537f3ef02261c3661f3d91",
+    "e4cf9cce8f55fe7a530a62d34382a6cd8ca55ba3d0b5a25320fbf9c888409b95",
     "32c169d964d929b51ada2bc74da190366138753ff12e75386f78fdb4f62892b3"
   ],
   "status": "ok"

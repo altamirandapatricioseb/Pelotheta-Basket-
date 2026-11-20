@@ -246,7 +246,8 @@ h3 {
   background: var(--color-surface-2);
 }
 
-@media (max-width: 1080px) {
+/* 10 pestañas (con Valor, Alternativas y Predictor): debajo de 1500 px no entran junto a las marcas. */
+@media (max-width: 1500px) {
   .site-header__bar {
     grid-template-columns: 1fr auto;
   }
@@ -1057,7 +1058,8 @@ h3 {
 /* Números destacados de cada sección de la landing (9.2). */
 .tile-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr));
+  /* auto-fit: con pocos números, cada uno se estira y la fila ocupa todo el ancho (sin hueco a la derecha). */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
   gap: 12px 24px;
   border: 1px solid var(--color-border);
   border-radius: 12px;
@@ -1083,6 +1085,99 @@ h3 {
 .tile-hint {
   font-size: 0.75rem;
   color: var(--color-text-muted);
+}
+/* Explicación al pasar el mouse (interfaces de modelos): «i» con un globo, también con teclado. */
+.tile-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.hint {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  color: var(--color-text-muted);
+  border-radius: 999px;
+  cursor: help;
+}
+.hint:hover,
+.hint:focus-visible {
+  color: var(--color-link);
+  outline: none;
+}
+.hint-pop {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  z-index: var(--z-tooltip);
+  width: max-content;
+  max-width: min(280px, 80vw);
+  translate: -50% 4px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  color: var(--color-text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  white-space: normal;
+  /* Fuera del flujo hasta que se usa: invisible igual ensanchaba la página en el celular. */
+  display: none;
+  pointer-events: none;
+}
+.hint:hover .hint-pop,
+.hint:focus .hint-pop {
+  display: block;
+  translate: -50% 0;
+}
+.data-table .cell-text {
+  text-align: left;
+}
+.data-table .cell-wrap {
+  min-width: 16rem;
+  max-width: 30rem;
+  white-space: normal;
+}
+/* Selectores en fila que ocupan todo el ancho (predictor): uno por columna, se apilan en el celular. */
+.selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 12px 16px;
+  align-items: end;
+}
+.field {
+  display: grid;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.field .select {
+  width: 100%;
+}
+.field .select:disabled {
+  opacity: 0.55;
+}
+.sort-definition {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+.data-table tr[data-link] {
+  cursor: pointer;
+}
+.data-table tr[aria-current] > * {
+  background: var(--color-surface-2);
+}
+.row-link {
+  border-radius: 4px;
+  font-weight: 700;
+  color: var(--color-link);
+}
+.row-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .icon-button {
   display: inline-grid;
