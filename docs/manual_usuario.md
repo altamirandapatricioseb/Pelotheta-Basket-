@@ -105,6 +105,48 @@ la probabilidad de ganar, los puntos esperados, cómo puede terminar el margen y
 partido, más el backtest y las pruebas de hipótesis. Un club sin resultados abiertos cuenta como un club
 promedio de la Liga Nacional y se marca como estimado.
 
+## Ojeador
+
+Informes como los de un ojeador. Arriba, la matriz de profundidad y edades: cada zona (exterior, alero, interior)
+contra cinco franjas de edad, con cada jugador más violeta cuantos más minutos jugó. Después, «Lo que le falta al
+plantel»: una nota de necesidad de 0 a 10 por zona (profundidad, nivel de los titulares en las estadísticas de la zona
+contra la liga, titulares de 33 años o más y contratos que terminan), los motivos, lo más flojo y lo mejor de los
+titulares y un mapa de calor con todos los jugadores de la zona y su percentil en cada estadística relevante, cada 36
+minutos. Abajo, los informes de jugadores de otros clubes en tres categorías (por necesidad, oportunidades de mercado
+y jóvenes promesas de hasta 23 años) con filtro por zona y un gráfico de nivel contra minutos por partido. Cada
+informe trae nota de 0 a 10, veredicto (fichar, seguir de cerca u opción de reserva), barras violetas de nivel actual
+y potencial (0 a 100), sus minutos contra la mediana de su zona y edad, en qué es bueno (verde) y en qué es flojo
+(rojo). Como la LNB no publica sueldos ni pases, el «precio» son los minutos que le da su entrenador (igual que en
+Valor): una oportunidad es un jugador que produce mucho con pocos minutos; con valores en dólares cargados, pasa a
+ser el valor de mercado. La fuente no informa la posición de los jugadores de otros clubes: su zona se estima por su
+perfil de juego (la más parecida a la de los jugadores propios) y el informe lo avisa.
+
+«Ver informe completo» (o tocar su punto en el gráfico) abre su página: el resumen, sus minutos contra los de todos
+los de su zona por edad (con la mediana, la curva de la regresión y los del plantel propio marcados), lo mejor y lo
+peor de su juego y una tabla con todas las estadísticas de jugador del catálogo (las mismas que tienen los jugadores
+propios): su valor, su percentil en la liga, la mediana de la liga y la de los titulares propios. Lo que la fuente
+todavía no trae de otros clubes queda con «–» y se completa solo cuando llegue.
+
+Al final, el mercado con estadística clásica, cada análisis bajo lo que muestra: cómo se reparten los minutos por
+zona (diagramas de caja con media, intervalo del 95 %, mediana, desvío y coeficiente de variación, y un ANOVA de un
+factor), edad y zona (tabla de contingencia con χ²), qué explica los minutos (regresión lineal múltiple por edad, edad
+al cuadrado y zona, con sus curvas sobre la nube de jugadores) y el plantel contra la liga (t de Welch, F de varianzas
+y z de dos proporciones).
+
+## Análisis estadísticos de cada interfaz
+
+Equipo, Situaciones, Partido, Jugadores, la ficha de cada jugador, Comparar (con otro jugador elegido), Valor,
+Alternativas, Predictor, la Estadística desglosada y el Ojeador suman tarjetas de análisis bajo la sección de lo que
+muestran (Puntos, Triples, Resultados, Local y visitante, Ritmo y eficiencia, Valoración partido a partido, Qué tan
+confiable es el modelo, etc.), con los datos de esa pantalla: distribuciones (binomial, Poisson, geométrica, normal y
+beta) contra lo observado con su prueba de bondad de ajuste y la regla de Sturges, gráficos Q-Q, intervalos de
+confianza para medias (t de Student) y proporciones (Wilson), pruebas de hipótesis (t de Welch, F de varianzas, z de
+una y dos proporciones), tablas de contingencia, ANOVA, correlación y regresión lineal simple y múltiple, el teorema
+central del límite, la aproximación normal a la binomial, el diagnóstico de residuos de Valor y la inferencia bayesiana
+contra la clásica en Predictor. Los puntos se modelan con la normal y los triples con la Poisson; la «calificación» de
+fútbol es acá la valoración FIBA. Cada análisis dice su H₀, el estadístico, el p y la decisión con α = 0,05, y se
+recalcula con cada carga de datos. Con pocos partidos (al principio de la temporada) se muestran desde 5.
+
 ## Actualizar (Interfaz 6)
 
 Muestra la fecha y hora de la última carga en formato argentino y el historial de cargas. El botón

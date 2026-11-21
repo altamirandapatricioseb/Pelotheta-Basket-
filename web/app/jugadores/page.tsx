@@ -1,3 +1,6 @@
+import { StatsLab } from '@/components/stats/stats-lab';
+import { squadAnalyses } from '@/lib/models/analyses';
+import { GROUP_OF } from '@/lib/models/scouting';
 import type { Metadata } from 'next';
 import { z } from 'zod';
 
@@ -65,6 +68,21 @@ export default async function JugadoresPage({ searchParams }: PageProps) {
           Todavía no hay partidos cargados. Se completan con la próxima actualización.
         </p>
       )}
+      {players.ok ? (
+        <StatsLab
+          analyses={squadAnalyses(
+            players.data.map((p) => ({
+              name: p.name,
+              zone: p.position ? (GROUP_OF[p.position] ?? null) : null,
+              minutes: p.minutes,
+              games: p.matches,
+              stats: Object.fromEntries(
+                Object.entries(p.stats).filter((e): e is [string, number] => typeof e[1] === 'number'),
+              ),
+            })),
+          )}
+        />
+      ) : null}
     </div>
   );
 }

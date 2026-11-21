@@ -35,6 +35,7 @@ propias.
 | [Valor](https://pelotheta-basket-dva.vercel.app/valor) | Minutos que juega cada jugador contra los que su producción justifica (regresión lineal con toda la liga); pantalla por jugador con 6 gráficos |
 | [Alternativas](https://pelotheta-basket-dva.vercel.app/alternativas) | K-means sobre los jugadores de toda la Liga Nacional: reemplazo 1 a 1 de otro club, dupla y compañero, con la comparación completa |
 | [Predictor](https://pelotheta-basket-dva.vercel.app/predictor) | Probabilidad de ganar contra un club o la media de una liga, un país o toda la zona; regresión de puntos, margen normal, backtest y pruebas |
+| [Ojeador](https://pelotheta-basket-dva.vercel.app/ojeador) | Informes de fichaje con nota: necesidad por zona, oportunidades de mercado y jóvenes promesas de otros clubes, con la estadística del mercado |
 | [Actualizar](https://pelotheta-basket-dva.vercel.app/actualizar) | Fecha de la última carga e historial; detecta una carga nueva sin escribir |
 | Estadística desglosada | Doble clic en cualquier número: ventanas de tiempo, gráficos y partidos |
 

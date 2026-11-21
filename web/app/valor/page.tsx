@@ -1,3 +1,5 @@
+import { StatsLab } from '@/components/stats/stats-lab';
+import { valueAnalyses } from '@/lib/models/analyses';
 import type { Metadata } from 'next';
 
 import { ErrorNotice } from '@/components/error-notice';
@@ -27,7 +29,15 @@ export default async function ValorPage() {
       ) : !values.ok ? (
         <ErrorNotice code={values.code} />
       ) : (
-        <ValueView run={run.data} rows={values.data.rows} coefs={values.data.coefs} />
+        <>
+          <ValueView run={run.data} rows={values.data.rows} coefs={values.data.coefs} />
+          <StatsLab
+            analyses={valueAnalyses(
+              values.data.rows,
+              typeof run.data?.params.unit === 'string' ? run.data.params.unit : 'min',
+            )}
+          />
+        </>
       )}
     </div>
   );
