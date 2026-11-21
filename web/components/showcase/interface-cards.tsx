@@ -18,6 +18,7 @@ const COPY: Record<InterfaceLink['icon'], string> = {
   valor: 'Los minutos que le da el entrenador a cada jugador contra los que su producción justifica, con toda la liga.',
   alternativas: 'Para cada jugador, los más parecidos de la liga con K-means: de otro club, en dupla o del plantel.',
   predictor: 'Probabilidad de ganar contra cualquier rival o la media de una liga, con backtest y pruebas.',
+  ojeador: 'Informes de ojeador con nota: lo que le falta al plantel, oportunidades de mercado y jóvenes promesas.',
   actualizar: 'La carga de datos a un botón: última actualización, estado de cada fuente e historial de cargas.',
 };
 

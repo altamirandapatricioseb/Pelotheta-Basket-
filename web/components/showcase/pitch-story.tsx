@@ -1,11 +1,11 @@
 'use client';
 
-// Las nueve interfaces contadas sobre una pizarra táctica. La sección queda pegada (100 vh por paso
+// Las diez interfaces contadas sobre una pizarra táctica. La sección queda pegada (100 vh por paso
 // en escritorio, 80 en el celular): la cancha de básquet (vista desde arriba, vertical) va en el
 // centro y la cámara se mueve con el scroll. Partido entero (Equipo), los cinco puntos (Jugadores),
 // dos aislados (Comparar), uno y sus parecidos del rival (Alternativas), la línea real contra
 // esperado (Valor), uno cargado de faltas (Situaciones), la barra de probabilidades (Predictor),
-// una jugada hasta el aro (Gráficos) y vuelta al círculo central (Actualizar). El texto cambia de
+// una jugada hasta el aro (Gráficos), el mercado con la mira del ojeador (Ojeador) y vuelta al círculo central (Actualizar). El texto cambia de
 // lado en cada paso; en el celular va debajo de la cancha.
 
 import { motion, type MotionValue, useMotionValueEvent, useScroll, useSpring, useTransform } from 'motion/react';
@@ -92,6 +92,11 @@ const STEPS: readonly StepCopy[] = [
     text: '79 gráficos en 13 categorías: forma, puntos y ritmo, cuartos, cuatro factores, tiros, rebote, jugadores, métricas propias y modelos. Todos se exportan como imagen o tabla.',
   },
   {
+    icon: 'ojeador',
+    lead: '¿A quién vamos a buscar?',
+    text: 'Informes como los de un ojeador, con nota de 0 a 10: qué zona le falta al plantel (profundidad, nivel contra la liga y edad), oportunidades que su club casi no usa y jóvenes promesas de otros clubes, con lo mejor en verde y lo peor en rojo.',
+  },
+  {
     icon: 'actualizar',
     lead: 'Vuelta al círculo central.',
     text: 'Los datos se cargan solos el día 1 de cada mes y un botón trae la última carga, con los tres modelos vueltos a entrenar. Se ve la última actualización, el estado de cada fuente y el historial.',
@@ -104,6 +109,7 @@ const H = 0.028;
 const stepOf = (icon: InterfaceLink['icon']) => STEPS.findIndex((s) => s.icon === icon);
 const RED = stepOf('situaciones');
 const GRAF = stepOf('graficos');
+const SCOUT = stepOf('ojeador');
 
 /** Un valor por paso: el de base, salvo en los pasos que se nombran. */
 function per<T>(base: T, overrides: Partial<Record<InterfaceLink['icon'], T>>): T[] {
@@ -118,9 +124,26 @@ const ARC_TOP = 'M102.4 21V128.6A243 243 0 0 0 577.6 128.6V21';
 const ARC_BOTTOM = 'M102.4 1029V921.4A243 243 0 0 1 577.6 921.4V1029';
 
 // Cámara por paso: zoom y punto de la cancha que queda en el centro.
-const ZOOM = per(1, { jugadores: 1.6, comparar: 1.9, alternativas: 1.35, valor: 1.25, situaciones: 1.6, predictor: 1.15, graficos: 1.05 });
+const ZOOM = per(1, {
+  jugadores: 1.6,
+  comparar: 1.9,
+  alternativas: 1.35,
+  valor: 1.25,
+  situaciones: 1.6,
+  predictor: 1.15,
+  graficos: 1.05,
+  ojeador: 1.3,
+});
 const FOCUS_X = per(340, {});
-const FOCUS_Y = per(525, { jugadores: 722, comparar: 720, alternativas: 600, valor: 640, situaciones: 722, graficos: 470 });
+const FOCUS_Y = per(525, {
+  jugadores: 722,
+  comparar: 720,
+  alternativas: 600,
+  valor: 640,
+  situaciones: 722,
+  graficos: 470,
+  ojeador: 330,
+});
 
 type Pos = readonly [number, number];
 interface Player {
@@ -143,6 +166,12 @@ const HOME: Player[] = [
 // Índices dentro de HOME: el cargado de faltas del paso 3 y los dos comparados del paso 2.
 const FOULED_OUT = 4;
 const PAIR = [0, 1];
+// Índices dentro de RIVAL que mira el Ojeador, con la nota de su informe (ilustrativa) y su color.
+const SCOUTED = [
+  { i: 0, score: '8,1', tone: 'show-pitch__grade--good' },
+  { i: 2, score: '6,4', tone: 'show-pitch__grade--mid' },
+  { i: 3, score: '4,2', tone: 'show-pitch__grade--bad' },
+];
 
 const RIVAL: Pos[][] = HOME.map(({ pos }) => {
   const [x, y] = pos[0] ?? [340, 525];
@@ -164,13 +193,15 @@ function Dot({ player, index, progress }: { player: Player; index: number; progr
   const target = index === PAIR[0];
   const dim = hold(
     index === FOULED_OUT
-      ? per(1, { comparar: 0.25, alternativas: 0.25, situaciones: 0.14 })
-      : per(1, { comparar: paired ? 1 : 0.25, alternativas: target ? 1 : 0.25 }),
+      ? per(1, { comparar: 0.25, alternativas: 0.25, situaciones: 0.14, ojeador: 0.2 })
+      : per(1, { comparar: paired ? 1 : 0.25, alternativas: target ? 1 : 0.25, ojeador: 0.2 }),
   );
   const opacity = useTransform(progress, dim.input, dim.output);
   const grow = hold(per(1, { comparar: paired ? 1.45 : 1, alternativas: target ? 1.45 : 1 }));
   const scale = useTransform(progress, grow.input, grow.output);
-  const ring = hold(per(0, { jugadores: 1, comparar: paired ? 1 : 0.2, alternativas: target ? 1 : 0, valor: 1, situaciones: 0.5 }));
+  const ring = hold(
+    per(0, { jugadores: 1, comparar: paired ? 1 : 0.2, alternativas: target ? 1 : 0, valor: 1, situaciones: 0.5 }),
+  );
   const ringOpacity = useTransform(progress, ring.input, ring.output);
   const label = hold(per(0, { jugadores: 1, comparar: 1, alternativas: 1, valor: 1, situaciones: 1 }));
   const labelOpacity = useTransform(progress, label.input, label.output);
@@ -192,14 +223,28 @@ function Dot({ player, index, progress }: { player: Player; index: number; progr
   );
 }
 
-function RivalDot({ pos, progress }: { pos: Pos[]; progress: MotionValue<number> }) {
+function RivalDot({ pos, index, progress }: { pos: Pos[]; index: number; progress: MotionValue<number> }) {
   const xs = hold(pos.map((p) => p[0]));
   const ys = hold(pos.map((p) => p[1]));
   const x = useTransform(progress, xs.input, xs.output);
   const y = useTransform(progress, ys.input, ys.output);
-  const fade = hold(per(0.55, { jugadores: 0.2, comparar: 0.12, alternativas: 0.7, valor: 0.2, situaciones: 0.3, predictor: 0.45, graficos: 0.6 }));
+  const scouted = SCOUTED.some((s) => s.i === index);
+  const fade = hold(
+    per(0.55, {
+      jugadores: 0.2,
+      comparar: 0.12,
+      alternativas: 0.7,
+      valor: 0.2,
+      situaciones: 0.3,
+      predictor: 0.45,
+      graficos: 0.6,
+      ojeador: scouted ? 1 : 0.15,
+    }),
+  );
   const opacity = useTransform(progress, fade.input, fade.output);
-  return <motion.circle r={18} className="show-pitch__rival" style={{ x, y, opacity }} />;
+  const grow = hold(per(1, { ojeador: scouted ? 1.3 : 1 }));
+  const scale = useTransform(progress, grow.input, grow.output);
+  return <motion.circle r={18} className="show-pitch__rival" style={{ x, y, opacity, scale }} />;
 }
 
 /** Capa que solo se ve en un paso. */
@@ -297,7 +342,7 @@ export function PitchStory() {
     <section ref={ref} className="show-pitch show-bleed" aria-labelledby="pitch-title">
       <div className="show-pitch__stage">
         <h2 id="pitch-title" className="sr-only">
-          Las nueve interfaces
+          Las diez interfaces
         </h2>
         <div className="show-pitch__panels">
           {STEPS.map((s, i) => {
@@ -404,6 +449,26 @@ export function PitchStory() {
               <motion.path ref={play} d={PLAY_PATH} className="show-pitch__play" style={{ pathLength: playDraw }} />
               <circle cx="340" cy={HOOP_TOP} r="26" className="show-pitch__xg" />
             </Layer>
+            <Layer step={SCOUT} progress={progress}>
+              {SCOUTED.map(({ i, score, tone }, k) => {
+                const [x, y] = RIVAL[i]?.[SCOUT] ?? [340, 525];
+                return (
+                  <g key={i} transform={`translate(${String(x)} ${String(y)})`}>
+                    <circle r="34" className="show-pitch__scope" style={{ animationDelay: `${String(k * -1.5)}s` }} />
+                    <line x1="-46" x2="-30" className="show-pitch__scope-tick" />
+                    <line x1="30" x2="46" className="show-pitch__scope-tick" />
+                    <line y1="-46" y2="-30" className="show-pitch__scope-tick" />
+                    <line y1="30" y2="46" className="show-pitch__scope-tick" />
+                    <g transform="translate(0 -66)">
+                      <rect x="-34" y="-18" width="68" height="36" rx="9" className={`show-pitch__grade ${tone}`} />
+                      <text textAnchor="middle" dy="7" className="show-pitch__grade-text">
+                        {score}
+                      </text>
+                    </g>
+                  </g>
+                );
+              })}
+            </Layer>
             <Layer step={stepOf('actualizar')} progress={progress}>
               {[0, 1, 2].map((i) => (
                 <circle
@@ -417,7 +482,7 @@ export function PitchStory() {
               ))}
             </Layer>
             {RIVAL.map((pos, i) => (
-              <RivalDot key={i} pos={pos} progress={progress} />
+              <RivalDot key={i} pos={pos} index={i} progress={progress} />
             ))}
             {HOME.map((player, i) => (
               <Dot key={player.n} player={player} index={i} progress={progress} />

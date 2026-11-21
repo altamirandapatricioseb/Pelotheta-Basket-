@@ -1,3 +1,5 @@
+import { StatsLab } from '@/components/stats/stats-lab';
+import { playerAnalyses } from '@/lib/models/analyses';
 import { ArrowLeftIcon } from '@phosphor-icons/react/ssr';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -158,7 +160,8 @@ export default async function JugadorPage({ params }: PageProps) {
                     {
                       label: 'Minutos: real y esperado',
                       value: `${formatNumber(value.actual, 1)} y ${formatNumber(value.predicted, 1)}`,
-                      hint: value.residualPct !== null ? `Diferencia ${formatNumber(value.residualPct, 1)} %` : undefined,
+                      hint:
+                        value.residualPct !== null ? `Diferencia ${formatNumber(value.residualPct, 1)} %` : undefined,
                       help: 'Minutos por partido que juega contra los que su producción justifica, según la regresión de toda la liga (Valor).',
                     },
                   ]
@@ -337,6 +340,17 @@ export default async function JugadorPage({ params }: PageProps) {
         Fuente: Liga Nacional de Básquet (box score y ficha oficial), Wikipedia (posición, altura, peso y nacionalidad),
         cálculo propio.
       </p>
+      <StatsLab
+        analyses={playerAnalyses(
+          log.map(({ game, line }) => ({
+            home: game.isHome,
+            started: line.started,
+            minutes: line.minutes,
+            rating: line.efficiency,
+            triples: line.fg3m,
+          })),
+        )}
+      />
     </div>
   );
 }

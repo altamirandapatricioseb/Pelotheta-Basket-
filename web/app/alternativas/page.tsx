@@ -1,3 +1,5 @@
+import { StatsLab } from '@/components/stats/stats-lab';
+import { styleAnalyses } from '@/lib/models/analyses';
 import type { Metadata } from 'next';
 
 import { ErrorNotice } from '@/components/error-notice';
@@ -32,6 +34,15 @@ export default async function AlternativasPage({ searchParams }: PageProps) {
       { value: valueOf.get(p.playerId) ?? null, age: p.age, minutes: p.minutes, games: p.matches },
     ]),
   );
+  // Nombre de cada estadística del agrupamiento, como lo guarda el pipeline en los parámetros del run.
+  const features = run.ok ? run.data?.params.features : undefined;
+  const labels = Object.fromEntries(
+    (Array.isArray(features) ? features : []).flatMap((f) =>
+      f && typeof f === 'object' && !Array.isArray(f) && typeof f.id === 'string' && typeof f.label === 'string'
+        ? [[f.id, f.label]]
+        : [],
+    ),
+  );
   return (
     <div className="grid gap-6">
       <ModelHeader
@@ -52,6 +63,7 @@ export default async function AlternativasPage({ searchParams }: PageProps) {
           facts={facts}
         />
       )}
+      {data.ok ? <StatsLab analyses={styleAnalyses(data.data.styles, labels)} /> : null}
     </div>
   );
 }

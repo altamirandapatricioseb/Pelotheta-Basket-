@@ -1,3 +1,5 @@
+import { StatsLab } from '@/components/stats/stats-lab';
+import { asTeamMatch, matchAnalyses } from '@/lib/models/analyses';
 import { ArrowLeftIcon, CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react/ssr';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -87,7 +89,9 @@ export default async function PartidoPage({ params }: PageProps) {
   const away = { name: game.opponent, points: game.pointsAgainst };
   const [left, right] = game.isHome ? [home, away] : [away, home];
   // Lo que daba el predictor antes del partido (backtest: solo con lo jugado hasta ese día).
-  const before = preds.ok ? preds.data.predictions.find((p) => p.kind === 'backtest' && p.date === game.date.slice(0, 10)) : undefined;
+  const before = preds.ok
+    ? preds.data.predictions.find((p) => p.kind === 'backtest' && p.date === game.date.slice(0, 10))
+    : undefined;
   const pBefore = before ? (game.isHome ? before.pHome : before.pAway) : null;
 
   return (
@@ -279,6 +283,7 @@ export default async function PartidoPage({ params }: PageProps) {
           </details>
         ))}
       </section>
+      <StatsLab analyses={matchAnalyses(asTeamMatch(game), games.map(asTeamMatch))} />
       <p className="text-xs text-muted">Fuente: Liga Nacional de Básquet (box score oficial), cálculo propio.</p>
     </div>
   );
